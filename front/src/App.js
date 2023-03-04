@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import BackgroundPattern1 from './components/BackgroundPattern1';
+import Register from './pages/authentication/Register';
 import ThemeCustomization from './themes';
+import { JWTProvider as AuthProvider } from './contexts/JWTContext';
 
 const App = () => {
     return (
         <ThemeCustomization>
-            <BackgroundPattern1 />
+            <AuthProvider>
+                <Register />
+            </AuthProvider>
         </ThemeCustomization>
     );
 };
