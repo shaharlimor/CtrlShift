@@ -68,27 +68,25 @@ const FirebaseRegister = ({ ...others }) => {
 
     return (
         <>
-            <Grid container direction="column" justifyContent="center" spacing={2}>
-                <Grid item xs={12} container alignItems="center" justifyContent="center">
-                    <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1">Sign up with Email address</Typography>
-                    </Box>
-                </Grid>
-            </Grid>
-
             <Formik
                 initialValues={{
                     email: '',
                     password: '',
-                    submit: null
+                    submit: null,
+                    firstName: '',
+                    lastName: '',
+                    organizationName: ''
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    password: Yup.string().max(255).required('Password is required'),
+                    firstName: Yup.string().required('First Name is required'),
+                    lastName: Yup.string().required('Last Name is required'),
+                    organizationName: Yup.string().required('Organization is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        await Register(values.email, values.password).then(
+                        await Register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
                             () => {
                                 // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
                                 // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
@@ -117,30 +115,54 @@ const FirebaseRegister = ({ ...others }) => {
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                <FormControl
                                     fullWidth
-                                    label="First Name"
-                                    margin="normal"
-                                    name="fname"
-                                    type="text"
-                                    defaultValue=""
+                                    error={Boolean(touched.firstName && errors.firstName)}
                                     sx={{ ...theme.typography.customInput }}
-                                />
+                                >
+                                    <InputLabel htmlFor="outlined-adornment-firstName-register">First Name</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-firstName-register"
+                                        type="text"
+                                        value={values.firstName}
+                                        name="firstName"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        inputProps={{}}
+                                    />
+                                    {touched.firstName && errors.firstName && (
+                                        <FormHelperText error id="standard-weight-helper-text--register">
+                                            {errors.firstName}
+                                        </FormHelperText>
+                                    )}
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                <FormControl
                                     fullWidth
-                                    label="Last Name"
-                                    margin="normal"
-                                    name="lname"
-                                    type="text"
-                                    defaultValue=""
+                                    error={Boolean(touched.lastName && errors.lastName)}
                                     sx={{ ...theme.typography.customInput }}
-                                />
+                                >
+                                    <InputLabel htmlFor="outlined-adornment-email-register">Last Name</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-lastname-register"
+                                        type="text"
+                                        value={values.lastName}
+                                        name="lastName"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        inputProps={{}}
+                                    />
+                                    {touched.lastName && errors.lastName && (
+                                        <FormHelperText error id="standard-weight-helper-text--register">
+                                            {errors.lastName}
+                                        </FormHelperText>
+                                    )}
+                                </FormControl>
                             </Grid>
                         </Grid>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-register">Email Address / Username</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-register">Email Address</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-register"
                                 type="email"
@@ -153,6 +175,28 @@ const FirebaseRegister = ({ ...others }) => {
                             {touched.email && errors.email && (
                                 <FormHelperText error id="standard-weight-helper-text--register">
                                     {errors.email}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl
+                            fullWidth
+                            error={Boolean(touched.organizationName && errors.organizationName)}
+                            sx={{ ...theme.typography.customInput }}
+                        >
+                            <InputLabel htmlFor="outlined-adornment-org-register">Organization</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-org-register"
+                                type="text"
+                                value={values.organizationName}
+                                name="organizationName"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.organizationName && errors.organizationName && (
+                                <FormHelperText error id="standard-weight-helper-text--register">
+                                    {errors.organizationName}
                                 </FormHelperText>
                             )}
                         </FormControl>

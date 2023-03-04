@@ -96,14 +96,15 @@ export const JWTProvider = ({ children }) => {
         // });
     };
 
-    const register = async (email, password, firstName, lastName) => {
+    const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
         const response = await axios.post('/api/account/register', {
             id,
             email,
             password,
             firstName,
-            lastName
+            lastName,
+            organizationName
         });
         let users = response.data;
 
