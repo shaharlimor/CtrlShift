@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
-import BackgroundPattern1 from './components/BackgroundPattern1';
-import ThemeCustomization from './themes';
-import Routes from './routes';
+// routing
+import Routes from 'routes';
 
-const App = () => {
-    return (
-        <ThemeCustomization>
-            <Routes />
-        </ThemeCustomization>
-    );
-};
+// project imports
+import NavigationScroll from 'layout/NavigationScroll';
+import Snackbar from 'ui-component/Snackbar';
+import ThemeCustomization from 'themes';
+
+const App = () => (
+    <ThemeCustomization>
+        <NavigationScroll>
+            <>
+                <Routes />
+                <Snackbar />
+            </>
+        </NavigationScroll>
+    </ThemeCustomization>
+);
 
 export default App;

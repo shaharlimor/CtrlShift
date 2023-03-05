@@ -1,13 +1,17 @@
 import { lazy } from 'react';
 
-import Loadable from '../components/layout/Loadable';
+import Loadable from 'ui-component/Loadable';
 
 // login routing
-const AuthLogin = Loadable(lazy(() => import('../views/pages/authentication/Login')));
-const AuthRegister = Loadable(lazy(() => import('../views/pages/authentication/Register')));
+const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
+const AuthRegister = Loadable(lazy(() => import('pages/authentication/Register')));
 
 const LoginRoutes = {
     children: [
+        {
+            path: '/',
+            element: <AuthLogin />
+        },
         {
             path: '/login',
             element: <AuthLogin />
