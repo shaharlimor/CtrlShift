@@ -1,13 +1,22 @@
-import { useEffect, useState } from 'react';
-import BackgroundPattern1 from './components/BackgroundPattern1';
-import ThemeCustomization from './themes';
+import Routes from 'routes';
 
-const App = () => {
-    return (
-        <ThemeCustomization>
-            <BackgroundPattern1 />
-        </ThemeCustomization>
-    );
-};
+// project imports
+import NavigationScroll from 'layout/NavigationScroll';
+import Snackbar from 'ui-component/Snackbar';
+import ThemeCustomization from 'themes';
+import { JWTProvider as AuthProvider } from './contexts/JWTContext';
+
+const App = () => (
+    <ThemeCustomization>
+        <NavigationScroll>
+            <AuthProvider>
+                <>
+                    <Routes />
+                    <Snackbar />
+                </>
+            </AuthProvider>
+        </NavigationScroll>
+    </ThemeCustomization>
+);
 
 export default App;

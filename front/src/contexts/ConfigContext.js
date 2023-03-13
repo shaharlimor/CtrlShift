@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import { createContext } from 'react';
 
 // project import
-import defaultConfig from '../config';
+import defaultConfig from 'config';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 // initial state
 const initialState = {
@@ -10,31 +11,22 @@ const initialState = {
     onChangeLayout: () => {},
     onChangeDrawer: () => {},
     onChangeMenuType: () => {},
-    onChangePresetColor: () => {},
-    onChangeLocale: () => {},
-    onChangeRTL: () => {},
     onChangeContainer: () => {},
     onChangeFontFamily: () => {},
     onChangeBorderRadius: () => {},
     onChangeOutlinedField: () => {}
 };
 
-// ==============================|| CONFIG CONTEXT & PROVIDER ||============================== //
-
 const ConfigContext = createContext(initialState);
 
 function ConfigProvider({ children }) {
-    const [config, setConfig] = {
+    const [config, setConfig] = useLocalStorage('config', {
         layout: initialState.layout,
         drawerType: initialState.drawerType,
         fontFamily: initialState.fontFamily,
         borderRadius: initialState.borderRadius,
-        outlinedFilled: initialState.outlinedFilled,
-        navType: initialState.navType,
-        presetColor: initialState.presetColor,
-        locale: initialState.locale,
-        rtlLayout: initialState.rtlLayout
-    };
+        outlinedFilled: initialState.outlinedFilled
+    });
 
     const onChangeLayout = (layout) => {
         setConfig({
@@ -54,27 +46,6 @@ function ConfigProvider({ children }) {
         setConfig({
             ...config,
             navType
-        });
-    };
-
-    const onChangePresetColor = (presetColor) => {
-        setConfig({
-            ...config,
-            presetColor
-        });
-    };
-
-    const onChangeLocale = (locale) => {
-        setConfig({
-            ...config,
-            locale
-        });
-    };
-
-    const onChangeRTL = (rtlLayout) => {
-        setConfig({
-            ...config,
-            rtlLayout
         });
     };
 
@@ -113,9 +84,6 @@ function ConfigProvider({ children }) {
                 onChangeLayout,
                 onChangeDrawer,
                 onChangeMenuType,
-                onChangePresetColor,
-                onChangeLocale,
-                onChangeRTL,
                 onChangeContainer,
                 onChangeFontFamily,
                 onChangeBorderRadius,
