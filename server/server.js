@@ -14,6 +14,8 @@ const corsOptions = {
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
+app.use('/auth', require('./routes/auth'));
+
 app.listen(3001, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 })
