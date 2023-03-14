@@ -6,7 +6,7 @@ import { Chance } from 'chance';
 import jwtDecode from 'jwt-decode';
 
 // reducer - state management
-import accountReducer from '../store/AccountReducer';
+import accountReducer from 'store/accountReducer';
 
 // project imports
 import Loader from '../components/Loader';
@@ -82,6 +82,7 @@ export const JWTProvider = ({ children }) => {
         init();
     }, []);
 
+    /* eslint-disable */
     const login = async (email, password) => {
         //TODO: change to send to the server jwt
         // const response = await axios.post('/api/account/login', { email, password });
