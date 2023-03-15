@@ -8,7 +8,7 @@ import { Box, Tab, Tabs, Typography, styled } from '@mui/material';
 // assets
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
-import PanoramaTwoToneIcon from '@mui/icons-material/PanoramaTwoTone';
+import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 
 // tab content
@@ -105,7 +105,7 @@ export default function ManagerTabs() {
                 <AntTab
                     label={
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <StarTwoToneIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
+                            <PeopleIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
                             Permenent shifts
                         </Box>
                     }
