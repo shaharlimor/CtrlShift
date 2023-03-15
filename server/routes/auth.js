@@ -11,11 +11,28 @@ router.get('/login', (req, res) => {
     });
 });
 
+router.get('/register', (req, res) => {
+    authController.register()
+    .catch(error => {
+        res.status(500).send({error: error.message});
+    });
+});
+
+router.get('/refreshToken', (req, res) => {
+    authController.refreshToken()
+    .catch(error => {
+        res.status(500).send({error: error.message});
+    });
+});
+
+// With middleware
 router.get('/logout', middleware, (req, res) => {
     authController.logout()
     .catch(error => {
         res.status(500).send({error: error.message});
     });
 });
+
+
 
 module.exports = router;
