@@ -41,7 +41,9 @@ const AntTabs = styled(Tabs)(({ theme }) => ({
     borderRadius: '6px',
     '& .MuiTabs-indicator': {
         backgroundColor: theme.palette.secondary.main
-    }
+    },
+    display: 'flex',
+    justifyContent: 'center'
 }));
 
 // style constant
@@ -76,7 +78,9 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) =
     },
     '&.Mui-focusVisible': {
         backgroundColor: theme.palette.secondary.main
-    }
+    },
+    display: 'flex',
+    justifyContent: 'center'
 }));
 
 export default function ManagerTabs() {
