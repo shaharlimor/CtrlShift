@@ -43,7 +43,8 @@ const AntTabs = styled(Tabs)(({ theme }) => ({
         backgroundColor: theme.palette.secondary.main
     },
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: '0 auto'
 }));
 
 // style constant
