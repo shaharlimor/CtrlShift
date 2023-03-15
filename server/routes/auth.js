@@ -4,11 +4,11 @@ const middleware = require('../common/auth_middleware');
 var router = express.Router();
 
 router.post('/login', authController.login);
-router.get('/register', authController.register);
-router.get('/refreshToken', authController.refreshToken);
+router.post('/register', authController.register);
+router.post('/refreshToken', authController.refreshToken);
 
 // With middleware
-router.get('/logout', middleware, authController.logout);
+router.post('/logout', middleware, authController.logout);
 
 
 module.exports = router;
