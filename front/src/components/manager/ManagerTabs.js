@@ -105,7 +105,7 @@ export default function ManagerTabs() {
                 <AntTab
                     label={
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <PeopleIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
+                            <WorkOutlineIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
                             Permenent shifts
                         </Box>
                     }
@@ -113,7 +113,7 @@ export default function ManagerTabs() {
                 <AntTab
                     label={
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <WorkOutlineIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
+                            <PeopleIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
                             Employees
                         </Box>
                     }
