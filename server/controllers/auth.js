@@ -2,20 +2,29 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const login = async (req, res, next) => {
     console.log("login");
     const email = req.body.email;
     const password = req.body.password;
+
+    // Check if email and password valid
     if (email == null || password == null) {
         res.status(500).send("bad email or password");
     }
     try {
-        // Get user by email
+        // Check if user exists in DB
         const user = await User.findOne({"email":email})
         if (user == null) {
             res.status(500).send("bad email or password");
         }
 
+        // Check if password match
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
             res.status(500).send("bad email or password");
@@ -49,15 +58,21 @@ const login = async (req, res, next) => {
     }
 };
 
+
+/**
+ * Register creates new user and - gennerates jwt to the user
+ */
 const register = async (req, res, next) => {
     console.log("register");
     const email = req.body.email;
     const password = req.body.password;
 
+    // Check if email and password valid
     if (email == null || password == null) {
         res.status(500).send("bad email or password");
     }
     try {
+        // Check if user exists in DB
         const foundUser = await User.findOne({"email":email})
         if (foundUser != null) {
             res.status(500).send("User already exists");
@@ -73,8 +88,6 @@ const register = async (req, res, next) => {
         newUser = await user.save();
         // res.status(200).send(newUser);
 
-
-
         const accessToken = await jwt.sign(
             {'_id':newUser._id},
             process.env.ACCESS_TOKEN_SECRET,
@@ -86,13 +99,8 @@ const register = async (req, res, next) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-        if(user.tokens == null) {
-            user.tokens = [refreshToken];
-        } else {
-            user.tokens.push(refreshToken);
-        }
-
-        await user.save();
+        newUser.tokens = [refreshToken];
+        await newUser.save();
 
         res.status(200).send({
             "accessToken" : accessToken,
@@ -103,6 +111,11 @@ const register = async (req, res, next) => {
     }
 };
 
+/**
+ * Refresh token is used to generates new access token.
+ * Refresh token can used once.
+ * Reuse of refresh token blocks the user .
+ */
 const refreshToken = async (req, res, next) => {
     authHeaders = req.headers['authorization'];
     const token = authHeaders && authHeaders.split(' ')[1];
@@ -152,6 +165,10 @@ const refreshToken = async (req, res, next) => {
     })
 };
 
+/**
+ * If token is valid then invalidate it
+ * Else, invalidate all user tokens
+ */
 const logout = async (req, res, next) => {
     authHeaders = req.headers['authorization'];
     const token = authHeaders && authHeaders.split(' ')[1];
@@ -159,7 +176,6 @@ const logout = async (req, res, next) => {
         return res.sendStatus('401');
     }
 
-    // Refresh token invalid?
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err,user) => {
         if (err) {
             return res.status(403).send(err.message);
@@ -172,12 +188,14 @@ const logout = async (req, res, next) => {
                 return res.status(403).send('invalid request');
             }
 
+            // Invalidate all tokens
             if (!user.tokens.includes(token)) {
                 user.tokens = [];
                 await user.save();
                 return res.status(403).send('invalid request'); 
             }
 
+            // Invalidate the specific token
             user.tokens.splice(user.tokens.indexOf(token), 1);
             await user.save();
             res.status(200).send();
