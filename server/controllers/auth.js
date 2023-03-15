@@ -3,10 +3,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
 /**
- * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
+ * Logged on user and gennerates user token.
  */
 const login = async (req, res, next) => {
     console.log("login");
@@ -15,19 +12,19 @@ const login = async (req, res, next) => {
 
     // Check if email and password valid
     if (email == null || password == null) {
-        res.status(500).send("bad email or password");
+        return res.status(500).send("bad email or password");
     }
     try {
         // Check if user exists in DB
         const user = await User.findOne({"email":email})
         if (user == null) {
-            res.status(500).send("bad email or password");
+            return res.status(500).send("bad email or password");
         }
 
         // Check if password match
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
-            res.status(500).send("bad email or password");
+            return res.status(500).send("bad email or password");
         }
 
         const accessToken = await jwt.sign(
@@ -54,13 +51,13 @@ const login = async (req, res, next) => {
             "refreshToken" : refreshToken
         });
     } catch(err) {
-        res.status(500).send(err.message);
+        return res.status(500).send(err.message);
     }
 };
 
 
 /**
- * Register creates new user and - gennerates jwt to the user
+ * Register creates new user and gennerates user token.
  */
 const register = async (req, res, next) => {
     console.log("register");
@@ -69,13 +66,13 @@ const register = async (req, res, next) => {
 
     // Check if email and password valid
     if (email == null || password == null) {
-        res.status(500).send("bad email or password");
+        return res.status(500).send("bad email or password");
     }
     try {
         // Check if user exists in DB
         const foundUser = await User.findOne({"email":email})
         if (foundUser != null) {
-            res.status(500).send("User already exists");
+            return res.status(500).send("User already exists");
         }
 
         salt = await bcrypt.genSalt(10);
@@ -107,7 +104,7 @@ const register = async (req, res, next) => {
             "refreshToken" : refreshToken
         });
     } catch(err) {
-        res.status(500).send("Registration fail: " + err.message);
+        return res.status(500).send("Registration fail: " + err.message);
     }
 };
 
