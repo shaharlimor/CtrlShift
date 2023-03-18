@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 
@@ -9,12 +8,7 @@ import AuthWrapper from '../../components/auth/AuthWrapper';
 import AuthCardWrapper from '../../components/auth/AuthCardWrapper';
 import Logo from '../../components/Logo';
 import AuthLogin from '../../components/auth/AuthLogin';
-// import AuthFooter from 'ui-component/cards/AuthFooter';
 import useAuth from '../../hooks/useAuth';
-
-// assets
-
-// ================================|| AUTH3 - LOGIN ||================================ //
 
 const Login = () => {
     const theme = useTheme();

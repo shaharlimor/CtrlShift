@@ -1,14 +1,12 @@
-// material-ui
-import { Typography } from '@mui/material';
+import MainCard from 'components/cards/MainCard';
+import { lazy } from 'react';
+import Loadable from 'components/Loadable';
 
-// project imports
-import MainCard from 'ui-component/MainCard';
-
-// ==============================|| SAMPLE PAGE ||============================== //
+const Calendar = Loadable(lazy(() => import('components/calendar')));
 
 const ShiftsBoard = () => (
-    <MainCard title="ShiftsBoard">
-        <Typography variant="body2">ShiftsBoard</Typography>
+    <MainCard title="Shifts Board">
+        <Calendar />
     </MainCard>
 );
 

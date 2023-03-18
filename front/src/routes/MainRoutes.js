@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 import MainLayout from 'layout/MainLayout';
-import Loadable from 'ui-component/Loadable';
+import Loadable from 'components/Loadable';
 
 const Home = Loadable(lazy(() => import('pages/homepage')));
 const Profile = Loadable(lazy(() => import('pages/profile')));
