@@ -18,7 +18,7 @@ const pages = {
         },
         {
             id: 'Organization-Manager',
-            title: 'Manage Organization',
+            title: 'Organization Manager',
             type: 'item',
             url: '/manager/organization-manager',
             breadcrumbs: false
