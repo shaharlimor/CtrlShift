@@ -8,8 +8,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import timelinePlugin from '@fullcalendar/timeline';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import MainCard from 'ui-component/MainCard';
-import SubCard from 'components/SubCard';
+import MainCard from 'components/cards/MainCard';
+import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
 

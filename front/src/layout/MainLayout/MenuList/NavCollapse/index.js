@@ -20,7 +20,7 @@ import {
 
 // project imports
 import NavItem from '../NavItem';
-import Transitions from 'ui-component/Transitions';
+import Transitions from 'layout/Transitions';
 
 import { useSelector } from 'store';
 import LAYOUT_CONST from 'constant';

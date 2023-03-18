@@ -1,9 +1,7 @@
 import { Suspense } from 'react';
 
 // project imports
-import Loader from './Loader';
-
-// ==============================|| LOADABLE - LAZY LOADING ||============================== //
+import Loader from 'components/Loader';
 
 const Loadable = (Component) => (props) =>
     (

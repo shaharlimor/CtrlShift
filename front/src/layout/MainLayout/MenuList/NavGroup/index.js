@@ -22,7 +22,7 @@ import LAYOUT_CONST from 'constant';
 import NavCollapse from '../NavCollapse';
 import NavItem from '../NavItem';
 import useConfig from 'hooks/useConfig';
-import Transitions from 'ui-component/Transitions';
+import Transitions from 'layout/Transitions';
 import { dispatch, useSelector } from 'store';
 import { activeID } from 'store/slices/menu';
 

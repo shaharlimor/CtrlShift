@@ -8,7 +8,7 @@ import { AppBar, Box, Container, CssBaseline, Toolbar, useMediaQuery } from '@mu
 // project imports
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Breadcrumbs from 'ui-component/Breadcrumbs';
+import Breadcrumbs from 'layout/Breadcrumbs';
 
 import navigation from 'layout/menu-items';
 import LAYOUT_CONST from 'constant';

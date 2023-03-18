@@ -1,6 +1,6 @@
-import MainCard from 'ui-component/MainCard';
+import MainCard from 'components/cards/MainCard';
 import { lazy } from 'react';
-import Loadable from 'ui-component/Loadable';
+import Loadable from 'components/Loadable';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 

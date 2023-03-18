@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-import Loadable from 'ui-component/Loadable';
+import Loadable from 'components/Loadable';
 
 // login routing
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));

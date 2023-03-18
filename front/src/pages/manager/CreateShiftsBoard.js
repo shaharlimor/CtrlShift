@@ -1,10 +1,12 @@
-import { Typography } from '@mui/material';
+import MainCard from 'components/cards/MainCard';
+import { lazy } from 'react';
+import Loadable from 'components/Loadable';
 
-import MainCard from 'ui-component/MainCard';
+const Calendar = Loadable(lazy(() => import('components/calendar')));
 
 const CreateShiftsBoard = () => (
     <MainCard title="CreateShiftsBoard">
-        <Typography variant="body2">CreateShiftsBoard</Typography>
+        <Calendar />
     </MainCard>
 );
 

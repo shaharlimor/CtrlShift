@@ -9,12 +9,7 @@ import AuthWrapper from '../../components/auth/AuthWrapper';
 import AuthCardWrapper from '../../components/auth/AuthCardWrapper';
 import Logo from '../../components/Logo';
 import AuthRegister from '../../components/auth/AuthRegister';
-// import AuthFooter from 'ui-component/cards/AuthFooter';
 import useAuth from '../../hooks/useAuth';
-
-// assets
-
-// ===============================|| AUTH3 - REGISTER ||=============================== //
 
 const Register = () => {
     const theme = useTheme();

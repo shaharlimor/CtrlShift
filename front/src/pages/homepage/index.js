@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 
-import MainCard from 'ui-component/MainCard';
+import MainCard from 'components/cards/MainCard';
 
 const Home = () => (
     <MainCard title="Home">
