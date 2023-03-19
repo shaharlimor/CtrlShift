@@ -49,7 +49,8 @@ const login = async (req, res, next) => {
 
         res.status(200).send({
             "accessToken" : accessToken,
-            "refreshToken" : refreshToken
+            "refreshToken" : refreshToken,
+            "user" : user
         });
     } catch(err) {
         return res.status(500).send(err.message);
