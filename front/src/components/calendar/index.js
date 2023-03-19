@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, Fragment } from 'react';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Button, Grid } from '@mui/material';
+
+import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
 import FullCalendar from '@fullcalendar/react';
 import listPlugin from '@fullcalendar/list';
@@ -15,8 +17,11 @@ import Toolbar from './Toolbar';
 
 import value from 'assets/scss/_themes-vars.module.scss';
 
-const Calendar = () => {
+// eslint-disable-next-line
+const Calendar = (props) => {
     const calendarRef = useRef(null);
+    // eslint-disable-next-line
+    const isAdmin = props.isAdmin;
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
     // TODO: get events by props / from server
@@ -130,6 +135,7 @@ const Calendar = () => {
         }
     };
 
+    /* eslint-disable */
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -140,6 +146,7 @@ const Calendar = () => {
                     onClickNext={handleDateNext}
                     onClickPrev={handleDatePrev}
                     onChangeView={handleViewChange}
+                    isAdmin={isAdmin}
                 />
                 <SubCard>
                     <FullCalendar
@@ -163,8 +170,40 @@ const Calendar = () => {
                     />
                 </SubCard>
             </CalendarStyled>
+            <Grid alignItems="center"  justifyContent="space-between" container sx={{ pb: 3 }}>
+            {isAdmin && ( <Grid item>
+                <Grid alignItems="center" justifyContent="space-between" container spacing={2}>
+            <Grid item>
+            <Button
+                variant="contained"
+                sx={{ width: '100%' }}
+                size="large">
+                Start Insert Constraint
+            </Button>
+            </Grid>
+            <Grid item>
+            <Button
+                variant="contained"
+                sx={{ width: '100%' }}
+                size="large">
+                Create Schedule
+            </Button>
+            </Grid>
+            </Grid>
+            </Grid>)}
+            <Grid item>
+            <Button
+                variant="contained"
+                sx={{ width: '100%' }}
+                size="large">
+              {isAdmin ? "Publish Schedule" : "Switch shift"}
+            </Button>
+            
+            </Grid>
+            </Grid>
         </Fragment>
     );
+    /* eslint-disable */
 };
 
 export default Calendar;
