@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+
+import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
+
 import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery } from '@mui/material';
 
 import { format } from 'date-fns';
@@ -24,7 +27,7 @@ const viewOptions = [
     }
 ];
 
-const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, ...others }) => {
+const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, isAdmin, ...others }) => {
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const [newViewOption, setNewViewOption] = useState(viewOptions);
 
@@ -36,8 +39,18 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, ...others
         setNewViewOption(newOption);
     }, [matchSm]);
 
+    /* eslint-disable */
     return (
         <Grid alignItems="center" container justifyContent="space-between" {...others} sx={{ pb: 3 }}>
+            <Grid item>
+            <Button
+                variant="contained"
+                sx={{ width: '100%' }}
+                size="large"
+                startIcon={isAdmin && (<AddCircleOutlineTwoToneIcon />)}>
+                {isAdmin ? "Add shift": "My shifts"}
+            </Button>
+            </Grid>
             <Grid item>
                 <Stack direction="row" alignItems="center" spacing={3}>
                     <IconButton onClick={onClickPrev} size="large">
@@ -71,13 +84,16 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, ...others
             </Grid>
         </Grid>
     );
+
+     /* eslint-disable */
 };
 Toolbar.propTypes = {
     date: PropTypes.object,
     view: PropTypes.string,
     onClickNext: PropTypes.func,
     onClickPrev: PropTypes.func,
-    onChangeView: PropTypes.func
+    onChangeView: PropTypes.func,
+    isAdmin: PropTypes.bool
 };
 
 export default Toolbar;
