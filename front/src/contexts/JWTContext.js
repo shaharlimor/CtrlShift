@@ -45,6 +45,16 @@ const setSession = (serviceToken) => {
     }
 };
 
+const setRefreshToken = (refreshToken) => {
+    if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+        // axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
+    } else {
+        localStorage.removeItem('refreshToken');
+        // delete axios.defaults.headers.common.Authorization;
+    }
+};
+
 // ==============================|| JWT CONTEXT & PROVIDER ||============================== //
 const JWTContext = createContext(null);
 
@@ -57,15 +67,15 @@ export const JWTProvider = ({ children }) => {
                 const serviceToken = window.localStorage.getItem('serviceToken');
                 if (serviceToken && verifyToken(serviceToken)) {
                     setSession(serviceToken);
-                    const response = await axios.get('/api/account/me');
-                    const { user } = response.data;
-                    dispatch({
-                        type: LOGIN,
-                        payload: {
-                            isLoggedIn: true,
-                            user
-                        }
-                    });
+                    // const response = await axios.get('/api/account/me');
+                    // const { user } = response.data;
+                    // dispatch({
+                    //     type: LOGIN,
+                    //     payload: {
+                    //         isLoggedIn: true,
+                    //         user
+                    //     }
+                    // });
                 } else {
                     dispatch({
                         type: LOGOUT
@@ -99,15 +109,30 @@ export const JWTProvider = ({ children }) => {
 
     const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
-        const response = await axios.post('/api/account/register', {
+        const response = await axios.post('http://localhost:3001/auth/register', {
             id,
             email,
             password,
             firstName,
             lastName,
             organizationName
+        }).catch(err => {
+            throw new Error(err);
         });
-        let users = response.data;
+        let user = response.data.user;
+        let refreshToken = response.data.refreshToken;
+        let accessToken = response.data.accessToken;
+
+        setSession(accessToken);
+        setRefreshToken(refreshToken);
+
+        dispatch({
+            type: LOGIN,
+            payload: {
+                isLoggedIn: true,
+                user
+            }
+        });
 
         //TODO: change to send to the server jwt
         // if (window.localStorage.getItem('users') !== undefined && window.localStorage.getItem('users') !== null) {
