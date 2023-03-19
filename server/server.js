@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const hostname = "localhost";
-const port = 3001;
+const port = process.env.PORT || 3001;
 const app = express(bodyParser.urlencoded({ extended: false }));
 const corsOptions = {
   origin: "*",
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use('/auth', require('./routes/auth'));
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 })
 

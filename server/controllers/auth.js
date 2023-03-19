@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/users");
+const test = require('dotenv').config()
 
 /**
  * Logged on user and gennerates user token.
@@ -30,7 +31,7 @@ const login = async (req, res, next) => {
         const accessToken = await jwt.sign(
             {'_id':user._id},
             process.env.ACCESS_TOKEN_SECRET,
-            {expiredIn: process.env.JWT_TOKEN_EXPIRATION}
+            {expiresIn: process.env.JWT_TOKEN_EXPIRATION}
         )
 
         const refreshToken = await jwt.sign(
@@ -76,19 +77,24 @@ const register = async (req, res, next) => {
         }
 
         salt = await bcrypt.genSalt(10);
-        encryptedPass = await bcrypt.hash(user.password, salt);
+        encryptedPass = await bcrypt.hash(password, salt);
+
         const user = new User({
+            "_id": req.body.id,
+            "firstName": req.body.firstName,
+            "lastName": req.body.lastName,
+            "organization": req.body.organizationName,
+            // "isAdmin":
             "email": email,
             "password": encryptedPass
         });
 
         newUser = await user.save();
-        // res.status(200).send(newUser);
-
+        
         const accessToken = await jwt.sign(
             {'_id':newUser._id},
             process.env.ACCESS_TOKEN_SECRET,
-            {expiredIn: process.env.JWT_TOKEN_EXPIRATION}
+            {expiresIn: process.env.JWT_TOKEN_EXPIRATION}
         )
 
         const refreshToken = await jwt.sign(
@@ -101,7 +107,8 @@ const register = async (req, res, next) => {
 
         res.status(200).send({
             "accessToken" : accessToken,
-            "refreshToken" : refreshToken
+            "refreshToken" : refreshToken,
+            "user": newUser
         });
     } catch(err) {
         return res.status(500).send("Registration fail: " + err.message);
@@ -141,7 +148,7 @@ const refreshToken = async (req, res, next) => {
             const accessToken = await jwt.sign(
                 {'_id':user._id},
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiredIn: process.env.JWT_TOKEN_EXPIRATION}
+                {expiresIn: process.env.JWT_TOKEN_EXPIRATION}
             )
     
             const refreshToken = await jwt.sign(
