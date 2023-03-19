@@ -10,8 +10,6 @@ import { gridSpacing } from 'store/constant';
 // assets
 // import Avatar1 from 'assets/images/users/user-1.png';
 
-// ==============================|| PROFILE 3 - PROFILE ||============================== //
-
 const Profile = () => (
     <Grid container spacing={gridSpacing}>
         <Grid item sm={6} md={4}>

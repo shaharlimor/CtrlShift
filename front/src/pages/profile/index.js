@@ -31,7 +31,7 @@ function a11yProps(index) {
     };
 }
 
-const Profile3 = () => {
+const UserProfile = () => {
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -79,4 +79,4 @@ const Profile3 = () => {
     );
 };
 
-export default Profile3;
+export default UserProfile;

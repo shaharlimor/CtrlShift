@@ -5,8 +5,6 @@ import { Button, Grid, Stack, TextField } from '@mui/material';
 import AnimateButton from 'components/AnimateButton';
 import { gridSpacing } from 'store/constant';
 
-// ==============================|| PROFILE 2 - CHANGE PASSWORD ||============================== //
-
 const ChangePassword = () => (
     <Grid container spacing={gridSpacing}>
         <Grid item xs={12} sm={6}>
