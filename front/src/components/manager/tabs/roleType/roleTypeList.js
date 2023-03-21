@@ -27,6 +27,7 @@ function createData(name) {
     return { name };
 }
 
+// TODO: get events by props / from server
 // eslint-disable-next-line
 const rows = [
     createData('Day waiter'),
