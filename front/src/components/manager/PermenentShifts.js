@@ -104,16 +104,6 @@ function Row({ row }) {
                     </Collapse>
                 </TableCell>
             </TableRow>
-
-            {/* <IconButton
-                variant="contained"
-                sx={{ width: '15%' }}
-                // onClick={}
-                size="large"
-                color="primary"
-            >
-                <AddCircleOutlineTwoToneIcon />
-            </IconButton> */}
         </>
     );
 }
@@ -159,6 +149,15 @@ export default function PermanentShift() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {/* <IconButton
+                variant="contained"
+                sx={{ width: '15%' }}
+                // onClick={}
+                size="large"
+                color="primary"
+            >
+                <AddCircleOutlineTwoToneIcon />
+            </IconButton> */}
         </MainCard>
     );
 }
