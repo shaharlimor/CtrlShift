@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
 // project imports
 import MainCard from '../cards/MainCard';
@@ -42,6 +43,16 @@ function createData(name, startTime, endTime, days, roles) {
 }
 
 function Row({ row }) {
+    const handleEditClick = () => {
+        console.log('Edit row:', row);
+        // TODO: Implement edit
+    };
+
+    const handleDeleteClick = () => {
+        console.log('Delete row:', row);
+        // TODO: Implement delete
+    };
+
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -60,10 +71,10 @@ function Row({ row }) {
                 <TableCell>{row.endTime}</TableCell>
                 <TableCell>{row.days}</TableCell>
                 <TableCell sx={{ pr: 3 }}>
-                    <IconButton color="primary" size="large">
+                    <IconButton color="primary" size="large" onClick={handleDeleteClick}>
                         <DeleteIcon sx={{ fontSize: '1.3rem' }} />
                     </IconButton>
-                    <IconButton color="secondary" size="large">
+                    <IconButton color="secondary" size="large" onClick={handleEditClick}>
                         <EditTwoToneIcon sx={{ fontSize: '1.3rem' }} />
                     </IconButton>
                 </TableCell>
@@ -93,6 +104,16 @@ function Row({ row }) {
                     </Collapse>
                 </TableCell>
             </TableRow>
+
+            {/* <IconButton
+                variant="contained"
+                sx={{ width: '15%' }}
+                // onClick={}
+                size="large"
+                color="primary"
+            >
+                <AddCircleOutlineTwoToneIcon />
+            </IconButton> */}
         </>
     );
 }
