@@ -11,6 +11,8 @@ import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 
+import PermanentShift from './PermenentShifts';
+
 // tab content
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -123,7 +125,7 @@ export default function ManagerTabs() {
                 {/* TODO: roleTypes */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {/* TODO: Permenent shifts */}
+                <PermanentShift />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {/* TODO: Emplyees */}
