@@ -16,12 +16,12 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 
 // project imports
 import MainCard from '../cards/MainCard';
 import SubCard from '../cards/SubCard';
-// import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
-// import { header } from './TableBasic';
 
 // assets
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -59,6 +59,14 @@ function Row({ row }) {
                 <TableCell>{row.startTime}</TableCell>
                 <TableCell>{row.endTime}</TableCell>
                 <TableCell>{row.days}</TableCell>
+                <TableCell sx={{ pr: 3 }}>
+                    <IconButton color="primary" size="large">
+                        <DeleteIcon sx={{ fontSize: '1.3rem' }} />
+                    </IconButton>
+                    <IconButton color="secondary" size="large">
+                        <EditTwoToneIcon sx={{ fontSize: '1.3rem' }} />
+                    </IconButton>
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -120,6 +128,7 @@ export default function PermanentShift() {
                             <TableCell>Start Time</TableCell>
                             <TableCell>End Time</TableCell>
                             <TableCell>Days</TableCell>
+                            <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
