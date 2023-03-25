@@ -32,6 +32,9 @@ export default function PermanentShift() {
 
     const [addOpen, setAddOpen] = React.useState(false);
 
+    const handleAddOpenClose = () => {
+        setAddOpen(false);
+    };
     return (
         <MainCard content={false} title={!addOpen ? 'Permanent Shift' : 'Add Permenent Shift'}>
             {!addOpen ? (
@@ -58,7 +61,7 @@ export default function PermanentShift() {
                     </Grid>
                 </>
             ) : (
-                <AddPermenentShift />
+                <AddPermenentShift handleAddOpenClose={handleAddOpenClose} />
             )}
         </MainCard>
     );
