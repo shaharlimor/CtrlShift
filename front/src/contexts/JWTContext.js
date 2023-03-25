@@ -30,6 +30,7 @@ const verifyToken = (accessToken) => {
     if (!accessToken) {
         return false;
     }
+
     const decoded = jwtDecode(accessToken);
     /**
      * Property 'exp' does not exist on type '<T = unknown>(token, options?: JwtDecodeOptions | undefined) => T'.
@@ -68,6 +69,7 @@ export const JWTProvider = ({ children }) => {
     useEffect(() => {
         const init = async () => {
             try {
+                console.log("useeffect");
                 const accessToken = window.localStorage.getItem('accessToken');
                 const refreshToken = window.localStorage.getItem('refreshToken');
                 
@@ -76,55 +78,53 @@ export const JWTProvider = ({ children }) => {
                     setRefreshToken(refreshToken);
                     
                     if (verifyToken(accessToken)) {
-                        // TODO get user by session
                         //only if user == null;
-                        const response = await axios.get('http://localhost:3001/auth/getUserByRefreshToken');
-                        const { user } = response.data;
-                        dispatch({
-                            type: LOGIN,
-                            payload: {
-                                isLoggedIn: true,
-                                user
-                            }
-                        });
-                        navigate('/shifts-board');
+                        getUserByRefreshToken();
                     } else {
-                        const response = await axios.post('http://localhost:3001/auth/refreshToken');
-                        const { user, refreshToken, accessToken } = response.data;
-                        setSession(accessToken);
-                        setRefreshToken(refreshToken);
-                        
-                        dispatch({
-                            type: LOGIN,
-                            payload: {
-                                isLoggedIn: true,
-                                user
-                            }
-                        });
-                        navigate('/shifts-board');
+                        refreshToken();
                     }
                 }
                 else {
-                    dispatch({
-                        type: LOGOUT
-                    });
-                    navigate('/login');
+                    navigateLogin();
                 }
             } catch (err) {
-                dispatch({
-                    type: LOGOUT
-                });
+                navigateLogin();
                 console.error(err);
-                navigate('/login');
             }
         };
 
         init();
     }, []);
 
-    /* eslint-disable */
+    const navigateLogin = () => {
+        dispatch({
+            type: LOGOUT
+        });
+        navigate('/login');
+    }
+
+    const getUserByRefreshToken = async() => {
+        try {
+            const response = await axios.get('http://localhost:3001/auth/getUserByRefreshToken');
+            const { user } = response.data;
+            dispatch({
+                type: LOGIN,
+                payload: {
+                    isLoggedIn: true,
+                    user
+                }
+            });
+        } catch (err) {
+            console.error(err);
+            navigateLogin();
+        }
+    }
+    
     const login = async (email, password) => {
-        const response = await axios.post('http://localhost:3001/auth/login', { email, password });
+        const response = await axios.post('http://localhost:3001/auth/login', { email, password }) 
+        .catch(err => {
+            throw new Error(err);
+        });
         
         const { accessToken, refreshToken, user } = response.data;
         setSession(accessToken);
@@ -138,6 +138,27 @@ export const JWTProvider = ({ children }) => {
             }
         });
     };
+
+    const refreshToken = async() => {
+        console.log("refresh token");
+        try {
+            const response = await axios.post('http://localhost:3001/auth/refreshToken');
+            const { user, refreshToken, accessToken } = response.data;
+            setSession(accessToken);
+            setRefreshToken(refreshToken);
+            
+            dispatch({
+                type: LOGIN,
+                payload: {
+                    isLoggedIn: true,
+                    user
+                }
+            });
+        } catch (err) {
+            console.error(err);
+            navigateLogin();
+        }
+    }
 
     const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
@@ -194,7 +215,7 @@ export const JWTProvider = ({ children }) => {
     }
 
     return (
-        <JWTContext.Provider value={{ ...state, login, logout, register, resetPassword, updateProfile }}>{children}</JWTContext.Provider>
+        <JWTContext.Provider value={{ ...state, refreshToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>{children}</JWTContext.Provider>
     );
 };
 

@@ -71,7 +71,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                     try {
                         await login(values.email, values.password).then(
                             () => {
-                                navigate('/shifts-board');
+                                navigate('/');
                             },
                             (err) => {
                                 if (scriptedRef.current) {

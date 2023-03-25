@@ -87,7 +87,7 @@ const FirebaseRegister = ({ ...others }) => {
                     try {
                         await register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
                             () => {
-                                navigate('/shifts-board');
+                                navigate('/');
                             },
                             (err) => {
                                 if (scriptedRef.current) {
