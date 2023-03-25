@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 const auth = async (req, res, next) => {
-    authHeaders = req.headers['authorization'];
+    authHeaders = req.headers['accesstoken'];
     const token = authHeaders && authHeaders.split(' ')[1];
 
     // Not permitted
