@@ -14,11 +14,12 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Typography
+    Typography,
+    Grid
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
+import AddIcon from '@mui/icons-material/Add';
 
 // project imports
 import MainCard from '../cards/MainCard';
@@ -120,6 +121,8 @@ const rows = [
 ];
 
 export default function PermanentShift() {
+    const theme = useTheme();
+
     const newRow = [];
     rows.forEach((element) => {
         newRow.push({
@@ -127,37 +130,42 @@ export default function PermanentShift() {
             history: null
         });
     });
+
     return (
         <MainCard content={false} title="Permanent Shift">
             {/* table */}
-            <TableContainer>
-                <Table aria-label="collapsible table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell sx={{ pl: 3 }} />
-                            <TableCell>Name</TableCell>
-                            <TableCell>Start Time</TableCell>
-                            <TableCell>End Time</TableCell>
-                            <TableCell>Days</TableCell>
-                            <TableCell>Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <Row key={row.name} row={row} />
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            {/* <IconButton
-                variant="contained"
-                sx={{ width: '15%' }}
-                // onClick={}
-                size="large"
-                color="primary"
-            >
-                <AddCircleOutlineTwoToneIcon />
-            </IconButton> */}
+            <Grid container direction="column" justifyContent="center" alignItems="flex-end">
+                <TableContainer>
+                    <Table aria-label="collapsible table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ pl: 3 }} />
+                                <TableCell>Name</TableCell>
+                                <TableCell>Start Time</TableCell>
+                                <TableCell>End Time</TableCell>
+                                <TableCell>Days</TableCell>
+                                <TableCell>Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <Row key={row.name} row={row} />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                <Grid item xs={3} sx={{ mt: 2 }}>
+                    <IconButton
+                        variant="contained"
+                        sx={{ fontSize: '35px', bgcolor: theme.palette.secondary.main, color: theme.palette.secondary.contrastText }}
+                        // onClick={}
+                        size="large"
+                    >
+                        <AddIcon />
+                    </IconButton>
+                </Grid>
+            </Grid>
         </MainCard>
     );
 }
