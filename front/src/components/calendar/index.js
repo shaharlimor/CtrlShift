@@ -16,12 +16,17 @@ import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
 
 import value from 'assets/scss/_themes-vars.module.scss';
+import Constraints from 'pages/constraints';
 
 // eslint-disable-next-line
 const Calendar = (props) => {
     const calendarRef = useRef(null);
+    // According to the page and the type of the calendar
+    // 0 - Insert Constraints
+    // 1 - Manager
+    // 2 - Monthly Planner
     // eslint-disable-next-line
-    const isAdmin = props.isAdmin;
+    const calendarType = props.calendarType;
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
     // TODO: get events by props / from server
@@ -146,7 +151,7 @@ const Calendar = (props) => {
                     onClickNext={handleDateNext}
                     onClickPrev={handleDatePrev}
                     onChangeView={handleViewChange}
-                    isAdmin={isAdmin}
+                    calendarType={calendarType}
                 />
                 <SubCard>
                     <FullCalendar
@@ -170,40 +175,36 @@ const Calendar = (props) => {
                     />
                 </SubCard>
             </CalendarStyled>
-            <Grid alignItems="center"  justifyContent="space-between" container sx={{ pb: 3 }}>
-            {isAdmin && ( <Grid item>
-                <Grid alignItems="center" justifyContent="space-between" container spacing={2}>
-            <Grid item>
-            <Button
-                variant="contained"
-                sx={{ width: '100%' }}
-                size="large">
-                Start Insert Constraint
-            </Button>
-            </Grid>
-            <Grid item>
-            <Button
-                variant="contained"
-                sx={{ width: '100%' }}
-                size="large">
-                Create Schedule
-            </Button>
-            </Grid>
-            </Grid>
-            </Grid>)}
-            <Grid item>
-            <Button
-                variant="contained"
-                sx={{ width: '100%' }}
-                size="large">
-              {isAdmin ? "Publish Schedule" : "Switch shift"}
-            </Button>
-            
-            </Grid>
+            <Grid alignItems="center" justifyContent="space-between" container sx={{ pb: 3 }}>
+                {calendarType === 1 && (
+                    <Grid item>
+                        <Grid alignItems="center" justifyContent="space-between" container spacing={2}>
+                            <Grid item>
+                                <Button variant="contained" sx={{ width: '100%' }} size="large">
+                                    Start Insert Constraint
+                                </Button>
+                            </Grid>
+                            <Grid item>
+                                <Button variant="contained" sx={{ width: '100%' }} size="large">
+                                    Create Schedule
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                )}
+                {calendarType !== 0 ? (
+                    <Grid item>
+                        <Button variant="contained" sx={{ width: '100%' }} size="large">
+                            {calendarType === 1 ? 'Publish Schedule' : 'Switch shift'}
+                        </Button>
+                    </Grid>
+                ) : (
+                    ''
+                )}
             </Grid>
         </Fragment>
     );
-    /* eslint-disable */
+    /* eslint-enable */
 };
 
 export default Calendar;

@@ -7,7 +7,7 @@ const Calendar = Loadable(lazy(() => import('components/calendar')));
 /* eslint-disable */
 const ShiftsBoard = () => (
     <MainCard title="Shifts Board">
-        <Calendar isAdmin={false}/>
+        <Calendar calendarType={3} />
     </MainCard>
 );
 /* eslint-disable */
