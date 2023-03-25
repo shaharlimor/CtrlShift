@@ -65,7 +65,7 @@ const JWTContext = createContext(null);
 export const JWTProvider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
     const navigate = useNavigate();
-
+   
     useEffect(() => {
         const init = async () => {
             try {
@@ -81,7 +81,7 @@ export const JWTProvider = ({ children }) => {
                         //only if user == null;
                         getUserByRefreshToken();
                     } else {
-                        refreshToken();
+                        refreshAccessToken();
                     }
                 }
                 else {
@@ -105,7 +105,7 @@ export const JWTProvider = ({ children }) => {
 
     const getUserByRefreshToken = async() => {
         try {
-            const response = await axios.get('http://localhost:3001/auth/getUserByRefreshToken');
+            const response = await axios.get('/auth/getUserByRefreshToken');
             const { user } = response.data;
             dispatch({
                 type: LOGIN,
@@ -121,7 +121,7 @@ export const JWTProvider = ({ children }) => {
     }
     
     const login = async (email, password) => {
-        const response = await axios.post('http://localhost:3001/auth/login', { email, password }) 
+        const response = await axios.post('/auth/login', { email, password }) 
         .catch(err => {
             throw new Error(err);
         });
@@ -139,10 +139,10 @@ export const JWTProvider = ({ children }) => {
         });
     };
 
-    const refreshToken = async() => {
-        console.log("refresh token");
+    const refreshAccessToken = async() => {
+        console.log("refresh access token");
         try {
-            const response = await axios.post('http://localhost:3001/auth/refreshToken');
+            const response = await axios.post('/auth/refreshToken');
             const { user, refreshToken, accessToken } = response.data;
             setSession(accessToken);
             setRefreshToken(refreshToken);
@@ -162,7 +162,7 @@ export const JWTProvider = ({ children }) => {
 
     const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
-        const response = await axios.post('http://localhost:3001/auth/register', {
+        const response = await axios.post('/auth/register', {
             id,
             email,
             password,
@@ -215,7 +215,7 @@ export const JWTProvider = ({ children }) => {
     }
 
     return (
-        <JWTContext.Provider value={{ ...state, refreshToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>{children}</JWTContext.Provider>
+        <JWTContext.Provider value={{ ...state, refreshAccessToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>{children}</JWTContext.Provider>
     );
 };
 

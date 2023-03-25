@@ -3,12 +3,12 @@ import useAuth from '../hooks/useAuth';
 import axios from '../utils/axios';
 
 export const ProtectedRoute = ({ children }) => {
-  const { refreshToken, isLoggedIn, verifyToken } = useAuth();
+  const { refreshAccessToken, isLoggedIn, verifyToken } = useAuth();
 
   try {
     if (isLoggedIn) {
         if (!verifyToken(axios.defaults.headers.common.accessToken)) {
-            refreshToken();
+            refreshAccessToken();
         } 
         return children;
 
