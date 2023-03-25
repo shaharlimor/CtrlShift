@@ -51,8 +51,11 @@ const AddPermenentShift = (props) => {
                     roles: [{ roleType: '', amount: '' }]
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    startTime: Yup.string().required('start time is required'),
+                    endTime: Yup.string().required('end time is required'),
+                    name: Yup.string().required('name is required'),
+                    days: Yup.array().min(1, 'days is required'),
+                    roles: Yup.array().min(1, 'roles is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     // // TODO: send to new perment shift to the server
@@ -77,11 +80,12 @@ const AddPermenentShift = (props) => {
                     //         setSubmitting(false);
                     //     }
                     // }
+                    console.log('submit');
                     handleAddOpenClose();
                 }}
             >
                 {({ errors, handleBlur, handleChange, setFieldValue, handleSubmit, isSubmitting, touched, values }) => (
-                    <form noValidate onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
                             <Grid item xs={12}>
                                 <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
@@ -107,7 +111,7 @@ const AddPermenentShift = (props) => {
                                                 label="start time"
                                                 fullWidth
                                                 value={values.startTime}
-                                                onChange={handleChange('startTime')}
+                                                onChange={(newValue) => setFieldValue('startTime', newValue)}
                                                 renderInput={(props) => <TextField fullWidth {...props} />}
                                             />
                                         </LocalizationProvider>
@@ -119,7 +123,7 @@ const AddPermenentShift = (props) => {
                                                 label="end time"
                                                 fullWidth
                                                 value={values.endTime}
-                                                onChange={handleChange('endTime')}
+                                                onChange={(newValue) => setFieldValue('endTime', newValue)}
                                                 renderInput={(props) => <TextField fullWidth {...props} />}
                                             />
                                         </LocalizationProvider>
@@ -132,22 +136,23 @@ const AddPermenentShift = (props) => {
                                     {/* <FormLabel component="legend">Days</FormLabel> */}
                                     <FormGroup sx={{ justifyContent: 'center', flexDirection: 'row' }}>
                                         {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
-                                            <FormControlLabel
-                                                key={day}
-                                                control={
-                                                    <Checkbox
-                                                        checked={values.days.includes(day)}
-                                                        onChange={() => {
-                                                            const newDays = values.days.includes(day)
-                                                                ? values.days.filter((d) => d !== day)
-                                                                : [...values.days, day];
-                                                            setFieldValue('days', newDays);
-                                                        }}
-                                                        name={day}
-                                                    />
-                                                }
-                                                label={day}
-                                            />
+                                            <React.Fragment key={day}>
+                                                <FormControlLabel
+                                                    control={
+                                                        <Checkbox
+                                                            checked={values.days.includes(day)}
+                                                            onChange={() => {
+                                                                const newDays = values.days.includes(day)
+                                                                    ? values.days.filter((d) => d !== day)
+                                                                    : [...values.days, day];
+                                                                setFieldValue('days', newDays);
+                                                            }}
+                                                            name={day}
+                                                        />
+                                                    }
+                                                    label={day}
+                                                />
+                                            </React.Fragment>
                                         ))}
                                     </FormGroup>
                                 </FormControl>
@@ -197,10 +202,9 @@ const AddPermenentShift = (props) => {
                                 <Box sx={{ mt: 2 }}>
                                     <AnimateButton>
                                         <Button
-                                            disableElevation
-                                            disabled={isSubmitting}
                                             fullWidth
                                             size="large"
+                                            onSubmit={handleSubmit}
                                             type="submit"
                                             variant="contained"
                                             color="secondary"
@@ -211,11 +215,6 @@ const AddPermenentShift = (props) => {
                                 </Box>
                             </Grid>
                             <Grid item xs={5}>
-                                {errors.submit && (
-                                    <Box sx={{ mt: 3 }}>
-                                        <FormHelperText error>{errors.submit}</FormHelperText>
-                                    </Box>
-                                )}
                                 <Box sx={{ mt: 2 }}>
                                     <AnimateButton>
                                         <Button fullWidth size="large" onClick={handleAddOpenClose} variant="contained" color="secondary">
