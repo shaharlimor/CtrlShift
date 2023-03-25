@@ -24,7 +24,7 @@ import {
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 
 // third party
 import * as Yup from 'yup';
@@ -82,49 +82,55 @@ const AddPermenentShift = (props) => {
             >
                 {({ errors, handleBlur, handleChange, setFieldValue, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
-                        <Grid container spacing={matchDownSM ? 0 : 2}>
+                        <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
                             <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Name"
-                                    margin="normal"
-                                    name="name"
-                                    type="text"
-                                    defaultValue=""
-                                    sx={{ ...theme.typography.customInput }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={6} sm={3}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DesktopDatePicker
-                                        label="start time"
-                                        fullWidth
-                                        value={values.startTime}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={handleChange('startTime')}
-                                        renderInput={(props) => <TextField fullWidth {...props} />}
-                                    />
-                                </LocalizationProvider>
-                            </Grid>
-
-                            <Grid item xs={6} sm={3}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DesktopDatePicker
-                                        label="end time"
-                                        value={values.endTime}
-                                        fullWidth
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={handleChange('endTime')}
-                                        renderInput={(props) => <TextField fullWidth {...props} />}
-                                    />
-                                </LocalizationProvider>
+                                <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            fullWidth
+                                            label="Name"
+                                            margin="normal"
+                                            name="name"
+                                            type="text"
+                                            defaultValue=""
+                                            sx={{ ...theme.typography.customInput }}
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
 
                             <Grid item xs={12}>
+                                <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
+                                    <Grid item xs={6} sm={3}>
+                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                            <DesktopTimePicker
+                                                label="start time"
+                                                fullWidth
+                                                value={values.startTime}
+                                                onChange={handleChange('startTime')}
+                                                renderInput={(props) => <TextField fullWidth {...props} />}
+                                            />
+                                        </LocalizationProvider>
+                                    </Grid>
+
+                                    <Grid item xs={6} sm={3}>
+                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                            <DesktopTimePicker
+                                                label="end time"
+                                                fullWidth
+                                                value={values.endTime}
+                                                onChange={handleChange('endTime')}
+                                                renderInput={(props) => <TextField fullWidth {...props} />}
+                                            />
+                                        </LocalizationProvider>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                            <Grid item xs={12} container justifyContent="center" sx={{ flexDirection: 'row' }}>
                                 <FormControl component="fieldset">
-                                    <FormLabel component="legend">Days</FormLabel>
-                                    <FormGroup>
+                                    {/* <FormLabel component="legend">Days</FormLabel> */}
+                                    <FormGroup sx={{ justifyContent: 'center', flexDirection: 'row' }}>
                                         {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
                                             <FormControlLabel
                                                 key={day}
@@ -165,11 +171,15 @@ const AddPermenentShift = (props) => {
                                 </React.Fragment>
                             ))}
 
-                            <Grid item xs={12}>
+                            <Grid item xs={1.5}>
                                 <Button
                                     type="button"
                                     variant="outlined"
-                                    sx={{ backgroundColor: theme.palette.secondary.light }}
+                                    sx={{
+                                        fontSize: '15px',
+                                        bgcolor: theme.palette.grey.main,
+                                        color: theme.palette.grey.contrastText
+                                    }}
                                     onClick={() => setFieldValue('roles', [...values.roles, { roleType: '', amount: '' }])}
                                 >
                                     Add Role
@@ -177,26 +187,44 @@ const AddPermenentShift = (props) => {
                             </Grid>
                         </Grid>
 
-                        {errors.submit && (
-                            <Box sx={{ mt: 3 }}>
-                                <FormHelperText error>{errors.submit}</FormHelperText>
-                            </Box>
-                        )}
-                        <Box sx={{ mt: 2 }}>
-                            <AnimateButton>
-                                <Button
-                                    disableElevation
-                                    disabled={isSubmitting}
-                                    fullWidth
-                                    size="large"
-                                    type="submit"
-                                    variant="contained"
-                                    color="secondary"
-                                >
-                                    Add
-                                </Button>
-                            </AnimateButton>
-                        </Box>
+                        <Grid item xs={12} container spacing={5} justifyContent="center">
+                            <Grid item xs={5}>
+                                {errors.submit && (
+                                    <Box sx={{ mt: 3 }}>
+                                        <FormHelperText error>{errors.submit}</FormHelperText>
+                                    </Box>
+                                )}
+                                <Box sx={{ mt: 2 }}>
+                                    <AnimateButton>
+                                        <Button
+                                            disableElevation
+                                            disabled={isSubmitting}
+                                            fullWidth
+                                            size="large"
+                                            type="submit"
+                                            variant="contained"
+                                            color="secondary"
+                                        >
+                                            Add
+                                        </Button>
+                                    </AnimateButton>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={5}>
+                                {errors.submit && (
+                                    <Box sx={{ mt: 3 }}>
+                                        <FormHelperText error>{errors.submit}</FormHelperText>
+                                    </Box>
+                                )}
+                                <Box sx={{ mt: 2 }}>
+                                    <AnimateButton>
+                                        <Button fullWidth size="large" onClick={handleAddOpenClose} variant="contained" color="secondary">
+                                            Cancel
+                                        </Button>
+                                    </AnimateButton>
+                                </Box>
+                            </Grid>
+                        </Grid>
                     </form>
                 )}
             </Formik>
