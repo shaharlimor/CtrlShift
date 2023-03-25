@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useReducer } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // third-party
 import { Chance } from 'chance';
 import jwtDecode from 'jwt-decode';
@@ -12,10 +12,12 @@ import accountReducer from 'store/accountReducer';
 import Loader from '../components/Loader';
 import axios from '../utils/axios';
 
+
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 
 const chance = new Chance();
+
 
 // constant
 const initialState = {
@@ -24,34 +26,35 @@ const initialState = {
     user: null
 };
 
-const verifyToken = (serviceToken) => {
-    if (!serviceToken) {
+const verifyToken = (accessToken) => {
+    if (!accessToken) {
         return false;
     }
-    const decoded = jwtDecode(serviceToken);
+    const decoded = jwtDecode(accessToken);
     /**
      * Property 'exp' does not exist on type '<T = unknown>(token, options?: JwtDecodeOptions | undefined) => T'.
      */
     return decoded.exp > Date.now() / 1000;
 };
 
-const setSession = (serviceToken) => {
-    if (serviceToken) {
-        localStorage.setItem('serviceToken', serviceToken);
-        axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
+const setSession = (accessToken) => {
+    if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+        axios.defaults.headers.common.accessToken = accessToken;
     } else {
-        localStorage.removeItem('serviceToken');
-        delete axios.defaults.headers.common.Authorization;
+        localStorage.removeItem('accessToken');
+        delete axios.defaults.headers.common.accessToken;
     }
 };
 
 const setRefreshToken = (refreshToken) => {
     if (refreshToken) {
         localStorage.setItem('refreshToken', refreshToken);
-        // axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
+        axios.defaults.headers.common.refreshToken = `Bearer ${refreshToken}`;
+        // axios.defaults.headers.common.refreshToken = refreshToken;
     } else {
         localStorage.removeItem('refreshToken');
-        // delete axios.defaults.headers.common.Authorization;
+        delete axios.defaults.headers.common.refreshToken;
     }
 };
 
@@ -60,32 +63,59 @@ const JWTContext = createContext(null);
 
 export const JWTProvider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const init = async () => {
             try {
-                const serviceToken = window.localStorage.getItem('serviceToken');
-                if (serviceToken && verifyToken(serviceToken)) {
-                    setSession(serviceToken);
-                    // const response = await axios.get('/api/account/me');
-                    // const { user } = response.data;
-                    // dispatch({
-                    //     type: LOGIN,
-                    //     payload: {
-                    //         isLoggedIn: true,
-                    //         user
-                    //     }
-                    // });
-                } else {
+                const accessToken = window.localStorage.getItem('accessToken');
+                const refreshToken = window.localStorage.getItem('refreshToken');
+                
+                if (accessToken && refreshToken) {
+                    setSession(accessToken);
+                    setRefreshToken(refreshToken);
+                    
+                    if (verifyToken(accessToken)) {
+                        // TODO get user by session
+                        //only if user == null;
+                        const response = await axios.get('http://localhost:3001/auth/getUserByRefreshToken');
+                        const { user } = response.data;
+                        dispatch({
+                            type: LOGIN,
+                            payload: {
+                                isLoggedIn: true,
+                                user
+                            }
+                        });
+                        navigate('/shifts-board');
+                    } else {
+                        const response = await axios.post('http://localhost:3001/auth/refreshToken');
+                        const { user, refreshToken, accessToken } = response.data;
+                        setSession(accessToken);
+                        setRefreshToken(refreshToken);
+                        
+                        dispatch({
+                            type: LOGIN,
+                            payload: {
+                                isLoggedIn: true,
+                                user
+                            }
+                        });
+                        navigate('/shifts-board');
+                    }
+                }
+                else {
                     dispatch({
                         type: LOGOUT
                     });
+                    navigate('/login');
                 }
             } catch (err) {
-                console.error(err);
                 dispatch({
                     type: LOGOUT
                 });
+                console.error(err);
+                navigate('/login');
             }
         };
 
@@ -94,17 +124,19 @@ export const JWTProvider = ({ children }) => {
 
     /* eslint-disable */
     const login = async (email, password) => {
-        //TODO: change to send to the server jwt
-        // const response = await axios.post('/api/account/login', { email, password });
-        // const { serviceToken, user } = response.data;
-        // setSession(serviceToken);
-        // dispatch({
-        //     type: LOGIN,
-        //     payload: {
-        //         isLoggedIn: true,
-        //         user
-        //     }
-        // });
+        const response = await axios.post('http://localhost:3001/auth/login', { email, password });
+        
+        const { accessToken, refreshToken, user } = response.data;
+        setSession(accessToken);
+        setRefreshToken(refreshToken);
+
+        dispatch({
+            type: LOGIN,
+            payload: {
+                isLoggedIn: true,
+                user
+            }
+        });
     };
 
     const register = async (email, password, firstName, lastName, organizationName) => {
@@ -119,10 +151,8 @@ export const JWTProvider = ({ children }) => {
         }).catch(err => {
             throw new Error(err);
         });
-        let user = response.data.user;
-        let refreshToken = response.data.refreshToken;
-        let accessToken = response.data.accessToken;
 
+        const { accessToken, refreshToken, user } = response.data;
         setSession(accessToken);
         setRefreshToken(refreshToken);
 
@@ -134,7 +164,6 @@ export const JWTProvider = ({ children }) => {
             }
         });
 
-        //TODO: change to send to the server jwt
         // if (window.localStorage.getItem('users') !== undefined && window.localStorage.getItem('users') !== null) {
         //     const localUsers = window.localStorage.getItem('users');
         //     users = [
