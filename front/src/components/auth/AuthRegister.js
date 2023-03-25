@@ -45,7 +45,7 @@ const FirebaseRegister = ({ ...others }) => {
     const navigate = useNavigate();
     const [strength, setStrength] = React.useState(0);
     const [level, setLevel] = React.useState();
-    const { register, SignIn } = useAuth();
+    const { register } = useAuth();
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -87,8 +87,7 @@ const FirebaseRegister = ({ ...others }) => {
                     try {
                         await register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
                             () => {
-                                // TODO navigate home
-                                navigate('/login');
+                                navigate('/shifts-board');
                             },
                             (err) => {
                                 if (scriptedRef.current) {
