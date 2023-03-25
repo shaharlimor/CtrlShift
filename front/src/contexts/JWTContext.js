@@ -78,7 +78,7 @@ export const JWTProvider = ({ children }) => {
                     setRefreshToken(refreshToken);
                     
                     if (verifyToken(accessToken)) {
-                        //only if user == null;
+                        // if user == null?
                         getUserByRefreshToken();
                     } else {
                         refreshAccessToken();
