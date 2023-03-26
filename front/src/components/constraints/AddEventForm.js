@@ -1,9 +1,19 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, Tooltip, Typography } from '@mui/material';
-import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
+import {
+    Button,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Divider,
+    Grid,
+    TextField,
+    MenuItem,
+    DialogContentText,
+    Typography
+} from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 import '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
@@ -16,57 +26,37 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // import ColorPalette from './ColorPalette';
 import { gridSpacing } from 'store/constant';
 
-// assets
-import DateRangeIcon from '@mui/icons-material/DateRange';
-import DeleteIcon from '@mui/icons-material/Delete';
-
 // constant
-const getInitialValues = (event, range) => {
+const getInitialValues = (event) => {
     const newEvent = {
         title: '',
-        description: '',
-        color: '#2196f3',
-        textColor: '',
-        allDay: false,
-        start: range ? new Date(range.start) : new Date(),
-        end: range ? new Date(range.end) : new Date()
+        level: '1',
+        comment: ''
     };
 
-    if (event || range) {
+    if (event) {
         return _.merge({}, newEvent, event);
     }
 
     return newEvent;
 };
 
-// ==============================|| CALENDAR EVENT ADD / EDIT / DELETE ||============================== //
+const levelOptions = [1, 2, 3, 4, 5];
 
-const AddEventFrom = ({ event, range, handleDelete, handleCreate, handleUpdate, onCancel }) => {
-    const theme = useTheme();
-    const isCreating = !event;
-
+const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCancel }) => {
     const EventSchema = Yup.object().shape({
-        title: Yup.string().max(255).required('Title is required'),
-        description: Yup.string().max(5000),
-        end: Yup.date().when('start', (start, schema) => start && schema.min(start, 'End date must be later than start date')),
-        start: Yup.date(),
-        color: Yup.string().max(255),
-        textColor: Yup.string().max(255)
+        level: Yup.number(),
+        comment: Yup.string().max(5000)
     });
 
     const formik = useFormik({
-        initialValues: getInitialValues(event, range),
+        initialValues: getInitialValues(event),
         validationSchema: EventSchema,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
             try {
                 const data = {
-                    title: values.title,
-                    description: values.description,
-                    color: values.color,
-                    textColor: values.textColor,
-                    allDay: values.allDay,
-                    start: values.start,
-                    end: values.end
+                    level: values.level,
+                    comment: values.comment
                 };
 
                 if (event) {
@@ -90,28 +80,41 @@ const AddEventFrom = ({ event, range, handleDelete, handleCreate, handleUpdate, 
         <FormikProvider value={formik}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                    <DialogTitle>Add Constraint</DialogTitle>
+                    <DialogTitle color="primary.800">Add Constraint </DialogTitle>
                     <Divider />
-                    <DialogContent sx={{ p: 3 }}>
-                        <Grid container spacing={gridSpacing}>
-                            <Grid item xs={12}>
+                    <DialogContent sx={{ p: 2 }}>
+                        <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">
+                            {/* <Grid item xs={12}>
+                                <Typography color>{event.title} </Typography>
+                            </Grid> */}
+                            <Grid item xs={6}>
                                 <TextField
+                                    error={Boolean(touched.level && errors.level)}
                                     fullWidth
-                                    label="Title"
-                                    {...getFieldProps('title')}
-                                    error={Boolean(touched.title && errors.title)}
-                                    helperText={touched.title && errors.title}
-                                />
+                                    select
+                                    helperText={touched.level && errors.level}
+                                    label="level"
+                                    value={formik.values.level}
+                                    onChange={(opt) => {
+                                        formik.setFieldValue('level', opt.target.value);
+                                    }}
+                                >
+                                    {levelOptions.map((option) => (
+                                        <MenuItem key={option} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={11}>
                                 <TextField
                                     fullWidth
                                     multiline
-                                    rows={3}
-                                    label="Description"
-                                    {...getFieldProps('description')}
-                                    error={Boolean(touched.description && errors.description)}
-                                    helperText={touched.description && errors.description}
+                                    rows={1}
+                                    label="comment"
+                                    {...getFieldProps('comment')}
+                                    error={Boolean(touched.comment && errors.comment)}
+                                    helperText={touched.comment && errors.comment}
                                 />
                             </Grid>
                         </Grid>
@@ -132,7 +135,6 @@ const AddEventFrom = ({ event, range, handleDelete, handleCreate, handleUpdate, 
 
 AddEventFrom.propTypes = {
     event: PropTypes.object,
-    range: PropTypes.object,
     handleDelete: PropTypes.func,
     handleCreate: PropTypes.func,
     handleUpdate: PropTypes.func,

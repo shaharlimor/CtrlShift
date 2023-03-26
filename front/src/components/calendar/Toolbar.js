@@ -98,7 +98,7 @@ Toolbar.propTypes = {
     onClickNext: PropTypes.func,
     onClickPrev: PropTypes.func,
     onChangeView: PropTypes.func,
-    calendarType: PropTypes.string
+    calendarType: PropTypes.number
 };
 
 export default Toolbar;
