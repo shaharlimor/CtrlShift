@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -15,11 +15,12 @@ const corsOptions = {
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
-app.use('/auth', require('./routes/auth'));
+app.use("/auth", require("./routes/auth"));
+app.use("/constraints", require("./routes/constraints"));
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-})
+});
 
 const mongoDB =
   "mongodb+srv://guest_user:Aa123456@cluster0.emt0ekc.mongodb.net/?retryWrites=true&w=majority";
@@ -35,4 +36,3 @@ mongoose
   .catch((err) => {
     console.log("error connecting to mongo: " + err);
   });
-
