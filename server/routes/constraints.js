@@ -1,8 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const { uuid } = require("uuidv4");
-const axios = require("axios");
 const Constraint = require("../models/constraints");
 const {
   getConstraints,
@@ -21,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-app.get("/byShift/:id", async (req, res) => {
+router.get("/byShift/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const constraints = await getConstraintsByShiftId(id);
@@ -31,13 +29,23 @@ app.get("/byShift/:id", async (req, res) => {
   }
 });
 
-app.get("/byEmployee/:id", async (req, res) => {
+router.get("/byEmployee/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const constraints = await getConstraintsByEmployeeId(id);
     res.send(constraints);
   } catch (err) {
     res.send(err);
+  }
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const newConstraint = new Constraint(req.body);
+    const result = await newConstraint.save();
+    res.send("success adding new constraint shift" + result);
+  } catch (err) {
+    res.send("error adding constraint. error: " + err);
   }
 });
 

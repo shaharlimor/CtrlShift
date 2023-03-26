@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use("/auth", require("./routes/auth"));
 app.use("/constraints", require("./routes/constraints"));
+app.use("/permanentShifts", require("./routes/permanentShifts"));
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
