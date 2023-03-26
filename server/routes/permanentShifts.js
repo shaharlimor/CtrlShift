@@ -16,14 +16,13 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const newShift = new Shift(req.body);
-  newShift.save((err, result) => {
-    if (err) {
-      console.log(err);
-      res.send("error creating shifts. error: " + err);
-    }
-  });
-  res.send("success adding new permanent shift");
+  try {
+    const newShift = new Shift(req.body);
+    const result = await newShift.save();
+    res.send("success adding new permanent shift" + result);
+  } catch (err) {
+    res.send("error adding new permanent shift. error: " + err);
+  }
 });
 
 module.exports = router;

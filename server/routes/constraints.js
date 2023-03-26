@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
   try {
     const newConstraint = new Constraint(req.body);
     const result = await newConstraint.save();
-    res.send("success adding new constraint shift" + result);
+    res.send("success adding new constraint" + result);
   } catch (err) {
     res.send("error adding constraint. error: " + err);
   }
