@@ -5,7 +5,6 @@ const monthlyShiftSchema = new Schema({
   organization: String,
   startTime: Date,
   endTime: Date,
-  date: Date,
   name: String,
   roles: [
     {
