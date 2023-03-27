@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 // third-party
 import { Chance } from 'chance';
 import jwtDecode from 'jwt-decode';
-
 // reducer - state management
 import accountReducer from 'store/accountReducer';
 
@@ -38,10 +37,10 @@ const verifyToken = (accessToken) => {
     return decoded.exp > Date.now() / 1000;
 };
 
-const setSession = (accessToken) => {
+const setAccessToken = (accessToken) => {
     if (accessToken) {
         localStorage.setItem('accessToken', accessToken);
-        axios.defaults.headers.common.accessToken = accessToken;
+        axios.defaults.headers.common.accessToken = `Bearer ${accessToken}`;
     } else {
         localStorage.removeItem('accessToken');
         delete axios.defaults.headers.common.accessToken;
@@ -52,12 +51,24 @@ const setRefreshToken = (refreshToken) => {
     if (refreshToken) {
         localStorage.setItem('refreshToken', refreshToken);
         axios.defaults.headers.common.refreshToken = `Bearer ${refreshToken}`;
-        // axios.defaults.headers.common.refreshToken = refreshToken;
     } else {
         localStorage.removeItem('refreshToken');
         delete axios.defaults.headers.common.refreshToken;
     }
 };
+
+
+export const refreshAccessToken = async() => {
+    console.log("refresh access token");
+    const response = await axios.post('/auth/refreshToken');
+    const { user, refreshToken, accessToken } = response.data;
+    setAccessToken(accessToken);
+    setRefreshToken(refreshToken);
+    
+    initialState.isLoggedIn = true;
+    initialState.user = user;
+    initialState.type = LOGIN;
+}
 
 // ==============================|| JWT CONTEXT & PROVIDER ||============================== //
 const JWTContext = createContext(null);
@@ -74,7 +85,7 @@ export const JWTProvider = ({ children }) => {
                 const refreshToken = window.localStorage.getItem('refreshToken');
                 
                 if (accessToken && refreshToken) {
-                    setSession(accessToken);
+                    setAccessToken(accessToken);
                     setRefreshToken(refreshToken);
                     
                     if (verifyToken(accessToken)) {
@@ -127,7 +138,7 @@ export const JWTProvider = ({ children }) => {
         });
         
         const { accessToken, refreshToken, user } = response.data;
-        setSession(accessToken);
+        setAccessToken(accessToken);
         setRefreshToken(refreshToken);
 
         dispatch({
@@ -138,27 +149,6 @@ export const JWTProvider = ({ children }) => {
             }
         });
     };
-
-    const refreshAccessToken = async() => {
-        console.log("refresh access token");
-        try {
-            const response = await axios.post('/auth/refreshToken');
-            const { user, refreshToken, accessToken } = response.data;
-            setSession(accessToken);
-            setRefreshToken(refreshToken);
-            
-            dispatch({
-                type: LOGIN,
-                payload: {
-                    isLoggedIn: true,
-                    user
-                }
-            });
-        } catch (err) {
-            console.error(err);
-            navigateLogin();
-        }
-    }
 
     const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
@@ -174,7 +164,7 @@ export const JWTProvider = ({ children }) => {
         });
 
         const { accessToken, refreshToken, user } = response.data;
-        setSession(accessToken);
+        setAccessToken(accessToken);
         setRefreshToken(refreshToken);
 
         dispatch({
@@ -202,7 +192,7 @@ export const JWTProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setSession(null);
+        setAccessToken(null);
         dispatch({ type: LOGOUT });
     };
 

@@ -11,7 +11,9 @@ const auth = async (req, res, next) => {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         if (err) {
-            return res.status(403).send(err.message);
+            console.log(err);
+            // 403?
+            return res.status(401).send(err.message);
         }
         req.user = user;
         next();
