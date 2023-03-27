@@ -1,18 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import {
-    Button,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Divider,
-    Grid,
-    TextField,
-    MenuItem,
-    DialogContentText,
-    Typography
-} from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -25,11 +14,12 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // project imports
 // import ColorPalette from './ColorPalette';
 import { gridSpacing } from 'store/constant';
+import NestedList from 'components/list/NestedList';
+import { addConstraint } from 'utils/api';
 
 // constant
 const getInitialValues = (event) => {
     const newEvent = {
-        title: '',
         level: '1',
         comment: ''
     };
@@ -43,7 +33,7 @@ const getInitialValues = (event) => {
 
 const levelOptions = [1, 2, 3, 4, 5];
 
-const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCancel }) => {
+const AddEventFrom = ({ event, handleDelete, onCancel }) => {
     const EventSchema = Yup.object().shape({
         level: Yup.number(),
         comment: Yup.string().max(5000)
@@ -56,14 +46,11 @@ const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCance
             try {
                 const data = {
                     level: values.level,
-                    comment: values.comment
+                    description: values.comment,
+                    shiftId: event.id,
+                    employeeId: '964018ac'
                 };
-
-                if (event) {
-                    handleUpdate(event.id, data);
-                } else {
-                    handleCreate(data);
-                }
+                await addConstraint(data);
 
                 resetForm();
                 onCancel();
@@ -80,20 +67,19 @@ const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCance
         <FormikProvider value={formik}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                    <DialogTitle color="primary.800">Add Constraint </DialogTitle>
+                    <DialogTitle color="primary.800">
+                        Add Constraint - {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
+                    </DialogTitle>
                     <Divider />
                     <DialogContent sx={{ p: 2 }}>
                         <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">
-                            {/* <Grid item xs={12}>
-                                <Typography color>{event.title} </Typography>
-                            </Grid> */}
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <TextField
                                     error={Boolean(touched.level && errors.level)}
                                     fullWidth
                                     select
                                     helperText={touched.level && errors.level}
-                                    label="level"
+                                    label="Urgency"
                                     value={formik.values.level}
                                     onChange={(opt) => {
                                         formik.setFieldValue('level', opt.target.value);
@@ -106,7 +92,7 @@ const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCance
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid item xs={11}>
+                            <Grid item xs={8.1}>
                                 <TextField
                                     fullWidth
                                     multiline
@@ -117,12 +103,15 @@ const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCance
                                     helperText={touched.comment && errors.comment}
                                 />
                             </Grid>
+                            <Grid item xs={10}>
+                                <NestedList />
+                            </Grid>
                         </Grid>
                     </DialogContent>
 
                     <DialogActions sx={{ p: 3 }}>
                         <Grid container justifyContent="center" alignItems="center">
-                            <Button type="button" variant="contained" color="secondary" onClick={onCancel}>
+                            <Button type="submit" variant="contained" color="secondary" sx={{ width: '30%' }}>
                                 Save
                             </Button>
                         </Grid>
@@ -136,8 +125,6 @@ const AddEventFrom = ({ event, handleDelete, handleCreate, handleUpdate, onCance
 AddEventFrom.propTypes = {
     event: PropTypes.object,
     handleDelete: PropTypes.func,
-    handleCreate: PropTypes.func,
-    handleUpdate: PropTypes.func,
     onCancel: PropTypes.func
 };
 
