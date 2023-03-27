@@ -1,9 +1,10 @@
-import { lazy, useState } from 'react';
+import { lazy, useState, useEffect } from 'react';
 import Loadable from 'components/Loadable';
 import value from 'assets/scss/_themes-vars.module.scss';
 import { add, set, sub } from 'date-fns';
 import AddEventForm from './AddEventForm';
 import { Dialog } from '@mui/material';
+import { getPermanentShifts } from 'utils/api';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -11,8 +12,9 @@ const Calendar = Loadable(lazy(() => import('components/calendar')));
 const Constrainsts = (props) => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [events, setEvents] = useState([]);
 
-    const events = [
+    const shahar = [
         {
             id: '1',
             allDay: false,
@@ -77,10 +79,32 @@ const Constrainsts = (props) => {
             title: 'Evening Employee'
         }
     ];
+    // const temp = getPermanentShifts().then((res) => {
+    //     return res.data;
+    //     // console.log(res.data);
+    // });
+    // console.log(temp);
+
+    useEffect(async () => {
+        const r = await getPermanentShifts();
+        let parsedData = [];
+        r.data.map((item) =>
+            parsedData.push({
+                id: item._id,
+                color: value.secondary200,
+                description: item.name,
+                start: new Date(item.startTime.toString()),
+                end: new Date(item.endTime.toString()),
+                title: item.name
+            })
+        );
+        setEvents(parsedData);
+        parsedData = [];
+    }, []);
 
     const handleEventSelect = (arg) => {
         if (arg.event.id) {
-            const selectEvent = events.find((_event) => _event.id === arg.event.id);
+            const selectEvent = shahar.find((_event) => _event.id === arg.event.id);
             setSelectedEvent(selectEvent);
         } else {
             setSelectedEvent(null);
