@@ -12,8 +12,8 @@ const userSchema = new Schema({
   role_types: [String],
   isAdmin: Boolean,
   tokens: {
-    type: [String]
-  }
+    type: [String],
+  },
 });
 
 // Compile model from schema
