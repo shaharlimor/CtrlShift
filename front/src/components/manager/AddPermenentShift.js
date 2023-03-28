@@ -103,6 +103,8 @@ const AddPermenentShift = (props) => {
                                     type="text"
                                     defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
+                                    error={formik.touched.name && Boolean(formik.errors.name)}
+                                    helperText={formik.touched.name && formik.errors.name}
                                 />
                             </Grid>
                         </Grid>
@@ -117,6 +119,8 @@ const AddPermenentShift = (props) => {
                                         fullWidth
                                         value={formik.values.startTime}
                                         onChange={(newValue) => formik.setFieldValue('startTime', newValue)}
+                                        error={formik.touched.startTime && Boolean(formik.errors.startTime)}
+                                        helperText={formik.touched.startTime && formik.errors.startTime}
                                         renderInput={(props) => <TextField fullWidth {...props} />}
                                     />
                                 </LocalizationProvider>
@@ -129,6 +133,8 @@ const AddPermenentShift = (props) => {
                                         fullWidth
                                         value={formik.values.endTime}
                                         onChange={(newValue) => formik.setFieldValue('endTime', newValue)}
+                                        error={formik.touched.endTime && Boolean(formik.errors.endTime)}
+                                        helperText={formik.touched.endTime && formik.errors.endTime}
                                         renderInput={(props) => <TextField fullWidth {...props} />}
                                     />
                                 </LocalizationProvider>
@@ -166,11 +172,24 @@ const AddPermenentShift = (props) => {
                     {formik.values.roles.map((role, index) => (
                         <React.Fragment key={index}>
                             <Grid item xs={6} sm={3}>
-                                <TextField name={`roles.${index}.roleType`} label="Role Type" fullWidth />
+                                <TextField
+                                    name={`roles.${index}.roleType`}
+                                    label="Role Type"
+                                    fullWidth
+                                    error={formik.touched.roles && Boolean(formik.errors.roles)}
+                                    helperText={formik.touched.roles && formik.errors.roles}
+                                />
                             </Grid>
 
                             <Grid item xs={6} sm={3}>
-                                <TextField name={`roles.${index}.amount`} label="Amount" type="number" fullWidth />
+                                <TextField
+                                    name={`roles.${index}.amount`}
+                                    label="Amount"
+                                    type="number"
+                                    fullWidth
+                                    error={formik.touched.roles && Boolean(formik.errors.roles)}
+                                    helperText={formik.touched.roles && formik.errors.roles}
+                                />
                             </Grid>
                         </React.Fragment>
                     ))}
