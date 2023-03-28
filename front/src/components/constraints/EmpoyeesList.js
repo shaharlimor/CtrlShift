@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListItem } from '@mui/material';
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListItem, Avatar } from '@mui/material';
 
 // assets
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -17,6 +17,9 @@ const EmpoyeesList = ({ employess }) => {
 
     const emloyeesList = [...new Set(employess)].map((emp) => (
         <ListItem sx={{ pl: 4 }} key={emp.id}>
+            <ListItemIcon>
+                <Avatar alt="User pic" />
+            </ListItemIcon>
             <ListItemText primary={emp.id} />
         </ListItem>
     ));
