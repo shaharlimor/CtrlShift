@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'components/Loadable';
-
+import { ProtectedRoute } from 'contexts/ProtectedRoute';
 const Home = Loadable(lazy(() => import('pages/homepage')));
 const Profile = Loadable(lazy(() => import('pages/profile')));
 const ShiftsBoard = Loadable(lazy(() => import('pages/shiftsBoard')));
@@ -16,31 +16,31 @@ const MainRoutes = {
     children: [
         {
             path: '/',
-            element: <Home />
+            element: <ProtectedRoute><Home /></ProtectedRoute>
         },
         {
             path: '/home',
-            element: <Home />
+            element: <ProtectedRoute><Home /></ProtectedRoute>
         },
         {
             path: '/profile',
-            element: <Profile />
+            element: <ProtectedRoute><Profile /></ProtectedRoute>
         },
         {
             path: '/shifts-board',
-            element: <ShiftsBoard />
+            element: <ProtectedRoute><ShiftsBoard /></ProtectedRoute>
         },
         {
             path: '/constraints',
-            element: <Constraints />
+            element: <ProtectedRoute><Constraints /></ProtectedRoute>
         },
         {
             path: '/manager/shifts-Board',
-            element: <CreateShiftsBoard />
+            element: <ProtectedRoute><CreateShiftsBoard /></ProtectedRoute>
         },
         {
             path: '/manager/organization-manager',
-            element: <OrganizationManager />
+            element: <ProtectedRoute><OrganizationManager /></ProtectedRoute>
         }
     ]
 };

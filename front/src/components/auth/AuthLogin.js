@@ -31,6 +31,7 @@ import useConfig from '../../hooks/useConfig';
 import useAuth from '../../hooks/useAuth';
 import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../AnimateButton';
+import { useNavigate } from 'react-router-dom';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -42,8 +43,8 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const { borderRadius } = useConfig();
     const [checked, setChecked] = React.useState(true);
-
-    const { Register, SignIn } = useAuth();
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => {
@@ -68,12 +69,9 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        await SignIn(values.email, values.password).then(
+                        await login(values.email, values.password).then(
                             () => {
-                                // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
-                                // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
-                                // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-                                // github issue: https://github.com/formium/formik/issues/2430
+                                navigate('/');
                             },
                             (err) => {
                                 if (scriptedRef.current) {
