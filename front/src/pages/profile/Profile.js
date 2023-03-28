@@ -19,9 +19,13 @@ const Profile = () => {
     const [lastName, setLastName] = useState(user.lastName);
     const [phone, setPhone] = useState(user.phone);
 
+    // eslint-disable-next-line no-underscore-dangle
+    const userId = user._id;
+
     const test = async () => {
         try {
             const response = await axios.post('http://localhost:3001/auth/updateUserDetails', {
+                id: userId,
                 email,
                 firstName,
                 lastName,
