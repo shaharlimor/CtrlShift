@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
 import { Button } from '@mui/material';
+import EmployeeForm from './employeeForm';
 
 /* eslint-disable */
 const Employees = () => {
@@ -17,7 +18,7 @@ const Employees = () => {
 
 
     return (<MainCard title="Employees">
-         {/* {showForm &&(<RoleTypeForm changeShowForm={changeShowForm}/>)} */}
+         {showForm &&(<EmployeeForm changeShowForm={changeShowForm}/>)}
          {!showForm &&(<EmployeeList />)}
          {!showForm &&(<Button
                 variant="contained"

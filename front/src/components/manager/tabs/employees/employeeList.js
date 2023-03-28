@@ -36,7 +36,7 @@ const EmployeeList = () => {
                 title={
                     <Grid container alignItems="center" justifyContent="space-between" spacing={gridSpacing}>
                         <Grid item>
-                            <Typography variant="h3">List</Typography>
+                            <Typography variant="h3">Employees</Typography>
                         </Grid>
                         <Grid item>
                             <OutlinedInput
