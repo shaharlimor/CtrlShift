@@ -6,8 +6,8 @@ const Schedulechema = new Schema({
   month: Number,
   year: Number,
   isPublished: Boolean,
-  isOpenToConstraints: Boolean
+  isOpenToConstraints: Boolean,
 });
 
 // Compile model from schema
-module.exports = mongoose.model("Schedule", userSchema);
+module.exports = mongoose.model("Schedule", Schedulechema);
