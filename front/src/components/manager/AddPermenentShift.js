@@ -28,10 +28,11 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 
 // third party
 import * as Yup from 'yup';
-import { Formik, Field } from 'formik';
+import { useFormik, Field } from 'formik';
 
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../AnimateButton';
+import { savePermentShift } from '../../services/permenentShiftServices';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
@@ -40,194 +41,183 @@ const AddPermenentShift = (props) => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const { handleAddOpenClose } = props;
 
+    const validationSchema = Yup.object({
+        startTime: Yup.string().required('start time is required'),
+        endTime: Yup.string().required('end time is required'),
+        name: Yup.string().required('name is required'),
+        days: Yup.array().min(1, 'days is required'),
+        roles: Yup.array().min(1, 'roles is required')
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            startTime: null,
+            endTime: null,
+            days: [],
+            name: '',
+            roles: [{ roleType: '', amount: '' }]
+        },
+        validationSchema,
+        onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
+            // // TODO: send to new perment shift to the server
+            try {
+                await savePermentShift(values).then(
+                    () => {
+                        handleAddOpenClose();
+                    },
+                    (err) => {
+                        if (scriptedRef.current) {
+                            setStatus({ success: false });
+                            setErrors({ submit: err.message });
+                            setSubmitting(false);
+                        }
+                    }
+                );
+            } catch (err) {
+                console.error(err);
+                if (scriptedRef.current) {
+                    setStatus({ success: false });
+                    setErrors({ submit: err.message });
+                    setSubmitting(false);
+                }
+            }
+            console.log('submit');
+            handleAddOpenClose();
+        }
+    });
+
     return (
-        <Grid container direction="column" justifyContent="center" spacing={2} padding={5}>
-            <Formik
-                initialValues={{
-                    startTime: null,
-                    endTime: null,
-                    days: [],
-                    name: '',
-                    roles: [{ roleType: '', amount: '' }]
-                }}
-                validationSchema={Yup.object().shape({
-                    startTime: Yup.string().required('start time is required'),
-                    endTime: Yup.string().required('end time is required'),
-                    name: Yup.string().required('name is required'),
-                    days: Yup.array().min(1, 'days is required'),
-                    roles: Yup.array().min(1, 'roles is required')
-                })}
-                onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-                    // // TODO: send to new perment shift to the server
-                    // try {
-                    //     await savePermentShidt.then(
-                    //         () => {
-                    //    handleAddOpenClose();
-                    //         },
-                    //         (err) => {
-                    //             if (scriptedRef.current) {
-                    //                 setStatus({ success: false });
-                    //                 setErrors({ submit: err.message });
-                    //                 setSubmitting(false);
-                    //             }
-                    //         }
-                    //     );
-                    // } catch (err) {
-                    //     console.error(err);
-                    //     if (scriptedRef.current) {
-                    //         setStatus({ success: false });
-                    //         setErrors({ submit: err.message });
-                    //         setSubmitting(false);
-                    //     }
-                    // }
-                    console.log('submit');
-                    handleAddOpenClose();
-                }}
-            >
-                {({ errors, handleBlur, handleChange, setFieldValue, handleSubmit, isSubmitting, touched, values }) => (
-                    <form onSubmit={handleSubmit}>
+        <>
+            <form onSubmit={formik.handleSubmit}>
+                <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
+                    <Grid item xs={12}>
                         <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
-                            <Grid item xs={12}>
-                                <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
-                                    <Grid item xs={12} sm={6}>
-                                        <TextField
-                                            fullWidth
-                                            label="Name"
-                                            margin="normal"
-                                            name="name"
-                                            type="text"
-                                            defaultValue=""
-                                            sx={{ ...theme.typography.customInput }}
-                                        />
-                                    </Grid>
-                                </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    label="Name"
+                                    margin="normal"
+                                    name="name"
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                    type="text"
+                                    defaultValue=""
+                                    sx={{ ...theme.typography.customInput }}
+                                />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
+                            <Grid item xs={6} sm={3}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DesktopTimePicker
+                                        label="start time"
+                                        fullWidth
+                                        value={formik.values.startTime}
+                                        onChange={(newValue) => formik.setFieldValue('startTime', newValue)}
+                                        renderInput={(props) => <TextField fullWidth {...props} />}
+                                    />
+                                </LocalizationProvider>
                             </Grid>
 
-                            <Grid item xs={12}>
-                                <Grid container spacing={matchDownSM ? 0 : 2} justifyContent="center" alignItems="center">
-                                    <Grid item xs={6} sm={3}>
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                            <DesktopTimePicker
-                                                label="start time"
-                                                fullWidth
-                                                value={values.startTime}
-                                                onChange={(newValue) => setFieldValue('startTime', newValue)}
-                                                renderInput={(props) => <TextField fullWidth {...props} />}
-                                            />
-                                        </LocalizationProvider>
-                                    </Grid>
-
-                                    <Grid item xs={6} sm={3}>
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                            <DesktopTimePicker
-                                                label="end time"
-                                                fullWidth
-                                                value={values.endTime}
-                                                onChange={(newValue) => setFieldValue('endTime', newValue)}
-                                                renderInput={(props) => <TextField fullWidth {...props} />}
-                                            />
-                                        </LocalizationProvider>
-                                    </Grid>
-                                </Grid>
+                            <Grid item xs={6} sm={3}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DesktopTimePicker
+                                        label="end time"
+                                        fullWidth
+                                        value={formik.values.endTime}
+                                        onChange={(newValue) => formik.setFieldValue('endTime', newValue)}
+                                        renderInput={(props) => <TextField fullWidth {...props} />}
+                                    />
+                                </LocalizationProvider>
                             </Grid>
+                        </Grid>
+                    </Grid>
 
-                            <Grid item xs={12} container justifyContent="center" sx={{ flexDirection: 'row' }}>
-                                <FormControl component="fieldset">
-                                    {/* <FormLabel component="legend">Days</FormLabel> */}
-                                    <FormGroup sx={{ justifyContent: 'center', flexDirection: 'row' }}>
-                                        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
-                                            <React.Fragment key={day}>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox
-                                                            checked={values.days.includes(day)}
-                                                            onChange={() => {
-                                                                const newDays = values.days.includes(day)
-                                                                    ? values.days.filter((d) => d !== day)
-                                                                    : [...values.days, day];
-                                                                setFieldValue('days', newDays);
-                                                            }}
-                                                            name={day}
-                                                        />
-                                                    }
-                                                    label={day}
+                    <Grid item xs={12} container justifyContent="center" sx={{ flexDirection: 'row' }}>
+                        <FormControl component="fieldset">
+                            {/* <FormLabel component="legend">Days</FormLabel> */}
+                            <FormGroup sx={{ justifyContent: 'center', flexDirection: 'row' }}>
+                                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
+                                    <React.Fragment key={day}>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={formik.values.days.includes(day)}
+                                                    onChange={() => {
+                                                        const newDays = formik.values.days.includes(day)
+                                                            ? formik.values.days.filter((d) => d !== day)
+                                                            : [...formik.values.days, day];
+                                                        formik.setFieldValue('days', newDays);
+                                                    }}
+                                                    name={day}
                                                 />
-                                            </React.Fragment>
-                                        ))}
-                                    </FormGroup>
-                                </FormControl>
-                            </Grid>
-
-                            {values.roles.map((role, index) => (
-                                <React.Fragment key={index}>
-                                    <Grid item xs={6} sm={3}>
-                                        <Field component={TextField} name={`roles.${index}.roleType`} label="Role Type" fullWidth />
-                                    </Grid>
-
-                                    <Grid item xs={6} sm={3}>
-                                        <Field
-                                            component={TextField}
-                                            name={`roles.${index}.amount`}
-                                            label="Amount"
-                                            type="number"
-                                            fullWidth
+                                            }
+                                            label={day}
                                         />
-                                    </Grid>
-                                </React.Fragment>
-                            ))}
+                                    </React.Fragment>
+                                ))}
+                            </FormGroup>
+                        </FormControl>
+                    </Grid>
 
-                            <Grid item xs={1.5}>
-                                <Button
-                                    type="button"
-                                    variant="outlined"
-                                    sx={{
-                                        fontSize: '15px',
-                                        bgcolor: theme.palette.grey.main,
-                                        color: theme.palette.grey.contrastText
-                                    }}
-                                    onClick={() => setFieldValue('roles', [...values.roles, { roleType: '', amount: '' }])}
-                                >
-                                    Add Role
+                    {formik.values.roles.map((role, index) => (
+                        <React.Fragment key={index}>
+                            <Grid item xs={6} sm={3}>
+                                <TextField name={`roles.${index}.roleType`} label="Role Type" fullWidth />
+                            </Grid>
+
+                            <Grid item xs={6} sm={3}>
+                                <TextField name={`roles.${index}.amount`} label="Amount" type="number" fullWidth />
+                            </Grid>
+                        </React.Fragment>
+                    ))}
+
+                    <Grid item xs={1.5}>
+                        <Button
+                            type="button"
+                            variant="outlined"
+                            sx={{
+                                fontSize: '15px',
+                                bgcolor: theme.palette.grey.main,
+                                color: theme.palette.grey.contrastText
+                            }}
+                            onClick={() => formik.setFieldValue('roles', [...formik.values.roles, { roleType: '', amount: '' }])}
+                        >
+                            Add Role
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Grid item xs={12} container spacing={5} justifyContent="center">
+                    <Grid item xs={5}>
+                        {formik.errors.submit && (
+                            <Box sx={{ mt: 3 }}>
+                                <FormHelperText error>{formik.errors.submit}</FormHelperText>
+                            </Box>
+                        )}
+                        <Box sx={{ mt: 2 }}>
+                            <AnimateButton>
+                                <Button fullWidth size="large" type="submit" variant="contained" color="secondary">
+                                    Add
                                 </Button>
-                            </Grid>
-                        </Grid>
-
-                        <Grid item xs={12} container spacing={5} justifyContent="center">
-                            <Grid item xs={5}>
-                                {errors.submit && (
-                                    <Box sx={{ mt: 3 }}>
-                                        <FormHelperText error>{errors.submit}</FormHelperText>
-                                    </Box>
-                                )}
-                                <Box sx={{ mt: 2 }}>
-                                    <AnimateButton>
-                                        <Button
-                                            fullWidth
-                                            size="large"
-                                            onSubmit={handleSubmit}
-                                            type="submit"
-                                            variant="contained"
-                                            color="secondary"
-                                        >
-                                            Add
-                                        </Button>
-                                    </AnimateButton>
-                                </Box>
-                            </Grid>
-                            <Grid item xs={5}>
-                                <Box sx={{ mt: 2 }}>
-                                    <AnimateButton>
-                                        <Button fullWidth size="large" onClick={handleAddOpenClose} variant="contained" color="secondary">
-                                            Cancel
-                                        </Button>
-                                    </AnimateButton>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </form>
-                )}
-            </Formik>
-        </Grid>
+                            </AnimateButton>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={5}>
+                        <Box sx={{ mt: 2 }}>
+                            <AnimateButton>
+                                <Button fullWidth size="large" onClick={handleAddOpenClose} variant="contained" color="secondary">
+                                    Cancel
+                                </Button>
+                            </AnimateButton>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </form>
+        </>
     );
 };
 

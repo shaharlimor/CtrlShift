@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 // material-ui
@@ -36,12 +36,11 @@ export default function PermanentShift() {
         setAddOpen(false);
     };
     return (
-        <MainCard content={false} title={!addOpen ? 'Permanent Shift' : 'Add Permenent Shift'}>
+        <>
             {!addOpen ? (
-                <>
-                    {' '}
-                    <PermenentShiftTableMode />
+                <MainCard content={false} title={!addOpen ? 'Permanent Shift' : 'Add Permenent Shift'}>
                     <Grid container direction="column" justifyContent="center" alignItems="flex-end">
+                        <PermenentShiftTableMode />
                         <Grid item xs={3} sx={{ mt: 2 }}>
                             <IconButton
                                 variant="contained"
@@ -59,10 +58,12 @@ export default function PermanentShift() {
                             </IconButton>
                         </Grid>
                     </Grid>
-                </>
+                </MainCard>
             ) : (
-                <AddPermenentShift handleAddOpenClose={handleAddOpenClose} />
+                <MainCard content={false} title={!addOpen ? 'Permanent Shift' : 'Add Permenent Shift'}>
+                    <AddPermenentShift handleAddOpenClose={handleAddOpenClose} />
+                </MainCard>
             )}
-        </MainCard>
+        </>
     );
 }
