@@ -1,39 +1,47 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 // material-ui
 import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-// third-party
-import _ from 'lodash';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 
 // project imports
-// import ColorPalette from './ColorPalette';
 import { gridSpacing } from 'store/constant';
-import NestedList from 'components/list/NestedList';
-import { addConstraint } from 'utils/api';
+import NestedList from 'components/constraints/EmpoyeesList';
+import { addConstraint, getConstraintsByShiftId } from 'utils/api';
 
 // constant
-const getInitialValues = (event) => {
+const getInitialValues = () => {
     const newEvent = {
         level: '1',
         comment: ''
     };
-
-    if (event) {
-        return _.merge({}, newEvent, event);
-    }
-
     return newEvent;
 };
 
 const levelOptions = [1, 2, 3, 4, 5];
 
-const AddEventFrom = ({ event, handleDelete, onCancel }) => {
+const AddConstraintFrom = ({ event, onCancel }) => {
+    const [ids, setIds] = useState([]);
+
+    const getEmployeesConstraintOnShift = async (shiftId) => {
+        const result = await getConstraintsByShiftId(shiftId);
+        let parsedData = [];
+        result.data.map((item) =>
+            parsedData.push({
+                id: item.employeeId
+            })
+        );
+        setIds(parsedData);
+        parsedData = [];
+    };
+
+    getEmployeesConstraintOnShift(event.id);
+
     const EventSchema = Yup.object().shape({
         level: Yup.number(),
         comment: Yup.string().max(5000)
@@ -44,6 +52,7 @@ const AddEventFrom = ({ event, handleDelete, onCancel }) => {
         validationSchema: EventSchema,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
             try {
+                // TODO: get employee id according to the logged user
                 const data = {
                     level: values.level,
                     description: values.comment,
@@ -61,7 +70,7 @@ const AddEventFrom = ({ event, handleDelete, onCancel }) => {
         }
     });
 
-    const { values, errors, touched, handleSubmit, isSubmitting, getFieldProps, setFieldValue } = formik;
+    const { errors, touched, handleSubmit, getFieldProps } = formik;
 
     return (
         <FormikProvider value={formik}>
@@ -104,11 +113,10 @@ const AddEventFrom = ({ event, handleDelete, onCancel }) => {
                                 />
                             </Grid>
                             <Grid item xs={10}>
-                                <NestedList />
+                                {ids && <NestedList employess={ids} />}
                             </Grid>
                         </Grid>
                     </DialogContent>
-
                     <DialogActions sx={{ p: 3 }}>
                         <Grid container justifyContent="center" alignItems="center">
                             <Button type="submit" variant="contained" color="secondary" sx={{ width: '30%' }}>
@@ -122,10 +130,9 @@ const AddEventFrom = ({ event, handleDelete, onCancel }) => {
     );
 };
 
-AddEventFrom.propTypes = {
+AddConstraintFrom.propTypes = {
     event: PropTypes.object,
-    handleDelete: PropTypes.func,
     onCancel: PropTypes.func
 };
 
-export default AddEventFrom;
+export default AddConstraintFrom;

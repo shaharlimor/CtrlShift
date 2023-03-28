@@ -1,7 +1,7 @@
 import { lazy, useState, useEffect } from 'react';
 import Loadable from 'components/Loadable';
 import value from 'assets/scss/_themes-vars.module.scss';
-import AddEventForm from './AddEventForm';
+import AddEventForm from './AddConstraintFrom';
 import { Dialog } from '@mui/material';
 import { getMonthlyShifts } from 'utils/api';
 
@@ -13,21 +13,24 @@ const Constrainsts = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [events, setEvents] = useState([]);
 
-    useEffect(async () => {
-        const r = await getMonthlyShifts();
-        let parsedData = [];
-        r.data.map((item) =>
-            parsedData.push({
-                id: item._id,
-                color: value.secondary200,
-                description: item.name,
-                start: new Date(item.startTime.toString()),
-                end: new Date(item.endTime.toString()),
-                title: item.name
-            })
-        );
-        setEvents(parsedData);
-        parsedData = [];
+    useEffect(() => {
+        const getShifts = async () => {
+            const result = await getMonthlyShifts();
+            let parsedData = [];
+            result.data.map((item) =>
+                parsedData.push({
+                    id: item._id,
+                    color: value.secondary200,
+                    description: item.name,
+                    start: new Date(item.startTime.toString()),
+                    end: new Date(item.endTime.toString()),
+                    title: item.name
+                })
+            );
+            setEvents(parsedData);
+            parsedData = [];
+        };
+        getShifts();
     }, []);
 
     const handleEventSelect = (arg) => {
@@ -43,7 +46,6 @@ const Constrainsts = (props) => {
     const handleModalClose = () => {
         setIsModalOpen(false);
         setSelectedEvent(null);
-        // setSelectedRange(null);
     };
 
     return (
@@ -51,16 +53,7 @@ const Constrainsts = (props) => {
             <Calendar calendarType={0} events={events} handleEventSelect={handleEventSelect} />
             {/* Dialog renders its body even if not open */}
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && (
-                    <AddEventForm
-                        event={selectedEvent}
-                        // range={selectedRange}
-                        onCancel={handleModalClose}
-                        // handleDelete={handleEventDelete}
-                        // handleCreate={handleEventCreate}
-                        // handleUpdate={handleUpdateEvent}
-                    />
-                )}
+                {isModalOpen && <AddEventForm event={selectedEvent} onCancel={handleModalClose} employess />}
             </Dialog>
         </div>
     );
