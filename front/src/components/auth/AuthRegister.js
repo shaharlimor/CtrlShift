@@ -31,8 +31,7 @@ import useConfig from '../../hooks/useConfig';
 import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../AnimateButton';
 import { strengthColor, strengthIndicatorNumFunc } from '../../utils/password-strength';
-
-// assets
+import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -43,10 +42,10 @@ const FirebaseRegister = ({ ...others }) => {
     const { borderRadius } = useConfig();
     const [showPassword, setShowPassword] = React.useState(false);
     const [checked, setChecked] = React.useState(true);
-
+    const navigate = useNavigate();
     const [strength, setStrength] = React.useState(0);
     const [level, setLevel] = React.useState();
-    const { Register, SignIn } = useAuth();
+    const { register } = useAuth();
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -86,12 +85,9 @@ const FirebaseRegister = ({ ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        await Register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
+                        await register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
                             () => {
-                                // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
-                                // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
-                                // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-                                // github issue: https://github.com/formium/formik/issues/2430
+                                navigate('/');
                             },
                             (err) => {
                                 if (scriptedRef.current) {

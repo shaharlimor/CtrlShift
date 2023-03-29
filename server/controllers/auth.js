@@ -122,7 +122,7 @@ const register = async (req, res, next) => {
  * Reuse of refresh token blocks the user .
  */
 const refreshToken = async (req, res, next) => {
-    authHeaders = req.headers['authorization'];
+    authHeaders = req.headers['refreshtoken'];
     const token = authHeaders && authHeaders.split(' ')[1];
     if (token == null) {
         return res.sendStatus('401');
@@ -159,10 +159,11 @@ const refreshToken = async (req, res, next) => {
 
             // New refresh token
             user.tokens[user.tokens.indexOf(token)] = refreshToken;
-            await user.save();
+            const newUser = await user.save();
             res.status(200).send({
                 "accessToken" : accessToken,
-                "refreshToken" : refreshToken
+                "refreshToken" : refreshToken,
+                "user": newUser
             });
         } catch(err) {
             res.status(403).send(err.message);
@@ -175,7 +176,7 @@ const refreshToken = async (req, res, next) => {
  * Else, invalidate all user tokens
  */
 const logout = async (req, res, next) => {
-    authHeaders = req.headers['authorization'];
+    authHeaders = req.headers['refreshtoken'];
     const token = authHeaders && authHeaders.split(' ')[1];
     if (token == null) {
         return res.sendStatus('401');
@@ -210,11 +211,28 @@ const logout = async (req, res, next) => {
     })
 };
 
+const getUserByRefreshToken = async (req, res, next) => {
+    try {
+        const refreshTokenHeader = req.headers['refreshtoken'];
+        const refreshToken = refreshTokenHeader && refreshTokenHeader.split(' ')[1];
+        const user = await User.findOne({"tokens":refreshToken});
+
+        if (user == null) {
+            return res.status(500).send("invalid token");
+        } else {
+            res.status(200).send({"user": user});
+        }
+    } catch(err) {
+        return res.status(500).send("Get user by token fail: " + err.message);
+    }
+}
+
 module.exports = {
     login,
     register,
     logout,
-    refreshToken
+    refreshToken,
+    getUserByRefreshToken
 }
 
 

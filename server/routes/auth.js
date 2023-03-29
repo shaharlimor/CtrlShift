@@ -9,6 +9,7 @@ router.post('/refreshToken', authController.refreshToken);
 
 // With middleware
 router.post('/logout', middleware, authController.logout);
+router.get('/getUserByRefreshToken', authController.getUserByRefreshToken);
 
 
 module.exports = router;
