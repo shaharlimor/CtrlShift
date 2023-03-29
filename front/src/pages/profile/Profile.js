@@ -7,7 +7,7 @@ import useAuth from 'hooks/useAuth';
 import SubCard from 'components/cards/SubCard';
 import AnimateButton from 'components/AnimateButton';
 import { gridSpacing } from 'store/constant';
-import axios from 'axios';
+import updateUserDetails from 'services/userProfile';
 
 // assets
 // import Avatar1 from 'assets/images/users/user-1.png';
@@ -19,21 +19,11 @@ const Profile = () => {
     const [lastName, setLastName] = useState(user.lastName);
     const [phone, setPhone] = useState(user.phone);
 
-    const test = async () => {
-        try {
-            const response = await axios.post('http://localhost:3001/auth/updateUserDetails', {
-                email,
-                firstName,
-                lastName,
-                phone
-            });
+    // eslint-disable-next-line no-underscore-dangle
+    const userId = user._id;
 
-            // Handle the response (e.g., show a success message)
-            console.log(response.data.message);
-        } catch (error) {
-            // Handle the error (e.g., show an error message)
-            console.error('Error updating user details:', error);
-        }
+    const test = async () => {
+        updateUserDetails(userId, email, firstName, lastName, phone);
     };
 
     return (

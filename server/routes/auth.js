@@ -6,7 +6,7 @@ var router = express.Router();
 router.post('/login', authController.login);
 router.post('/register', authController.register);
 router.post('/refreshToken', authController.refreshToken);
-router.post('/updateUserDetails', express.json(), middleware, authController.updateUserDetails);
+router.post('/updateUserDetails', express.json(), authController.updateUserDetails);
 
 // With middleware
 router.post('/logout', middleware, authController.logout);
