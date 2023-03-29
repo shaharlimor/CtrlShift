@@ -7,7 +7,7 @@ import useAuth from 'hooks/useAuth';
 import SubCard from 'components/cards/SubCard';
 import AnimateButton from 'components/AnimateButton';
 import { gridSpacing } from 'store/constant';
-import updateUserDetails from 'services/userProfile';
+import updateUserDetails from 'utils/userProfile';
 
 // assets
 // import Avatar1 from 'assets/images/users/user-1.png';
@@ -23,7 +23,7 @@ const Profile = () => {
     const userId = user._id;
 
     const test = async () => {
-        updateUserDetails(userId, email, firstName, lastName, phone);
+        updateUserDetails(email, firstName, lastName, phone);
     };
 
     return (

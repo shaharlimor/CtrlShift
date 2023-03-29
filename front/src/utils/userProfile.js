@@ -1,9 +1,8 @@
-import axios from 'axios';
+import axios from 'utils/axios';
 
-const updateUserDetails = async (userID, email, firstName, lastName, phone) => {
+const updateUserDetails = async (email, firstName, lastName, phone) => {
     try {
         const response = await axios.post('http://localhost:3001/auth/updateUserDetails', {
-            id: userID,
             email,
             firstName,
             lastName,
