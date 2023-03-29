@@ -11,12 +11,10 @@ import accountReducer from 'store/accountReducer';
 import Loader from '../components/Loader';
 import axios from '../utils/axios';
 
-
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 
 const chance = new Chance();
-
 
 // constant
 const initialState = {
@@ -25,6 +23,7 @@ const initialState = {
     user: null
 };
 
+/* eslint-disable */
 const verifyToken = (accessToken) => {
     if (!accessToken) {
         return false;
@@ -57,18 +56,17 @@ const setRefreshToken = (refreshToken) => {
     }
 };
 
-
-export const refreshAccessToken = async() => {
-    console.log("refresh access token");
+export const refreshAccessToken = async () => {
+    console.log('refresh access token');
     const response = await axios.post('/auth/refreshToken');
     const { user, refreshToken, accessToken } = response.data;
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
-    
+
     initialState.isLoggedIn = true;
     initialState.user = user;
     initialState.type = LOGIN;
-}
+};
 
 // ==============================|| JWT CONTEXT & PROVIDER ||============================== //
 const JWTContext = createContext(null);
@@ -76,26 +74,25 @@ const JWTContext = createContext(null);
 export const JWTProvider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
     const navigate = useNavigate();
-   
+
     useEffect(() => {
         const init = async () => {
             try {
-                console.log("useeffect");
+                console.log('useeffect');
                 const accessToken = window.localStorage.getItem('accessToken');
                 const refreshToken = window.localStorage.getItem('refreshToken');
-                
+
                 if (accessToken && refreshToken) {
                     setAccessToken(accessToken);
                     setRefreshToken(refreshToken);
-                    
+
                     if (verifyToken(accessToken)) {
                         // if user == null?
                         getUserByRefreshToken();
                     } else {
                         refreshAccessToken();
                     }
-                }
-                else {
+                } else {
                     navigateLogin();
                 }
             } catch (err) {
@@ -112,9 +109,9 @@ export const JWTProvider = ({ children }) => {
             type: LOGOUT
         });
         navigate('/login');
-    }
+    };
 
-    const getUserByRefreshToken = async() => {
+    const getUserByRefreshToken = async () => {
         try {
             const response = await axios.get('/auth/getUserByRefreshToken');
             const { user } = response.data;
@@ -129,14 +126,13 @@ export const JWTProvider = ({ children }) => {
             console.error(err);
             navigateLogin();
         }
-    }
-    
+    };
+
     const login = async (email, password) => {
-        const response = await axios.post('/auth/login', { email, password }) 
-        .catch(err => {
+        const response = await axios.post('/auth/login', { email, password }).catch((err) => {
             throw new Error(err);
         });
-        
+
         const { accessToken, refreshToken, user } = response.data;
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
@@ -152,16 +148,18 @@ export const JWTProvider = ({ children }) => {
 
     const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
-        const response = await axios.post('/auth/register', {
-            id,
-            email,
-            password,
-            firstName,
-            lastName,
-            organizationName
-        }).catch(err => {
-            throw new Error(err);
-        });
+        const response = await axios
+            .post('/auth/register', {
+                id,
+                email,
+                password,
+                firstName,
+                lastName,
+                organizationName
+            })
+            .catch((err) => {
+                throw new Error(err);
+            });
 
         const { accessToken, refreshToken, user } = response.data;
         setAccessToken(accessToken);
@@ -205,7 +203,9 @@ export const JWTProvider = ({ children }) => {
     }
 
     return (
-        <JWTContext.Provider value={{ ...state, refreshAccessToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>{children}</JWTContext.Provider>
+        <JWTContext.Provider value={{ ...state, refreshAccessToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>
+            {children}
+        </JWTContext.Provider>
     );
 };
 
