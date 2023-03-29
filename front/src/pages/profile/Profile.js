@@ -7,7 +7,7 @@ import useAuth from 'hooks/useAuth';
 import SubCard from 'components/cards/SubCard';
 import AnimateButton from 'components/AnimateButton';
 import { gridSpacing } from 'store/constant';
-import axios from 'axios';
+import updateUserDetails from 'services/userProfile';
 
 // assets
 // import Avatar1 from 'assets/images/users/user-1.png';
@@ -23,21 +23,7 @@ const Profile = () => {
     const userId = user._id;
 
     const test = async () => {
-        try {
-            const response = await axios.post('http://localhost:3001/auth/updateUserDetails', {
-                id: userId,
-                email,
-                firstName,
-                lastName,
-                phone
-            });
-
-            // Handle the response (e.g., show a success message)
-            console.log(response.data.message);
-        } catch (error) {
-            // Handle the error (e.g., show an error message)
-            console.error('Error updating user details:', error);
-        }
+        updateUserDetails(userId, email, firstName, lastName, phone);
     };
 
     return (
