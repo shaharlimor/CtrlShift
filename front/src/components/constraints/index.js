@@ -7,18 +7,19 @@ import { getMonthlyShifts } from 'utils/api';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
-/* eslint-disable */
-const Constrainsts = (props) => {
+const Constrainsts = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [events, setEvents] = useState([]);
 
+    // TODO: get shift by month (only if open to insert)
     useEffect(() => {
         const getShifts = async () => {
             const result = await getMonthlyShifts();
             let parsedData = [];
             result.data.map((item) =>
                 parsedData.push({
+                    // eslint-disable-next-line
                     id: item._id,
                     color: value.secondary200,
                     description: item.name,

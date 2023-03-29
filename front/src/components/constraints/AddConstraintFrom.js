@@ -42,6 +42,8 @@ const AddConstraintFrom = ({ event, onCancel }) => {
 
     getEmployeesConstraintOnShift(event.id);
 
+    // TODO: check if the user doesnt already have constraint in this shift
+    // Implment after we have logged user
     const EventSchema = Yup.object().shape({
         level: Yup.number(),
         comment: Yup.string().max(5000)

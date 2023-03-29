@@ -39,7 +39,6 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
         setNewViewOption(newOption);
     }, [matchSm]);
 
-    /* eslint-disable */
     return (
         <Grid alignItems="center" container justifyContent="space-between" {...others} sx={{ pb: 3 }}>
             {calendarType !== 0 ? (
@@ -89,8 +88,6 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
             </Grid>
         </Grid>
     );
-
-    /* eslint-enable */
 };
 Toolbar.propTypes = {
     date: PropTypes.object,

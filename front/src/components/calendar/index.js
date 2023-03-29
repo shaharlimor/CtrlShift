@@ -8,24 +8,19 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import timelinePlugin from '@fullcalendar/timeline';
 import interactionPlugin from '@fullcalendar/interaction';
-import { add, set, sub } from 'date-fns';
 
 import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
 
-import value from 'assets/scss/_themes-vars.module.scss';
-
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
 // 1 - Manager
 // 2 - Monthly Planner
-const Calendar = ({ events, calendarType, handleEventSelect, ...others }) => {
+const Calendar = ({ events, calendarType, handleEventSelect }) => {
     const calendarRef = useRef(null);
 
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
-    // TODO: get events by props / from server
-    // const [events, setEvents] = useState([]);
 
     const displayEvents = events !== null ? events : [];
 
@@ -72,7 +67,6 @@ const Calendar = ({ events, calendarType, handleEventSelect, ...others }) => {
         }
     };
 
-    /* eslint-disable */
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -137,7 +131,6 @@ const Calendar = ({ events, calendarType, handleEventSelect, ...others }) => {
             </Grid>
         </Fragment>
     );
-    /* eslint-enable */
 };
 Calendar.propTypes = {
     events: PropTypes.array,
