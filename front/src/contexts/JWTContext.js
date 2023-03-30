@@ -23,7 +23,6 @@ const initialState = {
     user: null
 };
 
-/* eslint-disable */
 const verifyToken = (accessToken) => {
     if (!accessToken) {
         return false;
@@ -74,8 +73,30 @@ const JWTContext = createContext(null);
 export const JWTProvider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
     const navigate = useNavigate();
-
     useEffect(() => {
+        const navigateLogin = () => {
+            dispatch({
+                type: LOGOUT
+            });
+            navigate('/login');
+        };
+
+        const getUserByRefreshToken = async () => {
+            try {
+                const response = await axios.get('/auth/getUserByRefreshToken');
+                const { user } = response.data;
+                dispatch({
+                    type: LOGIN,
+                    payload: {
+                        isLoggedIn: true,
+                        user
+                    }
+                });
+            } catch (err) {
+                console.error(err);
+                navigateLogin();
+            }
+        };
         const init = async () => {
             try {
                 console.log('useeffect');
@@ -102,31 +123,7 @@ export const JWTProvider = ({ children }) => {
         };
 
         init();
-    }, []);
-
-    const navigateLogin = () => {
-        dispatch({
-            type: LOGOUT
-        });
-        navigate('/login');
-    };
-
-    const getUserByRefreshToken = async () => {
-        try {
-            const response = await axios.get('/auth/getUserByRefreshToken');
-            const { user } = response.data;
-            dispatch({
-                type: LOGIN,
-                payload: {
-                    isLoggedIn: true,
-                    user
-                }
-            });
-        } catch (err) {
-            console.error(err);
-            navigateLogin();
-        }
-    };
+    }, []); // eslint-disable-line
 
     const login = async (email, password) => {
         const response = await axios.post('/auth/login', { email, password }).catch((err) => {

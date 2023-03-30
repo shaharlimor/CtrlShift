@@ -227,12 +227,57 @@ const getUserByRefreshToken = async (req, res, next) => {
     }
 }
 
+const updateUserDetails = async (req, res) => {
+    authHeaders = req.headers['refreshtoken'];
+    const token = authHeaders && authHeaders.split(' ')[1];
+    if (token == null) {
+        return res.sendStatus('401');
+    }
+
+
+
+    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err,user) => {
+        if (err) {
+            return res.status(403).send(err.message);
+        }
+       
+        const userId = user._id;
+        const { email, firstName, lastName, phone } = req.body;
+        
+  
+        console.log(`updateUserDetails for user ${userId}`)
+
+        try {
+            // Find the user by ID and update the details
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: userId },
+                {
+                email,
+                firstName,
+                lastName,
+                phone,
+                },
+                { new: true } // Return the updated user object
+            );
+        
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+        
+            // Send the response back to the client
+            res.status(200).json({ message: 'User details updated successfully', user: updatedUser });
+        } catch (error) {
+            console.error('Error updating user details:', error);
+            res.status(500).json({ message: 'Error updating user details' });
+        }
+    })
+  };
+
 module.exports = {
     login,
     register,
     logout,
     refreshToken,
-    getUserByRefreshToken
+    getUserByRefreshToken,
+    updateUserDetails
 }
-
-
