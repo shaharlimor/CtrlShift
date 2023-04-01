@@ -122,7 +122,7 @@ const register = async (req, res, next) => {
  * Reuse of refresh token blocks the user .
  */
 const refreshToken = async (req, res, next) => {
-    authHeaders = req.headers['authorization'];
+    authHeaders = req.headers['refreshtoken'];
     const token = authHeaders && authHeaders.split(' ')[1];
     if (token == null) {
         return res.sendStatus('401');
@@ -159,10 +159,11 @@ const refreshToken = async (req, res, next) => {
 
             // New refresh token
             user.tokens[user.tokens.indexOf(token)] = refreshToken;
-            await user.save();
+            const newUser = await user.save();
             res.status(200).send({
                 "accessToken" : accessToken,
-                "refreshToken" : refreshToken
+                "refreshToken" : refreshToken,
+                "user": newUser
             });
         } catch(err) {
             res.status(403).send(err.message);
@@ -175,7 +176,7 @@ const refreshToken = async (req, res, next) => {
  * Else, invalidate all user tokens
  */
 const logout = async (req, res, next) => {
-    authHeaders = req.headers['authorization'];
+    authHeaders = req.headers['refreshtoken'];
     const token = authHeaders && authHeaders.split(' ')[1];
     if (token == null) {
         return res.sendStatus('401');
@@ -210,11 +211,73 @@ const logout = async (req, res, next) => {
     })
 };
 
+const getUserByRefreshToken = async (req, res, next) => {
+    try {
+        const refreshTokenHeader = req.headers['refreshtoken'];
+        const refreshToken = refreshTokenHeader && refreshTokenHeader.split(' ')[1];
+        const user = await User.findOne({"tokens":refreshToken});
+
+        if (user == null) {
+            return res.status(500).send("invalid token");
+        } else {
+            res.status(200).send({"user": user});
+        }
+    } catch(err) {
+        return res.status(500).send("Get user by token fail: " + err.message);
+    }
+}
+
+const updateUserDetails = async (req, res) => {
+    authHeaders = req.headers['refreshtoken'];
+    const token = authHeaders && authHeaders.split(' ')[1];
+    if (token == null) {
+        return res.sendStatus('401');
+    }
+
+
+
+    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err,user) => {
+        if (err) {
+            return res.status(403).send(err.message);
+        }
+       
+        const userId = user._id;
+        const { email, firstName, lastName, phone } = req.body;
+        
+  
+        console.log(`updateUserDetails for user ${userId}`)
+
+        try {
+            // Find the user by ID and update the details
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: userId },
+                {
+                email,
+                firstName,
+                lastName,
+                phone,
+                },
+                { new: true } // Return the updated user object
+            );
+        
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+        
+            // Send the response back to the client
+            res.status(200).json({ message: 'User details updated successfully', user: updatedUser });
+        } catch (error) {
+            console.error('Error updating user details:', error);
+            res.status(500).json({ message: 'Error updating user details' });
+        }
+    })
+  };
+
 module.exports = {
     login,
     register,
     logout,
-    refreshToken
+    refreshToken,
+    getUserByRefreshToken,
+    updateUserDetails
 }
-
-

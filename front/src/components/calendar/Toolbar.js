@@ -27,7 +27,7 @@ const viewOptions = [
     }
 ];
 
-const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, isAdmin, ...others }) => {
+const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarType, ...others }) => {
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const [newViewOption, setNewViewOption] = useState(viewOptions);
 
@@ -39,18 +39,22 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, isAdmin, 
         setNewViewOption(newOption);
     }, [matchSm]);
 
-    /* eslint-disable */
     return (
         <Grid alignItems="center" container justifyContent="space-between" {...others} sx={{ pb: 3 }}>
-            <Grid item>
-            <Button
-                variant="contained"
-                sx={{ width: '100%' }}
-                size="large"
-                startIcon={isAdmin && (<AddCircleOutlineTwoToneIcon />)}>
-                {isAdmin ? "Add shift": "My shifts"}
-            </Button>
-            </Grid>
+            {calendarType !== 0 ? (
+                <Grid item>
+                    <Button
+                        variant="contained"
+                        sx={{ width: '100%' }}
+                        size="large"
+                        startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
+                    >
+                        {calendarType === 1 ? 'Add shift' : 'My shifts'}
+                    </Button>
+                </Grid>
+            ) : (
+                ''
+            )}
             <Grid item>
                 <Stack direction="row" alignItems="center" spacing={3}>
                     <IconButton onClick={onClickPrev} size="large">
@@ -84,8 +88,6 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, isAdmin, 
             </Grid>
         </Grid>
     );
-
-     /* eslint-disable */
 };
 Toolbar.propTypes = {
     date: PropTypes.object,
@@ -93,7 +95,7 @@ Toolbar.propTypes = {
     onClickNext: PropTypes.func,
     onClickPrev: PropTypes.func,
     onChangeView: PropTypes.func,
-    isAdmin: PropTypes.bool
+    calendarType: PropTypes.number
 };
 
 export default Toolbar;

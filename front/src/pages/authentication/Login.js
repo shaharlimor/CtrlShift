@@ -65,7 +65,7 @@ const Login = () => {
                                         <Grid item container direction="column" alignItems="center" xs={12}>
                                             <Typography
                                                 component={Link}
-                                                to={isLoggedIn ? '/pages/authentication/register' : '/register'}
+                                                to={isLoggedIn ? '/' : '/register'}
                                                 variant="subtitle1"
                                                 sx={{ textDecoration: 'none' }}
                                             >

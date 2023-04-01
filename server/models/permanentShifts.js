@@ -7,11 +7,13 @@ const permanentShiftSchema = new Schema({
   endTime: Date,
   days: [String],
   name: String,
-  roles: [{
-    roleType:String,
-    amount: Number
-  }]
+  roles: [
+    {
+      roleType: String,
+      amount: Number,
+    },
+  ],
 });
 
 // Compile model from schema
-module.exports = mongoose.model("PermanentShift", userSchema);
+module.exports = mongoose.model("PermanentShift", permanentShiftSchema);

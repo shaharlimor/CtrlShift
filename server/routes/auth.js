@@ -6,9 +6,11 @@ var router = express.Router();
 router.post('/login', authController.login);
 router.post('/register', authController.register);
 router.post('/refreshToken', authController.refreshToken);
+router.post('/updateUserDetails', express.json(), authController.updateUserDetails);
 
 // With middleware
 router.post('/logout', middleware, authController.logout);
+router.get('/getUserByRefreshToken', authController.getUserByRefreshToken);
 
 
 module.exports = router;

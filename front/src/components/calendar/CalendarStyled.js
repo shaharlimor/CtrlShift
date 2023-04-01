@@ -74,20 +74,6 @@ const ExperimentalStyled = styled('div')(({ theme }) => ({
         borderTopRightRadius: '12px',
         backgroundColor: theme.palette.mode === 'dark' ? theme.palette.dark[800] : theme.palette.grey[200],
         color: theme.palette.mode === 'dark' ? theme.palette.dark.light : theme.palette.text.primary
-    },
-
-    // agenda view
-    '& .fc-theme-standard .fc-list-day-cushion': {
-        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100]
-    },
-
-    '& .fc .fc-list-event:hover td': {
-        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.dark[800] : theme.palette.grey[100]
-    },
-
-    '& .fc-timegrid-event-harness-inset .fc-timegrid-event, .fc-timegrid-event.fc-event-mirror, .fc-timegrid-more-link': {
-        padding: 8,
-        margin: 2
     }
 }));
 

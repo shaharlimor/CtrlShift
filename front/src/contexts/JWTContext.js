@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useReducer } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // third-party
 import { Chance } from 'chance';
 import jwtDecode from 'jwt-decode';
-
 // reducer - state management
 import accountReducer from 'store/accountReducer';
 
@@ -24,25 +23,48 @@ const initialState = {
     user: null
 };
 
-const verifyToken = (serviceToken) => {
-    if (!serviceToken) {
+const verifyToken = (accessToken) => {
+    if (!accessToken) {
         return false;
     }
-    const decoded = jwtDecode(serviceToken);
+
+    const decoded = jwtDecode(accessToken);
     /**
      * Property 'exp' does not exist on type '<T = unknown>(token, options?: JwtDecodeOptions | undefined) => T'.
      */
     return decoded.exp > Date.now() / 1000;
 };
 
-const setSession = (serviceToken) => {
-    if (serviceToken) {
-        localStorage.setItem('serviceToken', serviceToken);
-        axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
+const setAccessToken = (accessToken) => {
+    if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+        axios.defaults.headers.common.accessToken = `Bearer ${accessToken}`;
     } else {
-        localStorage.removeItem('serviceToken');
-        delete axios.defaults.headers.common.Authorization;
+        localStorage.removeItem('accessToken');
+        delete axios.defaults.headers.common.accessToken;
     }
+};
+
+const setRefreshToken = (refreshToken) => {
+    if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+        axios.defaults.headers.common.refreshToken = `Bearer ${refreshToken}`;
+    } else {
+        localStorage.removeItem('refreshToken');
+        delete axios.defaults.headers.common.refreshToken;
+    }
+};
+
+export const refreshAccessToken = async () => {
+    console.log('refresh access token');
+    const response = await axios.post('/auth/refreshToken');
+    const { user, refreshToken, accessToken } = response.data;
+    setAccessToken(accessToken);
+    setRefreshToken(refreshToken);
+
+    initialState.isLoggedIn = true;
+    initialState.user = user;
+    initialState.type = LOGIN;
 };
 
 // ==============================|| JWT CONTEXT & PROVIDER ||============================== //
@@ -50,66 +72,104 @@ const JWTContext = createContext(null);
 
 export const JWTProvider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
-
+    const navigate = useNavigate();
     useEffect(() => {
-        const init = async () => {
+        const navigateLogin = () => {
+            dispatch({
+                type: LOGOUT
+            });
+            navigate('/login');
+        };
+
+        const getUserByRefreshToken = async () => {
             try {
-                const serviceToken = window.localStorage.getItem('serviceToken');
-                if (serviceToken && verifyToken(serviceToken)) {
-                    setSession(serviceToken);
-                    const response = await axios.get('/api/account/me');
-                    const { user } = response.data;
-                    dispatch({
-                        type: LOGIN,
-                        payload: {
-                            isLoggedIn: true,
-                            user
-                        }
-                    });
-                } else {
-                    dispatch({
-                        type: LOGOUT
-                    });
-                }
+                const response = await axios.get('/auth/getUserByRefreshToken');
+                const { user } = response.data;
+                dispatch({
+                    type: LOGIN,
+                    payload: {
+                        isLoggedIn: true,
+                        user
+                    }
+                });
             } catch (err) {
                 console.error(err);
-                dispatch({
-                    type: LOGOUT
-                });
+                navigateLogin();
+            }
+        };
+        const init = async () => {
+            try {
+                console.log('useeffect');
+                const accessToken = window.localStorage.getItem('accessToken');
+                const refreshToken = window.localStorage.getItem('refreshToken');
+
+                if (accessToken && refreshToken) {
+                    setAccessToken(accessToken);
+                    setRefreshToken(refreshToken);
+
+                    if (verifyToken(accessToken)) {
+                        // if user == null?
+                        getUserByRefreshToken();
+                    } else {
+                        refreshAccessToken();
+                    }
+                } else {
+                    navigateLogin();
+                }
+            } catch (err) {
+                navigateLogin();
+                console.error(err);
             }
         };
 
         init();
-    }, []);
+    }, []); // eslint-disable-line
 
-    /* eslint-disable */
     const login = async (email, password) => {
-        //TODO: change to send to the server jwt
-        // const response = await axios.post('/api/account/login', { email, password });
-        // const { serviceToken, user } = response.data;
-        // setSession(serviceToken);
-        // dispatch({
-        //     type: LOGIN,
-        //     payload: {
-        //         isLoggedIn: true,
-        //         user
-        //     }
-        // });
+        const response = await axios.post('/auth/login', { email, password }).catch((err) => {
+            throw new Error(err);
+        });
+
+        const { accessToken, refreshToken, user } = response.data;
+        setAccessToken(accessToken);
+        setRefreshToken(refreshToken);
+
+        dispatch({
+            type: LOGIN,
+            payload: {
+                isLoggedIn: true,
+                user
+            }
+        });
     };
 
     const register = async (email, password, firstName, lastName, organizationName) => {
         const id = chance.bb_pin();
-        const response = await axios.post('/api/account/register', {
-            id,
-            email,
-            password,
-            firstName,
-            lastName,
-            organizationName
-        });
-        let users = response.data;
+        const response = await axios
+            .post('/auth/register', {
+                id,
+                email,
+                password,
+                firstName,
+                lastName,
+                organizationName
+            })
+            .catch((err) => {
+                throw new Error(err);
+            });
 
-        //TODO: change to send to the server jwt
+        const { accessToken, refreshToken, user } = response.data;
+        setAccessToken(accessToken);
+        setRefreshToken(refreshToken);
+
+        dispatch({
+            type: LOGIN,
+            payload: {
+                isLoggedIn: true,
+                user
+            }
+        });
+
         // if (window.localStorage.getItem('users') !== undefined && window.localStorage.getItem('users') !== null) {
         //     const localUsers = window.localStorage.getItem('users');
         //     users = [
@@ -127,7 +187,7 @@ export const JWTProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setSession(null);
+        setAccessToken(null);
         dispatch({ type: LOGOUT });
     };
 
@@ -140,7 +200,9 @@ export const JWTProvider = ({ children }) => {
     }
 
     return (
-        <JWTContext.Provider value={{ ...state, login, logout, register, resetPassword, updateProfile }}>{children}</JWTContext.Provider>
+        <JWTContext.Provider value={{ ...state, refreshAccessToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>
+            {children}
+        </JWTContext.Provider>
     );
 };
 
