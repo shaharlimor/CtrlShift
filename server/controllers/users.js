@@ -4,7 +4,7 @@ const createUser = async (req, res) => {
   const { email, firstName, lastName, phone } = req.body;
 
   try {
-      const newUser = await User.create(
+      const newUser = await Users.create(
           {email, firstName, lastName, phone,},
           { new: true } // Return the user
       );
@@ -20,10 +20,10 @@ const updateUser = async (req, res) => {
   const { email, firstName, lastName, phone } = req.body;
 
   try {
-      const updatedUser = await User.findOneAndUpdate(
+      const updatedUser = await Users.findOneAndUpdate(
           { _id: userId },
           {email, firstName, lastName, phone,},
-          { new: true } // Return the updated user object
+          { new: true } // Return the updated user
       );
   
       if (!updatedUser) {
@@ -32,7 +32,7 @@ const updateUser = async (req, res) => {
 
       res.status(200).json({ message: 'User updated successfully', user: updatedUser });
     } catch (error) {
-        res.status(500).json({ message: 'Error updating user details' });
+        res.status(500).json({ message: 'Error updating user' });
     }   
 };
 
@@ -40,13 +40,13 @@ const deleteUser = async (req, res) => {
   const userId = req.params.id;
 
   try {
-      await User.findOneAndDelete(
+      await Users.findOneAndDelete(
           { _id: userId }
       );
   
       res.status(200).json({ message: 'User deleted successfully'});
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting user details' });
+        res.status(500).json({ message: 'Error deleting user' });
     }   
 };
 
