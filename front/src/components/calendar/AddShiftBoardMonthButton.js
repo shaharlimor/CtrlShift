@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
 import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery, Select, MenuItem } from '@mui/material';
-import { ShiftBoardMonthsDoesntExist } from '../../utils/ShiftBoard';
+import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/ShiftBoard';
 
 /* eslint-disable */
 const AddShiftBoardMonthButton = ({ calendarType }) => {
@@ -14,35 +14,13 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
 
     function handleSelect(event) {
         //TODO: Create selected month in db
+
+        CreateMonthShiftBoard(event.target.value.month, event.target.value.year);
         console.log(event.target.value);
         setSelectedMonth(false);
     }
 
-    // function getMonthsWithoutBoard() {
-    //     // const now = new Date();
-    //     // const nextYear = now.getFullYear() + 1;
-    //     // const months = [];
-    //     // for (let year = now.getFullYear(); year <= nextYear; year + 1) {
-    //     //     for (let month = 0; month < 12; month + 1) {
-    //     //         const monthNum = month + 1;
-    //     //         const hasBoard = boards.find((b) => b.month === monthNum && b.year === year);
-    //     //         if (!hasBoard) {
-    //     //             months.push({ month, year });
-    //     //         }
-    //     //     }
-    //     // }
-    //     // return months.slice(0, 12); // Return up to 12 months from now
-
-    //     return [{ month: 3, year: 2023 }];
-    // }
-
     let monthsWithoutBoard = [];
-
-    const handleAddNewMonth = useCallback(() => {
-        // Add your logic for adding a new month here
-        setSelectedMonth('');
-        setButtonLabel('Add new month board');
-    }, []);
 
     useEffect(() => {
         monthsWithoutBoard = ShiftBoardMonthsDoesntExist();
