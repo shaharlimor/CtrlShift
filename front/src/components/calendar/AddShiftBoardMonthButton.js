@@ -13,8 +13,6 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
     const [selectedYear, setSelectedYear] = useState('');
 
     function handleSelect(event) {
-        //TODO: Create selected month in db
-
         CreateMonthShiftBoard(event.target.value.month, event.target.value.year);
         console.log(event.target.value);
         setSelectedMonth(false);
