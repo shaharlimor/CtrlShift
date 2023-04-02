@@ -15,6 +15,16 @@ const createUser = async (req, res) => {
     }   
 };
 
+const getAllUsersByOrganization = async (req, res) => {
+  try {
+      const { organization } = req.body;
+      const users = await Users.find({email:organization});
+      res.status(200).json({ message: 'All users', users: users });
+    } catch (error) {
+        res.status(500).json({ message: 'Error getting all users' });
+    }   
+};
+
 const updateUser = async (req, res) => {
   const userId = req.params.id;
   const { email, firstName, lastName, phone } = req.body;
@@ -53,5 +63,6 @@ const deleteUser = async (req, res) => {
 module.exports = {
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getAllUsersByOrganization
   };
