@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
 
 const getAllUsersByOrganization = async (req, res) => {
   try {
-      const { organization } = req.body;
+      const organization = req.query.organization;
       const users = await Users.find({email:organization});
       res.status(200).json({ message: 'All users', users: users });
     } catch (error) {
