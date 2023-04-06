@@ -20,13 +20,7 @@ const Employees = () => {
             {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
             {!showForm && <EmployeeList />}
             {!showForm && (
-                <Button
-                    variant="contained"
-                    sx={{ width: '15%' }}
-                    onClick={changeShowForm}
-                    size="large"
-                    startIcon={<AddCircleOutlineTwoToneIcon />}
-                >
+                <Button variant="contained" onClick={changeShowForm} size="medium" startIcon={<AddCircleOutlineTwoToneIcon />}>
                     Add Emloyee
                 </Button>
             )}
