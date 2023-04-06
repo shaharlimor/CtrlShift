@@ -1,11 +1,15 @@
 const Shift = require("../models/monthlyShifts");
 
-const getShifts = async () => {
-  return await Shift.find({}, "_id organization startTime endTime name roles");
+const getShifts = async (organization) => {
+  return await Shift.find(
+    { organization: organization },
+    "_id organization startTime endTime name roles"
+  );
 };
 
-const getMonthAndYearExist = async () => {
+const getMonthAndYearExist = async (organization) => {
   return await Shift.aggregate([
+    { $match: { organization: organization } },
     {
       $group: {
         _id: {
@@ -17,6 +21,7 @@ const getMonthAndYearExist = async () => {
     {
       $project: {
         _id: 0,
+        organization: "$organization",
         year: "$_id.year",
         month: "$_id.month",
       },
@@ -24,7 +29,7 @@ const getMonthAndYearExist = async () => {
   ]);
 };
 
-const getMissingMonthAndYear = async () => {
+const getMissingMonthAndYear = async (organization) => {
   const now = new Date();
   const nextYear = now.getFullYear() + 1;
   const missingMonths = [];
@@ -32,6 +37,7 @@ const getMissingMonthAndYear = async () => {
   // Find all existing months in the next 12 months
   const existingMonths = await Shift.find(
     {
+      organization: organization,
       startTime: { $gte: now, $lte: new Date(`${nextYear}-12-31`) },
     },
     { startTime: 1 }
@@ -49,7 +55,7 @@ const getMissingMonthAndYear = async () => {
   for (let year = now.getFullYear(); year <= nextYear; year++) {
     for (let month = 0; month < 12; month++) {
       const monthNum = month + 1;
-      const monthObj = { month: monthNum, year };
+      const monthObj = { organization: organization, month: monthNum, year };
       if (!existingMonthsSet.has(monthObj)) {
         missingMonths.push(monthObj);
       }
@@ -59,11 +65,12 @@ const getMissingMonthAndYear = async () => {
   return missingMonths;
 };
 
-const createMonthlyShiftBoard = async (month, year) => {
+const createMonthlyShiftBoard = async (month, year, organization) => {
   const startOfMonth = new Date(year, month - 1, 1);
   const endOfMonth = new Date(year, month, 0, 23, 59, 59, 999);
 
   const permanentShifts = await Shift.find({
+    organization: organization,
     days: { $in: [startOfMonth.getDay().toString()] },
   }).exec();
 

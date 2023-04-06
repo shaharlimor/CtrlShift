@@ -5,21 +5,22 @@ import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwo
 
 import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery, Select, MenuItem } from '@mui/material';
 import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/ShiftBoard';
+import useAuth from 'hooks/useAuth';
 
 /* eslint-disable */
 const AddShiftBoardMonthButton = ({ calendarType }) => {
     const [monthsWithoutBoard, setMonthsWithoutBoard] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(false);
     const [selectedYear, setSelectedYear] = useState('');
+    const { user } = useAuth();
 
     function handleSelect(event) {
-        CreateMonthShiftBoard(event.target.value.month, event.target.value.year);
+        CreateMonthShiftBoard(user.organization, event.target.value.month, event.target.value.year);
         setSelectedMonth(false);
     }
 
     useEffect(async () => {
-        setMonthsWithoutBoard(await ShiftBoardMonthsDoesntExist());
-        console.log(monthsWithoutBoard);
+        setMonthsWithoutBoard(await ShiftBoardMonthsDoesntExist(user.organization));
     }, []);
 
     return (
@@ -28,8 +29,8 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
                 <Grid item>
                     {selectedMonth && (
                         <Select sx={{ mt: 1, width: '100%' }} size="medium" value={selectedYear} onChange={handleSelect}>
-                            {monthsWithoutBoard?.map((month) => (
-                                <MenuItem key={'${month.month} - ${month.year}'} value={month}>
+                            {monthsWithoutBoard?.map((month, index) => (
+                                <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
                                     {`${month.month} - ${month.year}`}
                                 </MenuItem>
                             ))}
