@@ -14,13 +14,18 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
     const [selectedYear, setSelectedYear] = useState('');
     const { user } = useAuth();
 
+    async function fetchMonthsWithoutBoard() {
+        const data = await ShiftBoardMonthsDoesntExist(user.organization);
+        setMonthsWithoutBoard(data);
+    }
+
     function handleSelect(event) {
         CreateMonthShiftBoard(user.organization, event.target.value.month, event.target.value.year);
         setSelectedMonth(false);
     }
 
-    useEffect(async () => {
-        setMonthsWithoutBoard(await ShiftBoardMonthsDoesntExist(user.organization));
+    useEffect(() => {
+        fetchMonthsWithoutBoard();
     }, []);
 
     return (
