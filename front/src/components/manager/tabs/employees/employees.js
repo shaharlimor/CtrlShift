@@ -14,22 +14,25 @@ const Employees = () => {
 
     const changeShowForm = () => {
         setShowForm(!showForm);
-    } ;
+    };
 
-
-    return (<MainCard title="Employees">
-         {showForm &&(<EmployeeForm changeShowForm={changeShowForm}/>)}
-         {!showForm &&(<EmployeeList />)}
-         {!showForm &&(<Button
-                variant="contained"
-                sx={{ width: '15%' }}
-                onClick={changeShowForm}
-                size="large"
-                startIcon={(<AddCircleOutlineTwoToneIcon />)}>
-               Add Emloyee
-            </Button>)}
-
-    </MainCard>)
+    return (
+        <React.Fragment>
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
+            {!showForm && <EmployeeList />}
+            {!showForm && (
+                <Button
+                    variant="contained"
+                    sx={{ width: '15%' }}
+                    onClick={changeShowForm}
+                    size="large"
+                    startIcon={<AddCircleOutlineTwoToneIcon />}
+                >
+                    Add Emloyee
+                </Button>
+            )}
+        </React.Fragment>
+    );
 };
 /* eslint-disable */
 

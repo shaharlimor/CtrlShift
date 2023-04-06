@@ -22,8 +22,8 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import AddIcon from '@mui/icons-material/Add';
 
 // project imports
-import MainCard from '../cards/MainCard';
-import SubCard from '../cards/SubCard';
+import MainCard from '../../../cards/MainCard';
+import SubCard from '../../../cards/SubCard';
 
 // assets
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';

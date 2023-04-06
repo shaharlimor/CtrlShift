@@ -10,7 +10,7 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import PermanentShift from './PermenentShifts';
+import PermanentShift from './tabs/permenentShift/PermenentShifts';
 import RoleTypes from 'components/manager/tabs/roleType/roleType';
 import Employees from './tabs/employees/employees';
 
@@ -94,7 +94,7 @@ export default function ManagerTabs() {
         setValue(newValue);
     };
 
-/* eslint-disable */
+    /* eslint-disable */
     return (
         <>
             <AntTabs theme={theme} value={value} onChange={handleChange} aria-label="ant example">
@@ -124,13 +124,13 @@ export default function ManagerTabs() {
                 />
             </AntTabs>
             <TabPanel value={value} index={0}>
-                <RoleTypes/>
+                <RoleTypes />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <PermanentShift />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Employees/>
+                <Employees />
                 {/* TODO: Emplyees */}
             </TabPanel>
         </>
