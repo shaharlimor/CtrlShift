@@ -5,10 +5,12 @@ export const ShiftBoardMonthsExist = async () => {
         const response = await axios.get('http://localhost:3001/manager/shiftMonthBoardExist');
 
         // Handle the response (e.g., show a success message)
-        console.log(response.data.message);
+        console.log(response.data);
+        return response.data;
     } catch (error) {
         // Handle the error (e.g., show an error message)
         console.error('Error get the months: ', error);
+        return null;
     }
 };
 
@@ -17,10 +19,12 @@ export const ShiftBoardMonthsDoesntExist = async () => {
         const response = await axios.get('http://localhost:3001/monthlyShifts/DoesntExistMonthAndYearList');
 
         // Handle the response (e.g., show a success message)
-        console.log(response.data.message);
+        console.log(response.data);
+        return response.data;
     } catch (error) {
         // Handle the error (e.g., show an error message)
         console.error('Error get the months: ', error);
+        return null;
     }
 };
 

@@ -8,7 +8,7 @@ import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/
 
 /* eslint-disable */
 const AddShiftBoardMonthButton = ({ calendarType }) => {
-    const [boards, setBoards] = useState([]);
+    const [monthsWithoutBoard, setMonthsWithoutBoard] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(false);
     const [selectedYear, setSelectedYear] = useState('');
 
@@ -18,10 +18,9 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
         setSelectedMonth(false);
     }
 
-    let monthsWithoutBoard = [];
-
-    useEffect(() => {
-        monthsWithoutBoard = ShiftBoardMonthsDoesntExist();
+    useEffect(async () => {
+        setMonthsWithoutBoard(await ShiftBoardMonthsDoesntExist());
+        console.log(monthsWithoutBoard);
     }, []);
 
     return (

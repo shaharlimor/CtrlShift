@@ -24,6 +24,7 @@ router.get("/MonthAndYearList", async (req, res) => {
   try {
     const MonthAndYearList = await getMonthAndYearExist();
     res.send(MonthAndYearList);
+    console.log(MonthAndYearList);
   } catch (err) {
     res.send("error occured to get shifts: " + err);
   }
