@@ -1,5 +1,4 @@
 import EmployeeList from 'components/manager/tabs/employees/employeeList';
-import MainCard from 'components/cards/MainCard';
 import React, { useEffect } from 'react';
 // eslint-disable-next-line
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';

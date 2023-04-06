@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 
 // eslint-disable-next-line
- import Avatar from 'components/users/Avatar';
+import Avatar from 'components/users/Avatar';
 
 import { useDispatch, useSelector } from 'store';
 
@@ -41,15 +41,13 @@ function createData(name, email, phone, role, avatar) {
         phone,
         role,
         avatar
-   };
+    };
 }
 /* eslint-disable */
 
 // TODO: get events by props / from server
 // eslint-disable-next-line
-const rows = [
-    createData('Haim Cohen','abc@abc.com', '054-4448777', 'Manager', ''),
-];
+const rows = [createData('Haim Cohen', 'abc@abc.com', '054-4448777', 'Manager', '')];
 
 const UserList = () => {
     const theme = useTheme();
@@ -81,27 +79,28 @@ const UserList = () => {
                     {data &&
                         data.map((row, index) => (
                             <TableRow hover key={index}>
-                                <TableCell sx={{ pl: 3 }}>   
-                                <Avatar alt="User 1" /></TableCell>
+                                <TableCell sx={{ pl: 3 }}>
+                                    <Avatar alt="User 1" />
+                                </TableCell>
                                 <TableCell>
-                                      <Typography align="left" variant="subtitle1" component="div">
-                                                {row.name}{' '}
-                                            </Typography>
+                                    <Typography align="left" variant="subtitle1" component="div">
+                                        {row.name}{' '}
+                                    </Typography>
                                 </TableCell>
                                 <TableCell>{row.email}</TableCell>
                                 <TableCell>{row.role}</TableCell>
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
-                                        <Tooltip placement="top" title="Message">
-                                        <IconButton color="inherit" size="large">
-                                                    <DeleteOutlineOutlinedIcon />
-                                                </IconButton>
+                                        <Tooltip placement="top" title="Delete">
+                                            <IconButton color="inherit" size="medium">
+                                                <DeleteOutlineOutlinedIcon />
+                                            </IconButton>
                                         </Tooltip>
-                                        <Tooltip placement="top" title="Block">
-                                        <IconButton color="primary" size="large">
-                                                    <EditOutlinedIcon />
-                                                </IconButton>
+                                        <Tooltip placement="top" title="Edit">
+                                            <IconButton color="primary" size="medium">
+                                                <EditOutlinedIcon />
+                                            </IconButton>
                                         </Tooltip>
                                     </Stack>
                                 </TableCell>

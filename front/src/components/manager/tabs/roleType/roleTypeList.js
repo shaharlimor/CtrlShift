@@ -1,3 +1,4 @@
+import React from 'react';
 // material-ui
 import {
     Button,
@@ -11,7 +12,8 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow
+    TableRow,
+    Tooltip
 } from '@mui/material';
 
 // project imports
@@ -33,43 +35,45 @@ const rows = [createData('Day waiter'), createData('Day chef'), createData('Shif
 
 export default function RoleTypesList() {
     return (
-        <Grid container spacing={gridSpacing}>
-            <Grid item xs={12}>
-                <TableContainer>
-                    <Table sx={{ minWidth: 350 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ pl: 3 }}>Type</TableCell>
-                                <TableCell align="center" sx={{ pr: 3 }}>
-                                    Action
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row, index) => (
-                                <TableRow hover key={index}>
-                                    <TableCell sx={{ pl: 3 }}>{row.name}</TableCell>
-                                    <TableCell align="center" sx={{ pr: 3 }}>
-                                        <Stack direction="row" justifyContent="center" alignItems="center">
-                                            <IconButton color="primary" size="large">
-                                                <EditOutlinedIcon />
-                                            </IconButton>
-                                            <IconButton color="inherit" size="large">
+        <fragment>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell sx={{ pl: 3 }}>Type</TableCell>
+                            <TableCell align="center" sx={{ pl: 35 }}>
+                                Actions
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row, index) => (
+                            <TableRow hover key={index}>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell sx={{ pl: 35 }}>
+                                    <Stack direction="row" justifyContent="center" alignItems="center">
+                                        <Tooltip placement="top" title="Delete">
+                                            <IconButton color="inherit" size="medium">
                                                 <DeleteOutlineOutlinedIcon />
                                             </IconButton>
-                                        </Stack>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button variant="text" size="small">
-                        View all roles
-                    </Button>
-                </CardActions>
-            </Grid>
-        </Grid>
+                                        </Tooltip>
+                                        <Tooltip placement="top" title="Edit">
+                                            <IconButton color="primary" size="medium">
+                                                <EditOutlinedIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Stack>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <CardActions sx={{ justifyContent: 'flex-end' }}>
+                <Button variant="text" size="small">
+                    View all roles
+                </Button>
+            </CardActions>
+        </fragment>
     );
 }
