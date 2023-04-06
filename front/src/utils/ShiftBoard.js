@@ -30,13 +30,15 @@ export const ShiftBoardMonthsDoesntExist = async () => {
 
 export const CreateMonthShiftBoard = async (month, year) => {
     try {
-        const response = await axios.post('http://localhost:3001/monthlyShifts/createMonthBoard', { month, year });
+        const response = await axios.post('http://localhost:3001/monthlyShifts/createMonthlyShiftBoard', { month, year });
 
         // Handle the response (e.g., show a success message)
-        console.log(response.data.message);
+        console.log('message: ', response.data);
+        return response.data;
     } catch (error) {
         // Handle the error (e.g., show an error message)
-        console.error('Error get the months: ', error);
+        console.error('Error create the month: ', error);
+        return error;
     }
 };
 

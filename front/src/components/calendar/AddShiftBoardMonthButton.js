@@ -14,7 +14,6 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
 
     function handleSelect(event) {
         CreateMonthShiftBoard(event.target.value.month, event.target.value.year);
-        console.log(event.target.value);
         setSelectedMonth(false);
     }
 

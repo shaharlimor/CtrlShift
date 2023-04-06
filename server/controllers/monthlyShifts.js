@@ -67,7 +67,9 @@ const createMonthlyShiftBoard = async (month, year) => {
     days: { $in: [startOfMonth.getDay().toString()] },
   }).exec();
 
-  const monthlyShifts = Shift.map((permanentShift) => {
+  console.log("premenent shifts: ", permanentShifts);
+
+  const monthlyShifts = permanentShifts.map((permanentShift) => {
     return {
       organization: permanentShift.organization,
       startTime: new Date(
