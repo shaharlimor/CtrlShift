@@ -99,7 +99,6 @@ export const JWTProvider = ({ children }) => {
         };
         const init = async () => {
             try {
-                console.log('useeffect');
                 const accessToken = window.localStorage.getItem('accessToken');
                 const refreshToken = window.localStorage.getItem('refreshToken');
 
