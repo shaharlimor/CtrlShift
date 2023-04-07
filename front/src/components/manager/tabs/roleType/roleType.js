@@ -14,22 +14,19 @@ const RoleTypes = () => {
 
     const changeShowForm = () => {
         setShowForm(!showForm);
-    } ;
+    };
 
-
-    return (<MainCard title="RoleTypes">
-         {showForm &&(<RoleTypeForm changeShowForm={changeShowForm}/>)}
-         {!showForm &&(<RoleTypesList />)}
-         {!showForm &&(<Button
-                variant="contained"
-                sx={{ width: '15%' }}
-                onClick={changeShowForm}
-                size="large"
-                startIcon={(<AddCircleOutlineTwoToneIcon />)}>
-               Add Role Type
-            </Button>)}
-
-    </MainCard>)
+    return (
+        <MainCard title="RoleTypes">
+            {showForm && <RoleTypeForm changeShowForm={changeShowForm} />}
+            {!showForm && <RoleTypesList />}
+            {!showForm && (
+                <Button variant="contained" onClick={changeShowForm} size="small" startIcon={<AddCircleOutlineTwoToneIcon />}>
+                    Add Role Type
+                </Button>
+            )}
+        </MainCard>
+    );
 };
 /* eslint-disable */
 

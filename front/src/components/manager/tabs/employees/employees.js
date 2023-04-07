@@ -1,5 +1,4 @@
 import EmployeeList from 'components/manager/tabs/employees/employeeList';
-import MainCard from 'components/cards/MainCard';
 import React, { useEffect } from 'react';
 // eslint-disable-next-line
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
@@ -14,22 +13,19 @@ const Employees = () => {
 
     const changeShowForm = () => {
         setShowForm(!showForm);
-    } ;
+    };
 
-
-    return (<MainCard title="Employees">
-         {showForm &&(<EmployeeForm changeShowForm={changeShowForm}/>)}
-         {!showForm &&(<EmployeeList />)}
-         {!showForm &&(<Button
-                variant="contained"
-                sx={{ width: '15%' }}
-                onClick={changeShowForm}
-                size="large"
-                startIcon={(<AddCircleOutlineTwoToneIcon />)}>
-               Add Emloyee
-            </Button>)}
-
-    </MainCard>)
+    return (
+        <React.Fragment>
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
+            {!showForm && <EmployeeList />}
+            {!showForm && (
+                <Button variant="contained" onClick={changeShowForm} size="medium" startIcon={<AddCircleOutlineTwoToneIcon />}>
+                    Add Emloyee
+                </Button>
+            )}
+        </React.Fragment>
+    );
 };
 /* eslint-disable */
 
