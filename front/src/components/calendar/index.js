@@ -15,8 +15,8 @@ import Toolbar from './Toolbar';
 
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
-// 1 - Manager
-// 2 - Monthly Planner
+// 1 - Manager - Monthly Planner
+// 2 - Shifts Board
 const Calendar = ({ events, calendarType, handleEventSelect }) => {
     const calendarRef = useRef(null);
 

@@ -58,7 +58,7 @@ const AddPermenentShift = (props) => {
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
-            // // TODO: send to new perment shift to the server
+            // TODO: send to new perment shift to the server
             try {
                 await savePermentShift(values).then(
                     () => {

@@ -29,29 +29,23 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
     }, []);
 
     return (
-        <>
-            {calendarType === 1 ? (
-                <Grid item>
-                    {selectedMonth && (
-                        <Select sx={{ mt: 1, width: '100%' }} size="medium" value={selectedYear} onChange={handleSelect}>
-                            {monthsWithoutBoard?.map((month, index) => (
-                                <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
-                                    {`${month.month} - ${month.year}`}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    )}
-
-                    {!selectedMonth && (
-                        <Button sx={{ mt: 1, width: '100%' }} onClick={() => setSelectedMonth(true)} variant="contained" color="secondary">
-                            Add new month board
-                        </Button>
-                    )}
-                </Grid>
-            ) : (
-                ''
+        <Grid item>
+            {selectedMonth && (
+                <Select sx={{ mt: 1, width: '100%' }} size="medium" value={selectedYear} onChange={handleSelect}>
+                    {monthsWithoutBoard?.map((month, index) => (
+                        <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
+                            {`${month.month} - ${month.year}`}
+                        </MenuItem>
+                    ))}
+                </Select>
             )}
-        </>
+
+            {!selectedMonth && (
+                <Button sx={{ mt: 1, width: '100%' }} onClick={() => setSelectedMonth(true)} variant="contained" color="secondary">
+                    Add new month board
+                </Button>
+            )}
+        </Grid>
     );
 };
 

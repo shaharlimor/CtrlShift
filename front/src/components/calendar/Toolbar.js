@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, Fragment } from 'react';
 
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 
 import { IconChevronLeft, IconChevronRight, IconLayoutGrid, IconTemplate, IconLayoutList } from '@tabler/icons';
 import AddShiftBoardMonthButton from './AddShiftBoardMonthButton';
+import AddShiftButton from '../shifts/AddShiftButton';
 
 const viewOptions = [
     {
@@ -43,16 +44,21 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
     return (
         <Grid alignItems="center" container justifyContent="space-between" {...others} sx={{ pb: 3 }}>
             {calendarType !== 0 ? (
+                // eslint-disable
                 <Grid item>
-                    <Button
-                        variant="contained"
-                        sx={{ width: '100%' }}
-                        size="large"
-                        startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
-                    >
-                        {calendarType === 1 ? 'Add shift' : 'My shifts'}
-                    </Button>
-                    <AddShiftBoardMonthButton calendarType={calendarType} />
+                    <Stack direction="row" alignItems="center" spacing={4}>
+                        {/* <Button
+                            variant="contained"
+                            sx={{ width: '100%' }}
+                            size="large"
+                            color="secondary"
+                            startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
+                        >
+                            {calendarType === 1 ? 'Add shift' : 'My shifts'}
+                        </Button> */}
+                        <AddShiftButton />
+                        {/* <AddShiftBoardMonthButton calendarType={calendarType} /> */}
+                    </Stack>
                 </Grid>
             ) : (
                 ''
