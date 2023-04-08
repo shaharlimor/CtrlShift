@@ -13,7 +13,7 @@ axiosServices.interceptors.response.use(
         const originalRequest = error.config;
 
         /* eslint-disable-next-line */
-        if (error.response.status === 401 && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry) {
             /* eslint-disable-next-line */
             originalRequest._retry = true;
 

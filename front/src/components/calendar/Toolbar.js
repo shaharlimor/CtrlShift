@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
-import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery } from '@mui/material';
+import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery, Select, MenuItem } from '@mui/material';
 
 import { format } from 'date-fns';
 
 import { IconChevronLeft, IconChevronRight, IconLayoutGrid, IconTemplate, IconLayoutList } from '@tabler/icons';
+import AddShiftBoardMonthButton from './AddShiftBoardMonthButton';
 
 const viewOptions = [
     {
@@ -51,10 +52,12 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
                     >
                         {calendarType === 1 ? 'Add shift' : 'My shifts'}
                     </Button>
+                    <AddShiftBoardMonthButton calendarType={calendarType} />
                 </Grid>
             ) : (
                 ''
             )}
+
             <Grid item>
                 <Stack direction="row" alignItems="center" spacing={3}>
                     <IconButton onClick={onClickPrev} size="large">
