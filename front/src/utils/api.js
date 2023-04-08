@@ -5,10 +5,8 @@ export async function getPermanentShifts() {
     return data;
 }
 
-export async function getMonthlyShifts() {
-    const data = await axiosServices.get('/monthlyShifts');
-    console.log('data');
-    console.log(data);
+export async function getMonthlyShifts(org) {
+    const data = await axiosServices.get(`/monthlyShifts/${org}`);
     return data;
 }
 

@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
-// material-ui
 import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -11,8 +9,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 
 // project imports
 import { gridSpacing } from 'store/constant';
-import NestedList from 'components/constraints/EmpoyeesList';
-import { addConstraint, getConstraintsByShiftId, employeeHasConstraintInShift } from 'utils/api';
+import { addConstraint, employeeHasConstraintInShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 
 // constant
@@ -27,25 +24,8 @@ const getInitialValues = () => {
 const levelOptions = [1, 2, 3, 4, 5];
 
 const AddConstraintFrom = ({ event, onCancel }) => {
-    const [ids, setIds] = useState([]);
     const { user } = useAuth();
 
-    const getEmployeesConstraintOnShift = async (shiftId) => {
-        const result = await getConstraintsByShiftId(shiftId);
-        let parsedData = [];
-        result.data.map((item) =>
-            parsedData.push({
-                id: item.employeeId
-            })
-        );
-        setIds(parsedData);
-        parsedData = [];
-    };
-
-    getEmployeesConstraintOnShift(event.id);
-
-    // TODO: check if the user doesnt already have constraint in this shift
-    // Implment after we have logged user
     const EventSchema = Yup.object().shape({
         level: Yup.number(),
         comment: Yup.string().max(5000)
@@ -58,8 +38,6 @@ const AddConstraintFrom = ({ event, onCancel }) => {
             try {
                 /* eslint-disable-next-line */
                 const alreadyHasConstraint = await employeeHasConstraintInShift(user._id, event.id);
-                console.log('already have');
-                console.log(alreadyHasConstraint);
                 if (!alreadyHasConstraint.data) {
                     /* eslint-disable */
                     const data = {
@@ -122,9 +100,6 @@ const AddConstraintFrom = ({ event, onCancel }) => {
                                     error={Boolean(touched.comment && errors.comment)}
                                     helperText={touched.comment && errors.comment}
                                 />
-                            </Grid>
-                            <Grid item xs={10}>
-                                {ids && <NestedList employess={ids} />}
                             </Grid>
                         </Grid>
                     </DialogContent>
