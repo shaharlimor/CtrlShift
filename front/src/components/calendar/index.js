@@ -85,7 +85,6 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                         editable
                         droppable
                         selectable
-                        // TODO: events from props
                         events={displayEvents}
                         ref={calendarRef}
                         rerenderDelay={10}
