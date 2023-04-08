@@ -1,4 +1,5 @@
 const Shift = require("../models/monthlyShifts");
+const Schedule = require("../models/schedule");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -7,7 +8,7 @@ const getShifts = async (organization) => {
   );
 };
 
-const getMonthAndYearExist = async (organization) => {
+const getBoardListOfMonthlyShift = async (organization) => {
   return await Shift.aggregate([
     { $match: { organization: organization } },
     {
@@ -29,7 +30,7 @@ const getMonthAndYearExist = async (organization) => {
   ]);
 };
 
-const getMissingMonthAndYear = async (organization) => {
+const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
   const now = new Date();
   const nextYear = now.getFullYear() + 1;
   const missingMonths = [];
@@ -99,11 +100,29 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
   });
 
   await Shift.insertMany(monthlyShifts);
+
+  const newSchedule = new Schedule({
+    organization: organization,
+    month: month,
+    year: year,
+    isPublished: false,
+    isOpenToConstraints: false,
+  });
+
+  newSchedule.save((err) => {
+    if (err) {
+      console.log(err);
+      return err;
+    } else {
+      console.log("Schedule saved successfully!");
+      return null;
+    }
+  });
 };
 
 module.exports = {
   getShifts,
-  getMonthAndYearExist,
-  getMissingMonthAndYear,
+  getBoardListOfMonthlyShift,
+  getMissingBoardListOfMonthlyShiftOfYear,
   createMonthlyShiftBoard,
 };
