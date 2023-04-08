@@ -13,6 +13,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { gridSpacing } from 'store/constant';
 import NestedList from 'components/constraints/EmpoyeesList';
 import { addConstraint, getConstraintsByShiftId } from 'utils/api';
+import useAuth from 'hooks/useAuth';
 
 // constant
 const getInitialValues = () => {
@@ -27,6 +28,7 @@ const levelOptions = [1, 2, 3, 4, 5];
 
 const AddConstraintFrom = ({ event, onCancel }) => {
     const [ids, setIds] = useState([]);
+    const { user } = useAuth();
 
     const getEmployeesConstraintOnShift = async (shiftId) => {
         const result = await getConstraintsByShiftId(shiftId);
@@ -54,13 +56,14 @@ const AddConstraintFrom = ({ event, onCancel }) => {
         validationSchema: EventSchema,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
             try {
-                // TODO: get employee id according to the logged user
+                /* eslint-disable */
                 const data = {
                     level: values.level,
                     description: values.comment,
                     shiftId: event.id,
-                    employeeId: 'shahar'
+                    employeeId: user._id
                 };
+                /* eslint-enable */
                 await addConstraint(data);
 
                 resetForm();

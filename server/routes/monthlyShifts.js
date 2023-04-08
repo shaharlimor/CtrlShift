@@ -11,7 +11,7 @@ var router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const shifts = await getShifts();
+    const shifts = await getShifts("bla");
     res.send(shifts);
   } catch (err) {
     res.send("error occured to get shifts: " + err);

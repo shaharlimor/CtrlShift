@@ -7,6 +7,8 @@ export async function getPermanentShifts() {
 
 export async function getMonthlyShifts() {
     const data = await axiosServices.get('/monthlyShifts');
+    console.log('data');
+    console.log(data);
     return data;
 }
 

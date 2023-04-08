@@ -29,6 +29,7 @@ const Constrainsts = () => {
                 })
             );
             setEvents(parsedData);
+            console.log(result.data);
             parsedData = [];
         };
         getShifts();
