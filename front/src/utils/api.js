@@ -20,3 +20,8 @@ export async function getConstraintsByShiftId(id) {
     const data = await axiosServices.get(`/constraints/byShift/${id}`);
     return data;
 }
+
+export async function employeeHasConstraintInShift(empId, shiftId) {
+    const data = await axiosServices.get(`/constraints/userHasConstraint/${empId}/${shiftId}`);
+    return data;
+}

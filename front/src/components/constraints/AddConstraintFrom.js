@@ -12,7 +12,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // project imports
 import { gridSpacing } from 'store/constant';
 import NestedList from 'components/constraints/EmpoyeesList';
-import { addConstraint, getConstraintsByShiftId } from 'utils/api';
+import { addConstraint, getConstraintsByShiftId, employeeHasConstraintInShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 
 // constant
@@ -56,19 +56,25 @@ const AddConstraintFrom = ({ event, onCancel }) => {
         validationSchema: EventSchema,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
             try {
-                /* eslint-disable */
-                const data = {
-                    level: values.level,
-                    description: values.comment,
-                    shiftId: event.id,
-                    employeeId: user._id
-                };
-                /* eslint-enable */
-                await addConstraint(data);
+                /* eslint-disable-next-line */
+                const alreadyHasConstraint = await employeeHasConstraintInShift(user._id, event.id);
+                console.log('already have');
+                console.log(alreadyHasConstraint);
+                if (!alreadyHasConstraint.data) {
+                    /* eslint-disable */
+                    const data = {
+                        level: values.level,
+                        description: values.comment,
+                        shiftId: event.id,
+                        employeeId: user._id
+                    };
+                    /* eslint-enable */
+                    await addConstraint(data);
 
-                resetForm();
-                onCancel();
-                setSubmitting(false);
+                    resetForm();
+                    onCancel();
+                    setSubmitting(false);
+                }
             } catch (error) {
                 console.error(error);
             }
