@@ -31,7 +31,7 @@ import { useFormik, Field } from 'formik';
 
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
-import { savePermentShift } from '../../../../services/permenentShiftServices';
+import { savePermentShift } from '../../../../utils/permenentShift';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
