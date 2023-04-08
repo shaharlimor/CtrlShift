@@ -1,13 +1,17 @@
 import EmployeeList from 'components/manager/tabs/employees/employeeList';
 import React, { useEffect } from 'react';
 // eslint-disable-next-line
-import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
+import AddIcon from '@mui/icons-material/Add';
 
-import { Button } from '@mui/material';
+import { IconButton, Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import EmployeeForm from './employeeForm';
 
 /* eslint-disable */
 const Employees = () => {
+    const theme = useTheme();
+
     // eslint-disable-next-line
     const [showForm, setShowForm] = React.useState(false);
 
@@ -20,9 +24,22 @@ const Employees = () => {
             {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
             {!showForm && <EmployeeList />}
             {!showForm && (
-                <Button variant="contained" onClick={changeShowForm} size="medium" startIcon={<AddCircleOutlineTwoToneIcon />}>
-                    Add Emloyee
-                </Button>
+                <Grid container direction="column" justifyContent="center" alignItems="flex-end">
+                    <Grid item xs={3} sx={{ mt: 2 }}>
+                        <IconButton
+                            variant="contained"
+                            sx={{
+                                fontSize: '35px',
+                                bgcolor: theme.palette.secondary.main,
+                                color: theme.palette.secondary.contrastText
+                            }}
+                            onClick={changeShowForm}
+                            size="large"
+                        >
+                            <AddIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
             )}
         </React.Fragment>
     );
