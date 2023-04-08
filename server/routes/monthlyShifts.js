@@ -9,9 +9,10 @@ const {
 
 var router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/:organization", async (req, res) => {
   try {
-    const shifts = await getShifts();
+    const organization = req.params.organization;
+    const shifts = await getShifts(organization);
     res.send(shifts);
   } catch (err) {
     res.send("error occured to get shifts: " + err);
