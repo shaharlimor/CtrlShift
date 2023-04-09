@@ -8,34 +8,7 @@ import AddShiftFrom from './AddShiftFrom';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
 const Shifts = () => {
-    const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [events, setEvents] = useState([]);
-    const { user } = useAuth();
-
-    // TODO: get shift by month (only if open to insert)
-    useEffect(() => {
-        const getShifts = async () => {
-            /* eslint-disable-next-line */
-            const result = await getMonthlyShifts('bla');
-            let parsedData = [];
-            result.data.map((item) =>
-                parsedData.push({
-                    // eslint-disable-next-line
-                    id: item._id,
-                    color: value.secondary200,
-                    description: item.name,
-                    start: new Date(item.startTime.toString()),
-                    end: new Date(item.endTime.toString()),
-                    title: item.name
-                })
-            );
-            setEvents(parsedData);
-            console.log(result.data);
-            parsedData = [];
-        };
-        getShifts();
-    }, []);
 
     const handleClose = (ans) => {
         setIsModalOpen(ans);

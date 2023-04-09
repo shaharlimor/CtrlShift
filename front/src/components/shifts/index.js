@@ -4,7 +4,7 @@ import value from 'assets/scss/_themes-vars.module.scss';
 import { Dialog } from '@mui/material';
 import { getMonthlyShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
-import AddConstraintFrom from './AddShiftFrom';
+import AddShiftFrom from './AddShiftFrom';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -14,7 +14,7 @@ const Shifts = () => {
     const [events, setEvents] = useState([]);
     const { user } = useAuth();
 
-    // TODO: get shift by month (only if open to insert)
+    // TODO: get shifts by month (only if permenant shifts generated) + by organization
     useEffect(() => {
         const getShifts = async () => {
             /* eslint-disable-next-line */
@@ -32,7 +32,6 @@ const Shifts = () => {
                 })
             );
             setEvents(parsedData);
-            console.log(result.data);
             parsedData = [];
         };
         getShifts();
@@ -48,17 +47,9 @@ const Shifts = () => {
         // setIsModalOpen(true);
     };
 
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-        setSelectedEvent(null);
-    };
-
     return (
         <div>
             <Calendar calendarType={1} events={events} handleEventSelect={handleEventSelect} />
-            <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && <AddConstraintFrom event={selectedEvent} onCancel={handleModalClose} employess />}
-            </Dialog>
         </div>
     );
 };

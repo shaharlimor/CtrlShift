@@ -1,20 +1,18 @@
 import PropTypes from 'prop-types';
+import { Fragment } from 'react';
 
 import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, InputAdornment, IconButton } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider, Field, FieldArray } from 'formik';
-import { Fragment } from 'react';
-// project imports
 import { gridSpacing } from 'store/constant';
 import { addMonthlyShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
-import { useTheme } from '@mui/material/styles';
-import DateRangeIcon from '@mui/icons-material/DateRange';
-
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 const AddShiftFrom = ({ onCancel }) => {
     const { user } = useAuth();
@@ -30,7 +28,7 @@ const AddShiftFrom = ({ onCancel }) => {
             .of(
                 Yup.object().shape({
                     roleType: Yup.string().min(3).required('Role type is required'), // these constraints take precedence
-                    amount: Yup.number().required('Amount of employess is required') // these constraints take precedence
+                    amount: Yup.number().required('Amount of employess is required').min(1, 'Minimum 1 employee in each role') // these constraints take precedence
                 })
             )
             .min(1, 'Minimum of 1 role is required')
@@ -55,7 +53,6 @@ const AddShiftFrom = ({ onCancel }) => {
                     name: values.name,
                     roles: parsedRoles
                 };
-                console.log(data);
                 await addMonthlyShift(data);
                 resetForm();
                 onCancel();
@@ -186,7 +183,11 @@ const AddShiftFrom = ({ onCancel }) => {
                                                     <IconButton
                                                         variant="outlined"
                                                         sx={{ fontWeight: 'bold' }}
-                                                        onClick={() => remove(index)}
+                                                        onClick={() => {
+                                                            if (values.roles.length !== 1) {
+                                                                remove(index);
+                                                            }
+                                                        }}
                                                     >
                                                         <DeleteForeverOutlinedIcon sx={{ color: theme.palette.primary[800] }} />
                                                     </IconButton>
