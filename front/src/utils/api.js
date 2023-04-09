@@ -23,3 +23,7 @@ export async function employeeHasConstraintInShift(empId, shiftId) {
     const data = await axiosServices.get(`/constraints/userHasConstraint/${empId}/${shiftId}`);
     return data;
 }
+
+export async function addMonthlyShift(body) {
+    await axiosServices.post('/constraints', body);
+}

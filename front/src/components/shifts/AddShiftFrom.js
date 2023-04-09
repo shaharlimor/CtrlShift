@@ -9,23 +9,10 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Fragment } from 'react';
 // project imports
 import { gridSpacing } from 'store/constant';
-import { addConstraint, employeeHasConstraintInShift } from 'utils/api';
+import { addMonthlyShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import { useTheme } from '@mui/material/styles';
-import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-
-// import { useMediaQuery } from '@mui/material';
-
-// constant
-const getInitialValues = () => {
-    const newEvent = {
-        name: ''
-    };
-    return newEvent;
-};
-
-const levelOptions = [1, 2, 3, 4, 5];
 
 const AddShiftFrom = ({ onCancel }) => {
     const { user } = useAuth();
@@ -49,23 +36,22 @@ const AddShiftFrom = ({ onCancel }) => {
         },
         validationSchema: EventSchema,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
+            // TODO: first check if permanent shifts for this month and year already generated.
             try {
-                /* eslint-disable-next-line */
-                // const alreadyHasConstraint = await employeeHasConstraintInShift(user._id, event.id);
-                // if (!alreadyHasConstraint.data) {
-                //     /* eslint-disable */
-                //     const data = {
-                //         level: values.level,
-                //         description: values.name,
-                //         shiftId: event.id,
-                //         employeeId: user._id
-                //     };
-                //     /* eslint-enable */
-                //     await addConstraint(data);
-                //     resetForm();
-                //     onCancel();
-                //     setSubmitting(false);
-                // }
+                /* eslint-disable */
+                console.log(values);
+                // const data = {
+                //     organization: user.organization,
+                //     startTime: values.start,
+                //     endTime: values.end,
+                //     name: values.name,
+                //     roles: []
+                // };
+                // /* eslint-enable */
+                // await addMonthlyShift(data);
+                // resetForm();
+                // onCancel();
+                // setSubmitting(false);
             } catch (error) {
                 console.error(error);
             }
@@ -79,7 +65,7 @@ const AddShiftFrom = ({ onCancel }) => {
         <FormikProvider value={formik}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                    <DialogTitle color="primary.800">Add Shift</DialogTitle>
+                    <DialogTitle color="primary.800">Add new shift</DialogTitle>
                     <Divider />
                     <DialogContent sx={{ p: 2 }}>
                         <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">

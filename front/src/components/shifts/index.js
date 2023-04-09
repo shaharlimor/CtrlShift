@@ -18,7 +18,7 @@ const Shifts = () => {
     useEffect(() => {
         const getShifts = async () => {
             /* eslint-disable-next-line */
-            const result = await getMonthlyShifts(user.organization);
+            const result = await getMonthlyShifts('bla');
             let parsedData = [];
             result.data.map((item) =>
                 parsedData.push({
@@ -39,13 +39,13 @@ const Shifts = () => {
     }, []);
 
     const handleEventSelect = (arg) => {
-        if (arg.event.id) {
-            const selectEvent = events.find((_event) => _event.id === arg.event.id);
-            setSelectedEvent(selectEvent);
-        } else {
-            setSelectedEvent(null);
-        }
-        setIsModalOpen(true);
+        // if (arg.event.id) {
+        //     const selectEvent = events.find((_event) => _event.id === arg.event.id);
+        //     setSelectedEvent(selectEvent);
+        // } else {
+        //     setSelectedEvent(null);
+        // }
+        // setIsModalOpen(true);
     };
 
     const handleModalClose = () => {
