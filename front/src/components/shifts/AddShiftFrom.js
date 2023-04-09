@@ -93,6 +93,8 @@ const AddShiftFrom = ({ onCancel }) => {
                                     value={values.start}
                                     inputFormat="dd/MM/yyyy hh:mm a"
                                     onChange={(date) => setFieldValue('start', date)}
+                                    error={Boolean(touched.start && errors.start)}
+                                    helperText={touched.start && errors.start}
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
@@ -114,6 +116,8 @@ const AddShiftFrom = ({ onCancel }) => {
                                     value={values.end}
                                     inputFormat="dd/MM/yyyy hh:mm a"
                                     onChange={(date) => setFieldValue('end', date)}
+                                    error={Boolean(touched.end && errors.end)}
+                                    helperText={touched.end && errors.end}
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}

@@ -18,7 +18,7 @@ const Shifts = () => {
     useEffect(() => {
         const getShifts = async () => {
             /* eslint-disable-next-line */
-            const result = await getMonthlyShifts('bla');
+            const result = await getMonthlyShifts(user.organization);
             let parsedData = [];
             result.data.map((item) =>
                 parsedData.push({
@@ -56,7 +56,6 @@ const Shifts = () => {
     return (
         <div>
             <Calendar calendarType={1} events={events} handleEventSelect={handleEventSelect} />
-            {/* Dialog renders its body even if not open */}
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
                 {isModalOpen && <AddConstraintFrom event={selectedEvent} onCancel={handleModalClose} employess />}
             </Dialog>
