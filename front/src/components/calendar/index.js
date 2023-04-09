@@ -12,6 +12,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
+import { getMonthOpendToAddShifts } from 'utils/api';
+import useAuth from 'hooks/useAuth';
 
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
@@ -19,15 +21,14 @@ import Toolbar from './Toolbar';
 // 2 - Shifts Board
 const Calendar = ({ events, calendarType, handleEventSelect }) => {
     const calendarRef = useRef(null);
-
+    const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
     const displayEvents = events !== null ? events : [];
 
     const [date, setDate] = useState(new Date());
-
-    // Selected view
     const [view, setView] = useState(matchSm ? 'listWeek' : 'dayGridMonth');
+    const [openMonths, setOpenMonths] = useState([]);
 
     const handleViewChange = (newView) => {
         const calendarEl = calendarRef.current;
@@ -45,6 +46,15 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         handleViewChange(matchSm ? 'listWeek' : 'dayGridMonth');
     }, [matchSm]);
 
+    // TODO: get shifts by month (only if permenant shifts generated) + by organization
+    useEffect(() => {
+        const getOpenMonths = async () => {
+            const result = await getMonthOpendToAddShifts(user.organization);
+            setOpenMonths(result.data);
+        };
+        getOpenMonths();
+    }, []);
+
     const handleDatePrev = () => {
         const calendarEl = calendarRef.current;
 
@@ -58,12 +68,29 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
 
     const handleDateNext = () => {
         const calendarEl = calendarRef.current;
-
         if (calendarEl) {
             const calendarApi = calendarEl.getApi();
+            if (calendarType === 1) {
+                // Next date
+                console.log('month');
+                console.log(calendarApi.getDate().getMonth() + 2);
+                const newDateObj = {
+                    year: calendarApi.getDate().getYear() + 2000 - 100,
+                    month: calendarApi.getDate().getMonth() + 2
+                };
 
-            calendarApi.next();
-            setDate(calendarApi.getDate());
+                // Check if permanent shift generated for this month ("open")
+                const exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+
+                // Set next date
+                if (exists) {
+                    calendarApi.next();
+                    setDate(calendarApi.getDate());
+                }
+            } else {
+                calendarApi.next();
+                setDate(calendarApi.getDate());
+            }
         }
     };
 
