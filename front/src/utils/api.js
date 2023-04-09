@@ -23,3 +23,8 @@ export async function employeeHasConstraintInShift(empId, shiftId) {
     const data = await axiosServices.get(`/constraints/userHasConstraint/${empId}/${shiftId}`);
     return data;
 }
+
+export async function getEmployeesByOrg(org) {
+    const data = await axiosServices.get(`/user/users?organization=${org}`);
+    return data;
+}

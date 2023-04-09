@@ -1,6 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const Shift = require("../models/permanentShifts");
 const { getShifts } = require("../controllers/permanentShifts");
 

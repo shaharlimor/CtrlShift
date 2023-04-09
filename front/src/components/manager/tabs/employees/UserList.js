@@ -16,7 +16,6 @@ import {
     Tooltip,
     Typography
 } from '@mui/material';
-
 // eslint-disable-next-line
 import Avatar from 'components/users/Avatar';
 
@@ -28,44 +27,33 @@ import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
 import BlockTwoToneIcon from '@mui/icons-material/BlockTwoTone';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { getEmployeesByOrg } from 'utils/api';
 
 // const avatarImage = require.context('assets/images/users', true);
 
 // ==============================|| USER LIST 1 ||============================== //
-
-/* eslint-disable */
-function createData(name, email, phone, role, avatar) {
-    return {
-        name,
-        email,
-        phone,
-        role,
-        avatar
-    };
-}
-/* eslint-disable */
-
-// TODO: get events by props / from server
-// eslint-disable-next-line
-const rows = [createData('Haim Cohen', 'abc@abc.com', '054-4448777', 'Manager', '')];
 
 const UserList = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
     const [data, setData] = React.useState([]);
-    const { usersS1 } = rows;
 
     React.useEffect(() => {
-        setData(rows);
-    }, [usersS1]);
+        async function getEmployees() {
+            const response = await getEmployeesByOrg('bla');
+            const { users } = response.data;
+            setData(users);
+        }
+        getEmployees();
+    }, []);
 
     return (
         <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell sx={{ pl: 3 }}></TableCell>
+                        <TableCell sx={{ pl: 3 }} />
                         <TableCell>Name</TableCell>
                         <TableCell>Email</TableCell>
                         <TableCell>Role</TableCell>
