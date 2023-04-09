@@ -13,7 +13,7 @@ import updateUserDetails from 'utils/userProfile';
 // import Avatar1 from 'assets/images/users/user-1.png';
 
 const Profile = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const [email, setEmail] = useState(user.email);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
@@ -84,10 +84,15 @@ const Profile = () => {
                             <TextField fullWidth label="Organization" defaultValue={user.organization} disabled />
                         </Grid>
                         <Grid item xs={12}>
-                            <Stack direction="row">
+                            <Stack direction="row" spacing={gridSpacing}>
                                 <AnimateButton>
                                     <Button variant="contained" onClick={test}>
                                         Change Detail
+                                    </Button>
+                                </AnimateButton>
+                                <AnimateButton>
+                                    <Button variant="contained" onClick={logout}>
+                                        Logout
                                     </Button>
                                 </AnimateButton>
                             </Stack>
