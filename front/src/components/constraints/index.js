@@ -1,10 +1,12 @@
 import { lazy, useState, useEffect } from 'react';
-import Loadable from 'components/Loadable';
-import value from 'assets/scss/_themes-vars.module.scss';
-import AddEventForm from './AddConstraintFrom';
 import { Dialog } from '@mui/material';
-import { getMonthlyShifts } from 'utils/api';
+
 import useAuth from 'hooks/useAuth';
+import { getMonthlyShifts } from 'utils/api';
+import { colorGenerator } from 'utils/color-generator';
+
+import Loadable from 'components/Loadable';
+import AddEventForm from './AddConstraintFrom';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -20,11 +22,11 @@ const Constrainsts = () => {
             /* eslint-disable-next-line */
             const result = await getMonthlyShifts(user.organization);
             let parsedData = [];
-            result.data.map((item) =>
+            result.data.map(async (item) =>
                 parsedData.push({
                     // eslint-disable-next-line
                     id: item._id,
-                    color: value.secondary200,
+                    color: await colorGenerator(item.startTime.toString()),
                     description: item.name,
                     start: new Date(item.startTime.toString()),
                     end: new Date(item.endTime.toString()),
