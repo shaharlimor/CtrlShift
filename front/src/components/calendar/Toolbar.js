@@ -46,19 +46,22 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
             {calendarType !== 0 ? (
                 // eslint-disable
                 <Grid item>
-                    <Stack direction="row" alignItems="center" spacing={4}>
-                        {/* <Button
+                    {calendarType === 1 ? (
+                        <Stack direction="row" alignItems="center" spacing={4}>
+                            <AddShiftButton />
+                            <AddShiftBoardMonthButton calendarType={calendarType} />
+                        </Stack>
+                    ) : (
+                        <Button
                             variant="contained"
                             sx={{ width: '100%' }}
                             size="large"
                             color="secondary"
                             startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
                         >
-                            {calendarType === 1 ? 'Add shift' : 'My shifts'}
-                        </Button> */}
-                        <AddShiftButton />
-                        {/* <AddShiftBoardMonthButton calendarType={calendarType} /> */}
-                    </Stack>
+                            My shifts
+                        </Button>
+                    )}
                 </Grid>
             ) : (
                 ''

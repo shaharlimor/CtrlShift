@@ -19,11 +19,11 @@ router.get("/:organization", async (req, res) => {
   }
 });
 
-router.get("/MonthAndYearList", async (req, res) => {
+router.get("/monthOpendToAddShiftsList/:organization", async (req, res) => {
   try {
-    const MonthAndYearList = await getBoardListOfMonthlyShift();
+    const organization = req.params.organization;
+    const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
     res.send(MonthAndYearList);
-    console.log(MonthAndYearList);
   } catch (err) {
     res.send("error occured to get shifts: " + err);
   }
