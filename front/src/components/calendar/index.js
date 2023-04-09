@@ -46,7 +46,6 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         handleViewChange(matchSm ? 'listWeek' : 'dayGridMonth');
     }, [matchSm]);
 
-    // TODO: get shifts by month (only if permenant shifts generated) + by organization
     useEffect(() => {
         const getOpenMonths = async () => {
             const result = await getMonthOpendToAddShifts(user.organization);
@@ -66,49 +65,37 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
     };
 
-    const checkIfNextDateAvailable = () => {};
+    const checkIfNextDateAvailable = (calendarApi) => {
+        let newDateObj;
+        if (view === 'dayGridMonth') {
+            newDateObj = {
+                year: calendarApi.getDate().getYear() + 2000 - 100,
+                month: (calendarApi.getDate().getMonth() + 2) % 12
+            };
+        } else if (view === 'timeGridWeek') {
+            const nextWeek = new Date(calendarApi.getDate().getTime() + 7 * 24 * 60 * 60 * 1000);
+            newDateObj = {
+                year: calendarApi.getDate().getYear() + 2000 - 100,
+                month: (nextWeek.getMonth() + 1) % 12
+            };
+        } else {
+            const nextDay = new Date(calendarApi.getDate().getTime() + 24 * 60 * 60 * 1000);
+            newDateObj = {
+                year: calendarApi.getDate().getYear() + 2000 - 100,
+                month: (nextDay.getMonth() + 1) % 12
+            };
+        }
+
+        // Check if the next click date is open to insert shifts (permanent shift already generated - "open")
+        return openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+    };
 
     const handleDateNext = () => {
         const calendarEl = calendarRef.current;
         if (calendarEl) {
             const calendarApi = calendarEl.getApi();
             if (calendarType === 1) {
-                let exists = false;
-                if (view === 'dayGridMonth') {
-                    const newDateObj = {
-                        year: calendarApi.getDate().getYear() + 2000 - 100,
-                        month: (calendarApi.getDate().getMonth() + 2) % 12
-                    };
-
-                    // Check if permanent shift generated for this month ("open")
-                    exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
-                } else if (view === 'timeGridWeek') {
-                    const nextWeek = new Date(calendarApi.getDate().getTime() + 7 * 24 * 60 * 60 * 1000);
-
-                    const newDateObj = {
-                        year: calendarApi.getDate().getYear() + 2000 - 100,
-                        month: (nextWeek.getMonth() + 1) % 12
-                    };
-
-                    exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
-                } else {
-                    const nextDay = new Date(calendarApi.getDate().getTime() + 24 * 60 * 60 * 1000);
-
-                    const newDateObj = {
-                        year: calendarApi.getDate().getYear() + 2000 - 100,
-                        month: (nextDay.getMonth() + 1) % 12
-                    };
-
-                    exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
-                }
-                // Next date
-                // console.log('month');
-                // console.log(calendarApi.getDate());
-                // console.log('year');
-                // console.log(calendarApi.getDate().getYear() + 2000 - 100);
-
-                // Set next date
-                if (exists) {
+                if (checkIfNextDateAvailable(calendarApi)) {
                     calendarApi.next();
                     setDate(calendarApi.getDate());
                 }
