@@ -66,21 +66,46 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
     };
 
+    const checkIfNextDateAvailable = () => {};
+
     const handleDateNext = () => {
         const calendarEl = calendarRef.current;
         if (calendarEl) {
             const calendarApi = calendarEl.getApi();
             if (calendarType === 1) {
-                // Next date
-                console.log('month');
-                console.log(calendarApi.getDate().getMonth() + 2);
-                const newDateObj = {
-                    year: calendarApi.getDate().getYear() + 2000 - 100,
-                    month: calendarApi.getDate().getMonth() + 2
-                };
+                let exists = false;
+                if (view === 'dayGridMonth') {
+                    const newDateObj = {
+                        year: calendarApi.getDate().getYear() + 2000 - 100,
+                        month: (calendarApi.getDate().getMonth() + 2) % 12
+                    };
 
-                // Check if permanent shift generated for this month ("open")
-                const exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+                    // Check if permanent shift generated for this month ("open")
+                    exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+                } else if (view === 'timeGridWeek') {
+                    const nextWeek = new Date(calendarApi.getDate().getTime() + 7 * 24 * 60 * 60 * 1000);
+
+                    const newDateObj = {
+                        year: calendarApi.getDate().getYear() + 2000 - 100,
+                        month: (nextWeek.getMonth() + 1) % 12
+                    };
+
+                    exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+                } else {
+                    const nextDay = new Date(calendarApi.getDate().getTime() + 24 * 60 * 60 * 1000);
+
+                    const newDateObj = {
+                        year: calendarApi.getDate().getYear() + 2000 - 100,
+                        month: (nextDay.getMonth() + 1) % 12
+                    };
+
+                    exists = openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+                }
+                // Next date
+                // console.log('month');
+                // console.log(calendarApi.getDate());
+                // console.log('year');
+                // console.log(calendarApi.getDate().getYear() + 2000 - 100);
 
                 // Set next date
                 if (exists) {
