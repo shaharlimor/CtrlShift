@@ -4,6 +4,7 @@ import value from 'assets/scss/_themes-vars.module.scss';
 import AddEventForm from './AddConstraintFrom';
 import { Dialog } from '@mui/material';
 import { getMonthlyShifts } from 'utils/api';
+import useAuth from 'hooks/useAuth';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -11,11 +12,13 @@ const Constrainsts = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [events, setEvents] = useState([]);
+    const { user } = useAuth();
 
     // TODO: get shift by month (only if open to insert)
     useEffect(() => {
         const getShifts = async () => {
-            const result = await getMonthlyShifts();
+            /* eslint-disable-next-line */
+            const result = await getMonthlyShifts(user.organization);
             let parsedData = [];
             result.data.map((item) =>
                 parsedData.push({
@@ -29,6 +32,7 @@ const Constrainsts = () => {
                 })
             );
             setEvents(parsedData);
+            console.log(result.data);
             parsedData = [];
         };
         getShifts();

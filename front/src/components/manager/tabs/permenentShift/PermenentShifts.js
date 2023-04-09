@@ -17,13 +17,10 @@ import {
     Typography,
     Grid
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import AddIcon from '@mui/icons-material/Add';
 
 // project imports
-import MainCard from '../cards/MainCard';
-import SubCard from '../cards/SubCard';
+import MainCard from '../../../cards/MainCard';
 import PermenentShiftTableMode from './PermenentShiftTableMode';
 import AddPermenentShift from './AddPermenentShift';
 
