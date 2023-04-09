@@ -2,13 +2,16 @@ import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
 import MainCard from 'components/cards/MainCard';
 import React, { useEffect } from 'react';
 // eslint-disable-next-line
-import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
-import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { useTheme } from '@mui/material/styles';
+import { IconButton, Grid } from '@mui/material';
 import RoleTypeForm from './roleTypeForm';
 
 /* eslint-disable */
 const RoleTypes = () => {
+    const theme = useTheme();
+
     // eslint-disable-next-line
     const [showForm, setShowForm] = React.useState(false);
 
@@ -21,9 +24,22 @@ const RoleTypes = () => {
             {showForm && <RoleTypeForm changeShowForm={changeShowForm} />}
             {!showForm && <RoleTypesList />}
             {!showForm && (
-                <Button variant="contained" onClick={changeShowForm} size="small" startIcon={<AddCircleOutlineTwoToneIcon />}>
-                    Add Role Type
-                </Button>
+                <Grid container direction="column" justifyContent="center" alignItems="flex-end">
+                    <Grid item xs={3} sx={{ mt: 2 }}>
+                        <IconButton
+                            variant="contained"
+                            sx={{
+                                fontSize: '35px',
+                                bgcolor: theme.palette.secondary.main,
+                                color: theme.palette.secondary.contrastText
+                            }}
+                            onClick={changeShowForm}
+                            size="large"
+                        >
+                            <AddIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
             )}
         </MainCard>
     );
