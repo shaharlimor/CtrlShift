@@ -20,7 +20,7 @@ const AddShiftFrom = ({ onCancel }) => {
     const { user } = useAuth();
     const theme = useTheme();
 
-    const EventSchema = Yup.object().shape({
+    const ValidationCheck = Yup.object().shape({
         name: Yup.string().max(5000).required('Shift name is required'),
         end: Yup.date()
             .when('start', (start, schema) => start && schema.min(start, 'End date must be later than start date'))
@@ -29,7 +29,7 @@ const AddShiftFrom = ({ onCancel }) => {
         roles: Yup.array()
             .of(
                 Yup.object().shape({
-                    type: Yup.string().required('Role type is required'), // these constraints take precedence
+                    roleType: Yup.string().min(3).required('Role type is required'), // these constraints take precedence
                     amount: Yup.number().required('Amount of employess is required') // these constraints take precedence
                 })
             )
@@ -43,31 +43,30 @@ const AddShiftFrom = ({ onCancel }) => {
             start: new Date(),
             roles: [{ roleType: '', amount: '' }]
         },
-        validationSchema: EventSchema,
+        validationSchema: ValidationCheck,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
             // TODO: first check if permanent shifts for this month and year already generated.
             try {
-                console.log(values);
-                // const data = {
-                //     organization: user.organization,
-                //     startTime: values.start,
-                //     endTime: values.end,
-                //     name: values.name,
-                //     roles: []
-                // };
-                // /* eslint-enable */
-                // await addMonthlyShift(data);
-                // resetForm();
-                // onCancel();
-                // setSubmitting(false);
+                const parsedRoles = values.roles.map((obj) => ({ ...obj, employeeIds: [] }));
+                const data = {
+                    organization: user.organization,
+                    startTime: values.start,
+                    endTime: values.end,
+                    name: values.name,
+                    roles: parsedRoles
+                };
+                console.log(data);
+                await addMonthlyShift(data);
+                resetForm();
+                onCancel();
+                setSubmitting(false);
             } catch (error) {
                 console.error(error);
             }
         }
     });
 
-    // const { errors, touched, handleSubmit, getFieldProps } = formik;
-    const { values, errors, touched, handleSubmit, isSubmitting, getFieldProps, setFieldValue, handleArrayPush } = formik;
+    const { values, errors, touched, handleSubmit, isSubmitting, getFieldProps, setFieldValue } = formik;
 
     return (
         <FormikProvider value={formik}>
@@ -141,15 +140,15 @@ const AddShiftFrom = ({ onCancel }) => {
                                                 <Grid item xs={5.3} sm={5.3}>
                                                     <Field
                                                         name={`roles[${index}].roleType`}
-                                                        label="role Type"
+                                                        label="Role Type"
                                                         as={TextField}
                                                         fullWidth
-                                                        error={
+                                                        error={Boolean(
                                                             touched.roles &&
-                                                            touched.roles[index] &&
-                                                            errors.roles &&
-                                                            errors.roles[index]?.roleType
-                                                        }
+                                                                touched.roles[index] &&
+                                                                errors.roles &&
+                                                                errors.roles[index]?.roleType
+                                                        )}
                                                         helperText={
                                                             touched.roles &&
                                                             touched.roles[index] &&
@@ -165,12 +164,12 @@ const AddShiftFrom = ({ onCancel }) => {
                                                         as={TextField}
                                                         type="number"
                                                         fullWidth
-                                                        error={
+                                                        error={Boolean(
                                                             touched.roles &&
-                                                            touched.roles[index] &&
-                                                            errors.roles &&
-                                                            errors.roles[index]?.amount
-                                                        }
+                                                                touched.roles[index] &&
+                                                                errors.roles &&
+                                                                errors.roles[index]?.amount
+                                                        )}
                                                         helperText={
                                                             touched.roles &&
                                                             touched.roles[index] &&
@@ -193,7 +192,7 @@ const AddShiftFrom = ({ onCancel }) => {
                                         <Grid container justifyContent="center" alignItems="center" sx={{ pt: 3, ml: 3.2 }}>
                                             <Button
                                                 type="button"
-                                                onClick={() => push({ name: '', amount: '' })}
+                                                onClick={() => push({ roleType: '', amount: '' })}
                                                 variant="contained"
                                                 sx={{
                                                     width: '20%',
