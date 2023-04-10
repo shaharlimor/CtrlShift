@@ -1,9 +1,12 @@
 import { lazy, useState, useEffect } from 'react';
-import Loadable from 'components/Loadable';
-import value from 'assets/scss/_themes-vars.module.scss';
-import AddEventForm from './AddConstraintFrom';
 import { Dialog } from '@mui/material';
+
+import useAuth from 'hooks/useAuth';
 import { getMonthlyShifts } from 'utils/api';
+import { colorGenerator } from 'utils/color-generator';
+
+import Loadable from 'components/Loadable';
+import AddEventForm from './AddConstraintFrom';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -11,17 +14,19 @@ const Constrainsts = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [events, setEvents] = useState([]);
+    const { user } = useAuth();
 
     // TODO: get shift by month (only if open to insert)
     useEffect(() => {
         const getShifts = async () => {
-            const result = await getMonthlyShifts();
+            /* eslint-disable-next-line */
+            const result = await getMonthlyShifts(user.organization);
             let parsedData = [];
-            result.data.map((item) =>
+            result.data.map(async (item) =>
                 parsedData.push({
                     // eslint-disable-next-line
                     id: item._id,
-                    color: value.secondary200,
+                    color: await colorGenerator(item.startTime.toString()),
                     description: item.name,
                     start: new Date(item.startTime.toString()),
                     end: new Date(item.endTime.toString()),
@@ -29,6 +34,7 @@ const Constrainsts = () => {
                 })
             );
             setEvents(parsedData);
+            console.log(result.data);
             parsedData = [];
         };
         getShifts();

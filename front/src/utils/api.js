@@ -5,8 +5,8 @@ export async function getPermanentShifts() {
     return data;
 }
 
-export async function getMonthlyShifts() {
-    const data = await axiosServices.get('/monthlyShifts');
+export async function getMonthlyShifts(org) {
+    const data = await axiosServices.get(`/monthlyShifts/${org}`);
     return data;
 }
 
@@ -18,3 +18,18 @@ export async function getConstraintsByShiftId(id) {
     const data = await axiosServices.get(`/constraints/byShift/${id}`);
     return data;
 }
+
+export async function employeeHasConstraintInShift(empId, shiftId) {
+    const data = await axiosServices.get(`/constraints/userHasConstraint/${empId}/${shiftId}`);
+    return data;
+}
+
+export async function addMonthlyShift(body) {
+    await axiosServices.post('/monthlyShifts', body);
+}
+
+export async function getMonthOpendToAddShifts(org) {
+    const data = await axiosServices.get(`/monthlyShifts/monthOpendToAddShiftsList/${org}`);
+    return data;
+}
+

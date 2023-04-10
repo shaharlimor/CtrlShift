@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, Fragment } from 'react';
 
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
-import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery } from '@mui/material';
+import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery, Select, MenuItem } from '@mui/material';
 
 import { format } from 'date-fns';
 
 import { IconChevronLeft, IconChevronRight, IconLayoutGrid, IconTemplate, IconLayoutList } from '@tabler/icons';
+import AddShiftBoardMonthButton from './AddShiftBoardMonthButton';
+import AddShiftButton from '../shifts/AddShiftButton';
 
 const viewOptions = [
     {
@@ -42,19 +44,29 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
     return (
         <Grid alignItems="center" container justifyContent="space-between" {...others} sx={{ pb: 3 }}>
             {calendarType !== 0 ? (
+                // eslint-disable
                 <Grid item>
-                    <Button
-                        variant="contained"
-                        sx={{ width: '100%' }}
-                        size="large"
-                        startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
-                    >
-                        {calendarType === 1 ? 'Add shift' : 'My shifts'}
-                    </Button>
+                    {calendarType === 1 ? (
+                        <Stack direction="row" alignItems="center" spacing={4}>
+                            <AddShiftButton />
+                            <AddShiftBoardMonthButton calendarType={calendarType} />
+                        </Stack>
+                    ) : (
+                        <Button
+                            variant="contained"
+                            sx={{ width: '100%' }}
+                            size="large"
+                            color="secondary"
+                            startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
+                        >
+                            My shifts
+                        </Button>
+                    )}
                 </Grid>
             ) : (
                 ''
             )}
+
             <Grid item>
                 <Stack direction="row" alignItems="center" spacing={3}>
                     <IconButton onClick={onClickPrev} size="large">

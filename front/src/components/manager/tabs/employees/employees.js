@@ -1,15 +1,15 @@
-import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
-import MainCard from 'components/cards/MainCard';
+import EmployeeList from 'components/manager/tabs/employees/employeeList';
 import React, { useEffect } from 'react';
 // eslint-disable-next-line
-
 import AddIcon from '@mui/icons-material/Add';
-import { useTheme } from '@mui/material/styles';
+
 import { IconButton, Grid } from '@mui/material';
-import RoleTypeForm from './roleTypeForm';
+import { useTheme } from '@mui/material/styles';
+
+import EmployeeForm from './employeeForm';
 
 /* eslint-disable */
-const RoleTypes = () => {
+const Employees = () => {
     const theme = useTheme();
 
     // eslint-disable-next-line
@@ -20,9 +20,9 @@ const RoleTypes = () => {
     };
 
     return (
-        <MainCard title="RoleTypes">
-            {showForm && <RoleTypeForm changeShowForm={changeShowForm} />}
-            {!showForm && <RoleTypesList />}
+        <React.Fragment>
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
+            {!showForm && <EmployeeList />}
             {!showForm && (
                 <Grid container direction="column" justifyContent="center" alignItems="flex-end">
                     <Grid item xs={3} sx={{ mt: 2 }}>
@@ -41,10 +41,10 @@ const RoleTypes = () => {
                     </Grid>
                 </Grid>
             )}
-        </MainCard>
+        </React.Fragment>
     );
 };
 /* eslint-disable */
 
 // eslint-disable-next-line
-export default RoleTypes;
+export default Employees;

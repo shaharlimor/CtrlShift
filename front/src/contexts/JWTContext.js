@@ -99,7 +99,6 @@ export const JWTProvider = ({ children }) => {
         };
         const init = async () => {
             try {
-                console.log('useeffect');
                 const accessToken = window.localStorage.getItem('accessToken');
                 const refreshToken = window.localStorage.getItem('refreshToken');
 
@@ -186,9 +185,17 @@ export const JWTProvider = ({ children }) => {
         // window.localStorage.setItem('users', JSON.stringify(users));
     };
 
-    const logout = () => {
+    const logout = async () => {
+        const response = await axios.post('/auth/logout');
+        setRefreshToken(null);
         setAccessToken(null);
-        dispatch({ type: LOGOUT });
+        dispatch({
+            type: LOGOUT,
+            payload: {
+                isLoggedIn: false,
+                user: null
+            }
+        });
     };
 
     const resetPassword = (email) => console.log(email);

@@ -20,6 +20,7 @@ app.use("/notifications", require("./routes/notifications"));
 app.use("/constraints", require("./routes/constraints"));
 app.use("/monthlyShifts", require("./routes/monthlyShifts"));
 app.use("/permanentShifts", require("./routes/permanentShifts"));
+app.use("/user", require("./routes/users"));
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

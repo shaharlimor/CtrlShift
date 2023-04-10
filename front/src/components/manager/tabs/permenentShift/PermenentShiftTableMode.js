@@ -15,15 +15,16 @@ import {
     TableHead,
     TableRow,
     Typography,
-    Grid
+    Grid,
+    Tooltip
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import AddIcon from '@mui/icons-material/Add';
 
 // project imports
-import MainCard from '../cards/MainCard';
-import SubCard from '../cards/SubCard';
+import MainCard from '../../../cards/MainCard';
+import SubCard from '../../../cards/SubCard';
 
 // assets
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -71,13 +72,19 @@ function Row({ row }) {
                 <TableCell>{row.startTime}</TableCell>
                 <TableCell>{row.endTime}</TableCell>
                 <TableCell>{row.days}</TableCell>
-                <TableCell sx={{ pr: 3 }}>
-                    <IconButton color="primary" size="large" onClick={handleDeleteClick}>
-                        <DeleteIcon sx={{ fontSize: '1.3rem' }} />
-                    </IconButton>
-                    <IconButton color="secondary" size="large" onClick={handleEditClick}>
-                        <EditTwoToneIcon sx={{ fontSize: '1.3rem' }} />
-                    </IconButton>
+                <TableCell align="center" sx={{ pr: 3 }}>
+                    <Stack direction="row" justifyContent="center" alignItems="center">
+                        <Tooltip placement="top" title="Delete">
+                            <IconButton color="inherit" size="medium" onClick={handleDeleteClick}>
+                                <DeleteOutlineOutlinedIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip placement="top" title="Edit" onClick={handleEditClick}>
+                            <IconButton color="primary" size="medium">
+                                <EditOutlinedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Stack>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -142,7 +149,7 @@ export default function PermenentShiftTableMode() {
                         <TableCell>Start Time</TableCell>
                         <TableCell>End Time</TableCell>
                         <TableCell>Days</TableCell>
-                        <TableCell>Action</TableCell>
+                        <TableCell sx={{ pl: 6 }}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
