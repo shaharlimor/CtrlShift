@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 // eslint-disable-next-line
 import Avatar from 'components/users/Avatar';
-
+import useAuth from 'hooks/useAuth';
 import { useDispatch, useSelector } from 'store';
 
 // assets
@@ -36,12 +36,12 @@ import { getEmployeesByOrg } from 'utils/api';
 const UserList = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-
+    const { user } = useAuth();
     const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
         async function getEmployees() {
-            const response = await getEmployeesByOrg('bla');
+            const response = await getEmployeesByOrg(user.organization);
             const { users } = response.data;
             setData(users);
         }
