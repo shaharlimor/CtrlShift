@@ -24,107 +24,6 @@ const getNotifications = async (req, res) => {
   });
 };
 
-const createNotifications = async (req, res) => {
-  const userId = "c1bdde39"; // replace with actual user ID
-
-  const now = new Date();
-  const notifications = [
-    {
-      userId,
-      message: "<b>Notification</b> created now",
-      date: now,
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 1 hour ago",
-      date: new Date(now.getTime() - 3600000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 2 hours ago",
-      date: new Date(now.getTime() - 7200000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 6 hours ago",
-      date: new Date(now.getTime() - 21600000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 1 day ago",
-      date: new Date(now.getTime() - 86400000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 3 days ago",
-      date: new Date(now.getTime() - 259200000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 1 week ago",
-      date: new Date(now.getTime() - 604800000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 6 weeks ago",
-      date: new Date(now.getTime() - 3628800000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 12 weeks ago",
-      date: new Date(now.getTime() - 7257600000),
-    },
-    {
-      userId,
-      message: "<b>Notification</b> created 24 weeks ago",
-      date: new Date(now.getTime() - 14515200000),
-    },
-  ];
-
-  try {
-    const savedNotifications = await Notification.insertMany(notifications);
-    return res.json(savedNotifications);
-  } catch (error) {
-    return res.status(500).send(error.message);
-  }
-};
-
-const createSwitchNotification = async (req, res) => {
-  const userId = "c1bdde39"; // replace with actual user ID
-
-  const now = new Date();
-  const switchNotification = {
-    userId,
-    message: "<b>Switch notification</b> created now",
-    type: "switch",
-  };
-
-  try {
-    const savedNotification = await Notification.create(switchNotification);
-    return res.json(savedNotification);
-  } catch (error) {
-    return res.status(500).send(error.message);
-  }
-};
-
-const createRouteNotification = async (req, res) => {
-  const userId = "c1bdde39"; // replace with actual user ID
-
-  const now = new Date();
-  const routeNotification = {
-    userId,
-    message: "<b>Route notification</b> created now",
-    type: "route",
-  };
-
-  try {
-    const savedNotification = await Notification.create(routeNotification);
-    return res.json(savedNotification);
-  } catch (error) {
-    return res.status(500).send(error.message);
-  }
-};
-
 const markAsRead = async (req, res) => {
   const authHeaders = req.headers['refreshtoken'];
   const token = authHeaders && authHeaders.split(' ')[1];
@@ -229,9 +128,49 @@ const createNotificationForOrganization = async (req, res) => {
   });
 };
 
+const sendSwitchNotification = async (req, res) => {
+  const authHeaders = req.headers['refreshtoken'];
+  const token = authHeaders && authHeaders.split(' ')[1];
+  if (token == null) {
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
+    if (err) {
+      return res.status(403).send(err.message);
+    }
+
+    const currentUser = await User.findById(user._id);
+    const targetUserId = req.params.userId;
+    const targetUser = await User.findById(targetUserId);
+
+    if (!targetUser) {
+      return res.status(404).send("Target user not found");
+    }
+
+    if (currentUser.organization !== targetUser.organization) {
+      return res.status(403).send("Users are not in the same organization");
+    }
+
+    const switchNotification = {
+      userId: targetUserId,
+      message: `<b>${currentUser.firstName} ${currentUser.lastName}</b> proposed a shift change`,
+      type: "switch",
+    };
+
+    try {
+      const savedNotification = await Notification.create(switchNotification);
+      return res.json(savedNotification);
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
+  });
+};
+
 module.exports = {
   getNotifications,
   markAsRead,
   deleteNotificationById,
   createNotificationForOrganization,
+  sendSwitchNotification,
 };

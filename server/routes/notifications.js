@@ -13,4 +13,6 @@ router.delete("/deleteNotificationById/:notificationId", notificationsController
 
 router.post("/createNotificationForOrganization", express.json(), notificationsController.createNotificationForOrganization);
 
+router.post("/sendSwitchNotification/:userId", notificationsController.sendSwitchNotification);
+
 module.exports = router;
