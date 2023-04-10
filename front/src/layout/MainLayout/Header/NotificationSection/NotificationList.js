@@ -46,7 +46,8 @@ const NotificationList = () => {
         const response = await axios.get(`/notifications/`);
         setNotificatinos(
             response.data.map((notification) => (
-                <React.Fragment key={notification.id}>
+                // eslint-disable-next-line no-underscore-dangle
+                <React.Fragment key={notification._id}>
                     <ListItemWrapper
                         style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 4, paddingBottom: 4 }}
                         sx={{ width: 450 }}
