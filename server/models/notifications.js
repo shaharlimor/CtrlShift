@@ -3,7 +3,21 @@ const Schema = mongoose.Schema;
 
 const notificationSchema = new Schema({
   userId: String,
-  notification: String,
+  message: String,
+  isRead: {
+    type: Boolean,
+    default: false
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  type: {
+    type: String,
+    enum: ['switch', 'notification', 'route'],
+    default: 'notification'
+  },
+  routeTo: String
 });
 
 // Compile model from schema
