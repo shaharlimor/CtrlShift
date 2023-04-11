@@ -34,7 +34,7 @@ router.get(
   }
 );
 
-router.get("/DoesntExist/:organization", async (req, res) => {
+router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
     console.log("here");
     const organization = req.params.organization;

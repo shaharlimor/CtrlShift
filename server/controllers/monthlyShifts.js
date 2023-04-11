@@ -9,16 +9,9 @@ const getShifts = async (organization) => {
 };
 
 const getBoardListOfMonthlyShift = async (organization) => {
-  return await Shift.aggregate([
+  return await Schedule.aggregate([
     { $match: { organization: organization } },
-    {
-      $group: {
-        _id: {
-          year: { $year: "$startTime" },
-          month: { $month: "$startTime" },
-        },
-      },
-    },
+    {},
     {
       $project: {
         _id: 0,
@@ -115,15 +108,7 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
     isOpenToConstraints: false,
   });
 
-  newSchedule.save((err) => {
-    if (err) {
-      console.log(err);
-      return err;
-    } else {
-      console.log("Schedule saved successfully!");
-      return null;
-    }
-  });
+  await newSchedule.save();
 };
 
 module.exports = {
