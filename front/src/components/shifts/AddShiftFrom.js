@@ -63,7 +63,7 @@ const AddShiftFrom = ({ onCancel }) => {
         }
     });
 
-    const { values, errors, touched, handleSubmit, isSubmitting, getFieldProps, setFieldValue } = formik;
+    const { values, errors, touched, handleSubmit, getFieldProps, setFieldValue } = formik;
 
     return (
         <FormikProvider value={formik}>
