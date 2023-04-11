@@ -37,7 +37,6 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
                         </MenuItem>
                     ))}
                 </Select>
-
             )}
 
             {!selectedMonth && (

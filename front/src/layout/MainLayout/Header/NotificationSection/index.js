@@ -8,8 +8,8 @@ import { Avatar, Box, ClickAwayListener, Divider, Grid, Paper, Popper, Stack, Ty
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
-import Transitions from 'ui-component/extended/Transitions';
+import MainCard from 'components/cards/MainCard';
+import Transitions from 'components/extended/Transitions';
 import NotificationList from './NotificationList';
 
 // icon imports
