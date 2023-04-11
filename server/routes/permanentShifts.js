@@ -1,10 +1,11 @@
 const express = require("express");
+const middleware = require("../common/auth_middleware");
 const Shift = require("../models/permanentShifts");
 const { getShifts } = require("../controllers/permanentShifts");
 
 var router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", middleware, async (req, res) => {
   try {
     const shifts = await getShifts();
     res.send(shifts);
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", middleware, async (req, res) => {
   try {
     const newShift = new Shift(req.body);
     const result = await newShift.save();
