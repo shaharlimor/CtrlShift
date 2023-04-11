@@ -1,3 +1,4 @@
+/* eslint-diasble */
 import axios from 'utils/axios';
 
 export const ShiftBoardMonthsExist = async (organization) => {

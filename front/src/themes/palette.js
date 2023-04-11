@@ -51,6 +51,8 @@ const Palette = (navType) => {
             grey: {
                 50: colors.grey50,
                 100: colors.grey100,
+                200: colors.grey200,
+                300: colors.grey300,
                 500: navType === 'dark' ? colors.darkTextSecondary : colors.grey500,
                 600: navType === 'dark' ? colors.darkTextTitle : colors.grey900,
                 700: navType === 'dark' ? colors.darkTextPrimary : colors.grey700,
