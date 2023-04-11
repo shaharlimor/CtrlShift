@@ -9,6 +9,7 @@ const getShifts = async (organization) => {
 };
 
 const getBoardListOfMonthlyShift = async (organization) => {
+  console.log(organization);
   return await Shift.aggregate([
     { $match: { organization: organization } },
     {
@@ -31,6 +32,8 @@ const getBoardListOfMonthlyShift = async (organization) => {
 };
 
 const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
+  console.log(organization);
+
   const now = new Date();
   const nextYear = now.getFullYear() + 1;
   const missingMonths = [];
@@ -52,6 +55,8 @@ const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
     })
   );
 
+  console.log("exisiting month set: ", existingMonthsSet);
+
   // Loop through the next 12 months and add missing months to the missingMonths array
   for (let year = now.getFullYear(); year <= nextYear; year++) {
     for (let month = 0; month < 12; month++) {
@@ -62,6 +67,8 @@ const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
       }
     }
   }
+
+  console.log("missing Months: ", missingMonths);
 
   return missingMonths;
 };
