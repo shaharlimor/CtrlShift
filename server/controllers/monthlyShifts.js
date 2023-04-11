@@ -75,56 +75,56 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
     days: { $in: [startOfMonth.getDay().toString()] },
   }).exec();
 
-  console.log("premenent shifts: ", permanentShifts);
+  console.log("permanent shifts: ", permanentShifts);
 
-  const createMonthlyShiftBoard = async (month, year, organization) => {
-    const startOfMonth = new Date(year, month - 1, 1);
-    const endOfMonth = new Date(year, month, 0, 23, 59, 59, 999);
-  
-    const permanentShifts = await Shift.find({
-      organization: organization,
-      days: { $in: [startOfMonth.getDay().toString()] },
-    }).exec();
-  
-    console.log("permanent shifts: ", permanentShifts);
-  
-    const monthlyShifts = [];
-  
-    permanentShifts.forEach((permanentShift) => {
-      permanentShift.days.forEach((day) => {
-        const date = new Date(year, month - 1, parseInt(day), permanentShift.startTime.getHours(), permanentShift.startTime.getMinutes());
-  
-        monthlyShifts.push({
-          organization: permanentShift.organization,
-          startTime: date,
-          endTime: new Date(year, month - 1, parseInt(day), permanentShift.endTime.getHours(), permanentShift.endTime.getMinutes()),
-          name: permanentShift.name,
-          roles: permanentShift.roles,
-        });
+  const monthlyShifts = [];
+
+  permanentShifts.forEach((permanentShift) => {
+    permanentShift.days.forEach((day) => {
+      const date = new Date(
+        year,
+        month - 1,
+        parseInt(day),
+        permanentShift.startTime.getHours(),
+        permanentShift.startTime.getMinutes()
+      );
+
+      monthlyShifts.push({
+        organization: permanentShift.organization,
+        startTime: date,
+        endTime: new Date(
+          year,
+          month - 1,
+          parseInt(day),
+          permanentShift.endTime.getHours(),
+          permanentShift.endTime.getMinutes()
+        ),
+        name: permanentShift.name,
+        roles: permanentShift.roles,
       });
     });
-  
-    await Shift.insertMany(monthlyShifts);
-  
-    const newSchedule = new Schedule({
-      organization: organization,
-      month: month,
-      year: year,
-      isPublished: false,
-      isOpenToConstraints: false,
-    });
-  
-    newSchedule.save((err) => {
-      if (err) {
-        console.log(err);
-        return err;
-      } else {
-        console.log("Schedule saved successfully!");
-        return null;
-      }
-    });
-  };
-  
+  });
+
+  await Shift.insertMany(monthlyShifts);
+
+  const newSchedule = new Schedule({
+    organization: organization,
+    month: month,
+    year: year,
+    isPublished: false,
+    isOpenToConstraints: false,
+  });
+
+  newSchedule.save((err) => {
+    if (err) {
+      console.log(err);
+      return err;
+    } else {
+      console.log("Schedule saved successfully!");
+      return null;
+    }
+  });
+};
 
 module.exports = {
   getShifts,
