@@ -9,8 +9,9 @@ const {
 
 var router = express.Router();
 
-router.get("/DoesntExistMonthAndYearList/:organization", async (req, res) => {
+router.get("/DoesntExist/:organization", async (req, res) => {
   console.log("here 2");
+  console.log(req.params.organization);
   try {
     const organization = req.params.organization;
     const MonthAndYearList = await getMissingBoardListOfMonthlyShiftOfYear(
