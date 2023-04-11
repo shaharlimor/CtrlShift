@@ -9,6 +9,19 @@ const {
 
 var router = express.Router();
 
+router.get("/DoesntExistMonthAndYearList/:organization", async (req, res) => {
+  console.log("here 2");
+  try {
+    const organization = req.params.organization;
+    const MonthAndYearList = await getMissingBoardListOfMonthlyShiftOfYear(
+      organization
+    );
+    res.send(MonthAndYearList);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
+  }
+});
+
 router.get("/:organization", async (req, res) => {
   try {
     const organization = req.params.organization;
@@ -23,15 +36,6 @@ router.get("/monthOpendToAddShiftsList/:organization", async (req, res) => {
   try {
     const organization = req.params.organization;
     const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
-    res.send(MonthAndYearList);
-  } catch (err) {
-    res.send("error occured to get shifts: " + err);
-  }
-});
-
-router.get("/DoesntExistMonthAndYearList", async (req, res) => {
-  try {
-    const MonthAndYearList = await getMissingBoardListOfMonthlyShiftOfYear();
     res.send(MonthAndYearList);
   } catch (err) {
     res.send("error occured to get shifts: " + err);

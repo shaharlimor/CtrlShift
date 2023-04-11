@@ -1,10 +1,11 @@
 /* eslint-diasble */
-import axios from 'utils/axios';
+import axiosServices from './axios';
 
 export const ShiftBoardMonthsExist = async (organization) => {
     try {
-        const response = await axios.get(`http://localhost:3001/manager/shiftMonthBoardExist?organization=${organization}`);
+        const response = await axiosServices.get(`/monthlyShifts/monthOpendToAddShiftsList?organization=${organization}`);
 
+        console.log(response.data);
         // Handle the response (e.g., show a success message)
         return response.data;
     } catch (error) {
@@ -16,8 +17,10 @@ export const ShiftBoardMonthsExist = async (organization) => {
 
 export const ShiftBoardMonthsDoesntExist = async (organization) => {
     try {
-        const response = await axios.get(`http://localhost:3001/monthlyShifts/DoesntExistMonthAndYearList?organization=${organization}`);
+        console.log(organization);
+        const response = await axiosServices.get(`/monthlyShifts/DoesntExistMonthAndYearList?organization=${organization}`);
 
+        console.log('here 3');
         // Handle the response (e.g., show a success message)
         return response.data;
     } catch (error) {
@@ -29,7 +32,7 @@ export const ShiftBoardMonthsDoesntExist = async (organization) => {
 
 export const CreateMonthShiftBoard = async (organization, month, year) => {
     try {
-        const response = await axios.post('http://localhost:3001/monthlyShifts/createMonthlyShiftBoard', { organization, month, year });
+        const response = await axiosServices.post('/monthlyShifts/createMonthlyShiftBoard', { organization, month, year });
 
         // Handle the response (e.g., show a success message)
         return response.data;

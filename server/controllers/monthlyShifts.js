@@ -32,7 +32,7 @@ const getBoardListOfMonthlyShift = async (organization) => {
 };
 
 const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
-  console.log(organization);
+  console.log("org ", organization);
 
   const now = new Date();
   const nextYear = now.getFullYear() + 1;
@@ -47,6 +47,8 @@ const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
     { startTime: 1 }
   ).lean();
 
+  console.log("exisiting month set: ", existingMonths);
+
   // Create a set of all existing months
   const existingMonthsSet = new Set(
     existingMonths.map(({ startTime }) => {
@@ -54,8 +56,6 @@ const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
       return { month: date.getMonth() + 1, year: date.getFullYear() };
     })
   );
-
-  console.log("exisiting month set: ", existingMonthsSet);
 
   // Loop through the next 12 months and add missing months to the missingMonths array
   for (let year = now.getFullYear(); year <= nextYear; year++) {
