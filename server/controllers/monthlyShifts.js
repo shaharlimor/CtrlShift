@@ -30,7 +30,7 @@ const getBoardListOfMonthlyShift = async (organization) => {
   ]);
 };
 
-const getMissingBoardListOfMonthlyShiftOfYear = async (organization) => {
+const getMissingBoardList = async (organization) => {
   const now = new Date();
   const nextYear = now.getFullYear() + 1;
   const missingMonths = [];
@@ -77,52 +77,58 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
 
   console.log("premenent shifts: ", permanentShifts);
 
-  const monthlyShifts = permanentShifts.map((permanentShift) => {
-    return {
-      organization: permanentShift.organization,
-      startTime: new Date(
-        year,
-        month - 1,
-        parseInt(permanentShift.days[0]),
-        permanentShift.startTime.getHours(),
-        permanentShift.startTime.getMinutes()
-      ),
-      endTime: new Date(
-        year,
-        month - 1,
-        parseInt(permanentShift.days[0]),
-        permanentShift.endTime.getHours(),
-        permanentShift.endTime.getMinutes()
-      ),
-      name: permanentShift.name,
-      roles: permanentShift.roles,
-    };
-  });
-
-  await Shift.insertMany(monthlyShifts);
-
-  const newSchedule = new Schedule({
-    organization: organization,
-    month: month,
-    year: year,
-    isPublished: false,
-    isOpenToConstraints: false,
-  });
-
-  newSchedule.save((err) => {
-    if (err) {
-      console.log(err);
-      return err;
-    } else {
-      console.log("Schedule saved successfully!");
-      return null;
-    }
-  });
-};
+  const createMonthlyShiftBoard = async (month, year, organization) => {
+    const startOfMonth = new Date(year, month - 1, 1);
+    const endOfMonth = new Date(year, month, 0, 23, 59, 59, 999);
+  
+    const permanentShifts = await Shift.find({
+      organization: organization,
+      days: { $in: [startOfMonth.getDay().toString()] },
+    }).exec();
+  
+    console.log("permanent shifts: ", permanentShifts);
+  
+    const monthlyShifts = [];
+  
+    permanentShifts.forEach((permanentShift) => {
+      permanentShift.days.forEach((day) => {
+        const date = new Date(year, month - 1, parseInt(day), permanentShift.startTime.getHours(), permanentShift.startTime.getMinutes());
+  
+        monthlyShifts.push({
+          organization: permanentShift.organization,
+          startTime: date,
+          endTime: new Date(year, month - 1, parseInt(day), permanentShift.endTime.getHours(), permanentShift.endTime.getMinutes()),
+          name: permanentShift.name,
+          roles: permanentShift.roles,
+        });
+      });
+    });
+  
+    await Shift.insertMany(monthlyShifts);
+  
+    const newSchedule = new Schedule({
+      organization: organization,
+      month: month,
+      year: year,
+      isPublished: false,
+      isOpenToConstraints: false,
+    });
+  
+    newSchedule.save((err) => {
+      if (err) {
+        console.log(err);
+        return err;
+      } else {
+        console.log("Schedule saved successfully!");
+        return null;
+      }
+    });
+  };
+  
 
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
-  getMissingBoardListOfMonthlyShiftOfYear,
+  getMissingBoardList,
   createMonthlyShiftBoard,
 };

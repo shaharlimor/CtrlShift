@@ -35,7 +35,7 @@ const rows = [createData('Day waiter'), createData('Day chef'), createData('Shif
 
 export default function RoleTypesList() {
     return (
-        <fragment>
+        <>
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -74,6 +74,6 @@ export default function RoleTypesList() {
                     View all roles
                 </Button>
             </CardActions>
-        </fragment>
+        </>
     );
 }
