@@ -34,8 +34,10 @@ router.get(
   }
 );
 
-router.get("/DoesntExistMonthAndYearList", middleware, async (req, res) => {
+router.get("/DoesntExist", middleware, async (req, res) => {
   try {
+    console.log("here");
+
     const MonthAndYearList = await getMissingBoardListOfMonthlyShiftOfYear();
     res.send(MonthAndYearList);
   } catch (err) {
