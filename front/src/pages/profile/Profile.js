@@ -1,3 +1,5 @@
+import axios from 'utils/axios';
+
 // material-ui
 import React, { useState } from 'react';
 import { Avatar, Button, Grid, Stack, TextField, Typography } from '@mui/material';
@@ -9,8 +11,21 @@ import AnimateButton from 'components/AnimateButton';
 import { gridSpacing } from 'store/constant';
 import updateUserDetails from 'utils/userProfile';
 
-// assets
-// import Avatar1 from 'assets/images/users/user-1.png';
+const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+        const response = await axios.post('/user/changeImage', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    } catch (error) {
+        // Handle the error as needed
+        console.error('Error uploading the image:', error);
+    }
+};
 
 const Profile = () => {
     const { user, logout } = useAuth();
@@ -26,14 +41,37 @@ const Profile = () => {
         updateUserDetails(email, firstName, lastName, phone);
     };
 
+    const [avatarSrc, setAvatarSrc] = useState(`https://controlshift-images.s3.eu-central-1.amazonaws.com/${userId}.png`);
+    const maxFileSize = 500000; // 500 KB
+
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = () => {
+                    if (img.width === img.height && file.size <= maxFileSize) {
+                        setAvatarSrc(img.src);
+
+                        uploadImage(file);
+                    } else {
+                        alert('Image must be square and not exceed 500 KB.');
+                    }
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
         <Grid container spacing={gridSpacing}>
             <Grid item sm={6} md={4}>
                 <SubCard title="Profile Picture" contentSX={{ textAlign: 'center' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <Avatar alt="User 1" sx={{ width: 100, height: 100, margin: '0 auto' }} />
-                            {/* <Avatar alt="User 1" src={Avatar1} sx={{ width: 100, height: 100, margin: '0 auto' }} /> */}
+                            <Avatar alt={user.firstName} sx={{ width: 100, height: 100, margin: '0 auto' }} src={avatarSrc} />
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle2" align="center">
@@ -41,11 +79,15 @@ const Profile = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <AnimateButton>
-                                <Button variant="contained" size="small">
-                                    Upload Avatar
-                                </Button>
-                            </AnimateButton>
+                            <input accept="image/*" id="contained-button-file" type="file" hidden onChange={handleFileUpload} />
+                            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                            <label htmlFor="contained-button-file">
+                                <AnimateButton>
+                                    <Button variant="contained" size="small" component="span">
+                                        Upload Avatar
+                                    </Button>
+                                </AnimateButton>
+                            </label>
                         </Grid>
                     </Grid>
                 </SubCard>
