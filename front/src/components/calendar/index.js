@@ -50,6 +50,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         const getOpenMonths = async () => {
             const result = await getMonthOpendToAddShifts(user.organization);
             setOpenMonths(result.data);
+            console.log(result.data);
         };
         getOpenMonths();
     }, []);
@@ -57,7 +58,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
     const handleDatePrev = () => {
         const calendarEl = calendarRef.current;
 
-        if (calendarEl) {
+        if (calendarEl && openMonths.length !== 0) {
             const calendarApi = calendarEl.getApi();
 
             calendarApi.prev();
@@ -92,7 +93,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
 
     const handleDateNext = () => {
         const calendarEl = calendarRef.current;
-        if (calendarEl) {
+        if (calendarEl && openMonths.length !== 0) {
             const calendarApi = calendarEl.getApi();
             if (calendarType === 1) {
                 if (checkIfNextDateAvailable(calendarApi)) {
