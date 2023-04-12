@@ -37,3 +37,7 @@ export async function getMonthOpendToAddShifts(org) {
     const data = await axiosServices.get(`/monthlyShifts/monthOpendToAddShiftsList/${org}`);
     return data;
 }
+
+export async function deleteMonthlyShift(id) {
+    await axiosServices.delete(`/monthlyShifts/${id}`);
+}

@@ -5,12 +5,17 @@ import { useTheme } from '@mui/material/styles';
 
 // project imports
 import { gridSpacing } from 'store/constant';
-// import { addConstraint, employeeHasConstraintInShift } from 'utils/api';
+import { deleteMonthlyShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 
 const DeleteShiftPopup = ({ event, onCancel }) => {
     const { user } = useAuth();
     const theme = useTheme();
+
+    const handleDeleteClicked = async () => {
+        await deleteMonthlyShift(event.id);
+        onCancel();
+    };
 
     return (
         // eslint-disable-next-line
@@ -57,6 +62,7 @@ const DeleteShiftPopup = ({ event, onCancel }) => {
                             },
                             width: '15%'
                         }}
+                        onClick={handleDeleteClicked}
                     >
                         Delete
                     </Button>
