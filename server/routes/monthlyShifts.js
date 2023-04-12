@@ -4,7 +4,7 @@ const Shift = require("../models/monthlyShifts");
 const {
   getShifts,
   getBoardListOfMonthlyShift,
-  getMissingBoardListOfMonthlyShiftOfYear,
+  getMissingBoardList,
   createMonthlyShiftBoard,
 } = require("../controllers/monthlyShifts");
 
@@ -34,9 +34,12 @@ router.get(
   }
 );
 
-router.get("/DoesntExistMonthAndYearList", middleware, async (req, res) => {
+router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
-    const MonthAndYearList = await getMissingBoardListOfMonthlyShiftOfYear();
+    console.log("here");
+    const organization = req.params.organization;
+    console.log("org ", organization);
+    const MonthAndYearList = await getMissingBoardList(organization);
     res.send(MonthAndYearList);
   } catch (err) {
     res.send("error occured to get shifts: " + err);
