@@ -111,9 +111,21 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
   await newSchedule.save();
 };
 
+const deleteShiftById = async (id) => {
+  try {
+    if (id === "" || id === null) {
+      return res.status(404).send("shift not found");
+    }
+    return await Shift.deleteOne({ _id: id });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
   getMissingBoardList,
   createMonthlyShiftBoard,
+  deleteShiftById,
 };

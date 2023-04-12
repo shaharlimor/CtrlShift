@@ -6,6 +6,7 @@ const {
   getBoardListOfMonthlyShift,
   getMissingBoardList,
   createMonthlyShiftBoard,
+  deleteShiftById,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -36,9 +37,7 @@ router.get(
 
 router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
-    console.log("here");
     const organization = req.params.organization;
-    console.log("org ", organization);
     const MonthAndYearList = await getMissingBoardList(organization);
     res.send(MonthAndYearList);
   } catch (err) {
@@ -62,6 +61,16 @@ router.post("/createMonthlyShiftBoard", middleware, async (req, res) => {
     res.send(shifts);
   } catch (err) {
     res.send("error occured to post shifts: " + err);
+  }
+});
+
+router.delete("/:id", middleware, async (req, res) => {
+  try {
+    const id = req.params.id;
+    await deleteShiftById(id);
+    res.status(200).send(`success deleted shift ${id}`);
+  } catch (err) {
+    res.status(404).send("Error to delete shift " + err);
   }
 });
 
