@@ -9,7 +9,7 @@ import useAuth from 'hooks/useAuth';
 import SubCard from 'components/cards/SubCard';
 import AnimateButton from 'components/AnimateButton';
 import { gridSpacing } from 'store/constant';
-import updateUserDetails from 'utils/userProfile';
+import { updateUserDetails } from 'utils/userApi';
 
 const uploadImage = async (file) => {
     const formData = new FormData();
