@@ -24,6 +24,11 @@ export async function employeeHasConstraintInShift(empId, shiftId) {
     return data;
 }
 
+export async function getEmployeesByOrg(org) {
+    const data = await axiosServices.get(`/user/users?organization=${org}`);
+    return data;
+}
+
 export async function addMonthlyShift(body) {
     await axiosServices.post('/monthlyShifts', body);
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const middleware = require("../common/auth_middleware");
 const Shift = require("../models/monthlyShifts");
 const {
   getShifts,
@@ -9,7 +10,7 @@ const {
 
 var router = express.Router();
 
-router.get("/:organization", async (req, res) => {
+router.get("/:organization", middleware, async (req, res) => {
   try {
     const organization = req.params.organization;
     const shifts = await getShifts(organization);
@@ -19,17 +20,21 @@ router.get("/:organization", async (req, res) => {
   }
 });
 
-router.get("/monthOpendToAddShiftsList/:organization", async (req, res) => {
-  try {
-    const organization = req.params.organization;
-    const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
-    res.send(MonthAndYearList);
-  } catch (err) {
-    res.send("error occured to get shifts: " + err);
+router.get(
+  "/monthOpendToAddShiftsList/:organization",
+  middleware,
+  async (req, res) => {
+    try {
+      const organization = req.params.organization;
+      const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
+      res.send(MonthAndYearList);
+    } catch (err) {
+      res.send("error occured to get shifts: " + err);
+    }
   }
-});
+);
 
-router.get("/DoesntExistMonthAndYearList", async (req, res) => {
+router.get("/DoesntExistMonthAndYearList", middleware, async (req, res) => {
   try {
     const MonthAndYearList = await getMissingBoardListOfMonthlyShiftOfYear();
     res.send(MonthAndYearList);
@@ -38,7 +43,7 @@ router.get("/DoesntExistMonthAndYearList", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", middleware, async (req, res) => {
   try {
     const newShift = new Shift(req.body);
     const result = await newShift.save();
@@ -48,7 +53,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/createMonthlyShiftBoard", async (req, res) => {
+router.post("/createMonthlyShiftBoard", middleware, async (req, res) => {
   try {
     const shifts = await createMonthlyShiftBoard(req.body.month, req.body.year);
     res.send(shifts);

@@ -1,9 +1,5 @@
-import { lazy, useState, useEffect } from 'react';
-import Loadable from 'components/Loadable';
-import value from 'assets/scss/_themes-vars.module.scss';
+import { useState } from 'react';
 import { Dialog, Button } from '@mui/material';
-import { getMonthlyShifts } from 'utils/api';
-import useAuth from 'hooks/useAuth';
 import AddShiftFrom from './AddShiftFrom';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
