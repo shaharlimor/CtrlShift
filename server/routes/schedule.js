@@ -4,13 +4,13 @@ const Schedule = require("../models/schedule");
 const {
   getSchedules,
   changeOpenToConstraints,
-  getScheByMonthYearOrganization,
+  boardOpenToConstraints,
   changePublish,
 } = require("../controllers/schedule");
 
 var router = express.Router();
 
-router.get("/", middleware, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const schedules = await getSchedules();
     res.send(schedules);
@@ -52,6 +52,19 @@ router.patch("/publishBoard/", middleware, async (req, res) => {
     res.send(result);
   } catch (err) {
     res.send("Publish board failed. error: " + err);
+  }
+});
+
+router.get("/openToConstraints", async (req, res) => {
+  try {
+    const ans = await boardOpenToConstraints(
+      req.body.organization,
+      req.body.month,
+      req.body.year
+    );
+    res.send(ans);
+  } catch (err) {
+    res.send("error to check if board open to insert constraints: " + err);
   }
 });
 

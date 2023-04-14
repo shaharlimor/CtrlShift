@@ -7,8 +7,14 @@ const getSchedules = async () => {
   );
 };
 
-const getScheByMonthYearOrganization = async (org, month, year) => {
-  return await Schedule.find({ organization: org, month: month, year: year });
+const boardOpenToConstraints = async (org, month, year) => {
+  const ans = await Schedule.find({
+    organization: org,
+    month: month,
+    year: year,
+    isOpenToConstraints: true,
+  });
+  return ans.length === 1;
 };
 
 const changeOpenToConstraints = async (org, month, year) => {
@@ -28,6 +34,6 @@ const changePublish = async (org, month, year) => {
 module.exports = {
   getSchedules,
   changeOpenToConstraints,
-  getScheByMonthYearOrganization,
+  boardOpenToConstraints,
   changePublish,
 };
