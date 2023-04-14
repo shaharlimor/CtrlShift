@@ -18,8 +18,16 @@ const changeOpenToConstraints = async (org, month, year) => {
   );
 };
 
+const changePublish = async (org, month, year) => {
+  return await Schedule.updateMany(
+    { organization: org, month: month, year: year },
+    { isPublished: true }
+  );
+};
+
 module.exports = {
   getSchedules,
   changeOpenToConstraints,
   getScheByMonthYearOrganization,
+  changePublish,
 };

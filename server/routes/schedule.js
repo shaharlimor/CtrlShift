@@ -5,6 +5,7 @@ const {
   getSchedules,
   changeOpenToConstraints,
   getScheByMonthYearOrganization,
+  changePublish,
 } = require("../controllers/schedule");
 
 var router = express.Router();
@@ -30,15 +31,27 @@ router.post("/", async (req, res) => {
 
 router.patch("/startInsertConstraints/", async (req, res) => {
   try {
-    console.log(req.body);
     const result = await changeOpenToConstraints(
       req.body.organization,
       req.body.month,
       req.body.year
     );
-    res.send("change start insert constraint successfully " + result);
+    res.send(result);
   } catch (err) {
     res.send("change start insert constraint failed. error: " + err);
+  }
+});
+
+router.patch("/publishBoard/", async (req, res) => {
+  try {
+    const result = await changePublish(
+      req.body.organization,
+      req.body.month,
+      req.body.year
+    );
+    res.send(result);
+  } catch (err) {
+    res.send("Publish board failed. error: " + err);
   }
 });
 
