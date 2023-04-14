@@ -14,6 +14,7 @@ import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
 import { getMonthOpendToAddShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
+import PublishScheduleButton from '../shifts/PublishSchedule';
 
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
@@ -50,7 +51,6 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         const getOpenMonths = async () => {
             const result = await getMonthOpendToAddShifts(user.organization);
             setOpenMonths(result.data);
-            console.log(result.data);
         };
         getOpenMonths();
     }, []);
@@ -107,6 +107,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
     };
 
+    /* eslint-disable */
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -141,6 +142,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                     />
                 </SubCard>
             </CalendarStyled>
+
             <Grid alignItems="center" justifyContent="space-between" container sx={{ pb: 3 }}>
                 {calendarType === 1 && (
                     <Grid item>
@@ -158,10 +160,17 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                         </Grid>
                     </Grid>
                 )}
-                {calendarType !== 0 ? (
+                {calendarType === 1 ? (
+                    <Grid item>
+                        <PublishScheduleButton date={date} />
+                    </Grid>
+                ) : (
+                    ''
+                )}
+                {calendarType === 2 ? (
                     <Grid item>
                         <Button variant="contained" sx={{ width: '100%' }} size="large">
-                            {calendarType === 1 ? 'Publish Schedule' : 'Switch shift'}
+                            Switch shift
                         </Button>
                     </Grid>
                 ) : (

@@ -41,3 +41,7 @@ export async function getMonthOpendToAddShifts(org) {
 export async function deleteMonthlyShift(id) {
     await axiosServices.delete(`/monthlyShifts/${id}`);
 }
+
+export async function publishSchdule(body) {
+    await axiosServices.patch(`/schedule/publishBoard/`, body);
+}

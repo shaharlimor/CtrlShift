@@ -34,7 +34,6 @@ export const CreateMonthShiftBoard = async (organization, month, year) => {
         // Handle the response (e.g., show a success message)
         return response.data;
     } catch (error) {
-        // Handle the error (e.g., show an error message)
         console.error('Error create the month: ', error);
         return error;
     }
