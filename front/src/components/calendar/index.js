@@ -108,7 +108,25 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
     };
 
-    /* eslint-disable */
+    const displayButton = () => {
+        if (calendarType === 1) {
+            return (
+                <Grid item>
+                    <PublishScheduleButton date={date} />
+                </Grid>
+            );
+        }
+        if (calendarType === 2) {
+            return (
+                <Grid item>
+                    <Button variant="contained" sx={{ width: '100%' }} size="large">
+                        Switch shift
+                    </Button>
+                </Grid>
+            );
+        }
+        return '';
+    };
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -159,22 +177,8 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                         </Grid>
                     </Grid>
                 )}
-                {calendarType === 1 ? (
-                    <Grid item>
-                        <PublishScheduleButton date={date} />
-                    </Grid>
-                ) : (
-                    ''
-                )}
-                {calendarType === 2 ? (
-                    <Grid item>
-                        <Button variant="contained" sx={{ width: '100%' }} size="large">
-                            Switch shift
-                        </Button>
-                    </Grid>
-                ) : (
-                    ''
-                )}
+                {/* according to the calendar page display the relevant button */}
+                {displayButton()}
             </Grid>
         </Fragment>
     );
