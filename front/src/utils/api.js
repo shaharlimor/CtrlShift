@@ -45,3 +45,7 @@ export async function deleteMonthlyShift(id) {
 export async function publishSchdule(body) {
     await axiosServices.patch(`/schedule/publishBoard/`, body);
 }
+
+export async function startInsertConstraints(body) {
+    await axiosServices.patch(`/schedule/startInsertConstraints/`, body);
+}
