@@ -1,5 +1,5 @@
 const express = require("express");
-// const middleware = require("../common/auth_middleware");
+const middleware = require("../common/auth_middleware");
 const Schedule = require("../models/schedule");
 const {
   getSchedules,
@@ -10,7 +10,7 @@ const {
 
 var router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", middleware, async (req, res) => {
   try {
     const schedules = await getSchedules();
     res.send(schedules);
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", middleware, async (req, res) => {
   try {
     const newSche = new Schedule(req.body);
     const result = await newSche.save();
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/startInsertConstraints/", async (req, res) => {
+router.patch("/startInsertConstraints/", middleware, async (req, res) => {
   try {
     const result = await changeOpenToConstraints(
       req.body.organization,
@@ -42,7 +42,7 @@ router.patch("/startInsertConstraints/", async (req, res) => {
   }
 });
 
-router.patch("/publishBoard/", async (req, res) => {
+router.patch("/publishBoard/", middleware, async (req, res) => {
   try {
     const result = await changePublish(
       req.body.organization,
