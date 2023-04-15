@@ -22,19 +22,15 @@ router.get("/:organization", middleware, async (req, res) => {
   }
 });
 
-router.get(
-  "/monthOpendToAddShiftsList/:organization",
-  middleware,
-  async (req, res) => {
-    try {
-      const organization = req.params.organization;
-      const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
-      res.send(MonthAndYearList);
-    } catch (err) {
-      res.send("error occured to get shifts: " + err);
-    }
+router.get("/monthOpendToAddShiftsList/:organization", async (req, res) => {
+  try {
+    const organization = req.params.organization;
+    const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
+    res.send(MonthAndYearList);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
   }
-);
+});
 
 router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
