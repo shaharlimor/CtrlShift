@@ -22,15 +22,19 @@ router.get("/:organization", middleware, async (req, res) => {
   }
 });
 
-router.get("/monthOpendToAddShiftsList/:organization", async (req, res) => {
-  try {
-    const organization = req.params.organization;
-    const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
-    res.send(MonthAndYearList);
-  } catch (err) {
-    res.send("error occured to get shifts: " + err);
+router.get(
+  "/monthOpendToAddShiftsList/:organization",
+  middleware,
+  async (req, res) => {
+    try {
+      const organization = req.params.organization;
+      const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
+      res.send(MonthAndYearList);
+    } catch (err) {
+      res.send("error occured to get shifts: " + err);
+    }
   }
-});
+);
 
 router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
@@ -42,7 +46,7 @@ router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", middleware, async (req, res) => {
   try {
     const newShift = new Shift(req.body);
     const result = await newShift.save();
@@ -71,7 +75,7 @@ router.delete("/:id", middleware, async (req, res) => {
   }
 });
 
-router.get("/openToConstraints/:organization", async (req, res) => {
+router.get("/openToConstraints/:organization", middleware, async (req, res) => {
   try {
     const organization = req.params.organization;
     const shifts = await getShiftsOpenToConstraints(organization);

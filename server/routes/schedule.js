@@ -10,7 +10,7 @@ const {
 
 var router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", middleware, async (req, res) => {
   try {
     const schedules = await getSchedules();
     res.send(schedules);
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", middleware, async (req, res) => {
   try {
     const newSche = new Schedule(req.body);
     const result = await newSche.save();
@@ -55,7 +55,7 @@ router.patch("/publishBoard/", middleware, async (req, res) => {
   }
 });
 
-router.get("/openToConstraints", async (req, res) => {
+router.get("/openToConstraints", middleware, async (req, res) => {
   try {
     const ans = await boardOpenToConstraints(
       req.body.organization,

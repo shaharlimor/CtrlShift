@@ -11,13 +11,11 @@ const getShifts = async (organization) => {
 const getBoardListOfMonthlyShift = async (organization) => {
   return await Schedule.aggregate([
     { $match: { organization: organization } },
-    {},
     {
       $project: {
         _id: 0,
-        organization: "$organization",
-        year: "$_id.year",
-        month: "$_id.month",
+        year: "$year",
+        month: "$month",
       },
     },
   ]);
