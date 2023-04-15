@@ -29,7 +29,6 @@ import AddPermenentShift from './AddPermenentShift';
 
 export default function PermanentShift() {
     const theme = useTheme();
-
     const [addOpen, setAddOpen] = React.useState(false);
 
     const handleAddOpenClose = () => {

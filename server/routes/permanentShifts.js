@@ -1,28 +1,11 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const Shift = require("../models/permanentShifts");
-const { getShifts } = require("../controllers/permanentShifts");
-
+const { getShifts, updatePermanentShift, deletePermanentShift, createPermanentShift } = require("../controllers/permanentShifts");
+const middleware = require('../common/auth_middleware');
 var router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const shifts = await getShifts();
-    res.send(shifts);
-  } catch (err) {
-    res.send("error occured to get shifts: " + err);
-  }
-});
-
-router.post("/", async (req, res) => {
-  try {
-    const newShift = new Shift(req.body);
-    const result = await newShift.save();
-    res.send("success adding new permanent shift" + result);
-  } catch (err) {
-    res.send("error adding new permanent shift. error: " + err);
-  }
-});
+router.get('/:orgId', middleware, getShifts);
+router.post('/create', middleware, createPermanentShift);
+router.post('/delete', middleware, deletePermanentShift);
+router.post('/update', middleware, updatePermanentShift);
 
 module.exports = router;

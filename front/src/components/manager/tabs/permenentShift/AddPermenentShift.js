@@ -29,12 +29,14 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import * as Yup from 'yup';
 import { useFormik, Field } from 'formik';
 
+import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
 import { savePermentShift } from '../../../../services/permenentShiftServices';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
+    const { user } = useAuth();
 
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -58,9 +60,17 @@ const AddPermenentShift = (props) => {
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
+            const data = {
+                startTime: values.startTime,
+                endTime: values.endTime,
+                days: values.days,
+                name: values.name,
+                roles: values.roles,
+                organization: user.organization
+            };
             // // TODO: send to new perment shift to the server
             try {
-                await savePermentShift(values).then(
+                await savePermentShift(data).then(
                     () => {
                         handleAddOpenClose();
                     },
@@ -100,7 +110,6 @@ const AddPermenentShift = (props) => {
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     type="text"
-                                    defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
                                     error={formik.touched.name && Boolean(formik.errors.name)}
                                     helperText={formik.touched.name && formik.errors.name}

@@ -11,15 +11,22 @@ import RoleTypeForm from './roleTypeForm';
 const RoleTypes = () => {
     // eslint-disable-next-line
     const [showForm, setShowForm] = React.useState(false);
+    const [roleToEdit, setRoleToEdit] = React.useState();
 
     const changeShowForm = () => {
+        setRoleToEdit();
         setShowForm(!showForm);
+    };
+
+    const handleEdit = (row) => {
+        changeShowForm();
+        setRoleToEdit(row);
     };
 
     return (
         <MainCard title="RoleTypes">
-            {showForm && <RoleTypeForm changeShowForm={changeShowForm} />}
-            {!showForm && <RoleTypesList />}
+            {showForm && <RoleTypeForm roleToEdit={roleToEdit} changeShowForm={changeShowForm} />}
+            {!showForm && <RoleTypesList handleEdit={handleEdit}/>}
             {!showForm && (
                 <Button variant="contained" onClick={changeShowForm} size="small" startIcon={<AddCircleOutlineTwoToneIcon />}>
                     Add Role Type

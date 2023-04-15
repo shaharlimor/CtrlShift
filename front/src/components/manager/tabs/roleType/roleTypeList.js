@@ -1,41 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // material-ui
-import {
-    Button,
-    CardActions,
-    CardMedia,
-    Grid,
-    IconButton,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Tooltip
-} from '@mui/material';
+import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 
-// project imports
-import { gridSpacing } from 'store/constant';
+import { deleteRoleType, getRoleTypes } from 'services/roleTypeServices';
 
 // assets
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import MainCard from 'components/cards/MainCard';
+import useAuth from 'hooks/useAuth';
+import { PropaneSharp } from '@mui/icons-material';
 
 // table data
-function createData(name) {
-    return { name };
+function createData(roleType) {
+    return { roleType };
 }
 
 // TODO: get events by props / from server
 // eslint-disable-next-line
 const rows = [createData('Day waiter'), createData('Day chef'), createData('Shift supervisor'), createData('Bartender')];
 
-export default function RoleTypesList() {
+export default function RoleTypesList(props) {
+    const { handleEdit } = props;
+    const [roleTypes, setRoleTypes] = useState([]);
+    const { user } = useAuth();
+
+    const handleDeleteClick = async (row) => {
+        console.log('Delete row:', row);
+        // eslint-disable-next-line
+        await deleteRoleType(row);
+    };
+
+    const handleEditClick = async (row) => {
+        handleEdit(row);
+    };
+
+    useEffect(() => {
+        const getRoles = async () => {
+            /* eslint-disable-next-line */
+            const result = await getRoleTypes(user.organization);
+            setRoleTypes(result.data);
+        };
+        getRoles();
+    }, []);
     return (
-        <fragment>
+        <>
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -47,18 +55,18 @@ export default function RoleTypesList() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, index) => (
+                        {roleTypes.map((row, index) => (
                             <TableRow hover key={index}>
-                                <TableCell>{row.name}</TableCell>
+                                <TableCell>{row.roleType}</TableCell>
                                 <TableCell sx={{ pl: 35 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                         <Tooltip placement="top" title="Delete">
-                                            <IconButton color="inherit" size="medium">
+                                            <IconButton color="inherit" size="medium" onClick={() => handleDeleteClick(row)}>
                                                 <DeleteOutlineOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip placement="top" title="Edit">
-                                            <IconButton color="primary" size="medium">
+                                            <IconButton color="primary" size="medium" onClick={() => handleEditClick(row)}>
                                                 <EditOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
@@ -69,11 +77,6 @@ export default function RoleTypesList() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <CardActions sx={{ justifyContent: 'flex-end' }}>
-                <Button variant="text" size="small">
-                    View all roles
-                </Button>
-            </CardActions>
-        </fragment>
+        </>
     );
 }
