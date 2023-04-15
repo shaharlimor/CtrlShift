@@ -22,4 +22,9 @@ export const deleteUser = async (id) => {
     return response;
 };
 
+export const createUser = async (user) => {
+    const response = await axiosServices.post('/user/create', user);
+    return response;
+};
+
 export default { updateUserDetails, deleteUser };
