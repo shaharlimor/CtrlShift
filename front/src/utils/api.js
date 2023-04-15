@@ -49,3 +49,8 @@ export async function publishSchdule(body) {
 export async function startInsertConstraints(body) {
     await axiosServices.patch(`/schedule/startInsertConstraints/`, body);
 }
+
+export async function getMonthlyShiftsOpenToConstraints(org) {
+    const data = await axiosServices.get(`/monthlyShifts/openToConstraints/${org}`);
+    return data;
+}
