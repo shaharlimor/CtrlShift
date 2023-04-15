@@ -2,10 +2,9 @@ import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
 import MainCard from 'components/cards/MainCard';
 import React from 'react';
 import InputLabel from 'components/forms/InputLabel';
-import { Divider, Grid, TextField, Button, CardActions, FormHelperText, Typography, FormControl, Select, MenuItem } from '@mui/material';
+import { Grid, TextField, Button, CardActions, FormHelperText, Typography, FormControl, Select, MenuItem } from '@mui/material';
 // project imports
-import { gridSpacing } from 'store/constant';
-import { useFormik, Field } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import useAuth from 'hooks/useAuth';
 import { createUser } from 'utils/userApi';
@@ -13,15 +12,13 @@ import { createUser } from 'utils/userApi';
 /* eslint-disable */
 const EmployeeForm = (props) => {
     const { user } = useAuth();
-
-    // const clearFields = () => {
-    //     formik.initialValues.email = '',
-    //     formik.initialValues.password= '',
-    //     formik.initialValues.firstName = '',
-    //     formik.initialValues.lastName = '',
-    //     formik.initialValues.phone ='',
-    //     formik.initialValues.organization = ''
-    // }
+    
+    React.useEffect(() => {
+        async function getRoles() {
+            // TODO - when a role schema will be
+        }
+        getRoles();
+    }, []);
 
     const validationSchema = Yup.object({
         firstName: Yup.string().required('First name is required'),
@@ -29,14 +26,13 @@ const EmployeeForm = (props) => {
         email: Yup.string().required('Email is required'),
         password: Yup.string().required('Password is required'),
         phone: Yup.string().required('Phone is required'),
-        // roles: Yup.array().min(1, 'roles is required')
+        roles: Yup.array().min(1, 'roles is required')
     });
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            // submit: null,
             firstName: '',
             lastName: '',
             phone:'',
@@ -50,9 +46,12 @@ const EmployeeForm = (props) => {
                 const id = chance.bb_pin();
                 values.id = id;
                 values.isAdmin = false;
+
+                // TODO - send also role id
                 await createUser(values).then(
                     () => {
                         resetForm();
+                        props.changeShowForm();
                     },
                     (err) => {
                         if (scriptedRef.current) {
@@ -70,17 +69,10 @@ const EmployeeForm = (props) => {
                     setSubmitting(false);
                 }
             }
-            console.log('submit');
-            // handleAddOpenClose();
         }
     });
 
-    // const handleSumbit = async (index) => {
-       
-    // };
-
     return (
-    
     <>
     <MainCard title="Add employee form">
         <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
@@ -159,7 +151,7 @@ const EmployeeForm = (props) => {
                     helperText={formik.touched.phone && formik.errors.phone} />
                 <FormHelperText>Please enter your phone number</FormHelperText>
             </Grid>
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
                 <InputLabel>Role</InputLabel>
                 <FormControl sx={{ minWidth: 120 }}>
                     <InputLabel id="role-select">Role</InputLabel>
@@ -172,7 +164,7 @@ const EmployeeForm = (props) => {
                         <MenuItem value={'Trainee'}>Trainee</MenuItem>
                     </Select>
                 </FormControl>
-            </Grid> */}
+            </Grid>
             <CardActions>
                 <Grid container spacing={1} sx={{ alignItems: 'flex-start' }}>
                     <Grid item>
