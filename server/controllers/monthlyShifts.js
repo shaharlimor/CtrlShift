@@ -11,13 +11,11 @@ const getShifts = async (organization) => {
 const getBoardListOfMonthlyShift = async (organization) => {
   return await Schedule.aggregate([
     { $match: { organization: organization } },
-    {},
     {
       $project: {
         _id: 0,
-        organization: "$organization",
-        year: "$_id.year",
-        month: "$_id.month",
+        year: "$year",
+        month: "$month",
       },
     },
   ]);
@@ -111,9 +109,49 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
   await newSchedule.save();
 };
 
+const deleteShiftById = async (id) => {
+  try {
+    if (id === "" || id === null) {
+      return res.status(404).send("shift not found");
+    }
+    return await Shift.deleteOne({ _id: id });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+const getShiftsOpenToConstraints = async (organization) => {
+  // Get The month and year open to insert constraints
+  const scheOpenToInsert = await Schedule.find(
+    { organization: organization, isOpenToConstraints: true },
+    "month year"
+  );
+
+  // Get shifts that open to insert constraints according to boards that open
+  const shifts = await Shift.find({
+    organization: organization,
+    $expr: {
+      $in: [
+        {
+          $concat: [
+            { $toString: { $month: "$startTime" } }, // Extract and convert month to string
+            "-",
+            { $toString: { $year: "$startTime" } }, // Extract and convert year to string
+          ],
+        },
+        scheOpenToInsert.map(({ month, year }) => `${month}-${year}`), // Map array of objects to concatenated month-year strings
+      ],
+    },
+  });
+
+  return shifts;
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
   getMissingBoardList,
   createMonthlyShiftBoard,
+  deleteShiftById,
+  getShiftsOpenToConstraints,
 };
