@@ -126,12 +126,6 @@ const getShiftsOpenToConstraints = async (organization) => {
     { organization: organization, isOpenToConstraints: true },
     "month year"
   );
-  const test = [
-    { month: 4, year: 2024 },
-    { month: 4, year: 2023 },
-    { month: 1, year: 2023 },
-    { month: 8, year: 2023 },
-  ];
 
   // Get shifts that open to insert constraints according to boards that open
   const shifts = await Shift.find({

@@ -51,7 +51,6 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
     useEffect(() => {
         const getOpenMonths = async () => {
             const result = await getMonthOpendToAddShifts(user.organization);
-            console.log(result.data);
             setOpenMonths(result.data);
         };
         getOpenMonths();
