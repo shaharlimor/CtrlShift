@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", middleware, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newSche = new Schedule(req.body);
     const result = await newSche.save();

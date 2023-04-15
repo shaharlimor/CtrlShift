@@ -122,10 +122,44 @@ const deleteShiftById = async (id) => {
   }
 };
 
+const getShiftsOpenToConstraints = async (organization) => {
+  // Get The month and year open to insert constraints
+  const scheOpenToInsert = await Schedule.find(
+    { organization: organization, isOpenToConstraints: true },
+    "month year"
+  );
+  const test = [
+    { month: 4, year: 2024 },
+    { month: 4, year: 2023 },
+    { month: 1, year: 2023 },
+    { month: 8, year: 2023 },
+  ];
+
+  // Get shifts that open to insert constraints according to boards that open
+  const shifts = await Shift.find({
+    organization: organization,
+    $expr: {
+      $in: [
+        {
+          $concat: [
+            { $toString: { $month: "$startTime" } }, // Extract and convert month to string
+            "-",
+            { $toString: { $year: "$startTime" } }, // Extract and convert year to string
+          ],
+        },
+        scheOpenToInsert.map(({ month, year }) => `${month}-${year}`), // Map array of objects to concatenated month-year strings
+      ],
+    },
+  });
+
+  return shifts;
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
   getMissingBoardList,
   createMonthlyShiftBoard,
   deleteShiftById,
+  getShiftsOpenToConstraints,
 };

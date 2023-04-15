@@ -7,6 +7,7 @@ const {
   getMissingBoardList,
   createMonthlyShiftBoard,
   deleteShiftById,
+  getShiftsOpenToConstraints,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -45,7 +46,7 @@ router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   }
 });
 
-router.post("/", middleware, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newShift = new Shift(req.body);
     const result = await newShift.save();
@@ -71,6 +72,16 @@ router.delete("/:id", middleware, async (req, res) => {
     res.status(200).send(`success deleted shift ${id}`);
   } catch (err) {
     res.status(404).send("Error to delete shift " + err);
+  }
+});
+
+router.get("/openToConstraints/:organization", async (req, res) => {
+  try {
+    const organization = req.params.organization;
+    const shifts = await getShiftsOpenToConstraints(organization);
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
   }
 });
 
