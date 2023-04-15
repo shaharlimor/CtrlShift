@@ -4,12 +4,16 @@ import Loadable from 'components/Loadable';
 import { getMonthlyShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import { colorGenerator } from 'utils/color-generator';
+import DeleteShiftPopup from './DeleteShiftPopup';
+import { Dialog } from '@mui/material';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
 const Shifts = () => {
     const [events, setEvents] = useState([]);
     const { user } = useAuth();
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // TODO: get shifts by month (only if permenant shifts generated) + by organization
     useEffect(() => {
@@ -34,19 +38,27 @@ const Shifts = () => {
         getShifts();
     }, []);
 
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        setSelectedEvent(null);
+    };
+
     const handleEventSelect = (arg) => {
-        // if (arg.event.id) {
-        //     const selectEvent = events.find((_event) => _event.id === arg.event.id);
-        //     setSelectedEvent(selectEvent);
-        // } else {
-        //     setSelectedEvent(null);
-        // }
-        // setIsModalOpen(true);
+        if (arg.event.id) {
+            const selectEvent = events.find((_event) => _event.id === arg.event.id);
+            setSelectedEvent(selectEvent);
+        } else {
+            setSelectedEvent(null);
+        }
+        setIsModalOpen(true);
     };
 
     return (
         <div>
             <Calendar calendarType={1} events={events} handleEventSelect={handleEventSelect} />
+            <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
+                {isModalOpen && <DeleteShiftPopup event={selectedEvent} onCancel={handleModalClose} employess />}
+            </Dialog>
         </div>
     );
 };
