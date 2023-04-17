@@ -69,7 +69,10 @@ const EmployeeList = () => {
     const handleDelete = async (id) => {
         deleteUser(id)
         .then(() => {
-            setData(data.filter(us => us._id !== id))})
+            setData(data.filter(us => us._id !== id))
+            setFilteredUsers(filteredUsers.filter(us => us._id !== id));
+            calcPageNum(filteredUsers.length);
+        })
         .catch((err) => { console.log(err.message); });
     };
 
