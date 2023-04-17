@@ -12,22 +12,25 @@ import interactionPlugin from '@fullcalendar/interaction';
 import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
+import { getMonthOpendToAddShifts } from 'utils/api';
+import useAuth from 'hooks/useAuth';
+import PublishScheduleButton from '../shifts/PublishSchedule';
+import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
-// 1 - Manager
-// 2 - Monthly Planner
+// 1 - Manager - Monthly Planner
+// 2 - Shifts Board
 const Calendar = ({ events, calendarType, handleEventSelect }) => {
     const calendarRef = useRef(null);
-
+    const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
     const displayEvents = events !== null ? events : [];
 
     const [date, setDate] = useState(new Date());
-
-    // Selected view
     const [view, setView] = useState(matchSm ? 'listWeek' : 'dayGridMonth');
+    const [openMonths, setOpenMonths] = useState([]);
 
     const handleViewChange = (newView) => {
         const calendarEl = calendarRef.current;
@@ -45,10 +48,19 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         handleViewChange(matchSm ? 'listWeek' : 'dayGridMonth');
     }, [matchSm]);
 
+    useEffect(() => {
+        const getOpenMonths = async () => {
+            const result = await getMonthOpendToAddShifts(user.organization);
+            setOpenMonths(result.data);
+            console.log(result.data);
+        };
+        getOpenMonths();
+    }, []);
+
     const handleDatePrev = () => {
         const calendarEl = calendarRef.current;
 
-        if (calendarEl) {
+        if (calendarEl && openMonths.length !== 0) {
             const calendarApi = calendarEl.getApi();
 
             calendarApi.prev();
@@ -56,17 +68,66 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
     };
 
+    const checkIfNextDateAvailable = (calendarApi) => {
+        let newDateObj;
+        if (view === 'dayGridMonth') {
+            newDateObj = {
+                year: calendarApi.getDate().getYear() + 2000 - 100,
+                month: (calendarApi.getDate().getMonth() + 2) % 12
+            };
+        } else if (view === 'timeGridWeek') {
+            const nextWeek = new Date(calendarApi.getDate().getTime() + 7 * 24 * 60 * 60 * 1000);
+            newDateObj = {
+                year: calendarApi.getDate().getYear() + 2000 - 100,
+                month: (nextWeek.getMonth() + 1) % 12
+            };
+        } else {
+            const nextDay = new Date(calendarApi.getDate().getTime() + 24 * 60 * 60 * 1000);
+            newDateObj = {
+                year: calendarApi.getDate().getYear() + 2000 - 100,
+                month: (nextDay.getMonth() + 1) % 12
+            };
+        }
+
+        // Check if the next click date is open to insert shifts (permanent shift already generated - "open")
+        return openMonths.some((obj) => obj.month === newDateObj.month && obj.year === newDateObj.year);
+    };
+
     const handleDateNext = () => {
         const calendarEl = calendarRef.current;
-
-        if (calendarEl) {
+        if (calendarEl && openMonths.length !== 0) {
             const calendarApi = calendarEl.getApi();
-
-            calendarApi.next();
-            setDate(calendarApi.getDate());
+            if (calendarType === 1) {
+                if (checkIfNextDateAvailable(calendarApi)) {
+                    calendarApi.next();
+                    setDate(calendarApi.getDate());
+                }
+            } else {
+                calendarApi.next();
+                setDate(calendarApi.getDate());
+            }
         }
     };
 
+    const displayButton = () => {
+        if (calendarType === 1) {
+            return (
+                <Grid item>
+                    <PublishScheduleButton date={date} />
+                </Grid>
+            );
+        }
+        if (calendarType === 2) {
+            return (
+                <Grid item>
+                    <Button variant="contained" sx={{ width: '100%' }} size="large">
+                        Switch shift
+                    </Button>
+                </Grid>
+            );
+        }
+        return '';
+    };
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -101,14 +162,13 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                     />
                 </SubCard>
             </CalendarStyled>
-            <Grid alignItems="center" justifyContent="space-between" container sx={{ pb: 3 }}>
+
+            <Grid alignItems="center" justifyContent="space-between" container sx={{ pb: 1, pt: 2 }}>
                 {calendarType === 1 && (
                     <Grid item>
                         <Grid alignItems="center" justifyContent="space-between" container spacing={2}>
                             <Grid item>
-                                <Button variant="contained" sx={{ width: '100%' }} size="large">
-                                    Start Insert Constraint
-                                </Button>
+                                <StartInsertConstraintButton date={date} />
                             </Grid>
                             <Grid item>
                                 <Button variant="contained" sx={{ width: '100%' }} size="large">
@@ -118,15 +178,8 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                         </Grid>
                     </Grid>
                 )}
-                {calendarType !== 0 ? (
-                    <Grid item>
-                        <Button variant="contained" sx={{ width: '100%' }} size="large">
-                            {calendarType === 1 ? 'Publish Schedule' : 'Switch shift'}
-                        </Button>
-                    </Grid>
-                ) : (
-                    ''
-                )}
+                {/* according to the calendar page display the relevant button */}
+                {displayButton()}
             </Grid>
         </Fragment>
     );

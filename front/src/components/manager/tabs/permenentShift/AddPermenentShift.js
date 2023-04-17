@@ -28,7 +28,6 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 // third party
 import * as Yup from 'yup';
 import { useFormik, Field } from 'formik';
-
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
@@ -183,7 +182,7 @@ const AddPermenentShift = (props) => {
                         <FormControl component="fieldset">
                             {/* <FormLabel component="legend">Days</FormLabel> */}
                             <FormGroup sx={{ justifyContent: 'center', flexDirection: 'row' }}>
-                                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
+                                {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
                                     <React.Fragment key={day}>
                                         <FormControlLabel
                                             control={
@@ -239,7 +238,7 @@ const AddPermenentShift = (props) => {
                             type="button"
                             variant="outlined"
                             sx={{
-                                fontSize: '15px',
+                                fontSize: '13px',
                                 bgcolor: theme.palette.grey.main,
                                 color: theme.palette.grey.contrastText
                             }}

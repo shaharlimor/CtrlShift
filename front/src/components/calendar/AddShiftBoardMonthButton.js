@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState, useCallback } from 'react';
 
-import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
-
-import { Button, ButtonGroup, Grid, IconButton, Stack, Tooltip, Typography, useMediaQuery, Select, MenuItem } from '@mui/material';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { Button, Grid, Select, MenuItem } from '@mui/material';
 import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/ShiftBoard';
 import useAuth from 'hooks/useAuth';
 
@@ -29,29 +28,30 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
     }, []);
 
     return (
-        <>
-            {calendarType === 1 ? (
-                <Grid item>
-                    {selectedMonth && (
-                        <Select sx={{ mt: 1, width: '100%' }} size="medium" value={selectedYear} onChange={handleSelect}>
-                            {monthsWithoutBoard?.map((month, index) => (
-                                <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
-                                    {`${month.month} - ${month.year}`}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    )}
-
-                    {!selectedMonth && (
-                        <Button sx={{ mt: 1, width: '100%' }} onClick={() => setSelectedMonth(true)} variant="contained" color="secondary">
-                            Add new month board
-                        </Button>
-                    )}
-                </Grid>
-            ) : (
-                ''
+        <Grid item>
+            {selectedMonth && (
+                <Select sx={{ mt: 1, width: '100%' }} size="medium" value={selectedYear} onChange={handleSelect}>
+                    {monthsWithoutBoard?.map((month, index) => (
+                        <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
+                            {`${month.month} - ${month.year}`}
+                        </MenuItem>
+                    ))}
+                </Select>
             )}
-        </>
+
+            {!selectedMonth && (
+                <Button
+                    sx={{ width: '100%' }}
+                    startIcon={<LockOpenIcon />}
+                    size="large"
+                    onClick={() => setSelectedMonth(true)}
+                    variant="contained"
+                    color="secondary"
+                >
+                    Generate new month
+                </Button>
+            )}
+        </Grid>
     );
 };
 

@@ -1,15 +1,18 @@
 const express = require("express");
+const middleware = require("../common/auth_middleware");
 const Shift = require("../models/monthlyShifts");
 const {
   getShifts,
-  getMonthAndYearExist,
-  getMissingMonthAndYear,
+  getBoardListOfMonthlyShift,
+  getMissingBoardList,
   createMonthlyShiftBoard,
+  deleteShiftById,
+  getShiftsOpenToConstraints,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
 
-router.get("/:organization", async (req, res) => {
+router.get("/:organization", middleware, async (req, res) => {
   try {
     const organization = req.params.organization;
     const shifts = await getShifts(organization);
@@ -19,26 +22,31 @@ router.get("/:organization", async (req, res) => {
   }
 });
 
-router.get("/MonthAndYearList", async (req, res) => {
+router.get(
+  "/monthOpendToAddShiftsList/:organization",
+  middleware,
+  async (req, res) => {
+    try {
+      const organization = req.params.organization;
+      const MonthAndYearList = await getBoardListOfMonthlyShift(organization);
+      res.send(MonthAndYearList);
+    } catch (err) {
+      res.send("error occured to get shifts: " + err);
+    }
+  }
+);
+
+router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
-    const MonthAndYearList = await getMonthAndYearExist();
+    const organization = req.params.organization;
+    const MonthAndYearList = await getMissingBoardList(organization);
     res.send(MonthAndYearList);
-    console.log(MonthAndYearList);
   } catch (err) {
     res.send("error occured to get shifts: " + err);
   }
 });
 
-router.get("/DoesntExistMonthAndYearList", async (req, res) => {
-  try {
-    const MonthAndYearList = await getMissingMonthAndYear();
-    res.send(MonthAndYearList);
-  } catch (err) {
-    res.send("error occured to get shifts: " + err);
-  }
-});
-
-router.post("/", async (req, res) => {
+router.post("/", middleware, async (req, res) => {
   try {
     const newShift = new Shift(req.body);
     const result = await newShift.save();
@@ -48,12 +56,32 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/createMonthlyShiftBoard", async (req, res) => {
+router.post("/createMonthlyShiftBoard", middleware, async (req, res) => {
   try {
     const shifts = await createMonthlyShiftBoard(req.body.month, req.body.year);
     res.send(shifts);
   } catch (err) {
     res.send("error occured to post shifts: " + err);
+  }
+});
+
+router.delete("/:id", middleware, async (req, res) => {
+  try {
+    const id = req.params.id;
+    await deleteShiftById(id);
+    res.status(200).send(`success deleted shift ${id}`);
+  } catch (err) {
+    res.status(404).send("Error to delete shift " + err);
+  }
+});
+
+router.get("/openToConstraints/:organization", middleware, async (req, res) => {
+  try {
+    const organization = req.params.organization;
+    const shifts = await getShiftsOpenToConstraints(organization);
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
   }
 });
 
