@@ -7,15 +7,18 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import useAuth from 'hooks/useAuth';
 import { createUser } from 'utils/userApi';
+import { getRoleTypes } from 'utils/roleTypeServices';
 
 /* eslint-disable */
 const EmployeeForm = (props) => {
     const { user } = useAuth();
-    
+    const [roleTypes, setRoleTypes] = React.useState([]);
+
     React.useEffect(() => {
-        async function getRoles() {
-            // TODO - when a role schema will be
-        }
+        const getRoles = async () => {
+            const result = await getRoleTypes("hello");
+            setRoleTypes(result.data);
+        };
         getRoles();
     }, []);
 
@@ -25,7 +28,7 @@ const EmployeeForm = (props) => {
         email: Yup.string().required('Email is required'),
         password: Yup.string().required('Password is required'),
         phone: Yup.string().required('Phone is required'),
-        roles: Yup.array().min(1, 'roles is required')
+        role: Yup.string().required('role is required')
     });
 
     const formik = useFormik({
@@ -36,7 +39,7 @@ const EmployeeForm = (props) => {
             lastName: '',
             phone:'',
             organization: '',
-            // roles: [{ roleType: '', amount: '' }]
+            role: ''
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
@@ -89,7 +92,6 @@ const EmployeeForm = (props) => {
                     defaultValue=""
                     error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                     helperText={formik.touched.firstName && formik.errors.firstName}/>
-                <FormHelperText>Please enter your first name</FormHelperText>
             </Grid>
             <Grid item xs={12}>
                 <InputLabel>Last name</InputLabel>
@@ -104,7 +106,6 @@ const EmployeeForm = (props) => {
                     defaultValue=""
                     error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                     helperText={formik.touched.lastName && formik.errors.lastName}/>
-                <FormHelperText>Please enter your last name</FormHelperText>
             </Grid>
             <Grid item xs={12}>
                 <InputLabel>Email</InputLabel>
@@ -119,7 +120,6 @@ const EmployeeForm = (props) => {
                     defaultValue=""
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}/>
-                <FormHelperText>Please enter your Email</FormHelperText>
             </Grid>
             <Grid item xs={12}>
                 <InputLabel>Password</InputLabel>
@@ -148,20 +148,28 @@ const EmployeeForm = (props) => {
                     defaultValue=""
                     error={formik.touched.phone && Boolean(formik.errors.phone)}
                     helperText={formik.touched.phone && formik.errors.phone} />
-                <FormHelperText>Please enter your phone number</FormHelperText>
             </Grid>
             <Grid item xs={12}>
                 <InputLabel>Role</InputLabel>
-                <FormControl sx={{ minWidth: 120 }}>
-                    <InputLabel id="role-select">Role</InputLabel>
-                    <Select labelId="role-select" id="role" name="role" label="role">
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={'Manager'}>Manager</MenuItem>
-                        <MenuItem value={'Waiter'}>Waiter</MenuItem>
-                        <MenuItem value={'Trainee'}>Trainee</MenuItem>
+                <FormControl  
+                sx={{ minWidth: 120 }}>
+                    <Select  
+                        id="role" 
+                        name="role" 
+                        label="role"
+                        fullWidth
+                        value={formik.values.role}
+                        onChange={formik.handleChange}
+                        defaultValue=""
+                        error={formik.touched.role && Boolean(formik.errors.role)}
+                        helperText={formik.touched.role && formik.errors.role}>
+                        {roleTypes?.map((role, index) => (
+                            <MenuItem key={index} value={role.roleType}>
+                                {role.roleType}
+                            </MenuItem>
+                        ))}
                     </Select>
+                    <FormHelperText error>{formik.errors.role}</FormHelperText>
                 </FormControl>
             </Grid>
             <CardActions>
