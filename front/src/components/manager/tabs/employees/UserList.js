@@ -1,10 +1,8 @@
 import React from 'react';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import {
     Chip,
-    Grid,
     IconButton,
     Stack,
     Table,
@@ -14,47 +12,39 @@ import {
     TableHead,
     TableRow,
     Tooltip,
-    Typography
+    Typography,
+    FormControl,
+    Select
 } from '@mui/material';
 // eslint-disable-next-line
 import Avatar from 'components/users/Avatar';
-import useAuth from 'hooks/useAuth';
-import { useDispatch, useSelector } from 'store';
-import { deleteUser } from 'utils/userApi';
 // assets
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
-import BlockTwoToneIcon from '@mui/icons-material/BlockTwoTone';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { getEmployeesByOrg } from 'utils/api';
+import PropTypes from 'prop-types';
 
 // const avatarImage = require.context('assets/images/users', true);
 
 // ==============================|| USER LIST 1 ||============================== //
 
-const UserList = () => {
-    const theme = useTheme();
-    const dispatch = useDispatch();
-    const { user } = useAuth();
+const UserList = (props) => {
+    const { users, currentPage, pageSize, handleDelete } = props;
     const [data, setData] = React.useState([]);
+    const [value, setValue] = React.useState('');
 
     React.useEffect(() => {
-        async function getEmployees() {
-            const response = await getEmployeesByOrg(user.organization);
-            const { users } = response.data;
-            setData(users);
+        let lastIndex = currentPage * pageSize;
+        const firstIndex = lastIndex - pageSize;
+        if (lastIndex > users.length) {
+            lastIndex = users.length;
         }
-        getEmployees();
-    }, []);
+        setData(users.slice(firstIndex, lastIndex));
+    }, [users, currentPage, pageSize]);
 
-    const handleDelete = async (index) => {
-        /* eslint-disable*/
-        let id = data.at(index)._id;
-        deleteUser(id)
-        .then(() => {
-            setData(data.filter(us => us._id !== id))})
-        .catch((err) => { console.log(err.message); });
+    const deleteUser = async (index) => {
+        /* eslint-disable */
+        const id = data.at(index)._id;
+        handleDelete(id);
+        setData(data.filter((us) => us._id !== id));
         /* eslint-disable */
     };
 
@@ -92,12 +82,28 @@ const UserList = () => {
                                     </Typography>
                                 </TableCell>
                                 <TableCell>{row.email}</TableCell>
-                                <TableCell>{row.role}</TableCell>
+                                <TableCell> 
+                                    <FormControl sx={{ m: 1}}>
+                                        <Select  
+                                        SelectDisplayProps={{ style: { paddingTop: 2, paddingBottom: 2 } }}
+                                        variant="outlined"
+                                        style={{ height: 30, width:80 }}
+                                        multiple
+                                        value={[]}>
+                                        {row.role_types?.length === 0 ? 
+                                            <option disabled>none.</option>:
+                                            (row.role_types?.map((role, index) => (
+                                                <option> {role} </option>
+                                            )))
+                                        }
+                                        </Select>
+                                    </FormControl>
+                                    </TableCell>
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                         <Tooltip placement="top" title="Delete user">
-                                            <IconButton onClick={() => handleDelete(index)} color="inherit" size="medium">
+                                            <IconButton onClick={() => deleteUser(index)} color="inherit" size="medium">
                                                 <DeleteOutlineOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
@@ -109,6 +115,13 @@ const UserList = () => {
             </Table>
         </TableContainer>
     );
+};
+
+UserList.propTypes = {
+    users: PropTypes.array,
+    currentPage: PropTypes.number,
+    pageSize: PropTypes.number,
+    handleDelete: PropTypes.func
 };
 
 export default UserList;
