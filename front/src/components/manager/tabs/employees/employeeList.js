@@ -25,6 +25,7 @@ const EmployeeList = () => {
     const [pageNum, setPageNum] = React.useState();
     const { user } = useAuth();
     const [currentPage, setCurrentPage] = React.useState(1);
+    const PAGE_SIZE = 8;
 
     React.useEffect(() => {
         function getEmployees() {
@@ -40,8 +41,8 @@ const EmployeeList = () => {
     }, []);
 
     const calcPageNum = (len) => {
-        let num = Math.floor(len / 10);
-        if (len % 10 != 0) {
+        let num = Math.floor(len / PAGE_SIZE);
+        if (len % PAGE_SIZE != 0) {
             num += 1; 
         }
         setPageNum(num);
@@ -97,7 +98,7 @@ const EmployeeList = () => {
             content={false}
         >
             <UserList users={filteredUsers} currentPage={currentPage} 
-            pageSize={10} handleDelete={handleDelete}/>
+            pageSize={PAGE_SIZE} handleDelete={handleDelete}/>
             <Grid item xs={12} sx={{ p: 3 }}>
                 <Grid container justifyContent="space-between" spacing={gridSpacing}>
                     <Grid item>
