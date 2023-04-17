@@ -1,7 +1,8 @@
 const User = require("../models/users");
 const Common = require("../controllers/common");
 const AWS = require('aws-sdk');
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
+
 
 const createUser = async (req, res) => {
     const { id, email, firstName, lastName, phone, password, 
@@ -122,10 +123,44 @@ const changeImage = async (req, res) => {
     }
 };
 
+const changePassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+
+    try {
+        const user = await Common.getUserByRT(req);
+        const userId = user._id;
+        const storedPassword = user.password;
+
+        const isPasswordMatch = await bcrypt.compare(currentPassword, storedPassword);
+
+        if (!isPasswordMatch) {
+            return res.status(400).json({ message: 'Current password is incorrect' });
+        }
+
+        // Hash the new password using bcrypt
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+        const updatedUser = await Users.findOneAndUpdate(
+            { _id: userId },
+            { password: hashedNewPassword },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: 'Password changed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error changing password' });
+    }
+};
+
 module.exports = {
     createUser,
     deleteUser,
     updateUser,
     getAllUsersByOrganization,
-    changeImage
+    changeImage,
+    changePassword
 };

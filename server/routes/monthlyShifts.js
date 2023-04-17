@@ -8,6 +8,7 @@ const {
   createMonthlyShiftBoard,
   deleteShiftById,
   getShiftsOpenToConstraints,
+  getShiftsOpenToConstraintsByRoles,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -84,5 +85,23 @@ router.get("/openToConstraints/:organization", middleware, async (req, res) => {
     res.send("error occured to get shifts: " + err);
   }
 });
+
+router.get(
+  "/openToConstraintsByRoles/:organization/:role_types",
+  middleware,
+  async (req, res) => {
+    try {
+      const organization = req.params.organization;
+      const role_types = req.params.role_types;
+      const shifts = await getShiftsOpenToConstraintsByRoles(
+        organization,
+        role_types
+      );
+      res.send(shifts);
+    } catch (err) {
+      res.send("error occured to get shifts: " + err);
+    }
+  }
+);
 
 module.exports = router;

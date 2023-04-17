@@ -2,7 +2,7 @@ import { lazy, useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
-import { getMonthlyShiftsOpenToConstraints } from 'utils/api';
+import { getMonthlyShiftsOpenToConstraintsByRoles } from 'utils/api';
 import { colorGenerator } from 'utils/color-generator';
 
 import Loadable from 'components/Loadable';
@@ -19,7 +19,7 @@ const Constrainsts = () => {
     useEffect(() => {
         const getShifts = async () => {
             /* eslint-disable-next-line */
-            const result = await getMonthlyShiftsOpenToConstraints(user.organization);
+            const result = await getMonthlyShiftsOpenToConstraintsByRoles(user.organization, user.role_types);
             let parsedData = [];
             result.data.map(async (item) =>
                 parsedData.push({
