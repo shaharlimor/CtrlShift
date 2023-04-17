@@ -14,15 +14,22 @@ const RoleTypes = () => {
 
     // eslint-disable-next-line
     const [showForm, setShowForm] = React.useState(false);
+    const [roleToEdit, setRoleToEdit] = React.useState();
 
     const changeShowForm = () => {
+        setRoleToEdit();
         setShowForm(!showForm);
+    };
+
+    const handleEdit = (row) => {
+        changeShowForm();
+        setRoleToEdit(row);
     };
 
     return (
         <MainCard title="RoleTypes">
-            {showForm && <RoleTypeForm changeShowForm={changeShowForm} />}
-            {!showForm && <RoleTypesList />}
+            {showForm && <RoleTypeForm roleToEdit={roleToEdit} changeShowForm={changeShowForm} />}
+            {!showForm && <RoleTypesList handleEdit={handleEdit}/>}
             {!showForm && (
                 <Grid container direction="column" justifyContent="center" alignItems="flex-end">
                     <Grid item xs={3} sx={{ mt: 2 }}>

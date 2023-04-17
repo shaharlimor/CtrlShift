@@ -25,7 +25,6 @@ const levelOptions = [1, 2, 3, 4, 5];
 
 const AddConstraintFrom = ({ event, onCancel }) => {
     const { user } = useAuth();
-
     const EventSchema = Yup.object().shape({
         level: Yup.number(),
         comment: Yup.string().max(5000)

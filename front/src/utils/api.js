@@ -1,10 +1,5 @@
 import axiosServices from './axios';
 
-export async function getPermanentShifts() {
-    const data = await axiosServices.get('/permanentShifts');
-    return data;
-}
-
 export async function getMonthlyShifts(org) {
     const data = await axiosServices.get(`/monthlyShifts/${org}`);
     return data;

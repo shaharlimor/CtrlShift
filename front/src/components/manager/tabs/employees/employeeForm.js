@@ -1,4 +1,3 @@
-import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
 import MainCard from 'components/cards/MainCard';
 import React from 'react';
 import InputLabel from 'components/forms/InputLabel';
