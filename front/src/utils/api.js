@@ -54,3 +54,8 @@ export async function getMonthlyShiftsOpenToConstraints(org) {
     const data = await axiosServices.get(`/monthlyShifts/openToConstraints/${org}`);
     return data;
 }
+
+export async function getMonthlyShiftsOpenToConstraintsByRoles(org, roleTypes) {
+    const data = await axiosServices.get(`/monthlyShifts/openToConstraintsByRoles/${org}/${roleTypes}`);
+    return data;
+}

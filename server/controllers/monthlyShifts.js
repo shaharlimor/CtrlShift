@@ -29,8 +29,10 @@ const getMissingBoardList = async (organization) => {
   // Find all existing months in the next 12 months
   const existingMonths = await Shift.find(
     {
-      organization: organization,
-      startTime: { $gte: now, $lte: new Date(`${nextYear}-12-31`) },
+      $match: {
+        organization: organization,
+        startTime: { $gte: now, $lte: new Date(`${nextYear}-12-31`) },
+      },
     },
     { startTime: 1 }
   ).lean();
@@ -147,6 +149,21 @@ const getShiftsOpenToConstraints = async (organization) => {
   return shifts;
 };
 
+const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
+  // Get The month and year open to insert constraints
+  const shifts = await getShiftsOpenToConstraints(organization);
+
+  // Filter shifts to only include those that have at least one role with a matching role type
+  const filteredShifts = shifts.filter((shift) => {
+    // Check if any role in the shift has a role type that matches one of the role types provided
+    return shift.roles.some((role) => {
+      return role_types.includes(role.roleType);
+    });
+  });
+
+  return filteredShifts;
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
@@ -154,4 +171,5 @@ module.exports = {
   createMonthlyShiftBoard,
   deleteShiftById,
   getShiftsOpenToConstraints,
+  getShiftsOpenToConstraintsByRoles,
 };
