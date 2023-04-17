@@ -30,16 +30,28 @@ import AddPermenentShift from './AddPermenentShift';
 export default function PermanentShift() {
     const theme = useTheme();
     const [addOpen, setAddOpen] = React.useState(false);
+    const [shiftToEdit, setShiftToEdit] = React.useState();
 
     const handleAddOpenClose = () => {
         setAddOpen(false);
     };
+
+    const handleAddOpen = () => {
+        setShiftToEdit();
+        setAddOpen(true);
+    };
+
+    const handleEditShift = (row) => {
+        handleAddOpen();
+        setShiftToEdit(row);
+    };
+
     return (
         <>
             {!addOpen ? (
                 <MainCard content={false} title={!addOpen ? 'Permanent Shift' : 'Add Permenent Shift'}>
                     <Grid container direction="column" justifyContent="center" alignItems="flex-end">
-                        <PermenentShiftTableMode />
+                        <PermenentShiftTableMode handleEditShift={handleEditShift} />
                         <Grid item xs={3} sx={{ mt: 2 }}>
                             <IconButton
                                 variant="contained"
@@ -49,7 +61,7 @@ export default function PermanentShift() {
                                     color: theme.palette.secondary.contrastText
                                 }}
                                 onClick={() => {
-                                    setAddOpen(true);
+                                    handleAddOpen();
                                 }}
                                 size="large"
                             >
@@ -60,7 +72,7 @@ export default function PermanentShift() {
                 </MainCard>
             ) : (
                 <MainCard content={false} title={!addOpen ? 'Permanent Shift' : 'Add Permenent Shift'}>
-                    <AddPermenentShift handleAddOpenClose={handleAddOpenClose} />
+                    <AddPermenentShift handleAddOpenClose={handleAddOpenClose} shiftToEdit={shiftToEdit} />
                 </MainCard>
             )}
         </>

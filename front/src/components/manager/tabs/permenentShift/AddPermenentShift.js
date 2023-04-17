@@ -32,7 +32,7 @@ import { useFormik, Field } from 'formik';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
-import { savePermentShift } from '../../../../services/permenentShiftServices';
+import { savePermanentShift, updatePermanentShift } from '../../../../services/permenentShiftServices';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
@@ -40,7 +40,7 @@ const AddPermenentShift = (props) => {
 
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const { handleAddOpenClose } = props;
+    const { handleAddOpenClose, shiftToEdit } = props;
 
     const validationSchema = Yup.object({
         startTime: Yup.string().required('start time is required'),
@@ -52,36 +52,65 @@ const AddPermenentShift = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            startTime: null,
-            endTime: null,
-            days: [],
-            name: '',
-            roles: [{ roleType: '', amount: '' }]
+            startTime: shiftToEdit?.startTime ? shiftToEdit.startTime : null,
+            endTime: shiftToEdit?.endTime ? shiftToEdit.endTime : null,
+            days: shiftToEdit?.days ? shiftToEdit.days : [],
+            name: shiftToEdit?.name ? shiftToEdit.name : '',
+            roles: shiftToEdit?.roles ? shiftToEdit.roles : [{ roleType: '', amount: '' }]
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
-            const data = {
-                startTime: values.startTime,
-                endTime: values.endTime,
-                days: values.days,
-                name: values.name,
-                roles: values.roles,
-                organization: user.organization
-            };
-            // // TODO: send to new perment shift to the server
+            let data = {};
+            if (shiftToEdit) {
+                data = {
+                    // eslint-disable-next-line
+                    _id: shiftToEdit.id,
+                    startTime: values.startTime,
+                    endTime: values.endTime,
+                    days: values.days,
+                    name: values.name,
+                    roles: values.roles,
+                    organization: user.organization
+                };
+            } else {
+                data = {
+                    startTime: values.startTime,
+                    endTime: values.endTime,
+                    days: values.days,
+                    name: values.name,
+                    roles: values.roles,
+                    organization: user.organization
+                };
+            }
             try {
-                await savePermentShift(data).then(
-                    () => {
-                        handleAddOpenClose();
-                    },
-                    (err) => {
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
+                // eslint-disable-next-line
+                if (data._id) {
+                    await updatePermanentShift(data).then(
+                        () => {
+                            handleAddOpenClose();
+                        },
+                        (err) => {
+                            if (scriptedRef.current) {
+                                setStatus({ success: false });
+                                setErrors({ submit: err.message });
+                                setSubmitting(false);
+                            }
                         }
-                    }
-                );
+                    );
+                } else {
+                    await savePermanentShift(data).then(
+                        () => {
+                            handleAddOpenClose();
+                        },
+                        (err) => {
+                            if (scriptedRef.current) {
+                                setStatus({ success: false });
+                                setErrors({ submit: err.message });
+                                setSubmitting(false);
+                            }
+                        }
+                    );
+                }
             } catch (err) {
                 console.error(err);
                 if (scriptedRef.current) {
@@ -181,8 +210,10 @@ const AddPermenentShift = (props) => {
                         <React.Fragment key={index}>
                             <Grid item xs={6} sm={3}>
                                 <TextField
-                                    name={`roles.${index}.roleType`}
+                                    value={role.roleType}
+                                    name={`roles[${index}].roleType`}
                                     label="Role Type"
+                                    onChange={formik.handleChange}
                                     fullWidth
                                     error={formik.touched.roles && Boolean(formik.errors.roles)}
                                     helperText={formik.touched.roles && formik.errors.roles}
@@ -191,9 +222,10 @@ const AddPermenentShift = (props) => {
 
                             <Grid item xs={6} sm={3}>
                                 <TextField
-                                    name={`roles.${index}.amount`}
+                                    name={`roles[${index}].amount`}
                                     label="Amount"
                                     type="number"
+                                    onChange={formik.handleChange}
                                     fullWidth
                                     error={formik.touched.roles && Boolean(formik.errors.roles)}
                                     helperText={formik.touched.roles && formik.errors.roles}

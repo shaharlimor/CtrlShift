@@ -1,6 +1,4 @@
 import React from 'react';
-import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
-import MainCard from 'components/cards/MainCard';
 import { Button, CardContent, CardActions, Divider, Grid, TextField, FormControl, FormHelperText } from '@mui/material';
 import InputLabel from 'components/forms/InputLabel';
 import { useTheme } from '@mui/material/styles';
@@ -40,7 +38,6 @@ const RoleTypeForm = (props) => {
                 };
             }
             try {
-                console.log(data)
                 if(data._id) {
                     await updateRoleType(data).then(
                         () => {

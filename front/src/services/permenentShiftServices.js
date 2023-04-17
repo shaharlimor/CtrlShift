@@ -1,14 +1,14 @@
 import axiosServices from '../utils/axios';
 
-export const savePermentShift = async (body) => {
+export const savePermanentShift = async (body) => {
     await axiosServices.post('/permanentShifts/create', body);
 };
 
-export const deletePermentShift = async (body) => {
+export const deletePermanentShift = async (body) => {
     await axiosServices.post('/permanentShifts/delete', body);
 };
 
-export const updatePermentShift = async (body) => {
+export const updatePermanentShift = async (body) => {
     await axiosServices.post('/permanentShifts/update', body);
 };
 

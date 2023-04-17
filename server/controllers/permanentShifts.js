@@ -16,6 +16,8 @@ const getShifts = async (req, res) => {
 const createPermanentShift = async (req, res) => {
 try {
     const newShift = new Shift(req.body);
+    console.log(req.body);
+    console.log(newShift);
     const result = await newShift.save();
 
     res.status(200).json({ message: 'Shift created successfully', shift: newShift });
@@ -26,12 +28,11 @@ try {
 };
 
 const updatePermanentShift = async (req, res) => {
-  const shiftId = req.params.id;
-  const { organization, startTime, endTime, days, name, roles } = req.body;
+  const { _id ,organization, startTime, endTime, days, name, roles } = req.body;
 
   try {
       const updatedShift = await Shift.findOneAndUpdate(
-          { _id: shiftId },
+          { _id: _id },
           { organization, startTime, endTime, days, name, roles },
           { new: true } // Return the updated shift
       );
@@ -47,7 +48,7 @@ const updatePermanentShift = async (req, res) => {
 };
 
 const deletePermanentShift = async (req, res) => {
-  const shiftId = req.body;
+  const shiftId = req.body.id;
 
   try {
       await Shift.findOneAndDelete(

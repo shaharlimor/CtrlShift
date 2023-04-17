@@ -24,36 +24,22 @@ import useAuth from 'hooks/useAuth';
 // project imports
 import MainCard from '../../../cards/MainCard';
 import SubCard from '../../../cards/SubCard';
-import { deletePermentShift, getPermanentShifts } from '../../../../services/permenentShiftServices';
+import { deletePermanentShift, getPermanentShifts } from '../../../../services/permenentShiftServices';
 
 // assets
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-// table data
-function createData(name, startTime, endTime, days, roles) {
-    return {
-        name,
-        startTime,
-        endTime,
-        days,
-        roles: roles.map((role) => ({
-            roleType: role[0],
-            amount: role[1]
-        }))
-    };
-}
-
-function Row({ row }) {
+function Row({ row, handleEdit }) {
     const handleEditClick = () => {
         console.log('Edit row:', row);
-        // TODO: Implement edit
+        handleEdit(row);
     };
 
     const handleDeleteClick = async () => {
         console.log('Delete row:', row);
         // eslint-disable-next-line
-        await deletePermentShift(row._id);
+        await deletePermanentShift(row);
     };
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -117,10 +103,12 @@ function Row({ row }) {
 }
 
 Row.propTypes = {
-    row: PropTypes.object
+    row: PropTypes.object,
+    handleEdit: PropTypes.func
 };
 
-export default function PermenentShiftTableMode() {
+export default function PermenentShiftTableMode(props) {
+    const { handleEditShift } = props;
     const [shifts, setShifts] = useState([]);
     const theme = useTheme();
     const { user } = useAuth();
@@ -132,6 +120,10 @@ export default function PermenentShiftTableMode() {
     //         history: null
     //     });
     // });
+
+    const handleEdit = (shift) => {
+        handleEditShift(shift);
+    };
 
     useEffect(() => {
         const getShifts = async () => {
@@ -150,7 +142,6 @@ export default function PermenentShiftTableMode() {
                 })
             );
             setShifts(parsedData);
-            console.log(result.data);
             parsedData = [];
         };
         getShifts();
@@ -172,7 +163,7 @@ export default function PermenentShiftTableMode() {
                 <TableBody>
                     {shifts.map((row) => (
                         /* eslint-disable-next-line */
-                        <Row key={row.name} row={row} />
+                        <Row key={row.name} row={row} handleEdit={handleEdit} />
                     ))}
                 </TableBody>
             </Table>
