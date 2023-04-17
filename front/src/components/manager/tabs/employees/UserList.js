@@ -20,7 +20,7 @@ import {
 import Avatar from 'components/users/Avatar';
 import useAuth from 'hooks/useAuth';
 import { useDispatch, useSelector } from 'store';
-
+import { deleteUser } from 'utils/userApi';
 // assets
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
@@ -48,13 +48,24 @@ const UserList = () => {
         getEmployees();
     }, []);
 
+    const handleDelete = async (index) => {
+        /* eslint-disable*/
+        let id = data.at(index)._id;
+        deleteUser(id)
+        .then(() => {
+            setData(data.filter(us => us._id !== id))})
+        .catch((err) => { console.log(err.message); });
+        /* eslint-disable */
+    };
+
     return (
         <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell sx={{ pl: 3 }} />
-                        <TableCell>Name</TableCell>
+                        <TableCell>First name</TableCell>
+                        <TableCell>Last name</TableCell>
                         <TableCell>Email</TableCell>
                         <TableCell>Role</TableCell>
                         <TableCell>Phone</TableCell>
@@ -72,7 +83,12 @@ const UserList = () => {
                                 </TableCell>
                                 <TableCell>
                                     <Typography align="left" variant="subtitle1" component="div">
-                                        {row.name}{' '}
+                                        {row.firstName}{' '}
+                                    </Typography>
+                                </TableCell>
+                                <TableCell>
+                                    <Typography align="left" variant="subtitle1" component="div">
+                                        {row.lastName}{' '}
                                     </Typography>
                                 </TableCell>
                                 <TableCell>{row.email}</TableCell>
@@ -80,14 +96,9 @@ const UserList = () => {
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
-                                        <Tooltip placement="top" title="Delete">
-                                            <IconButton color="inherit" size="medium">
+                                        <Tooltip placement="top" title="Delete user">
+                                            <IconButton onClick={() => handleDelete(index)} color="inherit" size="medium">
                                                 <DeleteOutlineOutlinedIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                        <Tooltip placement="top" title="Edit">
-                                            <IconButton color="primary" size="medium">
-                                                <EditOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
                                     </Stack>
