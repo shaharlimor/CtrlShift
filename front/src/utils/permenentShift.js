@@ -1,4 +1,4 @@
-import axiosServices from '../utils/axios';
+import axiosServices from './axios';
 
 export const savePermanentShift = async (body) => {
     await axiosServices.post('/permanentShifts/create', body);

@@ -7,7 +7,7 @@ import useAuth from 'hooks/useAuth';
 // third party
 import * as Yup from 'yup';
 import { useFormik, Field } from 'formik';
-import { saveRoleType, updateRoleType } from 'services/roleTypeServices';
+import { saveRoleType, updateRoleType } from 'utils/roleTypeServices';
 
 /* eslint-disable */
 const RoleTypeForm = (props) => {

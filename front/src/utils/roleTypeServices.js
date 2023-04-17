@@ -1,4 +1,4 @@
-import axiosServices from '../utils/axios';
+import axiosServices from './axios';
 
 export const saveRoleType = async (body) => {
     await axiosServices.post('/roleTypes/create', body);

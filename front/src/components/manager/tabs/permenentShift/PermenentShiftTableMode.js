@@ -24,7 +24,7 @@ import useAuth from 'hooks/useAuth';
 // project imports
 import MainCard from '../../../cards/MainCard';
 import SubCard from '../../../cards/SubCard';
-import { deletePermanentShift, getPermanentShifts } from '../../../../services/permenentShiftServices';
+import { deletePermanentShift, getPermanentShifts } from '../../../../utils/permenentShift';
 
 // assets
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';

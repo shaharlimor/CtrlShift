@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 // material-ui
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 
-import { deleteRoleType, getRoleTypes } from 'services/roleTypeServices';
+import { deleteRoleType, getRoleTypes } from 'utils/roleTypeServices';
 
 // assets
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import useAuth from 'hooks/useAuth';
-import { PropaneSharp } from '@mui/icons-material';
 
 // table data
 function createData(roleType) {
