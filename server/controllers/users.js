@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 const createUser = async (req, res) => {
     const { id, email, firstName, lastName, phone, password, 
-            organization, isAdmin, role } = req.body;
+            organization, isAdmin, roles } = req.body;
 
     try {
         salt = await bcrypt.genSalt(10);
@@ -20,6 +20,7 @@ const createUser = async (req, res) => {
             phone: phone,
             email: email,
             password: encryptedPass,
+            role_types: roles
         });
     
         newUser = await user.save();

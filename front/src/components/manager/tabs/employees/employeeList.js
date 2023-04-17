@@ -16,6 +16,7 @@ import { gridSpacing } from 'store/constant';
 import MainCard from 'components/cards/MainCard';
 import UserList from 'components/manager/tabs/employees/UserList';
 import { getEmployeesByOrg } from 'utils/api';
+import { deleteUser } from 'utils/userApi';
 
 /* eslint-disable */
 const EmployeeList = () => {
@@ -58,12 +59,18 @@ const EmployeeList = () => {
                         el.email?.toString().toLowerCase().includes(lowerCase) ||
                         el.phone?.toString().toLowerCase().includes(lowerCase);
             }
-        })
-        
+        }) 
         setFilteredUsers(filteredData);
         calcPageNum(filteredData.length);
         setCurrentPage(1);
-      };
+    };
+
+    const handleDelete = async (id) => {
+        deleteUser(id)
+        .then(() => {
+            setData(data.filter(us => us._id !== id))})
+        .catch((err) => { console.log(err.message); });
+    };
 
     return (
         <MainCard
@@ -89,7 +96,8 @@ const EmployeeList = () => {
             }
             content={false}
         >
-            <UserList users={filteredUsers} currentPage={currentPage} pageSize={10}/>
+            <UserList users={filteredUsers} currentPage={currentPage} 
+            pageSize={10} handleDelete={handleDelete}/>
             <Grid item xs={12} sx={{ p: 3 }}>
                 <Grid container justifyContent="space-between" spacing={gridSpacing}>
                     <Grid item>
