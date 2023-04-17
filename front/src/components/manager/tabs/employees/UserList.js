@@ -1,10 +1,8 @@
 import React from 'react';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import {
     Chip,
-    Grid,
     IconButton,
     Stack,
     Table,
@@ -19,34 +17,27 @@ import {
 // eslint-disable-next-line
 import Avatar from 'components/users/Avatar';
 import useAuth from 'hooks/useAuth';
-import { useDispatch, useSelector } from 'store';
 import { deleteUser } from 'utils/userApi';
 // assets
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ChatBubbleTwoToneIcon from '@mui/icons-material/ChatBubbleTwoTone';
-import BlockTwoToneIcon from '@mui/icons-material/BlockTwoTone';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { getEmployeesByOrg } from 'utils/api';
+import PropTypes from 'prop-types';
 
 // const avatarImage = require.context('assets/images/users', true);
 
 // ==============================|| USER LIST 1 ||============================== //
 
-const UserList = () => {
-    const theme = useTheme();
-    const dispatch = useDispatch();
-    const { user } = useAuth();
+const UserList = (props) => {
+    const { users, currentPage, pageSize } = props;
     const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
-        async function getEmployees() {
-            const response = await getEmployeesByOrg(user.organization);
-            const { users } = response.data;
-            setData(users);
+        let lastIndex = currentPage * pageSize;
+        const firstIndex = lastIndex - pageSize;
+        if (lastIndex > users.length) {
+            lastIndex = users.length;
         }
-        getEmployees();
-    }, []);
+        setData(users.slice(firstIndex, lastIndex));
+    }, [users, currentPage, pageSize]);
 
     const handleDelete = async (index) => {
         /* eslint-disable*/
@@ -109,6 +100,12 @@ const UserList = () => {
             </Table>
         </TableContainer>
     );
+};
+
+UserList.propTypes = {
+    users: PropTypes.array,
+    currentPage: PropTypes.number,
+    pageSize: PropTypes.number
 };
 
 export default UserList;
