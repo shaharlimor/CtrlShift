@@ -28,17 +28,18 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 // third party
 import * as Yup from 'yup';
 import { useFormik, Field } from 'formik';
-
+import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
-import { savePermentShift } from '../../../../utils/permenentShift';
+import { savePermanentShift, updatePermanentShift } from '../../../../utils/permenentShift';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
+    const { user } = useAuth();
 
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const { handleAddOpenClose } = props;
+    const { handleAddOpenClose, shiftToEdit } = props;
 
     const validationSchema = Yup.object({
         startTime: Yup.string().required('start time is required'),
@@ -50,28 +51,65 @@ const AddPermenentShift = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            startTime: null,
-            endTime: null,
-            days: [],
-            name: '',
-            roles: [{ roleType: '', amount: '' }]
+            startTime: shiftToEdit?.startTime ? shiftToEdit.startTime : null,
+            endTime: shiftToEdit?.endTime ? shiftToEdit.endTime : null,
+            days: shiftToEdit?.days ? shiftToEdit.days : [],
+            name: shiftToEdit?.name ? shiftToEdit.name : '',
+            roles: shiftToEdit?.roles ? shiftToEdit.roles : [{ roleType: '', amount: '' }]
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
-            // TODO: send to new perment shift to the server
+            let data = {};
+            if (shiftToEdit) {
+                data = {
+                    // eslint-disable-next-line
+                    _id: shiftToEdit.id,
+                    startTime: values.startTime,
+                    endTime: values.endTime,
+                    days: values.days,
+                    name: values.name,
+                    roles: values.roles,
+                    organization: user.organization
+                };
+            } else {
+                data = {
+                    startTime: values.startTime,
+                    endTime: values.endTime,
+                    days: values.days,
+                    name: values.name,
+                    roles: values.roles,
+                    organization: user.organization
+                };
+            }
             try {
-                await savePermentShift(values).then(
-                    () => {
-                        handleAddOpenClose();
-                    },
-                    (err) => {
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
+                // eslint-disable-next-line
+                if (data._id) {
+                    await updatePermanentShift(data).then(
+                        () => {
+                            handleAddOpenClose();
+                        },
+                        (err) => {
+                            if (scriptedRef.current) {
+                                setStatus({ success: false });
+                                setErrors({ submit: err.message });
+                                setSubmitting(false);
+                            }
                         }
-                    }
-                );
+                    );
+                } else {
+                    await savePermanentShift(data).then(
+                        () => {
+                            handleAddOpenClose();
+                        },
+                        (err) => {
+                            if (scriptedRef.current) {
+                                setStatus({ success: false });
+                                setErrors({ submit: err.message });
+                                setSubmitting(false);
+                            }
+                        }
+                    );
+                }
             } catch (err) {
                 console.error(err);
                 if (scriptedRef.current) {
@@ -100,7 +138,6 @@ const AddPermenentShift = (props) => {
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     type="text"
-                                    defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
                                     error={formik.touched.name && Boolean(formik.errors.name)}
                                     helperText={formik.touched.name && formik.errors.name}
@@ -172,8 +209,10 @@ const AddPermenentShift = (props) => {
                         <React.Fragment key={index}>
                             <Grid item xs={6} sm={3}>
                                 <TextField
-                                    name={`roles.${index}.roleType`}
+                                    value={role.roleType}
+                                    name={`roles[${index}].roleType`}
                                     label="Role Type"
+                                    onChange={formik.handleChange}
                                     fullWidth
                                     error={formik.touched.roles && Boolean(formik.errors.roles)}
                                     helperText={formik.touched.roles && formik.errors.roles}
@@ -182,9 +221,10 @@ const AddPermenentShift = (props) => {
 
                             <Grid item xs={6} sm={3}>
                                 <TextField
-                                    name={`roles.${index}.amount`}
+                                    name={`roles[${index}].amount`}
                                     label="Amount"
                                     type="number"
+                                    onChange={formik.handleChange}
                                     fullWidth
                                     error={formik.touched.roles && Boolean(formik.errors.roles)}
                                     helperText={formik.touched.roles && formik.errors.roles}

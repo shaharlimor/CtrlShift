@@ -24,7 +24,7 @@ function TabPanel({ children, value, index, ...other }) {
                         p: 2
                     }}
                 >
-                    <Typography>{children}</Typography>
+                    <Box>{children}</Box>
                 </Box>
             )}
         </div>

@@ -6,6 +6,9 @@ const {
   getBoardListOfMonthlyShift,
   getMissingBoardList,
   createMonthlyShiftBoard,
+  deleteShiftById,
+  getShiftsOpenToConstraints,
+  getShiftsOpenToConstraintsByRoles,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -36,9 +39,7 @@ router.get(
 
 router.get("/DoesntExist/:organization", middleware, async (req, res) => {
   try {
-    console.log("here");
     const organization = req.params.organization;
-    console.log("org ", organization);
     const MonthAndYearList = await getMissingBoardList(organization);
     res.send(MonthAndYearList);
   } catch (err) {
@@ -64,5 +65,43 @@ router.post("/createMonthlyShiftBoard", middleware, async (req, res) => {
     res.send("error occured to post shifts: " + err);
   }
 });
+
+router.delete("/:id", middleware, async (req, res) => {
+  try {
+    const id = req.params.id;
+    await deleteShiftById(id);
+    res.status(200).send(`success deleted shift ${id}`);
+  } catch (err) {
+    res.status(404).send("Error to delete shift " + err);
+  }
+});
+
+router.get("/openToConstraints/:organization", middleware, async (req, res) => {
+  try {
+    const organization = req.params.organization;
+    const shifts = await getShiftsOpenToConstraints(organization);
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
+  }
+});
+
+router.get(
+  "/openToConstraintsByRoles/:organization/:role_types",
+  middleware,
+  async (req, res) => {
+    try {
+      const organization = req.params.organization;
+      const role_types = req.params.role_types;
+      const shifts = await getShiftsOpenToConstraintsByRoles(
+        organization,
+        role_types
+      );
+      res.send(shifts);
+    } catch (err) {
+      res.send("error occured to get shifts: " + err);
+    }
+  }
+);
 
 module.exports = router;

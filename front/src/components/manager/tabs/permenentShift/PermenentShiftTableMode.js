@@ -1,8 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Collapse,
@@ -15,46 +14,33 @@ import {
     TableHead,
     TableRow,
     Typography,
-    Grid,
     Tooltip
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import AddIcon from '@mui/icons-material/Add';
+import useAuth from 'hooks/useAuth';
 
 // project imports
 import MainCard from '../../../cards/MainCard';
 import SubCard from '../../../cards/SubCard';
+import { deletePermanentShift, getPermanentShifts } from '../../../../utils/permenentShift';
 
 // assets
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-// table data
-function createData(name, startTime, endTime, days, roles) {
-    return {
-        name,
-        startTime,
-        endTime,
-        days,
-        roles: roles.map((role) => ({
-            roleType: role[0],
-            amount: role[1]
-        }))
-    };
-}
-
-function Row({ row }) {
+function Row({ row, handleEdit }) {
     const handleEditClick = () => {
         console.log('Edit row:', row);
-        // TODO: Implement edit
+        handleEdit(row);
     };
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = async () => {
         console.log('Delete row:', row);
-        // TODO: Implement delete
+        // eslint-disable-next-line
+        await deletePermanentShift(row);
     };
-
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -99,8 +85,8 @@ function Row({ row }) {
                                         content={false}
                                     >
                                         <Stack direction="row" spacing={2} alignItems="center" sx={{ mr: 2, ml: 2 }}>
-                                            {row.roles?.map((rolesRow) => (
-                                                <Typography>
+                                            {row.roles?.map((rolesRow, index) => (
+                                                <Typography key={index}>
                                                     {rolesRow.roleType} - {rolesRow.amount}
                                                 </Typography>
                                             ))}
@@ -117,27 +103,49 @@ function Row({ row }) {
 }
 
 Row.propTypes = {
-    row: PropTypes.object
+    row: PropTypes.object,
+    handleEdit: PropTypes.func
 };
 
-// TODO: Need to change to get the data fron the server
-const rows = [
-    createData('Day - evening', '7pm', '8am', 'SUNDAY', [
-        ['chef', 1],
-        ['waiter', 2]
-    ])
-];
-
-export default function PermenentShiftTableMode() {
+export default function PermenentShiftTableMode(props) {
+    const { handleEditShift } = props;
+    const [shifts, setShifts] = useState([]);
     const theme = useTheme();
+    const { user } = useAuth();
 
-    const newRow = [];
-    rows.forEach((element) => {
-        newRow.push({
-            ...element,
-            history: null
-        });
-    });
+    // const newRow = [];
+    // rows.forEach((element) => {
+    //     newRow.push({
+    //         ...element,
+    //         history: null
+    //     });
+    // });
+
+    const handleEdit = (shift) => {
+        handleEditShift(shift);
+    };
+
+    useEffect(() => {
+        const getShifts = async () => {
+            /* eslint-disable-next-line */
+            const result = await getPermanentShifts(user.organization);
+            let parsedData = [];
+            result.data.map((item) =>
+                parsedData.push({
+                    // eslint-disable-next-line
+                    id: item._id,
+                    startTime: item.startTime,
+                    endTime: item.endTime,
+                    days: item.days,
+                    name: item.name,
+                    roles: item.roles
+                })
+            );
+            setShifts(parsedData);
+            parsedData = [];
+        };
+        getShifts();
+    }, []);
 
     return (
         <TableContainer>
@@ -153,8 +161,9 @@ export default function PermenentShiftTableMode() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <Row key={row.name} row={row} />
+                    {shifts.map((row) => (
+                        /* eslint-disable-next-line */
+                        <Row key={row.name} row={row} handleEdit={handleEdit} />
                     ))}
                 </TableBody>
             </Table>

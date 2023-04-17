@@ -2,7 +2,7 @@ import { lazy, useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
-import { getMonthlyShifts } from 'utils/api';
+import { getMonthlyShiftsOpenToConstraintsByRoles } from 'utils/api';
 import { colorGenerator } from 'utils/color-generator';
 
 import Loadable from 'components/Loadable';
@@ -16,11 +16,10 @@ const Constrainsts = () => {
     const [events, setEvents] = useState([]);
     const { user } = useAuth();
 
-    // TODO: get shift by month (only if open to insert)
     useEffect(() => {
         const getShifts = async () => {
             /* eslint-disable-next-line */
-            const result = await getMonthlyShifts(user.organization);
+            const result = await getMonthlyShiftsOpenToConstraintsByRoles(user.organization, user.role_types);
             let parsedData = [];
             result.data.map(async (item) =>
                 parsedData.push({

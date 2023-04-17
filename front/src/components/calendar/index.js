@@ -14,6 +14,8 @@ import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
 import { getMonthOpendToAddShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
+import PublishScheduleButton from '../shifts/PublishSchedule';
+import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
@@ -107,6 +109,25 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
     };
 
+    const displayButton = () => {
+        if (calendarType === 1) {
+            return (
+                <Grid item>
+                    <PublishScheduleButton date={date} />
+                </Grid>
+            );
+        }
+        if (calendarType === 2) {
+            return (
+                <Grid item>
+                    <Button variant="contained" sx={{ width: '100%' }} size="large">
+                        Switch shift
+                    </Button>
+                </Grid>
+            );
+        }
+        return '';
+    };
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -141,14 +162,13 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                     />
                 </SubCard>
             </CalendarStyled>
-            <Grid alignItems="center" justifyContent="space-between" container sx={{ pb: 3 }}>
+
+            <Grid alignItems="center" justifyContent="space-between" container sx={{ pb: 1, pt: 2 }}>
                 {calendarType === 1 && (
                     <Grid item>
                         <Grid alignItems="center" justifyContent="space-between" container spacing={2}>
                             <Grid item>
-                                <Button variant="contained" sx={{ width: '100%' }} size="large">
-                                    Start Insert Constraint
-                                </Button>
+                                <StartInsertConstraintButton date={date} />
                             </Grid>
                             <Grid item>
                                 <Button variant="contained" sx={{ width: '100%' }} size="large">
@@ -158,15 +178,8 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                         </Grid>
                     </Grid>
                 )}
-                {calendarType !== 0 ? (
-                    <Grid item>
-                        <Button variant="contained" sx={{ width: '100%' }} size="large">
-                            {calendarType === 1 ? 'Publish Schedule' : 'Switch shift'}
-                        </Button>
-                    </Grid>
-                ) : (
-                    ''
-                )}
+                {/* according to the calendar page display the relevant button */}
+                {displayButton()}
             </Grid>
         </Fragment>
     );
