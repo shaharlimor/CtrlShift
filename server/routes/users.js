@@ -16,5 +16,6 @@ router.post('/create', middleware, userController.createUser);
 router.post('/update/:id', middleware, userController.updateUser);
 router.get('/users', middleware, userController.getAllUsersByOrganization);
 router.post('/changeImage', middleware, upload.single('image'), userController.changeImage);
+router.post('/changePassword', middleware, userController.changePassword);
 
 module.exports = router;

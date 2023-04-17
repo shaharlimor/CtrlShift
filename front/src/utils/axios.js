@@ -18,7 +18,6 @@ axiosServices.interceptors.response.use(
             originalRequest._retry = true;
 
             return refreshAccessToken().then(() => {
-                // Update the new tokens
                 originalRequest.headers.accessToken = axios.defaults.headers.common.accessToken;
                 originalRequest.headers.refreshToken = axios.defaults.headers.common.refreshToken;
                 return axiosServices.request(originalRequest);
