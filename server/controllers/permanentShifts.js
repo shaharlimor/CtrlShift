@@ -16,8 +16,6 @@ const getShifts = async (req, res) => {
 const createPermanentShift = async (req, res) => {
 try {
     const newShift = new Shift(req.body);
-    console.log(req.body);
-    console.log(newShift);
     const result = await newShift.save();
 
     res.status(200).json({ message: 'Shift created successfully', shift: newShift });

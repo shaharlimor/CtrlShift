@@ -69,7 +69,7 @@ const UserList = (props) => {
                         data.map((row, index) => (
                             <TableRow hover key={index}>
                                 <TableCell sx={{ pl: 3 }}>
-                                    <Avatar alt="User 1" />
+                                    <Avatar src={"https://controlshift-images.s3.eu-central-1.amazonaws.com/"+row._id+".png"} />
                                 </TableCell>
                                 <TableCell>
                                     <Typography align="left" variant="subtitle1" component="div">
