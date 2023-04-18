@@ -24,9 +24,15 @@ export default function RoleTypesList(props) {
     const { user } = useAuth();
 
     const handleDeleteClick = async (row) => {
-        console.log('Delete row:', row);
         // eslint-disable-next-line
-        await deleteRoleType(row);
+        await deleteRoleType(row)
+            .then(() => {
+                // eslint-disable-next-line
+                setRoleTypes(roleTypes.filter((role) => role._id !== row._id));
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
     };
 
     const handleEditClick = async (row) => {

@@ -9,17 +9,14 @@ import {
     Divider,
     FormControl,
     FormControlLabel,
+    ListItemText,
+    MenuItem,
     FormHelperText,
     Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
     TextField,
     FormGroup,
-    FormLabel,
-    Typography,
-    useMediaQuery
+    useMediaQuery,
+    Select
 } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -32,14 +29,26 @@ import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
 import { savePermanentShift, updatePermanentShift } from '../../../../utils/permenentShift';
+import { getRoleTypes } from 'utils/roleTypeServices';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
     const { user } = useAuth();
-
+    const [roleTypes, setRoleTypes] = React.useState([]);
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const { handleAddOpenClose, shiftToEdit } = props;
+
+    React.useEffect(() => {
+        async function getRoles() {
+            // TODO - when a role schema will be
+        }
+        const getRole = async () => {
+            const result = await getRoleTypes(user.organization);
+            setRoleTypes(result.data);
+        };
+        getRole();
+    }, []);
 
     const validationSchema = Yup.object({
         startTime: Yup.string().required('start time is required'),
@@ -208,19 +217,25 @@ const AddPermenentShift = (props) => {
                     {formik.values.roles.map((role, index) => (
                         <React.Fragment key={index}>
                             <Grid item xs={6} sm={3}>
-                                <TextField
+                                <Select
+                                    fullWidth
+                                    labelId="mutiple-select-label"
                                     value={role.roleType}
                                     name={`roles[${index}].roleType`}
-                                    label="Role Type"
                                     onChange={formik.handleChange}
-                                    fullWidth
-                                    error={formik.touched.roles && Boolean(formik.errors.roles)}
-                                    helperText={formik.touched.roles && formik.errors.roles}
-                                />
+                                    renderValue={(selected) => selected}
+                                >
+                                    {roleTypes?.map((role) => (
+                                        <MenuItem key={role.roleType} value={role.roleType}>
+                                            <ListItemText primary={role.roleType} />
+                                        </MenuItem>
+                                    ))}
+                                </Select>
                             </Grid>
 
                             <Grid item xs={6} sm={3}>
                                 <TextField
+                                    value={role.amount}
                                     name={`roles[${index}].amount`}
                                     label="Amount"
                                     type="number"

@@ -30,16 +30,20 @@ import { deletePermanentShift, getPermanentShifts } from '../../../../utils/perm
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-function Row({ row, handleEdit }) {
+function Row({ row, handleEdit, handleDelete }) {
     const handleEditClick = () => {
-        console.log('Edit row:', row);
         handleEdit(row);
     };
 
     const handleDeleteClick = async () => {
-        console.log('Delete row:', row);
         // eslint-disable-next-line
-        await deletePermanentShift(row);
+        await deletePermanentShift(row)
+            .then(() => {
+                handleDelete(row);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
     };
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -84,7 +88,7 @@ function Row({ row, handleEdit }) {
                                         title="roles"
                                         content={false}
                                     >
-                                        <Stack direction="row" spacing={2} alignItems="center" sx={{ mr: 2, ml: 2 }}>
+                                        <Stack direction="column" spacing={2} alignItems="flex-start" sx={{ mr: 2, ml: 2 }}>
                                             {row.roles?.map((rolesRow, index) => (
                                                 <Typography key={index}>
                                                     {rolesRow.roleType} - {rolesRow.amount}
@@ -104,7 +108,8 @@ function Row({ row, handleEdit }) {
 
 Row.propTypes = {
     row: PropTypes.object,
-    handleEdit: PropTypes.func
+    handleEdit: PropTypes.func,
+    handleDelete: PropTypes.func
 };
 
 export default function PermenentShiftTableMode(props) {
@@ -123,6 +128,11 @@ export default function PermenentShiftTableMode(props) {
 
     const handleEdit = (shift) => {
         handleEditShift(shift);
+    };
+
+    const handleDelete = (row) => {
+        // eslint-disable-next-line
+        setShifts(shifts.filter((shift) => shift.id !== row.id));
     };
 
     useEffect(() => {
@@ -163,7 +173,7 @@ export default function PermenentShiftTableMode(props) {
                 <TableBody>
                     {shifts.map((row) => (
                         /* eslint-disable-next-line */
-                        <Row key={row.name} row={row} handleEdit={handleEdit} />
+                        <Row key={row.name} row={row} handleEdit={handleEdit} handleDelete={handleDelete} />
                     ))}
                 </TableBody>
             </Table>

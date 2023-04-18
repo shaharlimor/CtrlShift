@@ -108,9 +108,6 @@ const RoleTypeForm = (props) => {
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="outlined">Clear</Button>
-                    </Grid>
-                    <Grid item>
                         <Button onClick={props.changeShowForm} variant="outlined">
                             Cancel
                         </Button>
