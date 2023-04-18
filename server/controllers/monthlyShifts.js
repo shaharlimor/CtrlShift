@@ -1,5 +1,6 @@
 const Shift = require("../models/monthlyShifts");
 const Schedule = require("../models/schedule");
+const Common = require("../controllers/common");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -21,42 +22,48 @@ const getBoardListOfMonthlyShift = async (organization) => {
   ]);
 };
 
-const getMissingBoardList = async (organization) => {
-  const now = new Date();
-  const nextYear = now.getFullYear() + 1;
-  const missingMonths = [];
+const getMissingBoardList = async (req, res) => {
+  try {
+    const user = await Common.getUserByRT(req);
+    const userOrg = user.organization;
 
-  // Find all existing months in the next 12 months
-  const existingMonths = await Shift.find(
-    {
-      $match: {
-        organization: organization,
+    const now = new Date();
+    const nextYear = now.getFullYear() + 1;
+    const missingMonths = [];
+
+    // Find all existing months in the next 12 months
+    const existingMonths = await Shift.find(
+      {
+        organization: userOrg,
         startTime: { $gte: now, $lte: new Date(`${nextYear}-12-31`) },
       },
-    },
-    { startTime: 1 }
-  ).lean();
+      { startTime: 1 }
+    ).lean();
 
-  // Create a set of all existing months
-  const existingMonthsSet = new Set(
-    existingMonths.map(({ startTime }) => {
-      const date = new Date(startTime);
-      return { month: date.getMonth() + 1, year: date.getFullYear() };
-    })
-  );
+    // Create a set of all existing months
+    const existingMonthsSet = new Set(
+      existingMonths.map(({ startTime }) => {
+        const date = new Date(startTime);
+        return JSON.stringify({ month: date.getMonth() + 1, year: date.getFullYear() });
+      })
+    );
 
-  // Loop through the next 12 months and add missing months to the missingMonths array
-  for (let year = now.getFullYear(); year <= nextYear; year++) {
-    for (let month = 0; month < 12; month++) {
-      const monthNum = month + 1;
-      const monthObj = { organization: organization, month: monthNum, year };
-      if (!existingMonthsSet.has(monthObj)) {
-        missingMonths.push(monthObj);
+    // Loop through the next 12 months and add missing months to the missingMonths array
+    for (let year = now.getFullYear(); year <= nextYear; year++) {
+      const startMonth = year === now.getFullYear() ? now.getMonth() : 0;
+      for (let month = startMonth; month < 12; month++) {
+        const monthNum = month + 1;
+        const monthObj = { organization: userOrg, month: monthNum, year };
+        if (!existingMonthsSet.has(JSON.stringify(monthObj))) {
+          missingMonths.push(monthObj);
+        }
       }
     }
-  }
 
-  return missingMonths;
+    res.status(200).json(missingMonths);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving missing board list", error });
+  }
 };
 
 const createMonthlyShiftBoard = async (month, year, organization) => {
