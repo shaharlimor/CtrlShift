@@ -29,9 +29,6 @@ const verifyToken = (accessToken) => {
     }
 
     const decoded = jwtDecode(accessToken);
-    /**
-     * Property 'exp' does not exist on type '<T = unknown>(token, options?: JwtDecodeOptions | undefined) => T'.
-     */
     return decoded.exp > Date.now() / 1000;
 };
 
@@ -71,11 +68,11 @@ export const refreshAccessToken = async () => {
 const JWTContext = createContext(null);
 
 export const JWTProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(accountReducer, initialState);
+    const [state, setState] = useReducer(accountReducer, initialState);
     const navigate = useNavigate();
     useEffect(() => {
         const navigateLogin = () => {
-            dispatch({
+            setState({
                 type: LOGOUT
             });
             navigate('/login');
@@ -85,7 +82,7 @@ export const JWTProvider = ({ children }) => {
             try {
                 const response = await axios.get('/auth/getUserByRefreshToken');
                 const { user } = response.data;
-                dispatch({
+                setState({
                     type: LOGIN,
                     payload: {
                         isLoggedIn: true,
@@ -133,7 +130,7 @@ export const JWTProvider = ({ children }) => {
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
 
-        dispatch({
+        setState({
             type: LOGIN,
             payload: {
                 isLoggedIn: true,
@@ -161,35 +158,20 @@ export const JWTProvider = ({ children }) => {
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
 
-        dispatch({
+        setState({
             type: LOGIN,
             payload: {
                 isLoggedIn: true,
                 user
             }
         });
-
-        // if (window.localStorage.getItem('users') !== undefined && window.localStorage.getItem('users') !== null) {
-        //     const localUsers = window.localStorage.getItem('users');
-        //     users = [
-        //         ...JSON.parse(localUsers),
-        //         {
-        //             id,
-        //             email,
-        //             password,
-        //             name: `${firstName} ${lastName}`
-        //         }
-        //     ];
-        // }
-
-        // window.localStorage.setItem('users', JSON.stringify(users));
     };
 
     const logout = async () => {
         const response = await axios.post('/auth/logout');
         setRefreshToken(null);
         setAccessToken(null);
-        dispatch({
+        setState({
             type: LOGOUT,
             payload: {
                 isLoggedIn: false,
