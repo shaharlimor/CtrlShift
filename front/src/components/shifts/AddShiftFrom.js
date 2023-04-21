@@ -27,7 +27,7 @@ const AddShiftFrom = ({ onCancel }) => {
         roles: Yup.array()
             .of(
                 Yup.object().shape({
-                    roleType: Yup.string().min(3).required('Role type is required'), // these constraints take precedence
+                    roleType: Yup.string().min(3, 'Role type must be at least 3 characters').required('Role type is required'), // these constraints take precedence
                     amount: Yup.number().required('Amount of employess is required').min(1, 'Minimum 1 employee in each role') // these constraints take precedence
                 })
             )
