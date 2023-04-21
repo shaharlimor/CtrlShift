@@ -20,12 +20,12 @@ const RoleTypeForm = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            roleType: roleToEdit ? roleToEdit.roleType : ""
+            roleType: roleToEdit ? roleToEdit.roleType : ''
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
             let data = {};
-            if(roleToEdit) {
+            if (roleToEdit) {
                 data = {
                     _id: roleToEdit._id,
                     roleType: values.roleType,
@@ -38,7 +38,7 @@ const RoleTypeForm = (props) => {
                 };
             }
             try {
-                if(data._id) {
+                if (data._id) {
                     await updateRoleType(data).then(
                         () => {
                             changeShowForm();
@@ -73,7 +73,6 @@ const RoleTypeForm = (props) => {
                     setSubmitting(false);
                 }
             }
-            console.log('submit');
             changeShowForm();
         }
     });
