@@ -52,13 +52,17 @@ const getMissingBoardList = async (req, res) => {
       })
     );
 
+    console.log("sagi", existingMonthsSet);
+
     // Loop through the next 12 months and add missing months to the missingMonths array
     for (let year = now.getFullYear(); year <= nextYear; year++) {
       const startMonth = year === now.getFullYear() ? now.getMonth() : 0;
       for (let month = startMonth; month < 12; month++) {
         const monthNum = month + 1;
-        const monthObj = { organization: userOrg, month: monthNum, year };
-        if (!existingMonthsSet.has(JSON.stringify(monthObj))) {
+        const monthObj = { month: monthNum, year: year };
+        const monthStr = JSON.stringify(monthObj); // Convert to string representation
+        if (!existingMonthsSet.has(monthStr)) {
+          // Check for membership using string representation
           missingMonths.push(monthObj);
         }
       }
@@ -86,8 +90,6 @@ const createMonthlyShiftBoard = async (req, res) => {
       organization: userOrg,
     })
     .exec();
-
-  console.log("sagi permanent shifts: ", permanentShifts);
 
   const monthlyShifts = [];
 
@@ -131,8 +133,6 @@ const createMonthlyShiftBoard = async (req, res) => {
       }
     });
   }
-
-  console.log("sagi monthly", monthlyShifts);
 
   await Shift.insertMany(monthlyShifts);
 
