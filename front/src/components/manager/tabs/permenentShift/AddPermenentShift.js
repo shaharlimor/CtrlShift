@@ -127,7 +127,6 @@ const AddPermenentShift = (props) => {
                     setSubmitting(false);
                 }
             }
-            console.log('submit');
             handleAddOpenClose();
         }
     });

@@ -73,7 +73,7 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
                         <IconChevronLeft />
                     </IconButton>
                     <Typography variant="h3" color="textPrimary">
-                        {format(date, 'MMMM yyyy')}
+                        {view === 'timeGridDay' ? format(date, 'PP') : format(date, 'MMMM yyyy')}
                     </Typography>
                     <IconButton onClick={onClickNext} size="large">
                         <IconChevronRight />
