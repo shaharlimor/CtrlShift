@@ -1,4 +1,5 @@
 const Shift = require("../models/monthlyShifts");
+const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const Common = require("../controllers/common");
 
@@ -71,49 +72,72 @@ const getMissingBoardList = async (req, res) => {
   }
 };
 
-const createMonthlyShiftBoard = async (month, year, organization) => {
+const createMonthlyShiftBoard = async (req, res) => {
+  const user = await Common.getUserByRT(req);
+  const userOrg = user.organization;
+  const year = req.body.year;
+  const month = req.body.month;
+
   const startOfMonth = new Date(year, month - 1, 1);
   const endOfMonth = new Date(year, month, 0, 23, 59, 59, 999);
 
-  const permanentShifts = await Shift.find({
-    organization: organization,
-    days: { $in: [startOfMonth.getDay().toString()] },
-  }).exec();
+  const permanentShifts = await permanentShift
+    .find({
+      organization: userOrg,
+    })
+    .exec();
 
-  console.log("permanent shifts: ", permanentShifts);
+  console.log("sagi permanent shifts: ", permanentShifts);
 
   const monthlyShifts = [];
 
-  permanentShifts.forEach((permanentShift) => {
-    permanentShift.days.forEach((day) => {
-      const date = new Date(
-        year,
-        month - 1,
-        parseInt(day),
-        permanentShift.startTime.getHours(),
-        permanentShift.startTime.getMinutes()
-      );
+  for (let i = 1; i <= endOfMonth.getDate(); i++) {
+    const date = new Date(year, month - 1, i);
 
-      monthlyShifts.push({
-        organization: permanentShift.organization,
-        startTime: date,
-        endTime: new Date(
+    permanentShifts.forEach((permanentShift) => {
+      if (permanentShift.days.includes(getDayOfWeek(date))) {
+        const dayIndex = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ].indexOf(getDayOfWeek(date));
+
+        const shiftStart = new Date(
           year,
           month - 1,
-          parseInt(day),
-          permanentShift.endTime.getHours(),
-          permanentShift.endTime.getMinutes()
-        ),
-        name: permanentShift.name,
-        roles: permanentShift.roles,
-      });
+          i,
+          permanentShift.startTime.getHours().toString().padStart(2, "0"),
+          permanentShift.startTime.getMinutes().toString().padStart(2, "0")
+        );
+        const shiftEnd = new Date(
+          year,
+          month - 1,
+          i,
+          permanentShift.endTime.getHours().toString().padStart(2, "0"),
+          permanentShift.endTime.getMinutes().toString().padStart(2, "0")
+        );
+
+        monthlyShifts.push({
+          organization: userOrg,
+          startTime: shiftStart,
+          endTime: shiftEnd,
+          name: permanentShift.name,
+          roles: permanentShift.roles,
+        });
+      }
     });
-  });
+  }
+
+  console.log("sagi monthly", monthlyShifts);
 
   await Shift.insertMany(monthlyShifts);
 
   const newSchedule = new Schedule({
-    organization: organization,
+    organization: userOrg,
     month: month,
     year: year,
     isPublished: false,
@@ -122,6 +146,19 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
 
   await newSchedule.save();
 };
+
+function getDayOfWeek(date) {
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return daysOfWeek[date.getDay()];
+}
 
 const deleteShiftById = async (id) => {
   try {

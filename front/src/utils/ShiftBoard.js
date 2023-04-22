@@ -28,7 +28,7 @@ export const ShiftBoardMonthsDoesntExist = async () => {
 
 export const CreateMonthShiftBoard = async (organization, month, year) => {
     try {
-        const response = await axiosServices.post('/monthlyShifts/createMonthlyShiftBoard', { organization, month, year });
+        const response = await axiosServices.post('/monthlyShifts/createMonthlyShiftBoard', { month, year });
 
         // Handle the response (e.g., show a success message)
         return response.data;
