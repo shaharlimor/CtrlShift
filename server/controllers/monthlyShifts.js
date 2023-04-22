@@ -44,7 +44,10 @@ const getMissingBoardList = async (req, res) => {
     const existingMonthsSet = new Set(
       existingMonths.map(({ startTime }) => {
         const date = new Date(startTime);
-        return JSON.stringify({ month: date.getMonth() + 1, year: date.getFullYear() });
+        return JSON.stringify({
+          month: date.getMonth() + 1,
+          year: date.getFullYear(),
+        });
       })
     );
 
@@ -62,7 +65,9 @@ const getMissingBoardList = async (req, res) => {
 
     res.status(200).json(missingMonths);
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving missing board list", error });
+    res
+      .status(500)
+      .json({ message: "Error retrieving missing board list", error });
   }
 };
 

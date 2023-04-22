@@ -14,7 +14,7 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
     const { user } = useAuth();
 
     async function fetchMonthsWithoutBoard() {
-        const data = await ShiftBoardMonthsDoesntExist(user.organization);
+        const data = await ShiftBoardMonthsDoesntExist();
         setMonthsWithoutBoard(data);
     }
 
