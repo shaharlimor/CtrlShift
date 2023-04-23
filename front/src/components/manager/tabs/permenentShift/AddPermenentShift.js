@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -7,6 +7,7 @@ import {
     Button,
     Checkbox,
     Divider,
+    IconButton,
     FormControl,
     FormControlLabel,
     ListItemText,
@@ -19,12 +20,13 @@ import {
     Select
 } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 
 // third party
 import * as Yup from 'yup';
-import { useFormik, Field } from 'formik';
+import { useFormik, Field, FieldArray } from 'formik';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
@@ -55,7 +57,14 @@ const AddPermenentShift = (props) => {
         endTime: Yup.string().required('end time is required'),
         name: Yup.string().required('name is required'),
         days: Yup.array().min(1, 'days is required'),
-        roles: Yup.array().min(1, 'roles is required')
+        roles: Yup.array()
+            .of(
+                Yup.object().shape({
+                    roleType: Yup.string().min(3).required('Role type is required'), // these constraints take precedence
+                    amount: Yup.number().required('Amount of employess is required').min(1, 'Minimum 1 employee in each role') // these constraints take precedence
+                })
+            )
+            .min(1, 'Minimum of 1 role is required')
     });
 
     const formik = useFormik({
@@ -213,17 +222,23 @@ const AddPermenentShift = (props) => {
                             </FormGroup>
                         </FormControl>
                     </Grid>
-
                     {formik.values.roles.map((role, index) => (
-                        <React.Fragment key={index}>
-                            <Grid item xs={6} sm={3}>
+                        <Fragment key={index}>
+                            <Grid item xs={5.3} sm={4}>
                                 <Select
                                     fullWidth
-                                    labelId="mutiple-select-label"
+                                    label="Role Type"
+                                    labelId="select-label"
                                     value={role.roleType}
                                     name={`roles[${index}].roleType`}
                                     onChange={formik.handleChange}
                                     renderValue={(selected) => selected}
+                                    error={Boolean(
+                                        formik.touched.roles &&
+                                            formik.touched.roles[index] &&
+                                            formik.errors.roles &&
+                                            formik.errors.roles[index]?.roleType
+                                    )}
                                 >
                                     {roleTypes?.map((role) => (
                                         <MenuItem key={role.roleType} value={role.roleType}>
@@ -232,32 +247,57 @@ const AddPermenentShift = (props) => {
                                     ))}
                                 </Select>
                             </Grid>
-
-                            <Grid item xs={6} sm={3}>
+                            <Grid item xs={5.3} sm={4}>
                                 <TextField
                                     value={role.amount}
-                                    name={`roles[${index}].amount`}
-                                    label="Amount"
                                     type="number"
                                     onChange={formik.handleChange}
+                                    name={`roles[${index}].amount`}
+                                    label="Amount"
                                     fullWidth
-                                    error={formik.touched.roles && Boolean(formik.errors.roles)}
-                                    helperText={formik.touched.roles && formik.errors.roles}
+                                    error={Boolean(
+                                        formik.touched.roles &&
+                                            formik.touched.roles[index] &&
+                                            formik.errors.roles &&
+                                            formik.errors.roles[index]?.amount
+                                    )}
+                                    helperText={
+                                        formik.touched.roles &&
+                                        formik.touched.roles[index] &&
+                                        formik.errors.roles &&
+                                        formik.errors.roles[index]?.amount
+                                    }
                                 />
                             </Grid>
-                        </React.Fragment>
+                            <Grid item xs={1} sm={1} sx={{ mr: 2 }}>
+                                <IconButton
+                                    variant="outlined"
+                                    sx={{ fontWeight: 'bold' }}
+                                    onClick={() => {
+                                        if (formik.values.roles.length !== 1) {
+                                            formik.setFieldValue('roles', formik.values.roles.splice(index, 1));
+                                        }
+                                    }}
+                                >
+                                    <DeleteForeverOutlinedIcon sx={{ color: theme.palette.primary[800] }} />
+                                </IconButton>
+                            </Grid>
+                        </Fragment>
                     ))}
-
-                    <Grid item xs={1.5}>
+                    <Grid container justifyContent="center" alignItems="center" sx={{ pt: 3, ml: 3.2 }}>
                         <Button
                             type="button"
-                            variant="outlined"
-                            sx={{
-                                fontSize: '13px',
-                                bgcolor: theme.palette.grey.main,
-                                color: theme.palette.grey.contrastText
-                            }}
                             onClick={() => formik.setFieldValue('roles', [...formik.values.roles, { roleType: '', amount: '' }])}
+                            variant="contained"
+                            sx={{
+                                width: '20%',
+                                backgroundColor: theme.palette.grey[300],
+                                // eslint-disable-next-line
+                                color: theme.palette.common['black'],
+                                '&:hover': {
+                                    background: theme.palette.grey[200]
+                                }
+                            }}
                         >
                             Add Role
                         </Button>
