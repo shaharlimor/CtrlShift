@@ -1,4 +1,5 @@
 const Shift = require("../models/monthlyShifts");
+const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const Common = require("../controllers/common");
 
@@ -44,17 +45,24 @@ const getMissingBoardList = async (req, res) => {
     const existingMonthsSet = new Set(
       existingMonths.map(({ startTime }) => {
         const date = new Date(startTime);
-        return JSON.stringify({ month: date.getMonth() + 1, year: date.getFullYear() });
+        return JSON.stringify({
+          month: date.getMonth() + 1,
+          year: date.getFullYear(),
+        });
       })
     );
+
+    console.log("sagi", existingMonthsSet);
 
     // Loop through the next 12 months and add missing months to the missingMonths array
     for (let year = now.getFullYear(); year <= nextYear; year++) {
       const startMonth = year === now.getFullYear() ? now.getMonth() : 0;
       for (let month = startMonth; month < 12; month++) {
         const monthNum = month + 1;
-        const monthObj = { organization: userOrg, month: monthNum, year };
-        if (!existingMonthsSet.has(JSON.stringify(monthObj))) {
+        const monthObj = { month: monthNum, year: year };
+        const monthStr = JSON.stringify(monthObj); // Convert to string representation
+        if (!existingMonthsSet.has(monthStr)) {
+          // Check for membership using string representation
           missingMonths.push(monthObj);
         }
       }
@@ -62,53 +70,74 @@ const getMissingBoardList = async (req, res) => {
 
     res.status(200).json(missingMonths);
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving missing board list", error });
+    res
+      .status(500)
+      .json({ message: "Error retrieving missing board list", error });
   }
 };
 
-const createMonthlyShiftBoard = async (month, year, organization) => {
+const createMonthlyShiftBoard = async (req, res) => {
+  const user = await Common.getUserByRT(req);
+  const userOrg = user.organization;
+  const year = req.body.year;
+  const month = req.body.month;
+
   const startOfMonth = new Date(year, month - 1, 1);
   const endOfMonth = new Date(year, month, 0, 23, 59, 59, 999);
 
-  const permanentShifts = await Shift.find({
-    organization: organization,
-    days: { $in: [startOfMonth.getDay().toString()] },
-  }).exec();
-
-  console.log("permanent shifts: ", permanentShifts);
+  const permanentShifts = await permanentShift
+    .find({
+      organization: userOrg,
+    })
+    .exec();
 
   const monthlyShifts = [];
 
-  permanentShifts.forEach((permanentShift) => {
-    permanentShift.days.forEach((day) => {
-      const date = new Date(
-        year,
-        month - 1,
-        parseInt(day),
-        permanentShift.startTime.getHours(),
-        permanentShift.startTime.getMinutes()
-      );
+  for (let i = 1; i <= endOfMonth.getDate(); i++) {
+    const date = new Date(year, month - 1, i);
 
-      monthlyShifts.push({
-        organization: permanentShift.organization,
-        startTime: date,
-        endTime: new Date(
+    permanentShifts.forEach((permanentShift) => {
+      if (permanentShift.days.includes(getDayOfWeek(date))) {
+        const dayIndex = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ].indexOf(getDayOfWeek(date));
+
+        const shiftStart = new Date(
           year,
           month - 1,
-          parseInt(day),
-          permanentShift.endTime.getHours(),
-          permanentShift.endTime.getMinutes()
-        ),
-        name: permanentShift.name,
-        roles: permanentShift.roles,
-      });
+          i,
+          permanentShift.startTime.getHours().toString().padStart(2, "0"),
+          permanentShift.startTime.getMinutes().toString().padStart(2, "0")
+        );
+        const shiftEnd = new Date(
+          year,
+          month - 1,
+          i,
+          permanentShift.endTime.getHours().toString().padStart(2, "0"),
+          permanentShift.endTime.getMinutes().toString().padStart(2, "0")
+        );
+
+        monthlyShifts.push({
+          organization: userOrg,
+          startTime: shiftStart,
+          endTime: shiftEnd,
+          name: permanentShift.name,
+          roles: permanentShift.roles,
+        });
+      }
     });
-  });
+  }
 
   await Shift.insertMany(monthlyShifts);
 
   const newSchedule = new Schedule({
-    organization: organization,
+    organization: userOrg,
     month: month,
     year: year,
     isPublished: false,
@@ -117,6 +146,19 @@ const createMonthlyShiftBoard = async (month, year, organization) => {
 
   await newSchedule.save();
 };
+
+function getDayOfWeek(date) {
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return daysOfWeek[date.getDay()];
+}
 
 const deleteShiftById = async (id) => {
   try {

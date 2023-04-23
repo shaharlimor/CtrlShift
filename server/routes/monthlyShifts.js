@@ -51,7 +51,7 @@ router.post("/", middleware, async (req, res) => {
 
 router.post("/createMonthlyShiftBoard", middleware, async (req, res) => {
   try {
-    const shifts = await createMonthlyShiftBoard(req.body.month, req.body.year);
+    const shifts = await createMonthlyShiftBoard(req);
     res.send(shifts);
   } catch (err) {
     res.send("error occured to post shifts: " + err);
