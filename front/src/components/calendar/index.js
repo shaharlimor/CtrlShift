@@ -12,7 +12,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
-import { getMonthOpendToAddShifts } from 'utils/api';
+import { getMonthOpendToAddShifts, generateScheduleMonthlyShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import PublishScheduleButton from '../shifts/PublishSchedule';
 import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
@@ -170,7 +170,12 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                                 <StartInsertConstraintButton date={date} />
                             </Grid>
                             <Grid item>
-                                <Button variant="contained" sx={{ width: '100%' }} size="large">
+                                <Button
+                                    variant="contained"
+                                    sx={{ width: '100%' }}
+                                    size="large"
+                                    onClick={() => generateScheduleMonthlyShifts()}
+                                >
                                     Create Schedule
                                 </Button>
                             </Grid>

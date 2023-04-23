@@ -20,9 +20,14 @@ const employeeHasConstraintInShift = async (userId, shiftId) => {
   return ans.length != 0;
 };
 
+const getConstraintsByOrganization = async (organization) => {
+  return await Constraint.find({ organization });
+};
+
 module.exports = {
   getConstraints,
   getConstraintsByShiftId,
   getConstraintsByEmployeeId,
   employeeHasConstraintInShift,
+  getConstraintsByOrganization,
 };

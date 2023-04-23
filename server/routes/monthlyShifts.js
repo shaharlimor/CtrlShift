@@ -9,6 +9,7 @@ const {
   deleteShiftById,
   getShiftsOpenToConstraints,
   getShiftsOpenToConstraintsByRoles,
+  generateScheduleMonthlyShifts,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -95,5 +96,14 @@ router.get(
     }
   }
 );
+
+router.post("/generateScheduleMonthlyShifts", middleware, async (req, res) => {
+  try {
+    const shifts = await generateScheduleMonthlyShifts();
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
+  }
+});
 
 module.exports = router;
