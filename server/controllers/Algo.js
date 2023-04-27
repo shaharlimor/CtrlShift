@@ -1,4 +1,4 @@
-export const scheduleShifts = async (monthlyShifts, users, constraints) => {
+const scheduleShifts = async (monthlyShifts, users, constraints) => {
   // Step 1: Create a list for each type containing all the shifts and for each shift a list of all the employees that can do that shift
   // Step 2: Sort all the lists by the amount of employees that can do that shift
   const shiftsByType = createShiftsAndEmployeesLists(
@@ -6,6 +6,8 @@ export const scheduleShifts = async (monthlyShifts, users, constraints) => {
     users,
     constraints
   );
+
+  console.log("sagi", shiftsByType);
 
   // Sort each list of shifts by the number of employees that can do that shift
   sortListsByEmployeeCount(shiftsByType);
@@ -56,6 +58,7 @@ const createShiftsAndEmployeesLists = (monthlyShifts, users, constraints) => {
   const shiftsByType = new Map();
 
   for (const shift of monthlyShifts) {
+    console.log("shift", shift);
     const shiftType = shift.name;
 
     if (!shiftsByType.has(shiftType)) {
@@ -63,20 +66,19 @@ const createShiftsAndEmployeesLists = (monthlyShifts, users, constraints) => {
     }
 
     const possibleEmployees = users.filter((user) => {
-      // Check if user has a constraint that disallows them from taking this shift
       const hasConstraint = constraints.some(
         (constraint) =>
-          constraint.employeeId === user._id &&
-          constraint.shiftId === shift._id &&
-          constraint.level === "disallow"
+          constraint.employeeId === user._id && constraint.shiftId === shift._id
       );
 
       if (hasConstraint) {
         return false;
       }
 
-      // Check if user has a role type that allows them to take this shift
-      const hasRoleType = user.roleTypes.includes(shift.roleType);
+      console.log(user);
+      const hasRoleType = shift.roles.some((role) =>
+        user.role_types.includes(role.roleType)
+      );
 
       if (!hasRoleType) {
         return false;
@@ -85,16 +87,23 @@ const createShiftsAndEmployeesLists = (monthlyShifts, users, constraints) => {
       return true;
     });
 
-    // Store the list of employees that can do this shift in the map
-    shiftsByType
-      .get(shiftType)
-      .employeesByShift.set(shift._id, possibleEmployees);
-    shiftsByType.get(shiftType).shifts.push(shift);
+    shiftsByType.get(shiftType).shifts.push({
+      shift: shift,
+      possibleEmployees: possibleEmployees,
+    });
   }
 
-  // Sort each list of shifts by the number of employees that can do that shift
+  // Sort each shift by the number of employees that can do it
   for (const shiftType of shiftsByType.values()) {
-    sortListsByEmployeeCount(shiftType);
+    shiftType.shifts.sort((a, b) => {
+      const numPossibleEmployeesA = a.possibleEmployees.length;
+      const numPossibleEmployeesB = b.possibleEmployees.length;
+      return numPossibleEmployeesA - numPossibleEmployeesB;
+    });
+
+    for (const shift of shiftType.shifts) {
+      shiftType.employeesByShift.set(shift.shift._id, shift.possibleEmployees);
+    }
   }
 
   return shiftsByType;
@@ -126,4 +135,8 @@ const removeShiftFromEmployee = (
 
 const sortEmployeesByWeight = (employeesByShift, shiftId) => {
   // implementation
+};
+
+module.exports = {
+  scheduleShifts,
 };

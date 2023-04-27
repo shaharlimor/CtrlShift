@@ -2,10 +2,11 @@ const Shift = require("../models/monthlyShifts");
 const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const Common = require("../controllers/common");
+const User = require("../models/users");
 
-import scheduleShifts from "../controllers/Algo";
-import getAllUsersByOrganization from "../controllers/users/";
-import getConstraintsByOrganization from "../controllers/constraints";
+const { scheduleShifts } = require("../controllers/Algo");
+const { getAllUsersByOrganization } = require("../controllers/users");
+const { getConstraintsByOrganization } = require("../controllers/constraints");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -221,7 +222,8 @@ const generateScheduleMonthlyShifts = async (req, res) => {
   const user = await Common.getUserByRT(req);
   const userOrg = user.organization;
 
-  const users = await getAllUsersByOrganization(userOrg);
+  const users = await User.find({ organization: userOrg });
+
   const constraints = await getConstraintsByOrganization(userOrg);
 
   const monthlyShifts = await Shift.find().exec();
@@ -231,14 +233,14 @@ const generateScheduleMonthlyShifts = async (req, res) => {
     constraints
   );
 
-  const bulkOps = assignedShifts.map((shift) => ({
-    updateOne: {
-      filter: { _id: shift._id },
-      update: { assignedEmployee: shift.assignedEmployee },
-    },
-  }));
+  // const bulkOps = assignedShifts.map((shift) => ({
+  //   updateOne: {
+  //     filter: { _id: shift._id },
+  //     update: { assignedEmployee: shift.assignedEmployee },
+  //   },
+  // }));
 
-  await Shift.bulkWrite(bulkOps);
+  // await Shift.bulkWrite(bulkOps);
 };
 
 module.exports = {
