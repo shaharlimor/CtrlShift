@@ -205,6 +205,7 @@ const getShiftsOpenToConstraints = async (organization) => {
 
 const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
   // Get The month and year open to insert constraints
+  console.log("constraints", constraints);
   const shifts = await getShiftsOpenToConstraints(organization);
 
   // Filter shifts to only include those that have at least one role with a matching role type
