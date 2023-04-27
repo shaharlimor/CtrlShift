@@ -47,8 +47,6 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     }
   }
 
-  console.log("assignedShifts", assignedShifts);
-
   return assignedShifts;
 };
 
@@ -83,7 +81,6 @@ const createShiftsAndEmployeesLists = (monthlyShifts, users, constraints) => {
       return true;
     });
 
-    console.log("shift", shift);
     shiftsByType.get(shiftType).shifts.push({
       shift: shift,
       possibleEmployees: possibleEmployees,
