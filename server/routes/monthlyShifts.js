@@ -13,6 +13,8 @@ const {
 
 var router = express.Router();
 
+router.get("/DoesntExist", middleware, getMissingBoardList);
+
 router.get("/:organization", middleware, async (req, res) => {
   try {
     const organization = req.params.organization;
@@ -37,16 +39,6 @@ router.get(
   }
 );
 
-router.get("/DoesntExist/:organization", middleware, async (req, res) => {
-  try {
-    const organization = req.params.organization;
-    const MonthAndYearList = await getMissingBoardList(organization);
-    res.send(MonthAndYearList);
-  } catch (err) {
-    res.send("error occured to get shifts: " + err);
-  }
-});
-
 router.post("/", middleware, async (req, res) => {
   try {
     const newShift = new Shift(req.body);
@@ -59,7 +51,7 @@ router.post("/", middleware, async (req, res) => {
 
 router.post("/createMonthlyShiftBoard", middleware, async (req, res) => {
   try {
-    const shifts = await createMonthlyShiftBoard(req.body.month, req.body.year);
+    const shifts = await createMonthlyShiftBoard(req);
     res.send(shifts);
   } catch (err) {
     res.send("error occured to post shifts: " + err);

@@ -13,10 +13,9 @@ export const ShiftBoardMonthsExist = async (organization) => {
     }
 };
 
-export const ShiftBoardMonthsDoesntExist = async (organization) => {
+export const ShiftBoardMonthsDoesntExist = async () => {
     try {
-        console.log(organization);
-        const response = await axiosServices.get(`/monthlyShifts/DoesntExist/${organization}`);
+        const response = await axiosServices.get(`/monthlyShifts/DoesntExist`);
         console.log(response.data);
         // Handle the response (e.g., show a success message)
         return response.data;
@@ -29,7 +28,7 @@ export const ShiftBoardMonthsDoesntExist = async (organization) => {
 
 export const CreateMonthShiftBoard = async (organization, month, year) => {
     try {
-        const response = await axiosServices.post('/monthlyShifts/createMonthlyShiftBoard', { organization, month, year });
+        const response = await axiosServices.post('/monthlyShifts/createMonthlyShiftBoard', { month, year });
 
         // Handle the response (e.g., show a success message)
         return response.data;

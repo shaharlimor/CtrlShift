@@ -52,7 +52,6 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         const getOpenMonths = async () => {
             const result = await getMonthOpendToAddShifts(user.organization);
             setOpenMonths(result.data);
-            console.log(result.data);
         };
         getOpenMonths();
     }, []);
