@@ -8,7 +8,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import useAuth from 'hooks/useAuth';
 import { createUser } from 'utils/userApi';
-import { getRoleTypes } from 'utils/roleTypeServices';
+import { getRoleTypesByOrg } from 'utils/roleTypeServices';
 
 /* eslint-disable */
 const EmployeeForm = (props) => {
@@ -19,7 +19,7 @@ const EmployeeForm = (props) => {
 
     React.useEffect(() => {
         const getRoles = async () => {
-            const result = await getRoleTypes("hello");
+            const result = await getRoleTypesByOrg(user.organization);
             setRoleTypes(result.data);
         };
         getRoles();
