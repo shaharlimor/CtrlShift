@@ -16,6 +16,7 @@ const EmployeeForm = (props) => {
     const [roleTypes, setRoleTypes] = React.useState([]);
     const [submit, setSubmit] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
+    const [message, setMessage] = React.useState(null);
 
     React.useEffect(() => {
         const getRoles = async () => {
@@ -28,7 +29,7 @@ const EmployeeForm = (props) => {
     const validationSchema = Yup.object({
         firstName: Yup.string().required('First name is required'),
         lastName: Yup.string().required('Last name is required'),
-        email: Yup.string().required('Email is required'),
+        email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
         password: Yup.string().required('Password is required'),
         phone: Yup.string().required('Phone is required')
     });
@@ -45,36 +46,30 @@ const EmployeeForm = (props) => {
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
             try {
-               
-
-                if (selected.length > 0) {
-                    values.organization = user.organization;
-                    const id = chance.bb_pin();
-                    values.id = id;
-                    values.isAdmin = false;
-                    values.roles = selected;
-                    await createUser(values).then(
-                        () => {
-                            resetForm();
-                            props.changeShowForm();
-                            setSubmit(false);
-                        },
-                        (err) => {
-                            if (scriptedRef.current) {
-                                setStatus({ success: false });
-                                setErrors({ submit: err.message });
-                                setSubmitting(false);
-                            }
-                        }
-                    );
-                }
+                values.organization = user.organization;
+                const id = chance.bb_pin();
+                values.id = id;
+                values.isAdmin = false;
+                values.roles = selected;
+                await createUser(values).then(
+                    () => {
+                        resetForm();
+                        props.changeShowForm();
+                        setSubmit(false);
+                        setMessage(null);
+                    },
+                    (err) => {
+                        setStatus({ success: false });
+                        setErrors({ submit: err });
+                        setMessage(err);
+                        setSubmitting(false);
+                    }
+                );
             } catch (err) {
-                console.error(err);
-                if (scriptedRef.current) {
-                    setStatus({ success: false });
-                    setErrors({ submit: err.message });
-                    setSubmitting(false);
-                }
+                setStatus({ success: false });
+                setErrors({ submit: err });
+                setMessage(err);
+                setSubmitting(false);
             }
         }
     });
@@ -82,13 +77,17 @@ const EmployeeForm = (props) => {
     const handleChange = (event) => {
         const value = event.target.value;
         setSelected(value);
-      };
+    };
     
+
+    const changeData = () => {
+        setMessage(null);
+    };
 
     return (
     <>
     <MainCard title="Add employee form">
-        <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+        <form onSubmit={formik.handleSubmit} onReset={formik.handleReset} onChange={changeData}>
         <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
                 <InputLabel>First name</InputLabel>
@@ -178,9 +177,6 @@ const EmployeeForm = (props) => {
                          </MenuItem>
                         ))}
                     </Select>
-
-                    {submit && selected?.length === 0 ?
-                        <ListItemText primary={<Typography variant="h6" style={{ color: '#ff6f00' }}>Role is required.</Typography>}></ListItemText> : <div></div>}
                 </FormControl>
             </Grid>
             <CardActions>
@@ -199,6 +195,9 @@ const EmployeeForm = (props) => {
                 </Grid>
             </CardActions>
         </Grid>
+        {submit && message?.length > 0 ?
+                        <ListItemText primary={<Typography variant="h6" style={{ color: '#ff6f00' }}>{message}</Typography>}></ListItemText> : <div></div>}
+            
         </form>
         </MainCard>
         </>
