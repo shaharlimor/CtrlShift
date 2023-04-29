@@ -154,7 +154,7 @@ const EmployeeForm = (props) => {
                     name="phone"
                     value={formik.values.phone}
                     onChange={formik.handleChange}
-                    type="text"
+                    type="number"
                     defaultValue=""
                     error={formik.touched.phone && Boolean(formik.errors.phone)}
                     helperText={formik.touched.phone && formik.errors.phone} />
