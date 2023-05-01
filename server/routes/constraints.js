@@ -10,9 +10,10 @@ const {
 
 var router = express.Router();
 
-router.get("/", middleware, async (req, res) => {
+router.get("/:organization", middleware, async (req, res) => {
   try {
-    const constraints = await getConstraints();
+    const organization = req.params.organization;
+    const constraints = await getConstraints(organization);
     res.send(constraints);
   } catch (err) {
     res.send("error occured to get constraints: " + err);

@@ -1,7 +1,17 @@
 const Constraint = require("../models/constraints");
+const Shift = require("../models/monthlyShifts");
+const { getShifts } = require("../controllers/monthlyShifts");
+const getConstraints = async (organization) => {
+  // Find all the shifts that match the given organization
+  const shifts = await getShifts(organization);
 
-const getConstraints = async () => {
-  return await Constraint.find({}, "_id level description shiftId employeeId");
+  // Get an array of shift IDs from the matching shifts
+  const shiftIds = shifts.map((shift) => shift._id);
+
+  // Find all the constraints that have a matching shift ID and organization
+  return await Constraint.find({
+    shiftId: { $in: shiftIds },
+  });
 };
 
 const getConstraintsByShiftId = async (id) => {
