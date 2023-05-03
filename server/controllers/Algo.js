@@ -13,7 +13,7 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     for (const shift of shiftType.shifts) {
       // Step 3a: Take a shift from one of the types with the least employees that can do that shift
 
-      const possibleEmployees = shiftType.employeesByShift.get(shift._id);
+      const possibleEmployees = shiftType.employeesByShift.get(shift.shift._id);
       let assignedEmployee;
 
       if (!possibleEmployees || possibleEmployees.length === 0) {
@@ -21,12 +21,10 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
         assignedShifts.push({ ...shift, assignedEmployee });
         continue;
       } else if (possibleEmployees.length === 1) {
-        console.log("sagi1");
         assignedEmployee = { id: possibleEmployees[0]._id, weight: 0 };
         assignedShifts.push({ ...shift, assignedEmployee });
         continue;
       } else {
-        console.log("sagi2");
         assignedEmployee = calculateWeightedEmployee(possibleEmployees);
         assignedShifts.push({ ...shift, assignedEmployee });
       }
@@ -47,6 +45,7 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     }
   }
 
+  console.log(assignedShifts);
   return assignedShifts;
 };
 
@@ -121,25 +120,24 @@ const removeShiftFromEmployee = (
   constraints
 ) => {
   // Remove the shift from the employee's available shifts
-  employee.availableShifts = employee.availableShifts.filter(
-    (availableShift) => availableShift._id !== shift._id
-  );
-
+  // console.log("employeesByShift", employeesByShift);
+  // employeesByShift = employeesByShift.filter(
+  //   (availableShift) => availableShift._id !== shift._id
+  // );
   // Check if the employee has any shifts assigned within the previous 12 hours
-  const now = new Date();
-  const twelveHoursAgo = new Date(now.getTime() - 12 * 60 * 60 * 1000);
-  const hasShiftWithinTwelveHours = employee.shifts.some(
-    (assignedShift) =>
-      assignedShift.shift.startTime >= twelveHoursAgo &&
-      assignedShift.shift.startTime <= now
-  );
-
-  // If the employee has a shift within the previous 12 hours, remove the current shift from their available shifts
-  if (hasShiftWithinTwelveHours) {
-    employee.availableShifts = employee.availableShifts.filter(
-      (availableShift) => availableShift._id !== shift._id
-    );
-  }
+  // const now = new Date();
+  // const twelveHoursAgo = new Date(now.getTime() - 12 * 60 * 60 * 1000);
+  // const hasShiftWithinTwelveHours = employee.shifts.some(
+  //   (assignedShift) =>
+  //     assignedShift.shift.startTime >= twelveHoursAgo &&
+  //     assignedShift.shift.startTime <= now
+  // );
+  // // If the employee has a shift within the previous 12 hours, remove the current shift from their available shifts
+  // if (hasShiftWithinTwelveHours) {
+  //   employee.availableShifts = employee.availableShifts.filter(
+  //     (availableShift) => availableShift._id !== shift._id
+  //   );
+  // }
 };
 
 const calculateWeightedEmployee = (possibleEmployees) => {
@@ -158,15 +156,18 @@ const calculateWeightedEmployee = (possibleEmployees) => {
     }
   }
 
+  console.log("sagi3", lowestWeightedEmployee);
   return lowestWeightedEmployee;
 };
 
 const calculateEmployeeWeight = (employee) => {
-  let weight = employee.weight;
-  if (employee.shiftCount > 0) {
-    weight /= employee.shiftCount;
-  }
-  return weight;
+  // let weight = employee.weight;
+  // if (employee.shiftCount > 0) {
+  //   weight /= employee.shiftCount;
+  // }
+
+  // console.log("weight", weight);
+  return 1;
 };
 
 // const sortEmployeesByWeight = (employeesByShift, shiftId) => {
