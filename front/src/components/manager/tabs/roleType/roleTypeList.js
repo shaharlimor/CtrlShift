@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // material-ui
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 
-import { deleteRoleType, getRoleTypes } from 'utils/roleTypeServices';
+import { deleteRoleType, getRoleTypesByOrg } from 'utils/roleTypeServices';
 
 // assets
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -42,7 +42,7 @@ export default function RoleTypesList(props) {
     useEffect(() => {
         const getRoles = async () => {
             /* eslint-disable-next-line */
-            const result = await getRoleTypes(user.organization);
+            const result = await getRoleTypesByOrg(user.organization);
             setRoleTypes(result.data);
         };
         getRoles();

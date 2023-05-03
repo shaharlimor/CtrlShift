@@ -9,6 +9,12 @@ const createUser = async (req, res) => {
             organization, isAdmin, roles } = req.body;
 
     try {
+        // Check if user exists in DB
+        const foundUser = await User.findOne({ email: email });
+        if (foundUser != null) {
+            return res.status(500).send("User already exists");
+        }
+    
         salt = await bcrypt.genSalt(10);
         encryptedPass = await bcrypt.hash(password, salt);
 

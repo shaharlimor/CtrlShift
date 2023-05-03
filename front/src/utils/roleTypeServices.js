@@ -12,7 +12,7 @@ export const updateRoleType = async (body) => {
     await axiosServices.post('/roleTypes/update', body);
 };
 
-export async function getRoleTypes(org) {
+export async function getRoleTypesByOrg(org) {
     const data = await axiosServices.get(`/roleTypes/${org}`);
     return data;
 }

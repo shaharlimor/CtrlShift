@@ -29,7 +29,7 @@ import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from '../../../AnimateButton';
 import { savePermanentShift, updatePermanentShift } from '../../../../utils/permenentShift';
-import { getRoleTypes } from 'utils/roleTypeServices';
+import { getRoleTypesByOrg } from 'utils/roleTypeServices';
 
 const AddPermenentShift = (props) => {
     const theme = useTheme();
@@ -44,7 +44,7 @@ const AddPermenentShift = (props) => {
             // TODO - when a role schema will be
         }
         const getRole = async () => {
-            const result = await getRoleTypes(user.organization);
+            const result = await getRoleTypesByOrg(user.organization);
             setRoleTypes(result.data);
         };
         getRole();
