@@ -33,7 +33,7 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
       updateEmployeeWeight(users, assignedEmployee.id, assignedEmployee.weight);
 
       // Step 3c: Check constraints and remove shift from employee's available shifts
-      removeShiftFromEmployee(
+      removeEmplyeeFromShifts(
         assignedEmployee,
         shift,
         shiftType.employeesByShift,
@@ -113,31 +113,41 @@ const updateEmployeeWeight = (users, employeeId, weightDelta) => {
     employee.weight += weightDelta;
   }
 };
-const removeShiftFromEmployee = (
+const removeEmplyeeFromShifts = (
   employee,
   shift,
   employeesByShift,
   constraints
 ) => {
-  // Remove the shift from the employee's available shifts
-  // console.log("employeesByShift", employeesByShift);
-  // employeesByShift = employeesByShift.filter(
-  //   (availableShift) => availableShift._id !== shift._id
-  // );
-  // Check if the employee has any shifts assigned within the previous 12 hours
-  // const now = new Date();
-  // const twelveHoursAgo = new Date(now.getTime() - 12 * 60 * 60 * 1000);
-  // const hasShiftWithinTwelveHours = employee.shifts.some(
-  //   (assignedShift) =>
-  //     assignedShift.shift.startTime >= twelveHoursAgo &&
-  //     assignedShift.shift.startTime <= now
-  // );
-  // // If the employee has a shift within the previous 12 hours, remove the current shift from their available shifts
-  // if (hasShiftWithinTwelveHours) {
-  //   employee.availableShifts = employee.availableShifts.filter(
-  //     (availableShift) => availableShift._id !== shift._id
-  //   );
-  // }
+  // Remove the employee from the shifts they cannot do
+  for (const [shiftId, possibleEmployees] of employeesByShift) {
+    if (shiftId !== shift.shift._id) {
+      const index = possibleEmployees.findIndex((e) => e._id === employee.id);
+      if (index !== -1) {
+        possibleEmployees.splice(index, 1);
+      }
+    }
+  }
+
+  // Check if the employee has any shifts assigned within the previous 12 hours, if yes remove them from the list of possible employees
+  const maxEndTime = new Date(shift.shift.end_time);
+  maxEndTime.setHours(maxEndTime.getHours() + 12);
+  const conflictingShifts = constraints.filter(
+    (c) =>
+      c.employeeId === employee.id &&
+      new Date(c.shift.end_time) > shift.shift.start_time &&
+      new Date(c.shift.start_time) < maxEndTime
+  );
+
+  for (const c of conflictingShifts) {
+    const possibleEmployees = employeesByShift.get(c.shift._id);
+    if (possibleEmployees) {
+      const index = possibleEmployees.findIndex((e) => e._id === employee.id);
+      if (index !== -1) {
+        possibleEmployees.splice(index, 1);
+      }
+    }
+  }
 };
 
 const calculateWeightedEmployee = (possibleEmployees) => {
