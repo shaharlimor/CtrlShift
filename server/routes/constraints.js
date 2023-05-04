@@ -30,7 +30,7 @@ router.get("/byShift/:id", middleware, async (req, res) => {
   }
 });
 
-router.get("/byEmployee/:id", middleware, async (req, res) => {
+router.get("/byEmployee/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const constraints = await getConstraintsByEmployeeId(id);

@@ -19,6 +19,11 @@ export async function employeeHasConstraintInShift(empId, shiftId) {
     return data;
 }
 
+export async function getConstraintsByUserId(id) {
+    const data = await axiosServices.get(`/constraints/byEmployee/${id}`);
+    return data;
+}
+
 export async function getEmployeesByOrg(org) {
     const data = await axiosServices.get(`/user/users?organization=${org}`);
     return data;
