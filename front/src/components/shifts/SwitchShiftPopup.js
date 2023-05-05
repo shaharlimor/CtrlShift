@@ -8,7 +8,7 @@ import { gridSpacing } from 'store/constant';
 // import { SwitchShiftRequest } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 
-const SwitchShiftPopup = ({ onCancel }) => {
+const SwitchShiftPopup = ({ onCancel, events }) => {
     const { user } = useAuth();
     const theme = useTheme();
 
@@ -24,7 +24,7 @@ const SwitchShiftPopup = ({ onCancel }) => {
             <Divider />
             <DialogContent>
                 <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">
-                    bla
+                    {console.log(events)}
                 </Grid>
             </DialogContent>
             <DialogActions sx={{ pb: 2 }}>
@@ -66,6 +66,7 @@ const SwitchShiftPopup = ({ onCancel }) => {
 };
 
 SwitchShiftPopup.propTypes = {
+    events: PropTypes.array,
     onCancel: PropTypes.func
 };
 

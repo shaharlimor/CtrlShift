@@ -195,7 +195,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                 {displayButton()}
             </Grid>
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && <SwitchShiftPopup onCancel={handleModalClose} />}
+                {isModalOpen && <SwitchShiftPopup onCancel={handleModalClose} events={events} />}
             </Dialog>
         </Fragment>
     );
