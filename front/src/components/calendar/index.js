@@ -119,14 +119,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
         if (calendarType === 2) {
             return (
                 <Grid item>
-                    <Button
-                        variant="contained"
-                        sx={{ width: '100%' }}
-                        size="large"
-                        onClick={() => {
-                            handleSwitchShiftClick();
-                        }}
-                    >
+                    <Button variant="contained" sx={{ width: '100%' }} size="large" onClick={() => handleSwitchShiftClick()}>
                         Switch shift
                     </Button>
                 </Grid>

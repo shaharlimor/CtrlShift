@@ -9,6 +9,7 @@ const {
   deleteShiftById,
   getShiftsOpenToConstraints,
   getShiftsOpenToConstraintsByRoles,
+  getShiftsPublished,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -65,6 +66,16 @@ router.delete("/:id", middleware, async (req, res) => {
     res.status(200).send(`success deleted shift ${id}`);
   } catch (err) {
     res.status(404).send("Error to delete shift " + err);
+  }
+});
+
+router.get("/published/:organization", middleware, async (req, res) => {
+  try {
+    const organization = req.params.organization;
+    const shifts = await getShiftsPublished(organization);
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
   }
 });
 

@@ -2,7 +2,7 @@ import { lazy, useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
-import { getMonthlyShifts } from 'utils/api';
+import { getMonthlyShiftsPublished } from 'utils/api';
 import { colorGenerator } from 'utils/color-generator';
 
 import Loadable from 'components/Loadable';
@@ -23,7 +23,7 @@ const ShiftBoard = () => {
 
     useEffect(() => {
         const getShifts = async () => {
-            const result = await getMonthlyShifts();
+            const result = await getMonthlyShiftsPublished(user.organization);
             let parsedData = [];
             result.data.map(async (item) =>
                 parsedData.push({
@@ -32,9 +32,9 @@ const ShiftBoard = () => {
                     color: await colorGenerator(item.startTime.toString()),
                     description: item.name,
                     start: new Date(item.startTime.toString()),
-                    end: new Date(item.endTime.toString())
-                    /* eslint-disable-next-line */
-                    // title: await handleIsConstraintInsertTitle(item.name, item._id)
+                    end: new Date(item.endTime.toString()),
+                    title: item.name,
+                    roles: item.roles
                 })
             );
             setEvents(parsedData);
@@ -59,6 +59,7 @@ const ShiftBoard = () => {
     };
 
     const handleSwitchShiftClick = () => {
+        console.log('clicked');
         setIsModalOpen(true);
     };
 
