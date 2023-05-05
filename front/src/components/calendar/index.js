@@ -21,7 +21,7 @@ import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 // 0 - Insert Constraints
 // 1 - Manager - Monthly Planner
 // 2 - Shifts Board
-const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick }) => {
+const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick, handleChangeMyShifts }) => {
     const calendarRef = useRef(null);
     const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -137,6 +137,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
                     onClickNext={handleDateNext}
                     onClickPrev={handleDatePrev}
                     onChangeView={handleViewChange}
+                    handleChangeMyShifts={handleChangeMyShifts}
                     calendarType={calendarType}
                 />
                 <SubCard>
@@ -187,7 +188,8 @@ Calendar.propTypes = {
     events: PropTypes.array,
     handleEventSelect: PropTypes.func,
     calendarType: PropTypes.number,
-    handleSwitchShiftClick: PropTypes.func
+    handleSwitchShiftClick: PropTypes.func,
+    handleChangeMyShifts: PropTypes.func
 };
 
 export default Calendar;

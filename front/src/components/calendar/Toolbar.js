@@ -29,7 +29,7 @@ const viewOptions = [
     }
 ];
 
-const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarType, ...others }) => {
+const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarType, handleChangeMyShifts, ...others }) => {
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const [newViewOption, setNewViewOption] = useState(viewOptions);
 
@@ -58,6 +58,7 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
                             size="large"
                             color="secondary"
                             startIcon={calendarType === 1 && <AddCircleOutlineTwoToneIcon />}
+                            onClick={() => handleChangeMyShifts()}
                         >
                             My shifts
                         </Button>
@@ -107,7 +108,8 @@ Toolbar.propTypes = {
     onClickNext: PropTypes.func,
     onClickPrev: PropTypes.func,
     onChangeView: PropTypes.func,
-    calendarType: PropTypes.number
+    calendarType: PropTypes.number,
+    handleChangeMyShifts: PropTypes.func
 };
 
 export default Toolbar;
