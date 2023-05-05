@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, Fragment } from 'react';
-import { useMediaQuery, Button, Grid, Dialog } from '@mui/material';
+import { useMediaQuery, Button, Grid } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import FullCalendar from '@fullcalendar/react';
@@ -16,17 +16,15 @@ import { getMonthOpendToAddShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import PublishScheduleButton from '../shifts/PublishSchedule';
 import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
-import SwitchShiftPopup from '../shifts/SwitchShiftPopup';
 
 // According to the page and the type of the calendar
 // 0 - Insert Constraints
 // 1 - Manager - Monthly Planner
 // 2 - Shifts Board
-const Calendar = ({ events, calendarType, handleEventSelect }) => {
+const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick }) => {
     const calendarRef = useRef(null);
     const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const displayEvents = events !== null ? events : [];
 
@@ -126,7 +124,7 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                         sx={{ width: '100%' }}
                         size="large"
                         onClick={() => {
-                            setIsModalOpen(true);
+                            handleSwitchShiftClick();
                         }}
                     >
                         Switch shift
@@ -136,11 +134,6 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
         }
         return '';
     };
-
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-    };
-
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -194,16 +187,14 @@ const Calendar = ({ events, calendarType, handleEventSelect }) => {
                 {/* according to the calendar page display the relevant button */}
                 {displayButton()}
             </Grid>
-            <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && <SwitchShiftPopup onCancel={handleModalClose} events={events} />}
-            </Dialog>
         </Fragment>
     );
 };
 Calendar.propTypes = {
     events: PropTypes.array,
     handleEventSelect: PropTypes.func,
-    calendarType: PropTypes.number
+    calendarType: PropTypes.number,
+    handleSwitchShiftClick: PropTypes.func
 };
 
 export default Calendar;
