@@ -21,7 +21,7 @@ import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 // 0 - Insert Constraints
 // 1 - Manager - Monthly Planner
 // 2 - Shifts Board
-const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick, handleChangeMyShifts }) => {
+const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick, filterMode, changeFilteredByMyShifts }) => {
     const calendarRef = useRef(null);
     const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -119,7 +119,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
         if (calendarType === 2) {
             return (
                 <Grid item>
-                    <Button variant="contained" sx={{ width: '100%' }} size="large" onClick={() => handleSwitchShiftClick()}>
+                    <Button variant="contained" sx={{ width: '100%' }} size="large" onClick={handleSwitchShiftClick}>
                         Switch shift
                     </Button>
                 </Grid>
@@ -127,6 +127,13 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
         }
         return '';
     };
+
+    const handleChangeMyShifts = () => {
+        if (typeof changeFilteredByMyShifts === 'function') {
+            changeFilteredByMyShifts();
+        }
+    };
+
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -134,10 +141,11 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
                 <Toolbar
                     date={date}
                     view={view}
+                    filterMode={filterMode}
                     onClickNext={handleDateNext}
                     onClickPrev={handleDatePrev}
                     onChangeView={handleViewChange}
-                    handleChangeMyShifts={handleChangeMyShifts}
+                    onMyShiftChange={handleChangeMyShifts}
                     calendarType={calendarType}
                 />
                 <SubCard>
@@ -189,7 +197,8 @@ Calendar.propTypes = {
     handleEventSelect: PropTypes.func,
     calendarType: PropTypes.number,
     handleSwitchShiftClick: PropTypes.func,
-    handleChangeMyShifts: PropTypes.func
+    changeFilteredByMyShifts: PropTypes.func,
+    filterMode: PropTypes.bool
 };
 
 export default Calendar;

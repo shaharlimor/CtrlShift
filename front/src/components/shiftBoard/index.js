@@ -12,7 +12,7 @@ import { IconUserCheck } from '@tabler/icons';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 import SwitchShiftPopup from './SwitchShiftPopup';
-import { constant } from 'lodash';
+import { constant, filter } from 'lodash';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -21,7 +21,8 @@ const ShiftBoard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [events, setEvents] = useState([]);
     const { user } = useAuth();
-    const [filteredByEmplyee, setFilteredByEmplyee] = [];
+    const [filteredByEmployee, setFilteredByEmployee] = useState([]);
+    const [filterMode, setFilterMode] = useState(false);
 
     useEffect(() => {
         const getShifts = async () => {
@@ -39,7 +40,7 @@ const ShiftBoard = () => {
                     roles: item.roles
                 })
             );
-            console.log('parsedData', parsedData);
+
             setEvents(parsedData);
             parsedData = [];
         };
@@ -64,18 +65,16 @@ const ShiftBoard = () => {
             }
         }
 
-        setFilteredByEmplyee(shiftsForEmployee);
-    };
-
-    const removeGetShiftsByEmployee = () => {
-        setFilteredByEmplyee([]);
+        setFilteredByEmployee(shiftsForEmployee);
     };
 
     const handleChangeMyShifts = () => {
-        if (filteredByEmplyee === []) {
-            getShiftsForEmployee();
+        if (filterMode) {
+            setFilteredByEmployee([]);
+            setFilterMode(false);
         } else {
-            removeGetShiftsByEmployee();
+            setFilterMode(true);
+            getShiftsForEmployee();
         }
     };
 
@@ -95,23 +94,22 @@ const ShiftBoard = () => {
     };
 
     const handleSwitchShiftClick = () => {
-        console.log('clicked');
         setIsModalOpen(true);
     };
 
     return (
         <div>
-            <Calendar calendarType={2} events={events} handleEventSelect={handleEventSelect} />
+            <Calendar
+                calendarType={2}
+                handleEventSelect={handleEventSelect}
+                handleSwitchShiftClick={handleSwitchShiftClick}
+                changeFilteredByMyShifts={handleChangeMyShifts}
+                events={filterMode ? filteredByEmployee : events}
+                filterMode={filterMode}
+            />
             {/* Dialog renders its body even if not open */}
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && (
-                    <SwitchShiftPopup
-                        handleChangeMyShifts={handleChangeMyShifts()}
-                        handleSwitchShiftClick={handleSwitchShiftClick()}
-                        onCancel={handleModalClose}
-                        events={filteredByEmplyee !== null ? filteredByEmplyee : events}
-                    />
-                )}
+                {isModalOpen && <SwitchShiftPopup onCancel={handleModalClose} events={events} />}
             </Dialog>
         </div>
     );
