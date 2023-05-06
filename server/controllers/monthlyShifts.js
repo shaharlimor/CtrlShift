@@ -213,6 +213,36 @@ const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
   return filteredShifts;
 };
 
+const getShiftsPublished = async (organization) => {
+  // Get The month and year published
+  console.log(organization);
+  const schePublished = await Schedule.find(
+    { organization: organization, isPublished: true },
+    "month year"
+  );
+
+  console.log(schePublished);
+
+  // Get shifts that published according to boards that open
+  const shifts = await Shift.find({
+    organization: organization,
+    $expr: {
+      $in: [
+        {
+          $concat: [
+            { $toString: { $month: "$startTime" } }, // Extract and convert month to string
+            "-",
+            { $toString: { $year: "$startTime" } }, // Extract and convert year to string
+          ],
+        },
+        schePublished.map(({ month, year }) => `${month}-${year}`), // Map array of objects to concatenated month-year strings
+      ],
+    },
+  });
+
+  return shifts;
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
@@ -221,4 +251,5 @@ module.exports = {
   deleteShiftById,
   getShiftsOpenToConstraints,
   getShiftsOpenToConstraintsByRoles,
+  getShiftsPublished,
 };

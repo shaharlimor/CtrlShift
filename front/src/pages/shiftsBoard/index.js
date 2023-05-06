@@ -2,12 +2,12 @@ import MainCard from 'components/cards/MainCard';
 import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 
-const Calendar = Loadable(lazy(() => import('components/calendar')));
+const ShiftBoardCom = Loadable(lazy(() => import('components/shiftBoard')));
 
 /* eslint-disable */
 const ShiftsBoard = () => (
     <MainCard title="Shifts Board">
-        <Calendar calendarType={2} />
+        <ShiftBoardCom />
     </MainCard>
 );
 
