@@ -72,10 +72,7 @@ export const JWTProvider = ({ children }) => {
     const navigate = useNavigate();
     useEffect(() => {
         const navigateLogin = () => {
-            setState({
-                type: LOGOUT
-            });
-            navigate('/login');
+            navigateLogin();
         };
 
         const getUserByRefreshToken = async () => {
@@ -128,9 +125,24 @@ export const JWTProvider = ({ children }) => {
         init();
     }, []); // eslint-disable-line
 
+    const navigateLogin = () => {
+        setRefreshToken(null);
+        setAccessToken(null);
+        setState({
+            type: LOGOUT,
+            payload: {
+                isLoggedIn: false,
+                user: null
+            }
+        });
+        navigate('/login');
+    };
+
     const refreshStateAccessToken = async () => {
         console.log('refresh access token');
-        const response = await axiosServices.post('/auth/refreshToken');
+        const response = await axiosServices.post('/auth/refreshToken').catch(() => {
+            navigateLogin();
+        });
         const { user, refreshToken, accessToken } = response.data;
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
