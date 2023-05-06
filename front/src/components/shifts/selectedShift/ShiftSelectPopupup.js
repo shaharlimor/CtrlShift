@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, Typography } from '@mui/material';
+
+import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 // project imports
-import { gridSpacing } from 'store/constant';
 import { deleteMonthlyShift } from 'utils/api';
-import useAuth from 'hooks/useAuth';
 import ShiftTabs from './ShiftTabs';
 
 const ShiftSelectPopupup = ({ event, onCancel }) => {
-    const { user } = useAuth();
     const theme = useTheme();
 
     const handleDeleteClicked = async () => {
@@ -25,7 +23,7 @@ const ShiftSelectPopupup = ({ event, onCancel }) => {
                 {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
             </DialogTitle>
             <Divider />
-            <DialogContent sx={{ pt: 0 }}>
+            <DialogContent sx={{ pt: 0, maxHeight: 230, minHeight: 230 }}>
                 <ShiftTabs event={event} />
             </DialogContent>
             <DialogActions sx={{ pb: 2 }}>

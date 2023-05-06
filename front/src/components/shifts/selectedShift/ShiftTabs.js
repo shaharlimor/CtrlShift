@@ -1,18 +1,15 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Tab, Tabs, Typography, styled } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
 
 // assets
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import PeopleIcon from '@mui/icons-material/People';
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
 import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
-import TeamMembers from './TeamMembers';
+import ConstraintsTab from './ConstraintsTab';
+import { getUsersWithConstraintsInShift } from 'utils/api';
 
 // tabs panel
 function TabPanel({ children, value, index, ...other }) {
@@ -48,12 +45,32 @@ const tabsOption = [
     }
 ];
 
+/* eslint-disable*/
 const ShiftTabs = ({ event }) => {
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [employees, setEmployees] = useState([]);
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        const getEmp = async () => {
+            const result = await getUsersWithConstraintsInShift(event.id);
+            let parsedData = [];
+            parsedData = result.data.map((item) => ({
+                // eslint-disable-next-line
+                id: item._id,
+                firstName: item.firstName,
+                lastName: item.lastName
+            }));
+
+            setEmployees(parsedData);
+            parsedData = [];
+        };
+        getEmp();
+    }, [event]);
 
     return (
         <>
@@ -72,7 +89,7 @@ const ShiftTabs = ({ event }) => {
                         px: 1,
                         mr: 2.25,
                         color: theme.palette.grey[600],
-                        // display: 'flex',
+                        display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center'
@@ -94,7 +111,7 @@ const ShiftTabs = ({ event }) => {
                 ))}
             </Tabs>
             <TabPanel value={value} index={0}>
-                <TeamMembers event={event} />
+                <ConstraintsTab employees={employees} />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <Typography>shift placement</Typography>

@@ -1,32 +1,9 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 
-// material-ui
-import { Avatar, Button, CardActions, CardContent, Divider, Grid, Typography } from '@mui/material';
+import { Avatar, CardContent, Grid, Typography } from '@mui/material';
 
-// project imports
-import { getUsersWithConstraintsInShift } from 'utils/api';
-
-const TeamMembers = ({ event }) => {
-    const [employees, setEmployees] = useState([]);
-
-    useEffect(() => {
-        const getEmp = async () => {
-            const result = await getUsersWithConstraintsInShift(event.id);
-            let parsedData = [];
-            parsedData = result.data.map((item) => ({
-                // eslint-disable-next-line
-                id: item._id,
-                firstName: item.firstName,
-                lastName: item.lastName
-            }));
-
-            setEmployees(parsedData);
-            parsedData = [];
-        };
-        getEmp();
-    }, [event]);
-
+/* eslint-disable*/
+const ConstraintsTab = ({ employees }) => {
     return (
         <CardContent>
             {employees.length === 0 ? (
@@ -65,8 +42,8 @@ const TeamMembers = ({ event }) => {
     );
 };
 
-TeamMembers.propTypes = {
-    event: PropTypes.object
+ConstraintsTab.propTypes = {
+    employees: PropTypes.array
 };
 
-export default TeamMembers;
+export default ConstraintsTab;
