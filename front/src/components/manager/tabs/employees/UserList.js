@@ -45,7 +45,6 @@ const UserList = (props) => {
         const id = data.at(index)._id;
         handleDelete(id);
         setData(data.filter((us) => us._id !== id));
-        /* eslint-disable */
     };
 
     return (
@@ -69,7 +68,7 @@ const UserList = (props) => {
                         data.map((row, index) => (
                             <TableRow hover key={index}>
                                 <TableCell sx={{ pl: 3 }}>
-                                    <Avatar src={"https://controlshift-images.s3.eu-central-1.amazonaws.com/"+row._id+".png"} />
+                                    <Avatar src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${row._id}.png`} />
                                 </TableCell>
                                 <TableCell>
                                     <Typography align="left" variant="subtitle1" component="div">
@@ -82,23 +81,23 @@ const UserList = (props) => {
                                     </Typography>
                                 </TableCell>
                                 <TableCell>{row.email}</TableCell>
-                                <TableCell> 
-                                    <FormControl sx={{ m: 1}}>
-                                        <Select  
-                                        SelectDisplayProps={{ style: { paddingTop: 2, paddingBottom: 2 } }}
-                                        variant="outlined"
-                                        style={{ height: 30, width:80 }}
-                                        multiple
-                                        value={[]}>
-                                        {row.role_types?.length === 0 ? 
-                                            <option disabled>none.</option>:
-                                            (row.role_types?.map((role, index) => (
-                                                <option> {role} </option>
-                                            )))
-                                        }
+                                <TableCell>
+                                    <FormControl sx={{ m: 1 }}>
+                                        <Select
+                                            SelectDisplayProps={{ style: { paddingTop: 2, paddingBottom: 2 } }}
+                                            variant="outlined"
+                                            style={{ height: 30, width: 80 }}
+                                            multiple
+                                            value={[]}
+                                        >
+                                            {row.role_types?.length === 0 ? (
+                                                <option disabled>none.</option>
+                                            ) : (
+                                                row.role_types?.map((role, index) => <option> {role} </option>)
+                                            )}
                                         </Select>
                                     </FormControl>
-                                    </TableCell>
+                                </TableCell>
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">

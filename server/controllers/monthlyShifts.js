@@ -52,7 +52,7 @@ const getMissingBoardList = async (req, res) => {
       })
     );
 
-    console.log("sagi", existingMonthsSet);
+    // console.log("sagi", existingMonthsSet);
 
     // Loop through the next 12 months and add missing months to the missingMonths array
     for (let year = now.getFullYear(); year <= nextYear; year++) {

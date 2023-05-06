@@ -64,3 +64,8 @@ export async function getMonthlyShiftsPublished(org) {
     const data = await axiosServices.get(`/monthlyShifts/published/${org}`);
     return data;
 }
+
+export async function getUsersWithConstraintsInShift(id) {
+    const data = await axiosServices.get(`/constraints/EmployeesWithConstraintInShift/${id}`);
+    return data;
+}

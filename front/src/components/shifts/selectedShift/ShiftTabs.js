@@ -12,6 +12,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
 import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
+import TeamMembers from './TeamMembers';
 
 // tabs panel
 function TabPanel({ children, value, index, ...other }) {
@@ -39,65 +40,15 @@ function a11yProps(index) {
 const tabsOption = [
     {
         label: 'Constraints',
-        icon: <DescriptionTwoToneIcon sx={{ fontSize: '1.3rem' }} />
+        icon: <PeopleIcon sx={{ fontSize: '1.3rem' }} />
     },
     {
-        label: 'Assign',
+        label: 'Shift Placement',
         icon: <LibraryBooksTwoToneIcon sx={{ fontSize: '1.3rem' }} />
     }
 ];
 
-// icon tab style
-const AntTabs = styled(Tabs)(({ theme }) => ({
-    background: theme.palette.mode === 'dark' ? theme.palette.dark[800] : theme.palette.primary.light,
-    width: '100%',
-    borderRadius: '6px',
-    '& .MuiTabs-indicator': {
-        backgroundColor: theme.palette.secondary.main
-    },
-    display: 'flex',
-    justifyContent: 'center',
-    margin: '0 auto'
-}));
-
-// style constant
-const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
-    textTransform: 'none',
-    minWidth: 0,
-    [theme.breakpoints.up('sm')]: {
-        minWidth: 0
-    },
-    fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(1),
-    marginLeft: theme.spacing(1),
-    color: theme.palette.secondary.main,
-    fontFamily: [
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-    ].join(','),
-    '&:hover': {
-        color: theme.palette.secondary.main,
-        opacity: 1
-    },
-    '&.Mui-selected': {
-        color: theme.palette.secondary.main,
-        fontWeight: theme.typography.fontWeightMedium
-    },
-    '&.Mui-focusVisible': {
-        backgroundColor: theme.palette.secondary.main
-    },
-    display: 'flex',
-    justifyContent: 'center'
-}));
-
-const ShiftTabs = () => {
+const ShiftTabs = ({ event }) => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -143,13 +94,15 @@ const ShiftTabs = () => {
                 ))}
             </Tabs>
             <TabPanel value={value} index={0}>
-                <Typography>Constraints</Typography>
+                <TeamMembers event={event} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Typography>Assigns</Typography>
+                <Typography>shift placement</Typography>
             </TabPanel>
         </>
     );
 };
-
+ShiftTabs.propTypes = {
+    event: PropTypes.object
+};
 export default ShiftTabs;
