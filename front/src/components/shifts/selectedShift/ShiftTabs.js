@@ -3,29 +3,21 @@ import React from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Tab, Tabs, styled } from '@mui/material';
+import { Box, Tab, Tabs, Typography, styled } from '@mui/material';
 
 // assets
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
+import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import PermanentShift from './tabs/permenentShift/PermenentShifts';
-import RoleTypes from 'components/manager/tabs/roleType/roleType';
-import Employees from './tabs/employees/employees';
+import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
+import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
 
-// tab content
+// tabs panel
 function TabPanel({ children, value, index, ...other }) {
     return (
         <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
-            {value === index && (
-                <Box
-                    sx={{
-                        p: 2
-                    }}
-                >
-                    <Box>{children}</Box>
-                </Box>
-            )}
+            {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
         </div>
     );
 }
@@ -35,6 +27,25 @@ TabPanel.propTypes = {
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired
 };
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`
+    };
+}
+
+// tabs option
+const tabsOption = [
+    {
+        label: 'Constraints',
+        icon: <DescriptionTwoToneIcon sx={{ fontSize: '1.3rem' }} />
+    },
+    {
+        label: 'Assign',
+        icon: <LibraryBooksTwoToneIcon sx={{ fontSize: '1.3rem' }} />
+    }
+];
 
 // icon tab style
 const AntTabs = styled(Tabs)(({ theme }) => ({
@@ -86,52 +97,59 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) =
     justifyContent: 'center'
 }));
 
-export default function ManagerTabs() {
+const ShiftTabs = () => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    /* eslint-disable */
     return (
         <>
-            <AntTabs theme={theme} value={value} onChange={handleChange} aria-label="ant example">
-                <AntTab
-                    label={
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <MenuTwoToneIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
-                            Role Types
-                        </Box>
+            <Tabs
+                value={value}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={handleChange}
+                variant="scrollable"
+                sx={{
+                    mb: 1,
+                    '& a': {
+                        minHeight: 'auto',
+                        minWidth: 10,
+                        py: 1.5,
+                        px: 1,
+                        mr: 2.25,
+                        color: theme.palette.grey[600],
+                        // display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    },
+                    '& a.Mui-selected': {
+                        color: theme.palette.primary.main
+                    },
+                    '& .MuiTabs-indicator': {
+                        bottom: 2
+                    },
+                    '& a > svg': {
+                        marginBottom: '0px !important',
+                        mr: 1.25
                     }
-                />
-                <AntTab
-                    label={
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <WorkOutlineIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
-                            Permenent shifts
-                        </Box>
-                    }
-                />
-                <AntTab
-                    label={
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <PeopleIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
-                            Employees
-                        </Box>
-                    }
-                />
-            </AntTabs>
+                }}
+            >
+                {tabsOption.map((tab, index) => (
+                    <Tab key={index} to="#" icon={tab.icon} label={tab.label} {...a11yProps(index)} />
+                ))}
+            </Tabs>
             <TabPanel value={value} index={0}>
-                <RoleTypes />
+                <Typography>Constraints</Typography>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <PermanentShift />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <Employees />
+                <Typography>Assigns</Typography>
             </TabPanel>
         </>
     );
-    /* eslint-disable */
-}
+};
+
+export default ShiftTabs;

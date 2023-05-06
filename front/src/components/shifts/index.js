@@ -4,7 +4,7 @@ import Loadable from 'components/Loadable';
 import { getMonthlyShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import { colorGenerator } from 'utils/color-generator';
-import DeleteShiftPopup from './DeleteShiftPopup';
+import DeleteShiftPopup from './selectedShift/DeleteShiftPopup';
 import { Dialog } from '@mui/material';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));

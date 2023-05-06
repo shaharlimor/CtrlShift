@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { gridSpacing } from 'store/constant';
 import { deleteMonthlyShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
+import ShiftTabs from './ShiftTabs';
 
 const DeleteShiftPopup = ({ event, onCancel }) => {
     const { user } = useAuth();
@@ -21,18 +22,19 @@ const DeleteShiftPopup = ({ event, onCancel }) => {
         // eslint-disable-next-line
         <Fragment>
             <DialogTitle color="primary.800">
-                Delete - {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
+                {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
             </DialogTitle>
             <Divider />
             <DialogContent>
-                <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">
+                <ShiftTabs />
+                {/* <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">
                     <Grid item justifyContent="center">
                         <Typography variant="h3">Are you sure?</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant="body2">Do you really want to delete this shift? This process cannot be undone</Typography>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </DialogContent>
             <DialogActions sx={{ pb: 2 }}>
                 <Grid container justifyContent="space-between" alignItems="center">
