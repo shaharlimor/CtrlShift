@@ -107,4 +107,14 @@ router.get(
   }
 );
 
+router.get("/byId/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const shifts = await getShifts(organization);
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
+  }
+});
+
 module.exports = router;

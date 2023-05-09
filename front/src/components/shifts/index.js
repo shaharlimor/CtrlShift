@@ -20,7 +20,6 @@ const Shifts = () => {
         const getShifts = async () => {
             const result = await getMonthlyShifts(user.organization);
             let parsedData = [];
-
             result.data.map(async (item) =>
                 parsedData.push({
                     // eslint-disable-next-line
@@ -29,7 +28,8 @@ const Shifts = () => {
                     description: item.name,
                     start: new Date(item.startTime.toString()),
                     end: new Date(item.endTime.toString()),
-                    title: item.name
+                    title: item.name,
+                    roles: item.roles
                 })
             );
             setEvents(parsedData);

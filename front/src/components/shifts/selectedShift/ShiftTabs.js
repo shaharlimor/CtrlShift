@@ -10,6 +10,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
 import ConstraintsTab from './ConstraintsTab';
 import { getUsersWithConstraintsInShift } from 'utils/api';
+import PlacementTab from './PlacementTab';
 
 // tabs panel
 function TabPanel({ children, value, index, ...other }) {
@@ -56,6 +57,7 @@ const ShiftTabs = ({ event }) => {
     };
 
     useEffect(() => {
+        console.log(event);
         const getEmp = async () => {
             const result = await getUsersWithConstraintsInShift(event.id);
             let parsedData = [];
@@ -114,7 +116,7 @@ const ShiftTabs = ({ event }) => {
                 <ConstraintsTab employees={employees} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Typography>shift placement</Typography>
+                <PlacementTab employees={employees} roles={event.roles} />
             </TabPanel>
         </>
     );

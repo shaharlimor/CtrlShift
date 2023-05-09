@@ -243,6 +243,13 @@ const getShiftsPublished = async (organization) => {
   return shifts;
 };
 
+const getShiftById = async (id) => {
+  return await Shift.find(
+    { _id: id },
+    "_id organization startTime endTime name roles"
+  );
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
@@ -252,4 +259,5 @@ module.exports = {
   getShiftsOpenToConstraints,
   getShiftsOpenToConstraintsByRoles,
   getShiftsPublished,
+  getShiftById,
 };
