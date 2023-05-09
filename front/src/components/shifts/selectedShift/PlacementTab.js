@@ -24,6 +24,11 @@ const PlacementTab = ({ employees, roles }) => {
         handleRolesAndEmployess();
     }, []);
 
+    // TODO: create a state of all the emoloyess to display - from the db and from the manually inserted
+    // display it
+    // create post to db
+    // add option to add
+
     return (
         <CardContent>
             <Typography align="center" component="div" variant="h3">
