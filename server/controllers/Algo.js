@@ -1,3 +1,5 @@
+const MonthlyShifts = require("../models/monthlyShifts");
+
 const scheduleShifts = async (monthlyShifts, users, constraints) => {
   const createShiftObject = (shiftsArray, newShift) => {
     const shiftLength = newShift.possibleEmployees.length;
@@ -20,12 +22,38 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     }
   }
 
-  const assignShiftToEmployee = (shiftID, employeeID) => {
+  const assignShiftToEmployee = async(shiftID, roleType, employeeID) => {
     if (employeeID == null) {
-      // TODO assign empty shift
+      // MonthlyShifts.findByIdAndUpdate(
+      //   shiftID,
+      //   { $addToSet: { 'roles.$[role].employeeIds': employeeID } },
+      //   {
+      //     arrayFilters: [{ 'role.roleType': roleType }],
+      //     new: true,
+      //     upsert: true,
+      //   },
+      //   (err) => {
+      //     if (err) {
+      //       console.error(err);
+      //     }
+      //   }
+      // );
     } else {
       usersWeight.get(employeeID).given += 1;
-      // TODO assign shift
+      MonthlyShifts.findByIdAndUpdate(
+        shiftID,
+        { $addToSet: { 'roles.$[role].employeeIds': employeeID } },
+        {
+          arrayFilters: [{ 'role.roleType': roleType }],
+          new: true,
+          upsert: true,
+        },
+        (err) => {
+          if (err) {
+            console.error(err);
+          }
+        }
+      );
     }
   }
 
@@ -91,18 +119,16 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
   // Step 1: Create a list for each type containing all the shifts and for each shift a list of all the employees that can do that shift
   // Step 2: Sort all the lists by the amount of employees that can do that shift
   const shifts = createShiftsAndEmployeesLists(monthlyShifts, users, constraints);
-  console.log(usersWeight)
-  console.log(shifts)
 
   while (shifts.length != 0) {
     if (shifts[0].length == 0) {
       shifts[0].shifts.forEach(shift => {
-        assignShiftToEmployee(shift.shiftsID, null);
+        assignShiftToEmployee(shift.shiftsID, shift.roleType, null);
       });
       shifts.splice(0, 1);
     } else {
       const chosenEmployee = chooseEmployee(shifts[0].shifts[0]);
-      assignShiftToEmployee(shifts[0].shifts[0], chosenEmployee._id);
+      assignShiftToEmployee(shifts[0].shifts[0], shift.roleType, chosenEmployee._id);
 
       if (shifts[0].shifts.length > 1) {
         shifts[0].shifts.splice(0, 1);
