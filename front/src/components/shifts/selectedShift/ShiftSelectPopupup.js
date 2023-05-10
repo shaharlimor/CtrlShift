@@ -23,7 +23,7 @@ const ShiftSelectPopupup = ({ event, onCancel }) => {
                 {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
             </DialogTitle>
             <Divider />
-            <DialogContent sx={{ pt: 0, maxHeight: 230, minHeight: 230 }}>
+            <DialogContent sx={{ pt: 0, maxHeight: 300, minHeight: 300 }}>
                 <ShiftTabs event={event} />
             </DialogContent>
             <DialogActions sx={{ pb: 2 }}>

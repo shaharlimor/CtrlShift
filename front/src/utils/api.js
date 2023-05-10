@@ -69,3 +69,8 @@ export async function getUsersWithConstraintsInShift(id) {
     const data = await axiosServices.get(`/constraints/EmployeesWithConstraintInShift/${id}`);
     return data;
 }
+
+export async function getSpecificEmployeesDetails(body) {
+    const data = await axiosServices.get(`/user/getEmployeesDetails/${body}`);
+    return data;
+}

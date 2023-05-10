@@ -215,13 +215,10 @@ const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
 
 const getShiftsPublished = async (organization) => {
   // Get The month and year published
-  console.log(organization);
   const schePublished = await Schedule.find(
     { organization: organization, isPublished: true },
     "month year"
   );
-
-  console.log(schePublished);
 
   // Get shifts that published according to boards that open
   const shifts = await Shift.find({
