@@ -27,4 +27,8 @@ export const createUser = async (user) => {
     return response;
 };
 
-export default { updateUserDetails, deleteUser };
+export const updateUser = async (user) => {
+    const response = await axiosServices.post('/user/update', user);
+    return response;
+};
+export default { updateUserDetails, deleteUser, updateUser };
