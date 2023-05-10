@@ -32,6 +32,17 @@ const PlacementTab = ({ eventId, roles }) => {
         handleRolesAndEmployess();
     }, []);
 
+    const userRole = (id) => {
+        let ans = '';
+        roles.forEach((role) => {
+            const { roleType, employeeIds } = role;
+            if (employeeIds.includes(id)) {
+                ans = roleType;
+                // return;
+            }
+        });
+        return ans;
+    };
     useEffect(() => {
         const getEmp = async () => {
             if (employeesToDisplayIds && employeesToDisplayIds.length !== 0) {
@@ -41,7 +52,8 @@ const PlacementTab = ({ eventId, roles }) => {
                     // eslint-disable-next-line
                     id: item._id,
                     firstName: item.firstName,
-                    lastName: item.lastName
+                    lastName: item.lastName,
+                    role: userRole(item._id)
                 }));
 
                 setEmployees(parsedData);
@@ -78,7 +90,7 @@ const PlacementTab = ({ eventId, roles }) => {
                                         {emp.firstName} {emp.lastName}
                                     </Typography>
                                     <Typography align="left" component="div" variant="subtitle2">
-                                        {emp.lastName}
+                                        {emp.role}
                                     </Typography>
                                 </Grid>
                             </Grid>
