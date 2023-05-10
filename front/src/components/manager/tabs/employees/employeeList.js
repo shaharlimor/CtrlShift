@@ -17,6 +17,7 @@ import MainCard from 'components/cards/MainCard';
 import UserList from 'components/manager/tabs/employees/UserList';
 import { getEmployeesByOrg } from 'utils/api';
 import { deleteUser } from 'utils/userApi';
+import EmployeeForm from './employeeForm';
 
 /* eslint-disable */
 const EmployeeList = () => {
@@ -26,6 +27,9 @@ const EmployeeList = () => {
     const { user } = useAuth();
     const [currentPage, setCurrentPage] = React.useState(1);
     const PAGE_SIZE = 8;
+    const [showForm, setShowForm] = React.useState(false);
+    const [selectedUser, setSelectedUser] = React.useState(null);
+
 
     React.useEffect(() => {
         function getEmployees() {
@@ -38,7 +42,7 @@ const EmployeeList = () => {
         }
         getEmployees();
         
-    }, []);
+    }, [showForm]);
 
     const calcPageNum = (len) => {
         let num = Math.floor(len / PAGE_SIZE);
@@ -76,8 +80,21 @@ const EmployeeList = () => {
         .catch((err) => { console.log(err.message); });
     };
 
+    
+    const handleEditMode = async (user) => {
+       setSelectedUser(user);
+       changeShowForm();
+    };
+
+    const changeShowForm = () => {
+        setShowForm(!showForm);
+    };
+
     return (
-        <MainCard
+        <React.Fragment>
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} selectedUser={selectedUser}/>}
+            {!showForm && 
+        (<MainCard
             title={
                 <Grid container alignItems="center" justifyContent="space-between" spacing={gridSpacing}>
                     <Grid item>
@@ -101,7 +118,7 @@ const EmployeeList = () => {
             content={false}
         >
             <UserList users={filteredUsers} currentPage={currentPage} 
-            pageSize={PAGE_SIZE} handleDelete={handleDelete}/>
+            pageSize={PAGE_SIZE} handleDelete={handleDelete} handleEditUser={handleEditMode}/>
             <Grid item xs={12} sx={{ p: 3 }}>
                 <Grid container justifyContent="space-between" spacing={gridSpacing}>
                     <Grid item>
@@ -111,6 +128,9 @@ const EmployeeList = () => {
                 </Grid>
             </Grid>
         </MainCard>
+        
+        )}
+        </React.Fragment>
     );
 };
 /* eslint-disable */

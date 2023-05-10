@@ -7,7 +7,6 @@ const test = require("dotenv").config();
  * Logged on user and gennerates user token.
  */
 const login = async (req, res, next) => {
-  console.log("login");
   const email = req.body.email;
   const password = req.body.password;
 

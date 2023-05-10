@@ -7,15 +7,16 @@ import { Grid, TextField, Button, CardActions, ListItemIcon, ListItemText, Check
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import useAuth from 'hooks/useAuth';
-import { createUser } from 'utils/userApi';
+import { createUser, updateUser } from 'utils/userApi';
 import { getRoleTypesByOrg } from 'utils/roleTypeServices';
 
 /* eslint-disable */
 const EmployeeForm = (props) => {
+    const { selectedUser, changeShowForm } = props;
     const { user } = useAuth();
     const [roleTypes, setRoleTypes] = React.useState([]);
     const [submit, setSubmit] = React.useState(false);
-    const [selected, setSelected] = React.useState([]);
+    const [selected, setSelected] = React.useState(selectedUser != null ? selectedUser.role_types : []);
     const [message, setMessage] = React.useState(null);
 
     React.useEffect(() => {
@@ -36,35 +37,59 @@ const EmployeeForm = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            phone:'',
-            organization: ''
+            email: selectedUser?.email,
+            password: selectedUser ? "****" : "",
+            firstName: selectedUser?.firstName,
+            lastName: selectedUser?.lastName,
+            phone: selectedUser?.phone,
+            organization: selectedUser?.organization
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
             try {
-                values.organization = user.organization;
-                const id = chance.bb_pin();
-                values.id = id;
                 values.isAdmin = false;
                 values.roles = selected;
-                await createUser(values).then(
-                    () => {
-                        resetForm();
-                        props.changeShowForm();
-                        setSubmit(false);
-                        setMessage(null);
-                    },
-                    (err) => {
-                        setStatus({ success: false });
-                        setErrors({ submit: err });
-                        setMessage(err);
-                        setSubmitting(false);
-                    }
-                );
+                values.organization = user.organization;
+
+                if (!selectedUser) {
+                    const id = chance.bb_pin();
+                    values.id = id;
+
+                    await createUser(values).then(
+                        () => {
+                            resetForm();
+                            changeShowForm();
+                            setSubmit(false);
+                            setMessage(null);
+                        },
+                        (err) => {
+                            setStatus({ success: false });
+                            setErrors({ submit: err });
+                            setMessage(err);
+                            setSubmitting(false);
+                        }
+                    );
+                } else {
+                    values.id = selectedUser._id;
+                    values.tokens = selectedUser.tokens;
+                    values.password = selectedUser.password;
+
+                    await updateUser(values).then(
+                        () => {
+                            resetForm();
+                            changeShowForm();
+                            setSubmit(false);
+                            setMessage(null);
+                        },
+                        (err) => {
+                            setStatus({ success: false });
+                            setErrors({ submit: err });
+                            setMessage(err);
+                            setSubmitting(false);
+                        }
+                    );
+                }
+                
             } catch (err) {
                 setStatus({ success: false });
                 setErrors({ submit: err });
@@ -86,7 +111,7 @@ const EmployeeForm = (props) => {
 
     return (
     <>
-    <MainCard title="Add employee form">
+    <MainCard title={selectedUser ? "Edit employee" : "Add employee"}>
         <form onSubmit={formik.handleSubmit} onReset={formik.handleReset} onChange={changeData}>
         <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
@@ -138,10 +163,11 @@ const EmployeeForm = (props) => {
                     label="Password"
                     margin="normal"
                     name="password"
-                    value={formik.values.password}
+                    value={selectedUser ? "****" : formik.values.password}
                     onChange={formik.handleChange}
                     type="text"
                     defaultValue=""
+                    disabled={selectedUser}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password} />
             </Grid>
@@ -188,7 +214,7 @@ const EmployeeForm = (props) => {
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button onClick={props.changeShowForm} variant="outlined">
+                        <Button onClick={changeShowForm} variant="outlined">
                             Cancel
                         </Button>
                     </Grid>

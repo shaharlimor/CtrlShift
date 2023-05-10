@@ -50,23 +50,29 @@ const getAllUsersByOrganization = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    const userId = req.params.id;
-    const { email, firstName, lastName, phone } = req.body;
+    const { id, email, firstName, lastName, phone, password, 
+        organization, isAdmin, roles, tokens } = req.body;
 
     try {
-        const updatedUser = await User.findOneAndUpdate(
-            { _id: userId },
-            { email, firstName, lastName, phone, },
-            { new: true } // Return the updated user
-        );
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+        const user = new User({
+            _id: id,
+            firstName: firstName,
+            lastName: lastName,
+            organization: organization,
+            isAdmin:isAdmin,
+            phone: phone,
+            email: email,
+            password: password,
+            role_types: roles,
+            tokens: tokens
+        });
 
-        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+        newUser = await User.updateOne({email:email}, user);
+
+        res.status(200).json({ message: 'User updated successfully', user: newUser });
     } catch (error) {
-        res.status(500).json({ message: 'Error updating user' });
+        res.status(500).json({ message: 'Error update user details' });
     }
 };
 
