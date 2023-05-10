@@ -16,7 +16,7 @@ router.get("/:organization", middleware, async (req, res) => {
     const constraints = await getConstraints(organization);
     res.send(constraints);
   } catch (err) {
-    res.send("error occured to get constraints: " + err);
+    res.send("error occurred to get constraints: " + err);
   }
 });
 
