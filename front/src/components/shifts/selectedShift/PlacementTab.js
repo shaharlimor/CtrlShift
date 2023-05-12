@@ -21,17 +21,15 @@ import {
     MenuItem
 } from '@mui/material';
 /* eslint-disable*/
-const PlacementTab = ({ eventId, roles }) => {
+const PlacementTab = ({ eventId, roles, allEmployess }) => {
     const [missingRoles, setMissingRoles] = useState([]);
     const [employees, setEmployees] = useState([]);
     const [employeesToDisplayIds, setEmployeesIds] = useState([]);
     const { user } = useAuth();
     const [data, setData] = useState([]);
-    const [checked, setChecked] = useState(['shahar']);
+    const [checked, setChecked] = useState([]);
 
     const handleToggle = (value) => () => {
-        console.log('selected is:');
-        console.log(checked);
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
 
@@ -40,7 +38,6 @@ const PlacementTab = ({ eventId, roles }) => {
         } else {
             newChecked.splice(currentIndex, 1);
         }
-
         setChecked(newChecked);
     };
 
@@ -48,44 +45,26 @@ const PlacementTab = ({ eventId, roles }) => {
         // for each role in roles check if amount === employeeIds.length
         // if not employess missing in that shifts from that type
         let result = 'Missing employees: ';
-        let combinedSet = [];
+        // let combinedSet = [];
+        let changeChecked = [];
         roles.forEach((role) => {
             const { amount, roleType, employeeIds } = role;
             const difference = amount - employeeIds.length;
             if (difference !== 0) {
                 result = result + ' ' + difference + ' ' + roleType + ', ';
             }
-            combinedSet = new Set([...combinedSet, ...employeeIds]);
+            employeeIds.map((employeeId) => {
+                const newObject = employeeId + '-' + roleType;
+                changeChecked.push(newObject);
+            });
         });
 
-        // Convert the Set back to an array
-        const tmp = new Set([...employeesToDisplayIds, ...combinedSet]);
-        setEmployeesIds(...tmp);
+        setChecked(changeChecked);
+
         setMissingRoles(result.slice(0, -2));
     };
     useEffect(() => {
         handleRolesAndEmployess();
-    }, []);
-
-    useEffect(() => {
-        const getEmployees = async () => {
-            /* eslint-disable-next-line */
-            const res = await getEmployeesByOrg(user.organization);
-            let parsedData = [];
-            res.data.users.map(async (item) => {
-                item.role_types.forEach((rl) => {
-                    parsedData.push({
-                        id: item._id,
-                        firstName: item.firstName,
-                        lastName: item.lastName,
-                        role: rl
-                    });
-                });
-            });
-            setData(parsedData);
-            parsedData = [];
-        };
-        getEmployees();
     }, []);
 
     const userRole = (id) => {
@@ -157,7 +136,7 @@ const PlacementTab = ({ eventId, roles }) => {
 
             <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                 <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
-                    {data?.map((value) => {
+                    {allEmployess?.map((value) => {
                         const test = '';
                         return (
                             <ListItem
@@ -191,7 +170,8 @@ const PlacementTab = ({ eventId, roles }) => {
 
 PlacementTab.propTypes = {
     eventId: PropTypes.string,
-    roles: PropTypes.array
+    roles: PropTypes.array,
+    allEmployess: PropTypes.array
 };
 
 export default PlacementTab;

@@ -9,8 +9,9 @@ import { Box, Tab, Tabs, Typography } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
 import ConstraintsTab from './ConstraintsTab';
-import { getUsersWithConstraintsInShift } from 'utils/api';
+import { getUsersWithConstraintsInShift, getEmployeesByOrg } from 'utils/api';
 import PlacementTab from './PlacementTab';
+import useAuth from 'hooks/useAuth';
 
 // tabs panel
 function TabPanel({ children, value, index, ...other }) {
@@ -50,14 +51,15 @@ const tabsOption = [
 const ShiftTabs = ({ event }) => {
     const theme = useTheme();
     const [value, setValue] = useState(0);
-    const [employees, setEmployees] = useState([]);
+    const [employeesWithConstraints, setEmployeesWithConstraints] = useState([]);
+    const [allEmployess, setallEmployess] = useState([]);
+    const { user } = useAuth();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     useEffect(() => {
-        console.log(event);
         const getEmp = async () => {
             const result = await getUsersWithConstraintsInShift(event.id);
             let parsedData = [];
@@ -68,7 +70,21 @@ const ShiftTabs = ({ event }) => {
                 lastName: item.lastName
             }));
 
-            setEmployees(parsedData);
+            setEmployeesWithConstraints(parsedData);
+            parsedData = [];
+
+            const res = await getEmployeesByOrg(user.organization);
+            res.data.users.map(async (item) => {
+                item.role_types.forEach((rl) => {
+                    parsedData.push({
+                        id: item._id,
+                        firstName: item.firstName,
+                        lastName: item.lastName,
+                        role: rl
+                    });
+                });
+            });
+            setallEmployess(parsedData);
             parsedData = [];
         };
         getEmp();
@@ -113,10 +129,10 @@ const ShiftTabs = ({ event }) => {
                 ))}
             </Tabs>
             <TabPanel value={value} index={0}>
-                <ConstraintsTab employees={employees} />
+                <ConstraintsTab employees={employeesWithConstraints} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <PlacementTab employees={employees} roles={event.roles} />
+                <PlacementTab roles={event.roles} allEmployess={allEmployess} />
             </TabPanel>
         </>
     );
