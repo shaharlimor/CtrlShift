@@ -1,9 +1,9 @@
 import EmployeeList from 'components/manager/tabs/employees/employeeList';
-import React, { useEffect } from 'react';
+import React from 'react';
 // eslint-disable-next-line
 import AddIcon from '@mui/icons-material/Add';
 
-import { IconButton, Grid } from '@mui/material';
+import { IconButton, Grid, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import EmployeeForm from './employeeForm';
@@ -36,7 +36,9 @@ const Employees = () => {
                             onClick={changeShowForm}
                             size="large"
                         >
-                            <AddIcon />
+                            <Tooltip placement="top" title="Add user">
+                                <AddIcon />
+                            </Tooltip>
                         </IconButton>
                     </Grid>
                 </Grid>

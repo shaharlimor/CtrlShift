@@ -17,6 +17,7 @@ import MainCard from 'components/cards/MainCard';
 import UserList from 'components/manager/tabs/employees/UserList';
 import { getEmployeesByOrg } from 'utils/api';
 import { deleteUser } from 'utils/userApi';
+import EmployeeForm from './employeeForm';
 
 /* eslint-disable */
 const EmployeeList = () => {
@@ -26,6 +27,8 @@ const EmployeeList = () => {
     const { user } = useAuth();
     const [currentPage, setCurrentPage] = React.useState(1);
     const PAGE_SIZE = 8;
+    const [showForm, setShowForm] = React.useState(false);
+    const [selectedUser, setSelectedUser] = React.useState(null);
 
     React.useEffect(() => {
         function getEmployees() {
@@ -37,7 +40,7 @@ const EmployeeList = () => {
             });
         }
         getEmployees();
-    }, []);
+    }, [showForm]);
 
     const calcPageNum = (len) => {
         let num = Math.floor(len / PAGE_SIZE);
@@ -78,39 +81,59 @@ const EmployeeList = () => {
             });
     };
 
+    const handleEditMode = async (user) => {
+        setSelectedUser(user);
+        changeShowForm();
+    };
+
+    const changeShowForm = () => {
+        setShowForm(!showForm);
+    };
+
     return (
-        <MainCard
-            title={
-                <Grid container alignItems="center" justifyContent="space-between" spacing={gridSpacing}>
-                    <Grid item>
-                        <Typography variant="body">Employees</Typography>
+        <React.Fragment>
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} selectedUser={selectedUser} />}
+            {!showForm && (
+                <MainCard
+                    title={
+                        <Grid container alignItems="center" justifyContent="space-between" spacing={gridSpacing}>
+                            <Grid item>
+                                <Typography variant="body">Employees</Typography>
+                            </Grid>
+                            <Grid item>
+                                <OutlinedInput
+                                    id="input-search-list-style1"
+                                    placeholder="Search"
+                                    onChange={inputHandler}
+                                    startAdornment={
+                                        <InputAdornment position="start">
+                                            <IconSearch stroke={1.5} size="16px" />
+                                        </InputAdornment>
+                                    }
+                                    size="small"
+                                />
+                            </Grid>
+                        </Grid>
+                    }
+                    content={false}
+                >
+                    <UserList
+                        users={filteredUsers}
+                        currentPage={currentPage}
+                        pageSize={PAGE_SIZE}
+                        handleDelete={handleDelete}
+                        handleEditUser={handleEditMode}
+                    />
+                    <Grid item xs={12} sx={{ p: 3 }}>
+                        <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                            <Grid item>
+                                <Pagination count={pageNum} onChange={(event, page) => setCurrentPage(page)} color="primary" />
+                            </Grid>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <OutlinedInput
-                            id="input-search-list-style1"
-                            placeholder="Search"
-                            onChange={inputHandler}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <IconSearch stroke={1.5} size="16px" />
-                                </InputAdornment>
-                            }
-                            size="small"
-                        />
-                    </Grid>
-                </Grid>
-            }
-            content={false}
-        >
-            <UserList users={filteredUsers} currentPage={currentPage} pageSize={PAGE_SIZE} handleDelete={handleDelete} />
-            <Grid item xs={12} sx={{ p: 3 }}>
-                <Grid container justifyContent="space-between" spacing={gridSpacing}>
-                    <Grid item>
-                        <Pagination count={pageNum} onChange={(event, page) => setCurrentPage(page)} color="primary" />
-                    </Grid>
-                </Grid>
-            </Grid>
-        </MainCard>
+                </MainCard>
+            )}
+        </React.Fragment>
     );
 };
 /* eslint-disable */

@@ -2,7 +2,6 @@ import React from 'react';
 
 // material-ui
 import {
-    Chip,
     IconButton,
     Stack,
     Table,
@@ -21,15 +20,14 @@ import Avatar from 'components/users/Avatar';
 // assets
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import PropTypes from 'prop-types';
-
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 // const avatarImage = require.context('assets/images/users', true);
 
 // ==============================|| USER LIST 1 ||============================== //
 
 const UserList = (props) => {
-    const { users, currentPage, pageSize, handleDelete } = props;
+    const { users, currentPage, pageSize, handleDelete, handleEditUser } = props;
     const [data, setData] = React.useState([]);
-    const [value, setValue] = React.useState('');
 
     React.useEffect(() => {
         let lastIndex = currentPage * pageSize;
@@ -106,6 +104,11 @@ const UserList = (props) => {
                                                 <DeleteOutlineOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
+                                        <Tooltip placement="top" title="Edit user">
+                                            <IconButton onClick={() => handleEditUser(row)} color="inherit" size="medium">
+                                                <EditOutlinedIcon />
+                                            </IconButton>
+                                        </Tooltip>
                                     </Stack>
                                 </TableCell>
                             </TableRow>
@@ -120,7 +123,8 @@ UserList.propTypes = {
     users: PropTypes.array,
     currentPage: PropTypes.number,
     pageSize: PropTypes.number,
-    handleDelete: PropTypes.func
+    handleDelete: PropTypes.func,
+    handleEditUser: PropTypes.func,
 };
 
 export default UserList;
