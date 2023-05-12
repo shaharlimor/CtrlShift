@@ -1,39 +1,34 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-/* eslint-disable */
-import { Avatar, CardContent, Grid, Typography } from '@mui/material';
-import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
-import useAuth from 'hooks/useAuth';
-import InputLabel from 'components/forms/InputLabel';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useTheme } from '@mui/material/styles';
 
 import {
-    TextField,
+    Avatar,
+    CardContent,
+    Grid,
+    Typography,
     Button,
-    CardActions,
     Collapse,
     ListItemButton,
     ListItem,
-    List,
     ListItemText,
     Checkbox,
-    FormControl,
     Select,
-    MenuItem,
     IconButton
 } from '@mui/material';
-/* eslint-disable*/
-const PlacementTab = ({ eventId, roles, allEmployess }) => {
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
+import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
+import useAuth from 'hooks/useAuth';
+
+const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
     const [missingRoles, setMissingRoles] = useState([]);
     const [employees, setEmployees] = useState([]);
-    const { user } = useAuth();
-    const [checked, setChecked] = useState([]);
+    const [checked, setChecked] = useState(initCheck);
     const [open, setOpen] = useState(false);
 
-    const handleChaneEmployeesSelction = (value) => () => {
+    const handleChangeEmployeesSelction = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
 
@@ -45,29 +40,33 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         setChecked(newChecked);
     };
 
-    const handleRolesAndEmployess = () => {
-        // for each role in roles check if amount === employeeIds.length
-        // if not employess missing in that shifts from that type
-        let result = 'Missing employees: ';
-        // let combinedSet = [];
-        let changeChecked = [];
+    const handleMissingEmployess = () => {
+        let result = '';
+
+        // for each role in roles check if amount === assigned employess amount
         roles.forEach((role) => {
-            const { amount, roleType, employeeIds } = role;
-            const difference = amount - employeeIds.length;
+            const { amount, roleType } = role;
+
+            const insertedEmployessAmount = checked.reduce((count, employee) => {
+                const [, role] = employee.split('-'); // extract the role type from the employee string
+                if (role === roleType) {
+                    return count + 1; // increment the count if the role type matches the given value
+                }
+                return count;
+            }, 0);
+            const difference = amount - insertedEmployessAmount;
+
             if (difference > 0) {
+                // eslint-disable-next-line
                 result = result + ' ' + difference + ' ' + roleType + ', ';
             }
-            employeeIds.map((employeeId) => {
-                const newObject = employeeId + '-' + roleType;
-                changeChecked.push(newObject);
-            });
         });
 
-        setChecked(changeChecked);
         setMissingRoles(result.slice(0, -2));
     };
+
     useEffect(() => {
-        handleRolesAndEmployess();
+        handleMissingEmployess();
     }, []);
 
     const userRole = (id) => {
@@ -80,6 +79,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
     };
 
     useEffect(() => {
+        handleMissingEmployess();
         const getEmp = async () => {
             // get the checked employees id's (from db and selected)
             const employeeIds = checked.map((employee) => {
@@ -96,6 +96,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
                     id: item._id,
                     firstName: item.firstName,
                     lastName: item.lastName,
+                    // eslint-disable-next-line
                     role: userRole(item._id)
                 }));
 
@@ -121,11 +122,12 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         await changeEmployeesInShift(eventId, {
             roles: body
         });
+        onCancel();
     };
 
     return (
         <CardContent>
-            <Grid container spacing={1} alignItems="center">
+            <Grid container spacing={0} alignItems="center">
                 {employees &&
                     employees.map((emp) => (
                         /*eslint-disable */
@@ -151,7 +153,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
             </Grid>
             <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                 <Typography align="center" component="div" variant="h4">
-                    {missingRoles.length !== 0 ? missingRoles : 'Change Assigment'}
+                    {missingRoles.length !== 0 ? 'Missing employees: ' + missingRoles : 'Change Assigment'}
                 </Typography>
                 <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                     {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -170,7 +172,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
                                             secondaryAction={
                                                 <Checkbox
                                                     edge="end"
-                                                    onChange={handleChaneEmployeesSelction(value.id + '-' + value.role)}
+                                                    onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
                                                     checked={checked.indexOf(value.id + '-' + value.role) !== -1}
                                                 />
                                             }
@@ -216,7 +218,9 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
 PlacementTab.propTypes = {
     eventId: PropTypes.string,
     roles: PropTypes.array,
-    allEmployess: PropTypes.array
+    allEmployess: PropTypes.array,
+    onCancel: PropTypes.func,
+    initCheck: PropTypes.string
 };
 
 export default PlacementTab;

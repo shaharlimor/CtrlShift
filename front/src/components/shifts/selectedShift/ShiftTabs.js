@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Tab, Tabs, Typography } from '@mui/material';
-
-// assets
+import { Box, Tab, Tabs } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
+
 import ConstraintsTab from './ConstraintsTab';
 import { getUsersWithConstraintsInShift, getEmployeesByOrg } from 'utils/api';
 import PlacementTab from './PlacementTab';
@@ -47,20 +46,35 @@ const tabsOption = [
     }
 ];
 
-/* eslint-disable*/
-const ShiftTabs = ({ event }) => {
+const ShiftTabs = ({ event, onCancel }) => {
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [employeesWithConstraints, setEmployeesWithConstraints] = useState([]);
     const [allEmployess, setallEmployess] = useState([]);
     const { user } = useAuth();
+    const [initalizeChecked, setInitalizeChecked] = useState([]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    const initalizeRoles = () => {
+        const changeChecked = [];
+        event.roles.forEach((role) => {
+            const { roleType, employeeIds } = role;
+
+            /* eslint-disable */
+            employeeIds.map((employeeId) => {
+                const newObject = employeeId + '-' + roleType;
+                changeChecked.push(newObject);
+            });
+            /* eslint-enable */
+        });
+        setInitalizeChecked(changeChecked);
+    };
+
     useEffect(() => {
-        console.log(event);
+        initalizeRoles();
         const getEmp = async () => {
             const result = await getUsersWithConstraintsInShift(event.id);
             let parsedData = [];
@@ -78,6 +92,7 @@ const ShiftTabs = ({ event }) => {
             res.data.users.map(async (item) => {
                 item.role_types.forEach((rl) => {
                     parsedData.push({
+                        // eslint-disable-next-line
                         id: item._id,
                         firstName: item.firstName,
                         lastName: item.lastName,
@@ -133,12 +148,19 @@ const ShiftTabs = ({ event }) => {
                 <ConstraintsTab employees={employeesWithConstraints} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <PlacementTab eventId={event.id} roles={event.roles} allEmployess={allEmployess} />
+                <PlacementTab
+                    eventId={event.id}
+                    roles={event.roles}
+                    allEmployess={allEmployess}
+                    onCancel={onCancel}
+                    initCheck={initalizeChecked}
+                />
             </TabPanel>
         </>
     );
 };
 ShiftTabs.propTypes = {
-    event: PropTypes.object
+    event: PropTypes.object,
+    onCancel: PropTypes.func
 };
 export default ShiftTabs;

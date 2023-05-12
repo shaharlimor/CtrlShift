@@ -24,7 +24,7 @@ const ShiftSelectPopupup = ({ event, onCancel }) => {
             </DialogTitle>
             <Divider />
             <DialogContent sx={{ pt: 0, maxHeight: 300, minHeight: 300 }}>
-                <ShiftTabs event={event} />
+                <ShiftTabs event={event} onCancel={onCancel} />
             </DialogContent>
             <DialogActions sx={{ pb: 2 }}>
                 <Grid container justifyContent="space-between" alignItems="center">

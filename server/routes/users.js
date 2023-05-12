@@ -25,7 +25,6 @@ router.post("/changePassword", middleware, userController.changePassword);
 
 router.get("/getEmployeesDetails/:ids", async (req, res) => {
   try {
-    console.log(req.params.ids);
     const idsSplitted = req.params.ids.split(",");
     const ans = await userController.getEmployeesDetails(idsSplitted);
     res.send(ans);
