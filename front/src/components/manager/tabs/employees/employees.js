@@ -8,7 +8,6 @@ import { useTheme } from '@mui/material/styles';
 
 import EmployeeForm from './employeeForm';
 
-/* eslint-disable */
 const Employees = () => {
     const theme = useTheme();
 
@@ -20,10 +19,11 @@ const Employees = () => {
     };
 
     return (
-        <React.Fragment>
+        <fragment>
             {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
             {!showForm && <EmployeeList />}
             {!showForm && (
+                // eslint-disable-next-line
                 <Grid container direction="column" justifyContent="center" alignItems="flex-end">
                     <Grid item xs={3} sx={{ mt: 2 }}>
                         <IconButton
@@ -43,10 +43,8 @@ const Employees = () => {
                     </Grid>
                 </Grid>
             )}
-        </React.Fragment>
+        </fragment>
     );
 };
-/* eslint-disable */
 
-// eslint-disable-next-line
 export default Employees;
