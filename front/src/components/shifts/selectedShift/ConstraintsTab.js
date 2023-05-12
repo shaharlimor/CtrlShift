@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 
 import { Avatar, CardContent, Grid, Typography } from '@mui/material';
 
-/* eslint-disable*/
+// eslint-disable-next-line
 const ConstraintsTab = ({ employees }) => {
+    // eslint-disable-next-line
     return (
         <CardContent>
             {employees.length === 0 ? (
@@ -16,7 +17,6 @@ const ConstraintsTab = ({ employees }) => {
             <Grid container spacing={1} alignItems="center">
                 {employees &&
                     employees.map((emp) => (
-                        /*eslint-disable */
                         <Grid key={emp.id} item xs={4}>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid key={emp.LastName} item>
@@ -35,7 +35,6 @@ const ConstraintsTab = ({ employees }) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        /* eslint-enable */
                     ))}
             </Grid>
         </CardContent>
