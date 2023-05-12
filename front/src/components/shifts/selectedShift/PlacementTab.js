@@ -60,7 +60,6 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         });
 
         setChecked(changeChecked);
-
         setMissingRoles(result.slice(0, -2));
     };
     useEffect(() => {
@@ -68,36 +67,38 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
     }, []);
 
     const userRole = (id) => {
-        let ans = '';
-        roles.forEach((role) => {
-            const { roleType, employeeIds } = role;
-            if (employeeIds.includes(id)) {
-                ans = roleType;
-                // return;
-            }
-        });
-        return ans;
+        // find the employee string in the checked array
+        const checkedString = checked.find((str) => str.startsWith(id));
+        // if no matching string was found, return null
+        if (!checkedString) return null;
+        const idAndRole = checkedString.split('-');
+        return idAndRole[1];
     };
 
     useEffect(() => {
         const getEmp = async () => {
-            if (employeesToDisplayIds && employeesToDisplayIds.length !== 0) {
-                const result = await getSpecificEmployeesDetails(employeesToDisplayIds);
-                let parsedData = [];
-                parsedData = result.data.map((item) => ({
-                    // eslint-disable-next-line
-                    id: item._id,
-                    firstName: item.firstName,
-                    lastName: item.lastName,
-                    role: userRole(item._id)
-                }));
+            // get the checked employees id's (from db and selected)
+            const employeeIds = checked.map((employee) => {
+                const idAndRole = employee.split('-');
+                const id = idAndRole[0];
+                return id;
+            });
+            const result = await getSpecificEmployeesDetails(employeeIds);
+            let parsedData = [];
 
-                setEmployees(parsedData);
-                parsedData = [];
-            }
+            parsedData = result.data.map((item) => ({
+                // eslint-disable-next-line
+                id: item._id,
+                firstName: item.firstName,
+                lastName: item.lastName,
+                role: userRole(item._id)
+            }));
+
+            setEmployees(parsedData);
+            parsedData = [];
         };
         getEmp();
-    }, [employeesToDisplayIds]);
+    }, [checked]);
     // TODO: create a state of all the emoloyess to display - from the db and from the manually inserted
     // display it
     // create post to db
