@@ -8,6 +8,7 @@ import InputLabel from 'components/forms/InputLabel';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useTheme } from '@mui/material/styles';
 
 import {
     TextField,
@@ -28,13 +29,11 @@ import {
 const PlacementTab = ({ eventId, roles, allEmployess }) => {
     const [missingRoles, setMissingRoles] = useState([]);
     const [employees, setEmployees] = useState([]);
-    const [employeesToDisplayIds, setEmployeesIds] = useState([]);
     const { user } = useAuth();
-    const [data, setData] = useState([]);
     const [checked, setChecked] = useState([]);
     const [open, setOpen] = useState(false);
 
-    const handleToggle = (value) => () => {
+    const handleChaneEmployeesSelction = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
 
@@ -46,9 +45,6 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         setChecked(newChecked);
     };
 
-    const handleOpen = () => {
-        setOpen(!open);
-    };
 
     const handleRolesAndEmployess = () => {
         // for each role in roles check if amount === employeeIds.length
@@ -108,12 +104,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         };
         getEmp();
     }, [checked]);
-    // TODO: create a state of all the emoloyess to display - from the db and from the manually inserted
-    // display it
-    // create post to db
-    // add option to add
 
-    /* eslint-disable */
     return (
         <CardContent>
             <Grid container spacing={1} alignItems="center">
@@ -151,34 +142,51 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 {open && (
                     <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
-                        <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
-                            {allEmployess?.map((value) => {
-                                const test = '';
-                                return (
-                                    <ListItem
-                                        key={value.id + value.role}
-                                        secondaryAction={
-                                            <Checkbox
-                                                edge="end"
-                                                onChange={handleToggle(value.id + '-' + value.role)}
-                                                checked={checked.indexOf(value.id + '-' + value.role) !== -1}
-                                            />
-                                        }
-                                        disablePadding
-                                    >
-                                        <ListItemButton>
-                                            <ListItemAvatar>
-                                                <Avatar
-                                                    alt={value.firstName.toUpperCase()}
-                                                    src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                        <Grid item xs={10}>
+                            <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                                {allEmployess?.map((value) => {
+                                    const test = '';
+                                    return (
+                                        <ListItem
+                                            key={value.id + value.role}
+                                            secondaryAction={
+                                                <Checkbox
+                                                    edge="end"
+                                                    onChange={handleChaneEmployeesSelction(value.id + '-' + value.role)}
+                                                    checked={checked.indexOf(value.id + '-' + value.role) !== -1}
                                                 />
-                                            </ListItemAvatar>
-                                            <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
-                                        </ListItemButton>
-                                    </ListItem>
-                                );
-                            })}
-                        </Select>
+                                            }
+                                            disablePadding
+                                        >
+                                            <ListItemButton>
+                                                <ListItemAvatar>
+                                                    <Avatar
+                                                        alt={value.firstName.toUpperCase()}
+                                                        src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                                                    />
+                                                </ListItemAvatar>
+                                                <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    );
+                                })}
+                            </Select>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{
+                                    width: '100%',
+                                    backgroundColor: 'primary.800',
+                                    '&:hover': {
+                                        background: 'primary.dark'
+                                    }
+                                }}
+                            >
+                                Save
+                            </Button>
+                        </Grid>
                     </Grid>
                 )}
             </Collapse>

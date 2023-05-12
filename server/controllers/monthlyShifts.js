@@ -247,6 +247,20 @@ const getShiftById = async (id) => {
   );
 };
 
+const changeEmployeesInShift = async (id, roles) => {
+  const monthlyShift = await getShiftById(id);
+  if (!monthlyShift || !monthlyShift.length) return "Monthly shift not found";
+  const shiftDocument = monthlyShift[0]; // access the first document in the array
+
+  const newRoles = roles;
+  shiftDocument.roles = shiftDocument.roles.map((oldRole) => {
+    const newRole = newRoles.find((role) => role.roleType === oldRole.roleType);
+    return newRole ? { ...oldRole, employeeIds: newRole.employeeIds } : oldRole;
+  });
+  await shiftDocument.save();
+  return shiftDocument;
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
@@ -257,4 +271,5 @@ module.exports = {
   getShiftsOpenToConstraintsByRoles,
   getShiftsPublished,
   getShiftById,
+  changeEmployeesInShift,
 };
