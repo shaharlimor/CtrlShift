@@ -1,14 +1,49 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-
+/* eslint-disable */
 import { Avatar, CardContent, Grid, Typography } from '@mui/material';
-import { getSpecificEmployeesDetails } from 'utils/api';
+import { getSpecificEmployeesDetails, getEmployeesByOrg } from 'utils/api';
+import useAuth from 'hooks/useAuth';
+import InputLabel from 'components/forms/InputLabel';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
 
+import {
+    TextField,
+    Button,
+    CardActions,
+    ListItemButton,
+    ListItem,
+    List,
+    ListItemText,
+    Checkbox,
+    FormControl,
+    Select,
+    MenuItem
+} from '@mui/material';
 /* eslint-disable*/
 const PlacementTab = ({ eventId, roles }) => {
     const [missingRoles, setMissingRoles] = useState([]);
     const [employees, setEmployees] = useState([]);
     const [employeesToDisplayIds, setEmployeesIds] = useState([]);
+    const { user } = useAuth();
+    const [data, setData] = useState([]);
+    const [checked, setChecked] = useState(['shahar']);
+
+    const handleToggle = (value) => () => {
+        console.log('selected is:');
+        console.log(checked);
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(value);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+
+        setChecked(newChecked);
+    };
+
     const handleRolesAndEmployess = () => {
         // for each role in roles check if amount === employeeIds.length
         // if not employess missing in that shifts from that type
@@ -32,6 +67,27 @@ const PlacementTab = ({ eventId, roles }) => {
         handleRolesAndEmployess();
     }, []);
 
+    useEffect(() => {
+        const getEmployees = async () => {
+            /* eslint-disable-next-line */
+            const res = await getEmployeesByOrg(user.organization);
+            let parsedData = [];
+            res.data.users.map(async (item) => {
+                item.role_types.forEach((rl) => {
+                    parsedData.push({
+                        id: item._id,
+                        firstName: item.firstName,
+                        lastName: item.lastName,
+                        role: rl
+                    });
+                });
+            });
+            setData(parsedData);
+            parsedData = [];
+        };
+        getEmployees();
+    }, []);
+
     const userRole = (id) => {
         let ans = '';
         roles.forEach((role) => {
@@ -43,6 +99,7 @@ const PlacementTab = ({ eventId, roles }) => {
         });
         return ans;
     };
+
     useEffect(() => {
         const getEmp = async () => {
             if (employeesToDisplayIds && employeesToDisplayIds.length !== 0) {
@@ -67,10 +124,10 @@ const PlacementTab = ({ eventId, roles }) => {
     // create post to db
     // add option to add
 
+    /* eslint-disable */
     return (
         <CardContent>
             <Typography align="center" component="div" variant="h3" sx={{ mb: 1 }}>
-                {/* {missingRoles[0].roleType} */}
                 {missingRoles}
             </Typography>
             <Grid container spacing={1} alignItems="center">
@@ -95,8 +152,38 @@ const PlacementTab = ({ eventId, roles }) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        /* eslint-enable */
                     ))}
+            </Grid>
+
+            <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
+                <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                    {data?.map((value) => {
+                        const test = '';
+                        return (
+                            <ListItem
+                                key={value.id + value.role}
+                                secondaryAction={
+                                    <Checkbox
+                                        edge="end"
+                                        onChange={handleToggle(value.id + '-' + value.role)}
+                                        checked={checked.indexOf(value.id + '-' + value.role) !== -1}
+                                    />
+                                }
+                                disablePadding
+                            >
+                                <ListItemButton>
+                                    <ListItemAvatar>
+                                        <Avatar
+                                            alt={value.firstName.toUpperCase()}
+                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                                        />
+                                    </ListItemAvatar>
+                                    <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
+                </Select>
             </Grid>
         </CardContent>
     );
