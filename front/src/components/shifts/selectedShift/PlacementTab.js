@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 /* eslint-disable */
 import { Avatar, CardContent, Grid, Typography } from '@mui/material';
-import { getSpecificEmployeesDetails, getEmployeesByOrg } from 'utils/api';
+import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import InputLabel from 'components/forms/InputLabel';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -45,7 +45,6 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         setChecked(newChecked);
     };
 
-
     const handleRolesAndEmployess = () => {
         // for each role in roles check if amount === employeeIds.length
         // if not employess missing in that shifts from that type
@@ -55,7 +54,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
         roles.forEach((role) => {
             const { amount, roleType, employeeIds } = role;
             const difference = amount - employeeIds.length;
-            if (difference !== 0) {
+            if (difference > 0) {
                 result = result + ' ' + difference + ' ' + roleType + ', ';
             }
             employeeIds.map((employeeId) => {
@@ -88,22 +87,41 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
                 const id = idAndRole[0];
                 return id;
             });
-            const result = await getSpecificEmployeesDetails(employeeIds);
-            let parsedData = [];
+            if (employeeIds.length !== 0) {
+                const result = await getSpecificEmployeesDetails(employeeIds);
+                let parsedData = [];
 
-            parsedData = result.data.map((item) => ({
-                // eslint-disable-next-line
-                id: item._id,
-                firstName: item.firstName,
-                lastName: item.lastName,
-                role: userRole(item._id)
-            }));
+                parsedData = result.data.map((item) => ({
+                    // eslint-disable-next-line
+                    id: item._id,
+                    firstName: item.firstName,
+                    lastName: item.lastName,
+                    role: userRole(item._id)
+                }));
 
-            setEmployees(parsedData);
-            parsedData = [];
+                setEmployees(parsedData);
+                parsedData = [];
+            }
         };
         getEmp();
     }, [checked]);
+
+    const handleSave = async () => {
+        const body = checked.reduce((result, str) => {
+            const [id, roleType] = str.split('-');
+            const existingRole = result.find((r) => r.roleType === roleType);
+            if (existingRole) {
+                existingRole.employeeIds.push(id);
+            } else {
+                result.push({ roleType, employeeIds: [id] });
+            }
+            return result;
+        }, []);
+
+        await changeEmployeesInShift(eventId, {
+            roles: body
+        });
+    };
 
     return (
         <CardContent>
@@ -176,6 +194,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
                             <Button
                                 type="submit"
                                 variant="contained"
+                                onClick={handleSave}
                                 sx={{
                                     width: '100%',
                                     backgroundColor: 'primary.800',

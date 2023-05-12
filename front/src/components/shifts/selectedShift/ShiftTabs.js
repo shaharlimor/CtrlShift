@@ -60,6 +60,7 @@ const ShiftTabs = ({ event }) => {
     };
 
     useEffect(() => {
+        console.log(event);
         const getEmp = async () => {
             const result = await getUsersWithConstraintsInShift(event.id);
             let parsedData = [];
@@ -132,7 +133,7 @@ const ShiftTabs = ({ event }) => {
                 <ConstraintsTab employees={employeesWithConstraints} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <PlacementTab roles={event.roles} allEmployess={allEmployess} />
+                <PlacementTab eventId={event.id} roles={event.roles} allEmployess={allEmployess} />
             </TabPanel>
         </>
     );

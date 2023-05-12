@@ -11,6 +11,7 @@ const {
   getShiftsOpenToConstraintsByRoles,
   getShiftsPublished,
   changeEmployeesInShift,
+  getShiftById,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -111,7 +112,7 @@ router.get(
 router.get("/byId/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const shifts = await getShifts(organization);
+    const shifts = await getShiftById(id);
     res.send(shifts);
   } catch (err) {
     res.send("error occured to get shifts: " + err);

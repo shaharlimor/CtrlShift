@@ -74,3 +74,7 @@ export async function getSpecificEmployeesDetails(body) {
     const data = await axiosServices.get(`/user/getEmployeesDetails/${body}`);
     return data;
 }
+
+export async function changeEmployeesInShift(id, body) {
+    await axiosServices.patch(`/monthlyShifts/assingEmployees/${id}`, body);
+}
