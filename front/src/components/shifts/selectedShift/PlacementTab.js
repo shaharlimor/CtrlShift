@@ -6,11 +6,14 @@ import { getSpecificEmployeesDetails, getEmployeesByOrg } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import InputLabel from 'components/forms/InputLabel';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import {
     TextField,
     Button,
     CardActions,
+    Collapse,
     ListItemButton,
     ListItem,
     List,
@@ -18,7 +21,8 @@ import {
     Checkbox,
     FormControl,
     Select,
-    MenuItem
+    MenuItem,
+    IconButton
 } from '@mui/material';
 /* eslint-disable*/
 const PlacementTab = ({ eventId, roles, allEmployess }) => {
@@ -28,6 +32,7 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
     const { user } = useAuth();
     const [data, setData] = useState([]);
     const [checked, setChecked] = useState([]);
+    const [open, setOpen] = useState(false);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -39,6 +44,10 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
             newChecked.splice(currentIndex, 1);
         }
         setChecked(newChecked);
+    };
+
+    const handleOpen = () => {
+        setOpen(!open);
     };
 
     const handleRolesAndEmployess = () => {
@@ -107,9 +116,6 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
     /* eslint-disable */
     return (
         <CardContent>
-            <Typography align="center" component="div" variant="h3" sx={{ mb: 1 }}>
-                {missingRoles}
-            </Typography>
             <Grid container spacing={1} alignItems="center">
                 {employees &&
                     employees.map((emp) => (
@@ -134,37 +140,48 @@ const PlacementTab = ({ eventId, roles, allEmployess }) => {
                         </Grid>
                     ))}
             </Grid>
-
             <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
-                <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
-                    {allEmployess?.map((value) => {
-                        const test = '';
-                        return (
-                            <ListItem
-                                key={value.id + value.role}
-                                secondaryAction={
-                                    <Checkbox
-                                        edge="end"
-                                        onChange={handleToggle(value.id + '-' + value.role)}
-                                        checked={checked.indexOf(value.id + '-' + value.role) !== -1}
-                                    />
-                                }
-                                disablePadding
-                            >
-                                <ListItemButton>
-                                    <ListItemAvatar>
-                                        <Avatar
-                                            alt={value.firstName.toUpperCase()}
-                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
-                                        />
-                                    </ListItemAvatar>
-                                    <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
-                                </ListItemButton>
-                            </ListItem>
-                        );
-                    })}
-                </Select>
+                <Typography align="center" component="div" variant="h4">
+                    {missingRoles.length !== 0 ? missingRoles : 'Change Assigment'}
+                </Typography>
+                <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
             </Grid>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                {open && (
+                    <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
+                        <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                            {allEmployess?.map((value) => {
+                                const test = '';
+                                return (
+                                    <ListItem
+                                        key={value.id + value.role}
+                                        secondaryAction={
+                                            <Checkbox
+                                                edge="end"
+                                                onChange={handleToggle(value.id + '-' + value.role)}
+                                                checked={checked.indexOf(value.id + '-' + value.role) !== -1}
+                                            />
+                                        }
+                                        disablePadding
+                                    >
+                                        <ListItemButton>
+                                            <ListItemAvatar>
+                                                <Avatar
+                                                    alt={value.firstName.toUpperCase()}
+                                                    src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                                                />
+                                            </ListItemAvatar>
+                                            <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                );
+                            })}
+                        </Select>
+                    </Grid>
+                )}
+            </Collapse>
         </CardContent>
     );
 };
