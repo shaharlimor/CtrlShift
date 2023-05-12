@@ -109,7 +109,7 @@ router.get(
   }
 );
 
-router.get("/byId/:id", async (req, res) => {
+router.get("/byId/:id", middleware, async (req, res) => {
   try {
     const id = req.params.id;
     const shifts = await getShiftById(id);
@@ -119,7 +119,7 @@ router.get("/byId/:id", async (req, res) => {
   }
 });
 
-router.patch("/assingEmployees/:id", async (req, res) => {
+router.patch("/assingEmployees/:id", middleware, async (req, res) => {
   try {
     const result = await changeEmployeesInShift(req.params.id, req.body.roles);
     res.send(result);

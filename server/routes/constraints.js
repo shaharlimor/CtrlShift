@@ -31,7 +31,7 @@ router.get("/byShift/:id", middleware, async (req, res) => {
   }
 });
 
-router.get("/byEmployee/:id", async (req, res) => {
+router.get("/byEmployee/:id", middleware, async (req, res) => {
   try {
     const id = req.params.id;
     const constraints = await getConstraintsByEmployeeId(id);
@@ -56,15 +56,19 @@ router.get(
   }
 );
 
-router.get("/EmployeesWithConstraintInShift/:id", async (req, res) => {
-  try {
-    const shiftID = req.params.id;
-    const employess = await getEmployeesWithConstarintsInShift(shiftID);
-    res.send(employess);
-  } catch (err) {
-    res.send(err);
+router.get(
+  "/EmployeesWithConstraintInShift/:id",
+  middleware,
+  async (req, res) => {
+    try {
+      const shiftID = req.params.id;
+      const employess = await getEmployeesWithConstarintsInShift(shiftID);
+      res.send(employess);
+    } catch (err) {
+      res.send(err);
+    }
   }
-});
+);
 
 router.post("/", middleware, async (req, res) => {
   try {
