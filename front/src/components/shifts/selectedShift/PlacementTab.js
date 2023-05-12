@@ -13,14 +13,15 @@ import {
     ListItemText,
     Checkbox,
     Select,
-    IconButton
+    IconButton,
+    InputLabel,
+    FormControl
 } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
-import useAuth from 'hooks/useAuth';
 
 const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
     const [missingRoles, setMissingRoles] = useState([]);
@@ -163,34 +164,37 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
                 {open && (
                     <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
                         <Grid item xs={10}>
-                            <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
-                                {allEmployess?.map((value) => {
-                                    const test = '';
-                                    return (
-                                        <ListItem
-                                            key={value.id + value.role}
-                                            secondaryAction={
-                                                <Checkbox
-                                                    edge="end"
-                                                    onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
-                                                    checked={checked.indexOf(value.id + '-' + value.role) !== -1}
-                                                />
-                                            }
-                                            disablePadding
-                                        >
-                                            <ListItemButton>
-                                                <ListItemAvatar>
-                                                    <Avatar
-                                                        alt={value.firstName.toUpperCase()}
-                                                        src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                            <FormControl sx={{ width: '100%' }}>
+                                <InputLabel id="Chane Assigment">Employees List</InputLabel>
+                                <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                                    {allEmployess?.map((value) => {
+                                        const test = '';
+                                        return (
+                                            <ListItem
+                                                key={value.id + value.role}
+                                                secondaryAction={
+                                                    <Checkbox
+                                                        edge="end"
+                                                        onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
+                                                        checked={checked.indexOf(value.id + '-' + value.role) !== -1}
                                                     />
-                                                </ListItemAvatar>
-                                                <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
-                                            </ListItemButton>
-                                        </ListItem>
-                                    );
-                                })}
-                            </Select>
+                                                }
+                                                disablePadding
+                                            >
+                                                <ListItemButton>
+                                                    <ListItemAvatar>
+                                                        <Avatar
+                                                            alt={value.firstName.toUpperCase()}
+                                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                                                        />
+                                                    </ListItemAvatar>
+                                                    <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                                </ListItemButton>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid item xs={2}>
                             <Button
@@ -220,7 +224,7 @@ PlacementTab.propTypes = {
     roles: PropTypes.array,
     allEmployess: PropTypes.array,
     onCancel: PropTypes.func,
-    initCheck: PropTypes.string
+    initCheck: PropTypes.array
 };
 
 export default PlacementTab;
