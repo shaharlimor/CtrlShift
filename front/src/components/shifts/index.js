@@ -4,7 +4,7 @@ import Loadable from 'components/Loadable';
 import { getMonthlyShifts } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 import { colorGenerator } from 'utils/color-generator';
-import DeleteShiftPopup from './DeleteShiftPopup';
+import ShiftSelectPopupup from './selectedShift/ShiftSelectPopupup';
 import { Dialog } from '@mui/material';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
@@ -20,7 +20,6 @@ const Shifts = () => {
         const getShifts = async () => {
             const result = await getMonthlyShifts(user.organization);
             let parsedData = [];
-
             result.data.map(async (item) =>
                 parsedData.push({
                     // eslint-disable-next-line
@@ -29,7 +28,8 @@ const Shifts = () => {
                     description: item.name,
                     start: new Date(item.startTime.toString()),
                     end: new Date(item.endTime.toString()),
-                    title: item.name
+                    title: item.name,
+                    roles: item.roles
                 })
             );
             setEvents(parsedData);
@@ -57,7 +57,7 @@ const Shifts = () => {
         <div>
             <Calendar calendarType={1} events={events} handleEventSelect={handleEventSelect} />
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && <DeleteShiftPopup event={selectedEvent} onCancel={handleModalClose} employess />}
+                {isModalOpen && <ShiftSelectPopupup event={selectedEvent} onCancel={handleModalClose} employess />}
             </Dialog>
         </div>
     );

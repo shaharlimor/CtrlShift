@@ -52,7 +52,7 @@ const getMissingBoardList = async (req, res) => {
       })
     );
 
-    console.log("sagi", existingMonthsSet);
+    // console.log("sagi", existingMonthsSet);
 
     // Loop through the next 12 months and add missing months to the missingMonths array
     for (let year = now.getFullYear(); year <= nextYear; year++) {
@@ -215,13 +215,10 @@ const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
 
 const getShiftsPublished = async (organization) => {
   // Get The month and year published
-  console.log(organization);
   const schePublished = await Schedule.find(
     { organization: organization, isPublished: true },
     "month year"
   );
-
-  console.log(schePublished);
 
   // Get shifts that published according to boards that open
   const shifts = await Shift.find({
@@ -243,6 +240,27 @@ const getShiftsPublished = async (organization) => {
   return shifts;
 };
 
+const getShiftById = async (id) => {
+  return await Shift.find(
+    { _id: id },
+    "_id organization startTime endTime name roles"
+  );
+};
+
+const changeEmployeesInShift = async (id, roles) => {
+  const monthlyShift = await getShiftById(id);
+  if (!monthlyShift || !monthlyShift.length) return "Monthly shift not found";
+  const shiftDocument = monthlyShift[0]; // access the first document in the array
+
+  const newRoles = roles;
+  shiftDocument.roles = shiftDocument.roles.map((oldRole) => {
+    const newRole = newRoles.find((role) => role.roleType === oldRole.roleType);
+    return newRole ? { ...oldRole, employeeIds: newRole.employeeIds } : oldRole;
+  });
+  await shiftDocument.save();
+  return shiftDocument;
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
@@ -252,4 +270,6 @@ module.exports = {
   getShiftsOpenToConstraints,
   getShiftsOpenToConstraintsByRoles,
   getShiftsPublished,
+  getShiftById,
+  changeEmployeesInShift,
 };

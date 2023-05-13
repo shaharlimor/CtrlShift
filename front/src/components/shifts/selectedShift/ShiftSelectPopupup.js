@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, Typography } from '@mui/material';
+
+import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 // project imports
-import { gridSpacing } from 'store/constant';
 import { deleteMonthlyShift } from 'utils/api';
-import useAuth from 'hooks/useAuth';
+import ShiftTabs from './ShiftTabs';
 
-const DeleteShiftPopup = ({ event, onCancel }) => {
-    const { user } = useAuth();
+const ShiftSelectPopupup = ({ event, onCancel }) => {
     const theme = useTheme();
 
     const handleDeleteClicked = async () => {
@@ -21,18 +20,11 @@ const DeleteShiftPopup = ({ event, onCancel }) => {
         // eslint-disable-next-line
         <Fragment>
             <DialogTitle color="primary.800">
-                Delete - {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
+                {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
             </DialogTitle>
             <Divider />
-            <DialogContent>
-                <Grid container spacing={gridSpacing} justifyContent="center" alignItems="center">
-                    <Grid item justifyContent="center">
-                        <Typography variant="h3">Are you sure?</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="body2">Do you really want to delete this shift? This process cannot be undone</Typography>
-                    </Grid>
-                </Grid>
+            <DialogContent sx={{ pt: 0, maxHeight: 300, minHeight: 300 }}>
+                <ShiftTabs event={event} onCancel={onCancel} />
             </DialogContent>
             <DialogActions sx={{ pb: 2 }}>
                 <Grid container justifyContent="space-between" alignItems="center">
@@ -60,11 +52,11 @@ const DeleteShiftPopup = ({ event, onCancel }) => {
                             '&:hover': {
                                 background: theme.palette.error.main
                             },
-                            width: '15%'
+                            width: '20%'
                         }}
                         onClick={handleDeleteClicked}
                     >
-                        Delete
+                        Delete Shift
                     </Button>
                 </Grid>
             </DialogActions>
@@ -72,9 +64,9 @@ const DeleteShiftPopup = ({ event, onCancel }) => {
     );
 };
 
-DeleteShiftPopup.propTypes = {
+ShiftSelectPopupup.propTypes = {
     event: PropTypes.object,
     onCancel: PropTypes.func
 };
 
-export default DeleteShiftPopup;
+export default ShiftSelectPopupup;

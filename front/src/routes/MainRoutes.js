@@ -58,7 +58,8 @@ const MainRoutes = {
         {
             path: '/manager/shifts-Board',
             element: (
-                <ProtectedRoute>
+                // eslint-disable-next-line
+                <ProtectedRoute restricedRoute={true}>
                     <CreateShiftsBoard />
                 </ProtectedRoute>
             )
@@ -66,7 +67,8 @@ const MainRoutes = {
         {
             path: '/manager/organization-manager',
             element: (
-                <ProtectedRoute>
+                // eslint-disable-next-line
+                <ProtectedRoute restricedRoute={true}>
                     <OrganizationManager />
                 </ProtectedRoute>
             )
