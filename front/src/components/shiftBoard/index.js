@@ -52,19 +52,15 @@ const ShiftBoard = () => {
         const employeeID = user._id;
         const shiftsForEmployee = [];
 
-        console.log('events', events);
-
         // eslint-disable-next-line
         for (const shift of events) {
             const roles = shift.roles;
 
             // eslint-disable-next-line
             for (const role of roles) {
-                console.log('role', role);
                 // eslint-disable-next-line
                 for (const id of role.employeeIds) {
                     if (id === employeeID) {
-                        console.log('myShift sagi');
                         shiftsForEmployee.push(shift);
                         break;
                     }
