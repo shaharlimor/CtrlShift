@@ -8,6 +8,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
 
 import { getUsersWithConstraintsInShift, getEmployeesByOrg } from 'utils/api';
+import PlacementTab from './PlacementTab';
+import SwitchTab from './SwitchTab';
 import useAuth from 'hooks/useAuth';
 
 // tabs panel
@@ -142,17 +144,23 @@ const ShiftTabs = ({ event, onCancel }) => {
                     <Tab key={index} to="#" icon={tab.icon} label={tab.label} {...a11yProps(index)} />
                 ))}
             </Tabs>
-            <TabPanel value={value} index={1}>
-                {/* <PlacementTab
+            <TabPanel value={value} index={0}>
+                <PlacementTab
                     eventId={event.id}
                     roles={event.roles}
                     allEmployess={allEmployess}
                     onCancel={onCancel}
                     initCheck={initalizeChecked}
-                /> */}
+                />
             </TabPanel>
-            <TabPanel value={value} index={0}>
-                {/* <ConstraintsTab employees={employeesWithConstraints} /> */}
+            <TabPanel value={value} index={1}>
+                <SwitchTab
+                    eventId={event.id}
+                    roles={event.roles}
+                    allEmployess={allEmployess}
+                    onCancel={onCancel}
+                    initCheck={initalizeChecked}
+                />
             </TabPanel>
         </>
     );
