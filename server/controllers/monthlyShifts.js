@@ -52,8 +52,6 @@ const getMissingBoardList = async (req, res) => {
       })
     );
 
-    // console.log("sagi", existingMonthsSet);
-
     // Loop through the next 12 months and add missing months to the missingMonths array
     for (let year = now.getFullYear(); year <= nextYear; year++) {
       const startMonth = year === now.getFullYear() ? now.getMonth() : 0;
@@ -213,6 +211,28 @@ const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
   return filteredShifts;
 };
 
+const ShiftsByRoleType = async (roleType, startTime) => {
+  // Convert startTime to a Date object if it is not already
+  const startDate = new Date(startTime);
+
+  // Extract the year and month from the provided start time
+  const year = startDate.getFullYear();
+  const month = startDate.getMonth() + 1; // Month is zero-based, so add 1
+
+  // Create the start and end dates of the specified month
+  const startDateOfMonth = new Date(year, month - 1, 1);
+  const endDateOfMonth = new Date(year, month, 0, 23, 59, 59, 999); // Set the time to the last millisecond of the month
+
+  // Retrieve shifts with matching role type and within the specified month
+  const shifts = await Shift.find({
+    "roles.roleType": roleType,
+    startTime: { $gte: startDateOfMonth, $lte: endDateOfMonth },
+  }).exec();
+
+  console.log(shifts);
+  return shifts;
+};
+
 const getShiftsPublished = async (organization) => {
   // Get The month and year published
   const schePublished = await Schedule.find(
@@ -272,4 +292,5 @@ module.exports = {
   getShiftsPublished,
   getShiftById,
   changeEmployeesInShift,
+  ShiftsByRoleType,
 };

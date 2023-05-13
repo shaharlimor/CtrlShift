@@ -15,22 +15,23 @@ import {
     Select,
     IconButton,
     InputLabel,
-    FormControl
+    FormControl,
+    TableContainer
 } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useAuth from 'hooks/useAuth';
 
-import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
+import { getSpecificEmployeesDetails, changeEmployeesInShift, getShiftsByRoleType } from 'utils/api';
 
 const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
     const { user } = useAuth();
 
-    const [missingRoles, setMissingRoles] = useState([]);
     const [userRole, setUserRole] = useState(null);
 
     const [roleShifts, setRoleShifts] = useState([]);
+
     const [employees, setEmployees] = useState([]);
     const [checked, setChecked] = useState(initCheck);
     const [open, setOpen] = useState(false);
@@ -47,44 +48,6 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
         setChecked(newChecked);
     };
 
-    const handleUserShift = () => {
-        // eslint-disable-next-line
-        const userRole = event.roles.find((role) => role.employeeIds.includes(user._id));
-        if (userRole) {
-            setUserRole(userRole.roleType);
-        }
-    };
-
-    const handleMissingEmployess = () => {
-        let result = '';
-
-        // for each role in roles check if amount === assigned employess amount
-        roles.forEach((role) => {
-            const { amount, roleType } = role;
-
-            const insertedEmployessAmount = checked.reduce((count, employee) => {
-                const [, role] = employee.split('-'); // extract the role type from the employee string
-                if (role === roleType) {
-                    return count + 1; // increment the count if the role type matches the given value
-                }
-                return count;
-            }, 0);
-            const difference = amount - insertedEmployessAmount;
-
-            if (difference > 0) {
-                // eslint-disable-next-line
-                result = result + ' ' + difference + ' ' + roleType + ', ';
-            }
-        });
-
-        setMissingRoles(result.slice(0, -2));
-    };
-
-    useEffect(() => {
-        handleUserShift();
-        handleMissingEmployess();
-    }, []);
-
     const usersRole = (id) => {
         // find the employee string in the checked array
         const checkedString = checked.find((str) => str.startsWith(id));
@@ -95,14 +58,24 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
     };
 
     useEffect(() => {
-        handleMissingEmployess();
-        const getEmp = async () => {
-            // get the checked employees id's (from db and selected)
+        const handleUserShift = () => {
+            // eslint-disable-next-line
+            const userRole = event.roles.find((role) => role.employeeIds.includes(user._id));
+            if (userRole) {
+                setUserRole(userRole.roleType);
+                return userRole.roleType;
+            }
+            return null;
+        };
+
+        const fetchData = async () => {
+            const roleType = handleUserShift();
             const employeeIds = checked.map((employee) => {
                 const idAndRole = employee.split('-');
                 const id = idAndRole[0];
                 return id;
             });
+
             if (employeeIds.length !== 0) {
                 const result = await getSpecificEmployeesDetails(employeeIds);
                 let parsedData = [];
@@ -119,9 +92,16 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
                 setEmployees(parsedData);
                 parsedData = [];
             }
+
+            if (roleType !== null) {
+                const shiftsResponse = await getShiftsByRoleType(roleType, event.start);
+                const roleShiftsData = shiftsResponse.data;
+                setRoleShifts(roleShiftsData);
+            }
         };
-        getEmp();
-    }, [checked]);
+
+        fetchData();
+    }, []);
 
     const handleSave = async () => {
         const body = checked.reduce((result, str) => {
@@ -154,34 +134,35 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
                 <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                     <Grid item xs={10}>
                         <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="Change Assigment">Employees List</InputLabel>
-                            <Select labelId="Change Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
-                                {allEmployess?.map((value) => {
-                                    const test = '';
-                                    return (
-                                        <ListItem
-                                            key={value.id + value.role}
-                                            secondaryAction={
-                                                <Checkbox
-                                                    edge="end"
-                                                    onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
-                                                    checked={checked.indexOf(value.id + '-' + value.role) !== -1}
-                                                />
-                                            }
-                                            disablePadding
-                                        >
-                                            <ListItemButton>
-                                                <ListItemAvatar>
-                                                    <Avatar
-                                                        alt={value.firstName.toUpperCase()}
-                                                        src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                            <InputLabel id="Chane Assigment">Shift List</InputLabel>
+                            <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                                {Array.isArray(roleShifts) &&
+                                    roleShifts.map((value) => {
+                                        const test = '';
+                                        return (
+                                            <ListItem
+                                                key={value.id + value.role}
+                                                secondaryAction={
+                                                    <Checkbox
+                                                        edge="end"
+                                                        onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
+                                                        checked={checked.indexOf(value.id + '-' + value.role) !== -1}
                                                     />
-                                                </ListItemAvatar>
-                                                <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
-                                            </ListItemButton>
-                                        </ListItem>
-                                    );
-                                })}
+                                                }
+                                                disablePadding
+                                            >
+                                                <ListItemButton>
+                                                    <ListItemAvatar>
+                                                        <Avatar
+                                                            alt={value.firstName.toUpperCase()}
+                                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                                                        />
+                                                    </ListItemAvatar>
+                                                    <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                                </ListItemButton>
+                                            </ListItem>
+                                        );
+                                    })}
                             </Select>
                         </FormControl>
                     </Grid>
@@ -208,7 +189,7 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
 };
 
 SwitchTab.propTypes = {
-    event: PropTypes.array,
+    event: PropTypes.object,
     roles: PropTypes.array,
     allEmployess: PropTypes.array,
     onCancel: PropTypes.func,
