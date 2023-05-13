@@ -27,24 +27,24 @@ import { getSpecificEmployeesDetails, changeEmployeesInShift, getShiftsByRoleTyp
 
 const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
     const { user } = useAuth();
-
     const [userRole, setUserRole] = useState(null);
-
     const [roleShifts, setRoleShifts] = useState([]);
-
     const [checked, setChecked] = useState(initCheck);
 
-    const handleChangeEmployeesSelction = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
+    // eslint-disable-next-line
+    const [selectedShift, setSelectedShift] = useState(null);
 
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-        setChecked(newChecked);
-    };
+    // const handleChangeEmployeesSelction = (value) => () => {
+    //     const currentIndex = checked.indexOf(value);
+    //     const newChecked = [...checked];
+
+    //     if (currentIndex === -1) {
+    //         newChecked.push(value);
+    //     } else {
+    //         newChecked.splice(currentIndex, 1);
+    //     }
+    //     setChecked(newChecked);
+    // };
 
     useEffect(() => {
         const handleUserShift = () => {
@@ -90,6 +90,11 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
         onCancel();
     };
 
+    const handleSelect = (event) => {
+        console.log(event.target);
+        setSelectedShift(event.target.value);
+    };
+
     return (
         <CardContent>
             {/*eslint-disable */}
@@ -103,22 +108,17 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
                     <Grid item xs={10}>
                         <FormControl sx={{ width: '100%' }}>
                             <InputLabel id="Chane Assigment">Shift List</InputLabel>
-                            <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                            <Select
+                                labelId="Change Assignment"
+                                sx={{ width: '90%', bgcolor: 'background.paper' }}
+                                value={selectedShift || ''}
+                                onChange={handleSelect}
+                            >
                                 {Array.isArray(roleShifts) &&
                                     roleShifts.map((value) => {
                                         const test = '';
                                         return (
-                                            <ListItem
-                                                key={value.employeeId + value._id}
-                                                secondaryAction={
-                                                    <Checkbox
-                                                        edge="end"
-                                                        onChange={handleChangeEmployeesSelction(value.employeeId + '-' + value.role)}
-                                                        checked={checked.indexOf(value.employeeId + value._id) !== -1}
-                                                    />
-                                                }
-                                                disablePadding
-                                            >
+                                            <ListItem key={value.employeeId + value._id} disablePadding>
                                                 <ListItemButton>
                                                     <ListItemAvatar>
                                                         <Avatar
@@ -132,12 +132,12 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
                                                             ' ' +
                                                             value.lastName +
                                                             ' - ' +
-                                                            value.startTime.toLocaleString('en-US', {
+                                                            new Date(value.startTime).toLocaleString('en-US', {
                                                                 dateStyle: 'short',
                                                                 timeStyle: 'short'
                                                             }) +
                                                             ' - ' +
-                                                            value.endTime.toLocaleString('en-US', {
+                                                            new Date(value.endTime).toLocaleString('en-US', {
                                                                 dateStyle: 'short',
                                                                 timeStyle: 'short'
                                                             })
