@@ -229,8 +229,22 @@ const ShiftsByRoleType = async (roleType, startTime) => {
     startTime: { $gte: startDateOfMonth, $lte: endDateOfMonth },
   }).exec();
 
-  console.log(shifts);
-  return shifts;
+  // Map over the shifts array to extract the required information for each shift
+  const formattedShifts = shifts.map((shift) => ({
+    _id: shift._id,
+    role: roleType,
+    employeeId: shift.roles.reduce((ids, role) => {
+      if (role.roleType === roleType) {
+        ids.push(...role.employeeIds);
+      }
+      return ids;
+    }, []),
+    startTime: shift.startTime,
+    endTime: shift.endTime,
+  }));
+
+  console.log(formattedShifts);
+  return formattedShifts;
 };
 
 const getShiftsPublished = async (organization) => {

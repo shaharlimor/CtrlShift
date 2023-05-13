@@ -141,24 +141,24 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
                                         const test = '';
                                         return (
                                             <ListItem
-                                                key={value.id + value.role}
+                                                key={value.employeeId + value._id}
                                                 secondaryAction={
                                                     <Checkbox
                                                         edge="end"
-                                                        onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
-                                                        checked={checked.indexOf(value.id + '-' + value.role) !== -1}
+                                                        onChange={handleChangeEmployeesSelction(value.employeeId + '-' + value.role)}
+                                                        checked={checked.indexOf(value.employeeId + value._id) !== -1}
                                                     />
                                                 }
                                                 disablePadding
                                             >
                                                 <ListItemButton>
-                                                    <ListItemAvatar>
+                                                    {/* <ListItemAvatar>
                                                         <Avatar
                                                             alt={value.firstName.toUpperCase()}
                                                             src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
                                                         />
-                                                    </ListItemAvatar>
-                                                    <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                                    </ListItemAvatar> */}
+                                                    <ListItemText primary={value.employeeId + value._id} />
                                                 </ListItemButton>
                                             </ListItem>
                                         );
