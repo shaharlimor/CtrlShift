@@ -21,7 +21,7 @@ const MenuList = () => {
     // last menu-item to show in horizontal menu bar
     const lastItem = layout === LAYOUT_CONST.HORIZONTAL_LAYOUT && !matchDownMd ? HORIZONTAL_MAX_ITEM : null;
     const menuItems = menuItem;
-    menuItems.items[0].children = !user.isAdmin
+    menuItems.items[0].children = !user?.isAdmin
         ? menuItems.items[0].children.filter((item) => item.id !== 'Organization-Manager' && item.id !== 'Shifts-Board-Manager')
         : menuItems.items[0].children;
     let lastItemIndex = menuItems.items.length - 1;
