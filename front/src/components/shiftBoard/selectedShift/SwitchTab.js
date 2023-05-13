@@ -128,32 +128,9 @@ const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
 
     return (
         <CardContent>
-            <Grid container spacing={0} alignItems="center">
-                {employees &&
-                    employees.map((emp) => (
-                        /*eslint-disable */
-                        <Grid key={emp.id} item xs={4}>
-                            <Grid container spacing={2} alignItems="center">
-                                <Grid key={emp.LastName} item>
-                                    <Avatar
-                                        alt={emp.firstName}
-                                        src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${emp.id}.png`}
-                                    />
-                                </Grid>
-                                <Grid key={emp.firstName} item xs>
-                                    <Typography align="left" component="div" variant="subtitle1">
-                                        {emp.firstName} {emp.lastName}
-                                    </Typography>
-                                    <Typography align="left" component="div" variant="subtitle2">
-                                        {emp.role}
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    ))}
-            </Grid>
             <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                 <Typography align="center" component="div" variant="h4">
+                    {/*eslint-disable */}
                     {missingRoles.length !== 0 ? 'Missing employees: ' + missingRoles : 'Change Assigment'}
                 </Typography>
                 <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
