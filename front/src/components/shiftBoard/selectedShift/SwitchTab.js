@@ -152,13 +152,29 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
                                                 disablePadding
                                             >
                                                 <ListItemButton>
-                                                    {/* <ListItemAvatar>
+                                                    <ListItemAvatar>
                                                         <Avatar
                                                             alt={value.firstName.toUpperCase()}
-                                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
+                                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.employeeId}.png`}
                                                         />
-                                                    </ListItemAvatar> */}
-                                                    <ListItemText primary={value.employeeId + value._id} />
+                                                    </ListItemAvatar>
+                                                    <ListItemText
+                                                        primary={
+                                                            value.firstName +
+                                                            ' ' +
+                                                            value.lastName +
+                                                            ' - ' +
+                                                            value.startTime.toLocaleString('en-US', {
+                                                                dateStyle: 'short',
+                                                                timeStyle: 'short'
+                                                            }) +
+                                                            ' - ' +
+                                                            value.endTime.toLocaleString('en-US', {
+                                                                dateStyle: 'short',
+                                                                timeStyle: 'short'
+                                                            })
+                                                        }
+                                                    />
                                                 </ListItemButton>
                                             </ListItem>
                                         );
