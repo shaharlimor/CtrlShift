@@ -32,9 +32,7 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
 
     const [roleShifts, setRoleShifts] = useState([]);
 
-    const [employees, setEmployees] = useState([]);
     const [checked, setChecked] = useState(initCheck);
-    const [open, setOpen] = useState(false);
 
     const handleChangeEmployeesSelction = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -46,15 +44,6 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
             newChecked.splice(currentIndex, 1);
         }
         setChecked(newChecked);
-    };
-
-    const usersRole = (id) => {
-        // find the employee string in the checked array
-        const checkedString = checked.find((str) => str.startsWith(id));
-        // if no matching string was found, return null
-        if (!checkedString) return null;
-        const idAndRole = checkedString.split('-');
-        return idAndRole[1];
     };
 
     useEffect(() => {
@@ -70,28 +59,6 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
 
         const fetchData = async () => {
             const roleType = handleUserShift();
-            const employeeIds = checked.map((employee) => {
-                const idAndRole = employee.split('-');
-                const id = idAndRole[0];
-                return id;
-            });
-
-            if (employeeIds.length !== 0) {
-                const result = await getSpecificEmployeesDetails(employeeIds);
-                let parsedData = [];
-
-                parsedData = result.data.map((item) => ({
-                    // eslint-disable-next-line
-                    id: item._id,
-                    firstName: item.firstName,
-                    lastName: item.lastName,
-                    // eslint-disable-next-line
-                    role: usersRole(item._id)
-                }));
-
-                setEmployees(parsedData);
-                parsedData = [];
-            }
 
             if (roleType !== null) {
                 const shiftsResponse = await getShiftsByRoleType(roleType, event.start);
@@ -104,21 +71,22 @@ const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
     }, []);
 
     const handleSave = async () => {
-        const body = checked.reduce((result, str) => {
-            const [id, roleType] = str.split('-');
-            const existingRole = result.find((r) => r.roleType === roleType);
-            if (existingRole) {
-                existingRole.employeeIds.push(id);
-            } else {
-                result.push({ roleType, employeeIds: [id] });
-            }
-            return result;
-        }, []);
+        // TODO send a request to switchShift
+        // const body = checked.reduce((result, str) => {
+        //     const [id, roleType] = str.split('-');
+        //     const existingRole = result.find((r) => r.roleType === roleType);
+        //     if (existingRole) {
+        //         existingRole.employeeIds.push(id);
+        //     } else {
+        //         result.push({ roleType, employeeIds: [id] });
+        //     }
+        //     return result;
+        // }, []);
 
-        // eslint-disable-next-line
-        await changeEmployeesInShift(event._id, {
-            roles: body
-        });
+        // // eslint-disable-next-line
+        // await changeEmployeesInShift(event._id, {
+        //     roles: body
+        // });
         onCancel();
     };
 
