@@ -154,13 +154,7 @@ const ShiftTabs = ({ event, onCancel }) => {
                 />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SwitchTab
-                    eventId={event.id}
-                    roles={event.roles}
-                    allEmployess={allEmployess}
-                    onCancel={onCancel}
-                    initCheck={initalizeChecked}
-                />
+                <SwitchTab event={event} roles={event.roles} allEmployess={allEmployess} onCancel={onCancel} initCheck={initalizeChecked} />
             </TabPanel>
         </>
     );

@@ -20,11 +20,17 @@ import {
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import useAuth from 'hooks/useAuth';
 
 import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
 
-const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
+const SwitchTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
+    const { user } = useAuth();
+
     const [missingRoles, setMissingRoles] = useState([]);
+    const [userRole, setUserRole] = useState(null);
+
+    const [roleShifts, setRoleShifts] = useState([]);
     const [employees, setEmployees] = useState([]);
     const [checked, setChecked] = useState(initCheck);
     const [open, setOpen] = useState(false);
@@ -39,6 +45,14 @@ const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
             newChecked.splice(currentIndex, 1);
         }
         setChecked(newChecked);
+    };
+
+    const handleUserShift = () => {
+        // eslint-disable-next-line
+        const userRole = event.roles.find((role) => role.employeeIds.includes(user._id));
+        if (userRole) {
+            setUserRole(userRole.roleType);
+        }
     };
 
     const handleMissingEmployess = () => {
@@ -67,10 +81,11 @@ const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
     };
 
     useEffect(() => {
+        handleUserShift();
         handleMissingEmployess();
     }, []);
 
-    const userRole = (id) => {
+    const usersRole = (id) => {
         // find the employee string in the checked array
         const checkedString = checked.find((str) => str.startsWith(id));
         // if no matching string was found, return null
@@ -98,7 +113,7 @@ const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
                     firstName: item.firstName,
                     lastName: item.lastName,
                     // eslint-disable-next-line
-                    role: userRole(item._id)
+                    role: usersRole(item._id)
                 }));
 
                 setEmployees(parsedData);
@@ -120,7 +135,8 @@ const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        await changeEmployeesInShift(eventId, {
+        // eslint-disable-next-line
+        await changeEmployeesInShift(event._id, {
             roles: body
         });
         onCancel();
@@ -128,76 +144,71 @@ const SwitchTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
 
     return (
         <CardContent>
-            <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
+            {/*eslint-disable */}
+            <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
                 <Typography align="center" component="div" variant="h4">
-                    {/*eslint-disable */}
-                    {missingRoles.length !== 0 ? 'Missing employees: ' + missingRoles : 'Change Assigment'}
+                    {userRole == null ? "You don't have a shift " : 'Ask for a switch'}
                 </Typography>
-                <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                </IconButton>
             </Grid>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                {open && (
-                    <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
-                        <Grid item xs={10}>
-                            <FormControl sx={{ width: '100%' }}>
-                                <InputLabel id="Chane Assigment">Employees List</InputLabel>
-                                <Select labelId="Chane Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
-                                    {allEmployess?.map((value) => {
-                                        const test = '';
-                                        return (
-                                            <ListItem
-                                                key={value.id + value.role}
-                                                secondaryAction={
-                                                    <Checkbox
-                                                        edge="end"
-                                                        onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
-                                                        checked={checked.indexOf(value.id + '-' + value.role) !== -1}
+            {userRole && (
+                <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
+                    <Grid item xs={10}>
+                        <FormControl sx={{ width: '100%' }}>
+                            <InputLabel id="Change Assigment">Employees List</InputLabel>
+                            <Select labelId="Change Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                                {allEmployess?.map((value) => {
+                                    const test = '';
+                                    return (
+                                        <ListItem
+                                            key={value.id + value.role}
+                                            secondaryAction={
+                                                <Checkbox
+                                                    edge="end"
+                                                    onChange={handleChangeEmployeesSelction(value.id + '-' + value.role)}
+                                                    checked={checked.indexOf(value.id + '-' + value.role) !== -1}
+                                                />
+                                            }
+                                            disablePadding
+                                        >
+                                            <ListItemButton>
+                                                <ListItemAvatar>
+                                                    <Avatar
+                                                        alt={value.firstName.toUpperCase()}
+                                                        src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
                                                     />
-                                                }
-                                                disablePadding
-                                            >
-                                                <ListItemButton>
-                                                    <ListItemAvatar>
-                                                        <Avatar
-                                                            alt={value.firstName.toUpperCase()}
-                                                            src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${value.id}.png`}
-                                                        />
-                                                    </ListItemAvatar>
-                                                    <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
-                                                </ListItemButton>
-                                            </ListItem>
-                                        );
-                                    })}
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                onClick={handleSave}
-                                sx={{
-                                    width: '100%',
-                                    backgroundColor: 'primary.800',
-                                    '&:hover': {
-                                        background: 'primary.dark'
-                                    }
-                                }}
-                            >
-                                Save
-                            </Button>
-                        </Grid>
+                                                </ListItemAvatar>
+                                                <ListItemText primary={value.firstName + ' ' + value.lastName + ' - ' + value.role} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
                     </Grid>
-                )}
-            </Collapse>
+                    <Grid item xs={2}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            onClick={handleSave}
+                            sx={{
+                                width: '100%',
+                                backgroundColor: 'primary.800',
+                                '&:hover': {
+                                    background: 'primary.dark'
+                                }
+                            }}
+                        >
+                            Save
+                        </Button>
+                    </Grid>
+                </Grid>
+            )}
         </CardContent>
     );
 };
 
 SwitchTab.propTypes = {
-    eventId: PropTypes.string,
+    event: PropTypes.array,
     roles: PropTypes.array,
     allEmployess: PropTypes.array,
     onCancel: PropTypes.func,
