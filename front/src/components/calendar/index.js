@@ -21,7 +21,7 @@ import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 // 0 - Insert Constraints
 // 1 - Manager - Monthly Planner
 // 2 - Shifts Board
-const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick, filterMode, changeFilteredByMyShifts }) => {
+const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeFilteredByMyShifts }) => {
     const calendarRef = useRef(null);
     const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -116,15 +116,9 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
                 </Grid>
             );
         }
-        if (calendarType === 2) {
-            return (
-                <Grid item>
-                    <Button variant="contained" sx={{ width: '100%' }} size="large" onClick={handleSwitchShiftClick}>
-                        Switch shift
-                    </Button>
-                </Grid>
-            );
-        }
+        // if (calendarType === 2) {
+        //     return <Grid item></Grid>;
+        // }
         return '';
     };
 
@@ -196,7 +190,6 @@ Calendar.propTypes = {
     events: PropTypes.array,
     handleEventSelect: PropTypes.func,
     calendarType: PropTypes.number,
-    handleSwitchShiftClick: PropTypes.func,
     changeFilteredByMyShifts: PropTypes.func,
     filterMode: PropTypes.bool
 };
