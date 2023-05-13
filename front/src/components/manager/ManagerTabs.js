@@ -3,11 +3,10 @@ import React from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Tab, Tabs, Typography, styled } from '@mui/material';
+import { Box, Tab, Tabs, styled } from '@mui/material';
 
 // assets
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
 import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import PermanentShift from './tabs/permenentShift/PermenentShifts';
@@ -131,7 +130,6 @@ export default function ManagerTabs() {
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <Employees />
-                {/* TODO: Emplyees */}
             </TabPanel>
         </>
     );

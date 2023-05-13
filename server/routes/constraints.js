@@ -6,6 +6,7 @@ const {
   getConstraintsByShiftId,
   getConstraintsByEmployeeId,
   employeeHasConstraintInShift,
+  getEmployeesWithConstarintsInShift,
 } = require("../controllers/constraints");
 
 var router = express.Router();
@@ -30,7 +31,7 @@ router.get("/byShift/:id", middleware, async (req, res) => {
   }
 });
 
-router.get("/byEmployee/:id", async (req, res) => {
+router.get("/byEmployee/:id", middleware, async (req, res) => {
   try {
     const id = req.params.id;
     const constraints = await getConstraintsByEmployeeId(id);
@@ -49,6 +50,20 @@ router.get(
       const shiftId = req.params.shiftId;
       const ans = await employeeHasConstraintInShift(employeeId, shiftId);
       res.send(ans);
+    } catch (err) {
+      res.send(err);
+    }
+  }
+);
+
+router.get(
+  "/EmployeesWithConstraintInShift/:id",
+  middleware,
+  async (req, res) => {
+    try {
+      const shiftID = req.params.id;
+      const employess = await getEmployeesWithConstarintsInShift(shiftID);
+      res.send(employess);
     } catch (err) {
       res.send(err);
     }
