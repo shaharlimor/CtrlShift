@@ -1,6 +1,7 @@
 const Shift = require("../models/monthlyShifts");
 const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
+const User = require("../models/users");
 const Common = require("../controllers/common");
 
 const getShifts = async (organization) => {
@@ -229,19 +230,40 @@ const ShiftsByRoleType = async (roleType, startTime) => {
     startTime: { $gte: startDateOfMonth, $lte: endDateOfMonth },
   }).exec();
 
-  // Map over the shifts array to extract the required information for each shift
-  const formattedShifts = shifts.map((shift) => ({
-    _id: shift._id,
-    role: roleType,
-    employeeId: shift.roles.reduce((ids, role) => {
+  // Create an array to store the formatted shifts
+  const formattedShifts = [];
+
+  // Iterate over each shift
+  for (const shift of shifts) {
+    // Iterate over each role within the shift
+    for (const role of shift.roles) {
+      // Check if the role matches the specified roleType
       if (role.roleType === roleType) {
-        ids.push(...role.employeeIds);
+        // Iterate over each employee within the role
+        for (const employeeId of role.employeeIds) {
+          // Retrieve the user details from the User collection
+          const user = await User.findOne({ _id: employeeId }).exec();
+
+          // Check if the user exists and has the required fields
+          if (user && user.firstName && user.lastName) {
+            // Create a new shift object for the employee
+            const formattedShift = {
+              _id: shift._id,
+              role: roleType,
+              employeeId: employeeId,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              startTime: shift.startTime,
+              endTime: shift.endTime,
+            };
+
+            // Push the formatted shift to the result array
+            formattedShifts.push(formattedShift);
+          }
+        }
       }
-      return ids;
-    }, []),
-    startTime: shift.startTime,
-    endTime: shift.endTime,
-  }));
+    }
+  }
 
   console.log(formattedShifts);
   return formattedShifts;
