@@ -32,6 +32,18 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     const [checked, setChecked] = useState(initCheck);
     const [selectedShift, setSelectedShift] = useState(null);
 
+    const handleChangeShiftSelction = (value) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(value);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+        setChecked(newChecked);
+    };
+
     useEffect(() => {
         const handleUserShift = () => {
             // eslint-disable-next-line
@@ -58,20 +70,29 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
 
     const handleSave = async () => {
         const body = checked.reduce((result, str) => {
-            const [id, roleType] = str.split('-');
-            const existingRole = result.find((r) => r.roleType === roleType);
-            if (existingRole) {
-                existingRole.employeeIds.push(id);
-            } else {
-                result.push({ roleType, employeeIds: [id] });
-            }
+            // eslint-disable-next-line
+            const [employeeId, _id] = str.split('-');
+            const swapRequest = {
+                // eslint-disable-next-line
+                userId: user._id,
+                // eslint-disable-next-line
+                shiftId: event._id,
+                // eslint-disable-next-line
+                requestShiftId: _id,
+                requestUserId: employeeId,
+                status: 'open'
+            };
+
+            result.push(swapRequest);
+
             return result;
         }, []);
 
-        // eslint-disable-next-line
-        await changeEmployeesInShift(event._id, {
-            roles: body
-        });
+        //TODO send a request to server to create swapRequest
+        // // eslint-disable-next-line
+        // await postSwapRequest(event._id, {
+        //     roles: body
+        // });
 
         onCancel();
     };
@@ -103,7 +124,17 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
                                     roleShifts.map((value) => {
                                         const test = '';
                                         return (
-                                            <ListItem key={value.employeeId + value._id} disablePadding>
+                                            <ListItem
+                                                key={value.employeeId + value._id}
+                                                secondaryAction={
+                                                    <Checkbox
+                                                        edge="end"
+                                                        onChange={handleChangeShiftSelction(value.employeeId + '-' + value._id)}
+                                                        checked={checked.indexOf(value.employeeId + '-' + value._id) !== -1}
+                                                    />
+                                                }
+                                                disablePadding
+                                            >
                                                 <ListItemButton>
                                                     <ListItemAvatar>
                                                         <Avatar

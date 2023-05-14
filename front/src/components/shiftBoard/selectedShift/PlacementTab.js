@@ -62,7 +62,7 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
             }
         };
         getEmp();
-    }, [checked]);
+    }, []);
 
     return (
         <CardContent>
