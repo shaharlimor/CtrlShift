@@ -88,7 +88,7 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        //TODO send a request to server to create swapRequest
+        // TODO send a request to server to create swapRequest
         // // eslint-disable-next-line
         // await postSwapRequest(event._id, {
         //     roles: body

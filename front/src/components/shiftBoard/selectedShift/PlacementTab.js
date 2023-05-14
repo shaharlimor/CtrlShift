@@ -44,6 +44,9 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
                 const id = idAndRole[0];
                 return id;
             });
+
+            console.log(initCheck);
+
             if (employeeIds.length !== 0) {
                 const result = await getSpecificEmployeesDetails(employeeIds);
                 let parsedData = [];

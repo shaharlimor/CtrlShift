@@ -49,7 +49,6 @@ const tabsOption = [
 const ShiftTabs = ({ event, onCancel }) => {
     const theme = useTheme();
     const [value, setValue] = useState(0);
-    // const [employeesWithConstraints, setEmployeesWithConstraints] = useState([]);
     const [allEmployess, setallEmployess] = useState([]);
     const { user } = useAuth();
     const [initalizeChecked, setInitalizeChecked] = useState([]);
@@ -85,7 +84,6 @@ const ShiftTabs = ({ event, onCancel }) => {
                 lastName: item.lastName
             }));
 
-            // setEmployeesWithConstraints(parsedData);
             parsedData = [];
 
             const res = await getEmployeesByOrg(user.organization);
