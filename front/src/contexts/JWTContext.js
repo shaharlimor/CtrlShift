@@ -71,10 +71,6 @@ export const JWTProvider = ({ children }) => {
     const [state, setState] = useReducer(accountReducer, initialState);
     const navigate = useNavigate();
     useEffect(() => {
-        const navigateLogin = () => {
-            navigateLogin();
-        };
-
         const getUserByRefreshToken = async () => {
             try {
                 const response = await axiosServices.get('/auth/getUserByRefreshToken');
@@ -87,6 +83,7 @@ export const JWTProvider = ({ children }) => {
                     }
                 });
             } catch (err) {
+                // eslint-disable-next-line
                 navigateLogin();
             }
         };
@@ -96,6 +93,7 @@ export const JWTProvider = ({ children }) => {
                 // eslint-disable-next-line
                 refreshStateAccessToken();
             } catch (err) {
+                // eslint-disable-next-line
                 navigateLogin();
             }
         };
@@ -115,9 +113,11 @@ export const JWTProvider = ({ children }) => {
                         refresh();
                     }
                 } else {
+                    // eslint-disable-next-line
                     navigateLogin();
                 }
             } catch (err) {
+                // eslint-disable-next-line
                 navigateLogin();
             }
         };
