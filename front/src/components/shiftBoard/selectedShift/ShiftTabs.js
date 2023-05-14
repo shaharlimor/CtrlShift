@@ -144,7 +144,7 @@ const ShiftTabs = ({ event, onCancel }) => {
             </Tabs>
             <TabPanel value={value} index={0}>
                 <PlacementTab
-                    eventId={event.id}
+                    event={event}
                     roles={event.roles}
                     allEmployess={allEmployess}
                     onCancel={onCancel}

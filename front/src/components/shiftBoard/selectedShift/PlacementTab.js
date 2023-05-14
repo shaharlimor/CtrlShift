@@ -23,7 +23,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
 
-const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => {
+const PlacementTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
     const [employees, setEmployees] = useState([]);
     const [checked, setChecked] = useState(initCheck);
 
@@ -37,15 +37,29 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
     };
 
     useEffect(() => {
+        const initalizeRoles = () => {
+            const changeChecked = [];
+            event.roles.forEach((role) => {
+                const { roleType, employeeIds } = role;
+
+                /* eslint-disable */
+                employeeIds.map((employeeId) => {
+                    const newObject = employeeId + '-' + roleType;
+                    changeChecked.push(newObject);
+                });
+                /* eslint-enable */
+            });
+            return changeChecked;
+        };
+        const roles = initalizeRoles();
+
         const getEmp = async () => {
             // get the checked employees id's (from db and selected)
-            const employeeIds = checked.map((employee) => {
+            const employeeIds = roles.map((employee) => {
                 const idAndRole = employee.split('-');
                 const id = idAndRole[0];
                 return id;
             });
-
-            console.log(initCheck);
 
             if (employeeIds.length !== 0) {
                 const result = await getSpecificEmployeesDetails(employeeIds);
@@ -65,7 +79,7 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
             }
         };
         getEmp();
-    }, []);
+    }, [checked]);
 
     return (
         <CardContent>
@@ -98,7 +112,7 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
 };
 
 PlacementTab.propTypes = {
-    eventId: PropTypes.string,
+    event: PropTypes.object,
     roles: PropTypes.array,
     allEmployess: PropTypes.array,
     onCancel: PropTypes.func,
