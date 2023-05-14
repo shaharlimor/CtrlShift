@@ -265,7 +265,6 @@ const ShiftsByRoleType = async (roleType, startTime) => {
     }
   }
 
-  console.log(formattedShifts);
   return formattedShifts;
 };
 
