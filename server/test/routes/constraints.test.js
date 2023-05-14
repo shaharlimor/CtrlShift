@@ -1,7 +1,6 @@
 const request = require("supertest");
 const express = require("express");
 const Constraint = require("../../src/models/constraints");
-const middleware = require("../../src/common/auth_middleware");
 const router = require("../../src/routes/constraints");
 
 const {
@@ -16,7 +15,7 @@ jest.mock("../../src/controllers/constraints");
 
 const app = express();
 app.use(express.json());
-app.use("/",middleware, router);
+app.use("/", router);
 
 describe("Constraints Router", () => {
   afterEach(() => {
