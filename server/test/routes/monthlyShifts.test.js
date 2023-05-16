@@ -1,6 +1,5 @@
 const request = require('supertest');
 const express = require('express');
-const middleware = require("../../src/common/auth_middleware");
 const router = require("../../src/routes/monthlyShifts");
 const Shift = require('../../src/models/monthlyShifts');
 const {
@@ -20,7 +19,7 @@ jest.mock("../../src/controllers/monthlyShifts");
 
 const app = express();
 app.use(express.json());
-app.use('/', middleware, router);
+app.use('/', router);
 
 describe('Your Route Tests', () => {
   beforeEach(() => {

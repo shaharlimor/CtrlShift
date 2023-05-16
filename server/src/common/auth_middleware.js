@@ -2,7 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const auth = async (req, res, next) => {
 
-  if (process.env.NODE_ENV !== 'test') {
+  // Test mode 
+  if (process.env.JEST_WORKER_ID !== undefined) {
+    next();
+  } else { //Prod mode
 
     authHeaders = req.headers["accesstoken"];
     const token = authHeaders && authHeaders.split(" ")[1];
@@ -21,8 +24,6 @@ const auth = async (req, res, next) => {
       req.user = user;
       next();
     });
-  } else {
-    next();
   }
 };
 
