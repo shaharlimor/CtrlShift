@@ -11,6 +11,7 @@ const {
   getShiftsOpenToConstraintsByRoles,
   getShiftsPublished,
   changeEmployeesInShift,
+  generateScheduleMonthlyShifts,
   getShiftById,
 } = require("../controllers/monthlyShifts");
 
@@ -127,6 +128,15 @@ router.patch("/assingEmployees/:id", middleware, async (req, res) => {
     res.send(
       "failed to update employees in shift " + req.params.id + " error: " + err
     );
+  }
+});
+
+router.post("/generateScheduleMonthlyShifts", middleware, async (req, res) => {
+  try {
+    const shifts = await generateScheduleMonthlyShifts(req);
+    res.send(shifts);
+  } catch (err) {
+    res.send("error occured to get shifts: " + err);
   }
 });
 
