@@ -178,7 +178,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                                     variant="contained"
                                     sx={{ width: '100%' }}
                                     size="large"
-                                    onClick={() => generateScheduleMonthlyShifts()}
+                                    onClick={() => generateScheduleMonthlyShifts(date)}
                                 >
                                     Create Schedule
                                 </Button>

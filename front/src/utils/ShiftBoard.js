@@ -37,9 +37,11 @@ export const CreateMonthShiftBoard = async (organization, month, year) => {
     }
 };
 
-export const generateScheduleMonthlyShifts = async () => {
+export const generateScheduleMonthlyShifts = async (date) => {
     try {
-        const response = await axiosServices.post('/monthlyShifts/generateScheduleMonthlyShifts');
+        const response = await axiosServices.post(
+            `/monthlyShifts/generateScheduleMonthlyShifts/${(date.getMonth() + 1) % 12}/${date.getYear() + 2000 - 100}`
+        );
 
         // Handle the response (e.g., show a success message)
         return response.data;
