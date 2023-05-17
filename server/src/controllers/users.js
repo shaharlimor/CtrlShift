@@ -198,6 +198,13 @@ const changePassword = async (req, res) => {
   }
 };
 
+const organizationExist = async (org) => {
+  const exist = await User.find({ organization: org });
+
+  // there is a user in this organization - organization already exist
+  return exist.length !== 0;
+};
+
 module.exports = {
   createUser,
   deleteUser,
@@ -206,4 +213,5 @@ module.exports = {
   changeImage,
   changePassword,
   getEmployeesDetails,
+  organizationExist,
 };

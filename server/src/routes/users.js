@@ -33,4 +33,13 @@ router.get("/getEmployeesDetails/:ids", middleware, async (req, res) => {
   }
 });
 
+router.get("/orgExist/:name", async (req, res) => {
+  try {
+    const ans = await userController.organizationExist(req.params.name);
+    res.send(ans);
+  } catch (err) {
+    res.send("error to check if organization already exists: " + err);
+  }
+});
+
 module.exports = router;

@@ -85,6 +85,8 @@ const FirebaseRegister = ({ ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
+                        // Check if organization already exist first
+
                         await register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
                             () => {
                                 navigate('/');
