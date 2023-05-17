@@ -3,10 +3,11 @@ const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const User = require("../models/users");
 const Common = require("../controllers/common");
+const Constraint = require("../models/constraints");
 
 const { scheduleShifts } = require("../controllers/Algo");
 const { getAllUsersByOrganization } = require("../controllers/users");
-const { getConstraintsByOrganization } = require("../controllers/constraints");
+const { getConstraintsByOrganization } = require("./constraints");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -326,7 +327,7 @@ const generateScheduleMonthlyShifts = async (req, res) => {
 
   const users = await User.find({ organization: userOrg });
 
-  const constraints = await getConstraintsByOrganization(userOrg);
+  const constraints = await Constraint.find({ userOrg });
 
   const monthlyShifts = await Shift.find().exec();
   const assignedShifts = await scheduleShifts(
@@ -334,15 +335,6 @@ const generateScheduleMonthlyShifts = async (req, res) => {
     users,
     constraints
   );
-
-  // const bulkOps = assignedShifts.map((shift) => ({
-  //   updateOne: {
-  //     filter: { _id: shift._id },
-  //     update: { assignedEmployee: shift.assignedEmployee },
-  //   },
-  // }));
-
-  // await Shift.bulkWrite(bulkOps);
 };
 
 module.exports = {
