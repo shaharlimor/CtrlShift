@@ -3,11 +3,11 @@ const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const User = require("../models/users");
 const Common = require("../controllers/common");
-const User = require("../models/users");
+const Constraint = require("../models/constraints");
 
 const { scheduleShifts } = require("../controllers/Algo");
 const { getAllUsersByOrganization } = require("../controllers/users");
-const { getConstraintsByOrganization } = require("../controllers/constraints");
+const { getConstraintsByOrganization } = require("./constraints");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -273,6 +273,20 @@ const ShiftsByRoleType = async (roleType, startTime) => {
   return formattedShifts;
 };
 
+const ShiftsByMonth = async (organization, month, year) => {
+  // Create the start and end dates of the specified month
+  const startDateOfMonth = new Date(year, month - 1, 1);
+  const endDateOfMonth = new Date(year, month, 0, 23, 59, 59, 999); // Set the time to the last millisecond of the month
+
+  // Retrieve shifts with matching role type and within the specified month
+  const shifts = await Shift.find({
+    organization: organization,
+    startTime: { $gte: startDateOfMonth, $lte: endDateOfMonth },
+  }).exec();
+
+  return shifts;
+};
+
 const getShiftsPublished = async (organization) => {
   // Get The month and year published
   const schePublished = await Schedule.find(
@@ -322,28 +336,22 @@ const changeEmployeesInShift = async (id, roles) => {
 };
 
 const generateScheduleMonthlyShifts = async (req, res) => {
+  const month = req.params.month;
+  const year = req.params.year;
+
   const user = await Common.getUserByRT(req);
   const userOrg = user.organization;
 
   const users = await User.find({ organization: userOrg });
 
-  const constraints = await getConstraintsByOrganization(userOrg);
+  const constraints = await Constraint.find({ userOrg });
 
-  const monthlyShifts = await Shift.find().exec();
+  const monthlyShifts = await ShiftsByMonth(userOrg, month, year);
   const assignedShifts = await scheduleShifts(
     monthlyShifts,
     users,
     constraints
   );
-
-  // const bulkOps = assignedShifts.map((shift) => ({
-  //   updateOne: {
-  //     filter: { _id: shift._id },
-  //     update: { assignedEmployee: shift.assignedEmployee },
-  //   },
-  // }));
-
-  // await Shift.bulkWrite(bulkOps);
 };
 
 module.exports = {
