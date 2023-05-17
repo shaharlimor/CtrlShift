@@ -3,6 +3,11 @@ const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const User = require("../models/users");
 const Common = require("../controllers/common");
+const User = require("../models/users");
+
+const { scheduleShifts } = require("../controllers/Algo");
+const { getAllUsersByOrganization } = require("../controllers/users");
+const { getConstraintsByOrganization } = require("../controllers/constraints");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -316,6 +321,31 @@ const changeEmployeesInShift = async (id, roles) => {
   return shiftDocument;
 };
 
+const generateScheduleMonthlyShifts = async (req, res) => {
+  const user = await Common.getUserByRT(req);
+  const userOrg = user.organization;
+
+  const users = await User.find({ organization: userOrg });
+
+  const constraints = await getConstraintsByOrganization(userOrg);
+
+  const monthlyShifts = await Shift.find().exec();
+  const assignedShifts = await scheduleShifts(
+    monthlyShifts,
+    users,
+    constraints
+  );
+
+  // const bulkOps = assignedShifts.map((shift) => ({
+  //   updateOne: {
+  //     filter: { _id: shift._id },
+  //     update: { assignedEmployee: shift.assignedEmployee },
+  //   },
+  // }));
+
+  // await Shift.bulkWrite(bulkOps);
+};
+
 module.exports = {
   getShifts,
   getBoardListOfMonthlyShift,
@@ -328,4 +358,5 @@ module.exports = {
   getShiftById,
   changeEmployeesInShift,
   ShiftsByRoleType,
+  generateScheduleMonthlyShifts,
 };
