@@ -3,7 +3,6 @@ const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
 const User = require("../models/users");
 const Common = require("../controllers/common");
-const User = require("../models/users");
 
 const { scheduleShifts } = require("../controllers/Algo");
 const { getAllUsersByOrganization } = require("../controllers/users");
