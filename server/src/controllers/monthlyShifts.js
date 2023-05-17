@@ -1,6 +1,7 @@
 const Shift = require("../models/monthlyShifts");
 const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
+const User = require("../models/users");
 const Common = require("../controllers/common");
 const User = require("../models/users");
 
@@ -56,8 +57,6 @@ const getMissingBoardList = async (req, res) => {
         });
       })
     );
-
-    // console.log("sagi", existingMonthsSet);
 
     // Loop through the next 12 months and add missing months to the missingMonths array
     for (let year = now.getFullYear(); year <= nextYear; year++) {
@@ -218,6 +217,62 @@ const getShiftsOpenToConstraintsByRoles = async (organization, role_types) => {
   return filteredShifts;
 };
 
+const ShiftsByRoleType = async (roleType, startTime) => {
+  // Convert startTime to a Date object if it is not already
+  const startDate = new Date(startTime);
+
+  // Extract the year and month from the provided start time
+  const year = startDate.getFullYear();
+  const month = startDate.getMonth() + 1; // Month is zero-based, so add 1
+
+  // Create the start and end dates of the specified month
+  const startDateOfMonth = new Date(year, month - 1, 1);
+  const endDateOfMonth = new Date(year, month, 0, 23, 59, 59, 999); // Set the time to the last millisecond of the month
+
+  // Retrieve shifts with matching role type and within the specified month
+  const shifts = await Shift.find({
+    "roles.roleType": roleType,
+    startTime: { $gte: startDateOfMonth, $lte: endDateOfMonth },
+  }).exec();
+
+  // Create an array to store the formatted shifts
+  const formattedShifts = [];
+
+  // Iterate over each shift
+  for (const shift of shifts) {
+    // Iterate over each role within the shift
+    for (const role of shift.roles) {
+      // Check if the role matches the specified roleType
+      if (role.roleType === roleType) {
+        // Iterate over each employee within the role
+        for (const employeeId of role.employeeIds) {
+          // Retrieve the user details from the User collection
+          const user = await User.findOne({ _id: employeeId }).exec();
+
+          // Check if the user exists and has the required fields
+          if (user && user.firstName && user.lastName) {
+            // Create a new shift object for the employee
+            const formattedShift = {
+              _id: shift._id,
+              role: roleType,
+              employeeId: employeeId,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              startTime: shift.startTime,
+              endTime: shift.endTime,
+            };
+
+            // Push the formatted shift to the result array
+            formattedShifts.push(formattedShift);
+          }
+        }
+      }
+    }
+  }
+
+  return formattedShifts;
+};
+
 const getShiftsPublished = async (organization) => {
   // Get The month and year published
   const schePublished = await Schedule.find(
@@ -302,5 +357,6 @@ module.exports = {
   getShiftsPublished,
   getShiftById,
   changeEmployeesInShift,
+  ShiftsByRoleType,
   generateScheduleMonthlyShifts,
 };

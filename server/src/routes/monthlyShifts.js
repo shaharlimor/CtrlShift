@@ -13,6 +13,7 @@ const {
   changeEmployeesInShift,
   generateScheduleMonthlyShifts,
   getShiftById,
+  ShiftsByRoleType,
 } = require("../controllers/monthlyShifts");
 
 var router = express.Router();
@@ -131,6 +132,20 @@ router.patch("/assingEmployees/:id", middleware, async (req, res) => {
   }
 });
 
+router.get(
+  "/ShiftsByRoleType/:roleType/:startTime",
+  middleware,
+  async (req, res) => {
+    try {
+      const roleType = req.params.roleType;
+      const startTime = req.params.startTime;
+      const shifts = await ShiftsByRoleType(roleType, startTime);
+      res.send(shifts);
+    } catch (err) {
+      res.send("error occured to get shifts: " + err);
+    }
+  }
+);
 router.post("/generateScheduleMonthlyShifts", middleware, async (req, res) => {
   try {
     const shifts = await generateScheduleMonthlyShifts(req);
