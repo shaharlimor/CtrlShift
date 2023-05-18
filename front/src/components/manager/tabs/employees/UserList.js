@@ -99,12 +99,12 @@ const UserList = (props) => {
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
-                                        <Tooltip placement="top" title="Delete user">
+                                        <Tooltip placement="top" title="Delete">
                                             <IconButton onClick={() => deleteUser(index)} color="inherit" size="medium">
                                                 <DeleteOutlineOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
-                                        <Tooltip placement="top" title="Edit user">
+                                        <Tooltip placement="top" title="Edit">
                                             <IconButton onClick={() => handleEditUser(row)} color="inherit" size="medium">
                                                 <EditOutlinedIcon />
                                             </IconButton>
@@ -124,7 +124,7 @@ UserList.propTypes = {
     currentPage: PropTypes.number,
     pageSize: PropTypes.number,
     handleDelete: PropTypes.func,
-    handleEditUser: PropTypes.func,
+    handleEditUser: PropTypes.func
 };
 
 export default UserList;

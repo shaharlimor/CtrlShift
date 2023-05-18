@@ -49,6 +49,7 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
                     {calendarType === 1 ? (
                         <Stack direction="row" alignItems="center" spacing={4}>
                             <AddShiftButton />
+
                             <AddShiftBoardMonthButton calendarType={calendarType} />
                         </Stack>
                     ) : (

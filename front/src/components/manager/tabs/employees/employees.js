@@ -36,7 +36,7 @@ const Employees = () => {
                             onClick={changeShowForm}
                             size="large"
                         >
-                            <Tooltip placement="top" title="Add user">
+                            <Tooltip placement="top" title="Add">
                                 <AddIcon />
                             </Tooltip>
                         </IconButton>

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Dialog, Button } from '@mui/material';
+import { Fragment, useState } from 'react';
+import { Dialog, Button, Tooltip } from '@mui/material';
 import AddShiftFrom from './AddShiftFrom';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
@@ -11,19 +11,21 @@ const Shifts = () => {
     };
 
     return (
-        <div>
-            <Button
-                variant="contained"
-                sx={{ width: '100%' }}
-                size="large"
-                color="secondary"
-                startIcon={<AddCircleOutlineTwoToneIcon />}
-                onClick={(event) => {
-                    handleClose(true);
-                }}
-            >
-                Add shift
-            </Button>
+        <fragment>
+            <Tooltip placement="top" title="Add new shift to the board">
+                <Button
+                    variant="contained"
+                    sx={{ width: '100%' }}
+                    size="large"
+                    color="secondary"
+                    startIcon={<AddCircleOutlineTwoToneIcon />}
+                    onClick={(event) => {
+                        handleClose(true);
+                    }}
+                >
+                    Add shift
+                </Button>
+            </Tooltip>
             <Dialog
                 maxWidth="sm"
                 fullWidth
@@ -39,7 +41,7 @@ const Shifts = () => {
                     />
                 )}
             </Dialog>
-        </div>
+        </fragment>
     );
 };
 
