@@ -29,7 +29,6 @@
         "chance": "^1.1.11",
         "csstype": "^3.1.1",
         "date-fns": "^2.29.3",
-        "firebase": "^9.15.0",
         "formik": "^2.2.9",
         "framer-motion": "^8.4.2",
         "fullcalendar": "^6.1.4",

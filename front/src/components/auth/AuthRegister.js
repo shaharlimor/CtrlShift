@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -33,10 +33,10 @@ const JWTRegister = ({ ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const [strength, setStrength] = React.useState(0);
-    const [level, setLevel] = React.useState();
+    const [strength, setStrength] = useState(0);
+    const [level, setLevel] = useState();
     const { register } = useAuth();
 
     const handleClickShowPassword = () => {
