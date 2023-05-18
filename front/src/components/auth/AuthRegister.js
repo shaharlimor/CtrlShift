@@ -1,22 +1,17 @@
 import React, { useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
     Box,
     Button,
-    Checkbox,
-    Divider,
     FormControl,
-    FormControlLabel,
     FormHelperText,
     Grid,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    TextField,
     Typography,
     useMediaQuery
 } from '@mui/material';
@@ -27,7 +22,6 @@ import { Formik } from 'formik';
 
 // project imports
 import useAuth from '../../hooks/useAuth';
-import useConfig from '../../hooks/useConfig';
 import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../AnimateButton';
 import { strengthColor, strengthIndicatorNumFunc } from '../../utils/password-strength';
@@ -39,9 +33,7 @@ const FirebaseRegister = ({ ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const { borderRadius } = useConfig();
     const [showPassword, setShowPassword] = React.useState(false);
-    const [checked, setChecked] = React.useState(true);
     const navigate = useNavigate();
     const [strength, setStrength] = React.useState(0);
     const [level, setLevel] = React.useState();
@@ -85,8 +77,6 @@ const FirebaseRegister = ({ ...others }) => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        // Check if organization already exist first
-
                         await register(values.email, values.password, values.firstName, values.lastName, values.organizationName).then(
                             () => {
                                 navigate('/');
@@ -101,11 +91,8 @@ const FirebaseRegister = ({ ...others }) => {
                         );
                     } catch (err) {
                         console.error(err);
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
-                        }
+                        setStatus({ success: false });
+                        setErrors({ submit: err.message });
                     }
                 }}
             >
