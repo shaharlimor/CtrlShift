@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Button } from '@mui/material';
+import { Button, Tooltip, Typography } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
 import { publishSchdule } from 'utils/api';
@@ -18,16 +18,25 @@ const PublishScheduleButton = ({ date }) => {
     };
 
     return (
-        <Button
-            variant="contained"
-            sx={{
-                width: '100%'
-            }}
-            size="large"
-            onClick={handleClick}
+        <Tooltip
+            placement="top"
+            title={
+                <Typography align="center" fontSize="1.3em">
+                    Employees will be able to see the shift schedule for this month
+                </Typography>
+            }
         >
-            Publish Schedule
-        </Button>
+            <Button
+                variant="contained"
+                sx={{
+                    width: '100%'
+                }}
+                size="large"
+                onClick={handleClick}
+            >
+                Publish Schedule
+            </Button>
+        </Tooltip>
     );
 };
 PublishScheduleButton.propTypes = {

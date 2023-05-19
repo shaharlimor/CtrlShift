@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Button } from '@mui/material';
+import { Button, Tooltip, Typography } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
 import { startInsertConstraints } from 'utils/api';
@@ -18,16 +18,25 @@ const StartInsertConstraintButton = ({ date }) => {
     };
 
     return (
-        <Button
-            variant="contained"
-            sx={{
-                width: '100%'
-            }}
-            size="large"
-            onClick={handleClick}
+        <Tooltip
+            placement="top"
+            title={
+                <Typography align="center" fontSize="1.3em">
+                    Employees will be able to start entering constraints for this month
+                </Typography>
+            }
         >
-            Start Insert Constraint
-        </Button>
+            <Button
+                variant="contained"
+                sx={{
+                    width: '100%'
+                }}
+                size="large"
+                onClick={handleClick}
+            >
+                Start Insert Constraint
+            </Button>
+        </Tooltip>
     );
 };
 StartInsertConstraintButton.propTypes = {

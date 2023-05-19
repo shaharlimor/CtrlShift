@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { Button, Grid, Select, MenuItem } from '@mui/material';
+import { Button, Grid, Select, MenuItem, Tooltip, Typography } from '@mui/material';
+
 import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/ShiftBoard';
 import useAuth from 'hooks/useAuth';
 
@@ -40,16 +40,18 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
             )}
 
             {!selectedMonth && (
-                <Button
-                    sx={{ width: '100%' }}
-                    startIcon={<LockOpenIcon />}
-                    size="large"
-                    onClick={() => setSelectedMonth(true)}
-                    variant="contained"
-                    color="secondary"
-                >
-                    Generate new month
-                </Button>
+                <Tooltip placement="top" title={<Typography fontSize="1.2em">Generate all the permanent shifts to new month</Typography>}>
+                    <Button
+                        sx={{ width: '100%' }}
+                        startIcon={<LockOpenIcon />}
+                        size="large"
+                        onClick={() => setSelectedMonth(true)}
+                        variant="contained"
+                        color="secondary"
+                    >
+                        Generate new month
+                    </Button>
+                </Tooltip>
             )}
         </Grid>
     );

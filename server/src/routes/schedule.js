@@ -6,6 +6,8 @@ const {
   changeOpenToConstraints,
   boardOpenToConstraints,
   changePublish,
+  changeEmployessAssigned,
+  isEmployeesAssigned,
 } = require("../controllers/schedule");
 
 var router = express.Router();
@@ -65,6 +67,33 @@ router.get("/openToConstraints", middleware, async (req, res) => {
     res.send(ans);
   } catch (err) {
     res.send("error to check if board open to insert constraints: " + err);
+  }
+});
+
+router.patch("/employessAssigned/", async (req, res) => {
+  try {
+    const result = await changeEmployessAssigned(
+      req.body.organization,
+      req.body.month,
+      req.body.year,
+      req.body.changeTo
+    );
+    res.send(result);
+  } catch (err) {
+    res.send("Change generate algorithm status failed: " + err);
+  }
+});
+
+router.get("/employessAssigned", async (req, res) => {
+  try {
+    const ans = await isEmployeesAssigned(
+      req.query.organization,
+      req.query.month,
+      req.query.year
+    );
+    res.send(ans);
+  } catch (err) {
+    res.send(`error to check if is employees assigned: ` + err);
   }
 });
 

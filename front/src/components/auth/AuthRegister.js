@@ -1,22 +1,17 @@
-import React, { useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
     Box,
     Button,
-    Checkbox,
-    Divider,
     FormControl,
-    FormControlLabel,
     FormHelperText,
     Grid,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    TextField,
     Typography,
     useMediaQuery
 } from '@mui/material';
@@ -27,7 +22,6 @@ import { Formik } from 'formik';
 
 // project imports
 import useAuth from '../../hooks/useAuth';
-import useConfig from '../../hooks/useConfig';
 import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../AnimateButton';
 import { strengthColor, strengthIndicatorNumFunc } from '../../utils/password-strength';
@@ -35,16 +29,14 @@ import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-const FirebaseRegister = ({ ...others }) => {
+const JWTRegister = ({ ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const { borderRadius } = useConfig();
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [checked, setChecked] = React.useState(true);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const [strength, setStrength] = React.useState(0);
-    const [level, setLevel] = React.useState();
+    const [strength, setStrength] = useState(0);
+    const [level, setLevel] = useState();
     const { register } = useAuth();
 
     const handleClickShowPassword = () => {
@@ -99,11 +91,8 @@ const FirebaseRegister = ({ ...others }) => {
                         );
                     } catch (err) {
                         console.error(err);
-                        if (scriptedRef.current) {
-                            setStatus({ success: false });
-                            setErrors({ submit: err.message });
-                            setSubmitting(false);
-                        }
+                        setStatus({ success: false });
+                        setErrors({ submit: err.message });
                     }
                 }}
             >
@@ -284,4 +273,4 @@ const FirebaseRegister = ({ ...others }) => {
     );
 };
 
-export default FirebaseRegister;
+export default JWTRegister;
