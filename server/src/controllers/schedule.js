@@ -38,10 +38,21 @@ const changeEmployessAssigned = async (org, month, year, changeTo) => {
   );
 };
 
+const isEmployeesAssigned = async (org, month, year) => {
+  const ans = await Schedule.find({
+    organization: org,
+    month: month,
+    year: year,
+    employessAssigned: true,
+  });
+  return ans.length === 1;
+};
+
 module.exports = {
   getSchedules,
   changeOpenToConstraints,
   boardOpenToConstraints,
   changePublish,
   changeEmployessAssigned,
+  isEmployeesAssigned,
 };
