@@ -4,11 +4,10 @@ import { Button } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
 import { publishSchdule } from 'utils/api';
-import { useToaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const PublishScheduleButton = ({ date }) => {
     const { user } = useAuth();
-    const toaster = useToaster();
 
     const handleClick = async () => {
         const body = {
@@ -19,9 +18,9 @@ const PublishScheduleButton = ({ date }) => {
 
         try {
             await publishSchdule(body);
-            toaster.success('Schedule published successfully!');
+            toast.success('Schedule published successfully!');
         } catch (error) {
-            toaster.error('Failed to publish schedule.');
+            toast.error('Failed to publish schedule.');
         }
     };
 

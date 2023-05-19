@@ -11,12 +11,11 @@ const App = () => (
     <ThemeCustomization>
         <NavigationScroll>
             <AuthProvider>
-                <Toaster position="top-center" reverseOrder={false}>
-                    <>
-                        <Routes />
-                        <Snackbar />
-                    </>
-                </Toaster>
+                <>
+                    <Toaster position="top-center" reverseOrder={false} />
+                    <Routes />
+                    <Snackbar />
+                </>
             </AuthProvider>
         </NavigationScroll>
     </ThemeCustomization>
