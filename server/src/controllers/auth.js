@@ -83,7 +83,7 @@ const register = async (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       organization: req.body.organizationName,
-      // "isAdmin":
+      isAdmin: true,
       email: email,
       password: encryptedPass,
     });
@@ -260,12 +260,10 @@ const updateUserDetails = async (req, res) => {
       }
 
       // Send the response back to the client
-      res
-        .status(200)
-        .json({
-          message: "User details updated successfully",
-          user: updatedUser,
-        });
+      res.status(200).json({
+        message: "User details updated successfully",
+        user: updatedUser,
+      });
     } catch (error) {
       console.error("Error updating user details:", error);
       res.status(500).json({ message: "Error updating user details" });

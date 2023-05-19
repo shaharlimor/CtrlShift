@@ -68,8 +68,16 @@ function Row({ row }) {
                 <TableCell component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell>{row.startTime}</TableCell>
-                <TableCell>{row.endTime}</TableCell>
+                <TableCell>
+                    {new Date(row.startTime).toLocaleTimeString('en-US', {
+                        timeStyle: 'short'
+                    })}
+                </TableCell>
+                <TableCell>
+                    {new Date(row.endTime).toLocaleTimeString('en-US', {
+                        timeStyle: 'short'
+                    })}
+                </TableCell>
                 <TableCell>{row.days}</TableCell>
                 <TableCell sx={{ pr: 3 }}>
                     <IconButton color="primary" size="large" onClick={handleDeleteClick}>
