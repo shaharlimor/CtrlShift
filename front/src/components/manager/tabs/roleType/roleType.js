@@ -29,7 +29,7 @@ const RoleTypes = () => {
     return (
         <MainCard title="RoleTypes">
             {showForm && <RoleTypeForm roleToEdit={roleToEdit} changeShowForm={changeShowForm} />}
-            {!showForm && <RoleTypesList handleEdit={handleEdit}/>}
+            {!showForm && <RoleTypesList handleEdit={handleEdit} />}
             {!showForm && (
                 <Grid container direction="column" justifyContent="center" alignItems="flex-end">
                     <Grid item xs={3} sx={{ mt: 2 }}>

@@ -59,9 +59,22 @@ function Row({ row, handleEdit, handleDelete }) {
                 <TableCell component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell>{row.startTime}</TableCell>
-                <TableCell>{row.endTime}</TableCell>
-                <TableCell>{row.days}</TableCell>
+                <TableCell>
+                    {new Date(row.startTime).toLocaleTimeString('en-US', {
+                        timeStyle: 'short'
+                    })}
+                </TableCell>
+                <TableCell>
+                    {' '}
+                    {new Date(row.endTime).toLocaleTimeString('en-US', {
+                        timeStyle: 'short'
+                    })}
+                </TableCell>
+                <TableCell>
+                    {row.days.map((day) => (
+                        <span key={day}>{day} </span>
+                    ))}
+                </TableCell>
                 <TableCell align="center" sx={{ pr: 3 }}>
                     <Stack direction="row" justifyContent="center" alignItems="center">
                         <Tooltip placement="top" title="Delete">
@@ -117,14 +130,6 @@ export default function PermenentShiftTableMode(props) {
     const [shifts, setShifts] = useState([]);
     const theme = useTheme();
     const { user } = useAuth();
-
-    // const newRow = [];
-    // rows.forEach((element) => {
-    //     newRow.push({
-    //         ...element,
-    //         history: null
-    //     });
-    // });
 
     const handleEdit = (shift) => {
         handleEditShift(shift);
