@@ -45,6 +45,7 @@ const UserList = (props) => {
         setData(data.filter((us) => us._id !== id));
     };
 
+    /* eslint-disable */
     return (
         <TableContainer>
             <Table>
@@ -64,7 +65,7 @@ const UserList = (props) => {
                 <TableBody>
                     {data &&
                         data.map((row, index) => (
-                            <TableRow hover key={index}>
+                            <TableRow hover key={row._id}>
                                 <TableCell sx={{ pl: 3 }}>
                                     <Avatar src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${row._id}.png`} />
                                 </TableCell>
