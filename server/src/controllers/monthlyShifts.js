@@ -8,6 +8,7 @@ const Constraint = require("../models/constraints");
 const { scheduleShifts } = require("../controllers/Algo");
 const { getAllUsersByOrganization } = require("../controllers/users");
 const { getConstraintsByOrganization } = require("./constraints");
+const { changeEmployessAssigned } = require("../controllers/schedule");
 
 const getShifts = async (organization) => {
   return await Shift.find(
@@ -146,6 +147,7 @@ const createMonthlyShiftBoard = async (req, res) => {
     year: year,
     isPublished: false,
     isOpenToConstraints: false,
+    employessAssigned: false,
   });
 
   await newSchedule.save();
@@ -352,6 +354,9 @@ const generateScheduleMonthlyShifts = async (req, res) => {
     users,
     constraints
   );
+
+  // change the month in schduale schema to generated
+  await changeEmployessAssigned(userOrg, month, year, true);
 };
 
 module.exports = {

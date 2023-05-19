@@ -3,7 +3,7 @@ const Schedule = require("../models/schedule");
 const getSchedules = async () => {
   return await Schedule.find(
     {},
-    "_id organization month year isPublished isOpenToConstraints"
+    "_id organization month year isPublished isOpenToConstraints employessAssigned"
   );
 };
 
@@ -31,9 +31,17 @@ const changePublish = async (org, month, year) => {
   );
 };
 
+const changeEmployessAssigned = async (org, month, year, changeTo) => {
+  return await Schedule.updateMany(
+    { organization: org, month: month, year: year },
+    { employessAssigned: changeTo }
+  );
+};
+
 module.exports = {
   getSchedules,
   changeOpenToConstraints,
   boardOpenToConstraints,
   changePublish,
+  changeEmployessAssigned,
 };
