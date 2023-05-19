@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-import { Button, Grid, Select, MenuItem, Tooltip } from '@mui/material';
+import { Button, Grid, Select, MenuItem, Tooltip, Typography } from '@mui/material';
 
 import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/ShiftBoard';
 import useAuth from 'hooks/useAuth';
@@ -40,7 +40,7 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
             )}
 
             {!selectedMonth && (
-                <Tooltip placement="top" title="Generate all the permanent shifts to new month">
+                <Tooltip placement="top" title={<Typography fontSize="1.2em">Generate all the permanent shifts to new month</Typography>}>
                     <Button
                         sx={{ width: '100%' }}
                         startIcon={<LockOpenIcon />}

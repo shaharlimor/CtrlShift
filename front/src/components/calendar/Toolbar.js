@@ -44,7 +44,6 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
     return (
         <Grid alignItems="center" container justifyContent="space-between" {...others} sx={{ pb: 3 }}>
             {calendarType !== 0 ? (
-                // eslint-disable
                 <Grid item>
                     {calendarType === 1 ? (
                         <Stack direction="row" alignItems="center" spacing={4}>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, Fragment } from 'react';
-import { useMediaQuery, Button, Grid } from '@mui/material';
+import { useMediaQuery, Button, Grid, Tooltip, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import FullCalendar from '@fullcalendar/react';
@@ -117,9 +117,6 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                 </Grid>
             );
         }
-        // if (calendarType === 2) {
-        //     return <Grid item></Grid>;
-        // }
         return '';
     };
 
@@ -174,14 +171,23 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                                 <StartInsertConstraintButton date={date} />
                             </Grid>
                             <Grid item>
-                                <Button
-                                    variant="contained"
-                                    sx={{ width: '100%' }}
-                                    size="large"
-                                    onClick={() => generateScheduleMonthlyShifts(date)}
+                                <Tooltip
+                                    placement="top"
+                                    title={
+                                        <Typography align="center" fontSize="1.3em">
+                                            Create shift placement for this month
+                                        </Typography>
+                                    }
                                 >
-                                    Create Schedule
-                                </Button>
+                                    <Button
+                                        variant="contained"
+                                        sx={{ width: '100%' }}
+                                        size="large"
+                                        onClick={() => generateScheduleMonthlyShifts(date)}
+                                    >
+                                        Create Schedule
+                                    </Button>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                     </Grid>
