@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { Dialog, Button, Tooltip, Typography } from '@mui/material';
 import AddShiftFrom from './AddShiftFrom';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
@@ -9,6 +9,7 @@ const Shifts = () => {
     const handleClose = (ans) => {
         setIsModalOpen(ans);
     };
+    /* eslint-disable */
     return (
         <fragment>
             <Tooltip placement="top" title={<Typography fontSize="1.2em">Add new shift to the board</Typography>}>

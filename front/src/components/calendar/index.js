@@ -12,7 +12,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
-import { getMonthOpendToAddShifts } from 'utils/api';
+import { getMonthOpendToAddShifts, employessGeneratedToMonths } from 'utils/api';
 import { generateScheduleMonthlyShifts } from 'utils/ShiftBoard';
 import useAuth from 'hooks/useAuth';
 import PublishScheduleButton from '../shifts/PublishSchedule';
@@ -32,6 +32,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
     const [date, setDate] = useState(new Date());
     const [view, setView] = useState(matchSm ? 'listWeek' : 'dayGridMonth');
     const [openMonths, setOpenMonths] = useState([]);
+    const [createSchdualeDisable, setCreateSchdualeDisable] = useState(false);
 
     const handleViewChange = (newView) => {
         const calendarEl = calendarRef.current;
@@ -56,6 +57,15 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
         };
         getOpenMonths();
     }, []);
+
+    // When the month change check if its shifts generated
+    useEffect(() => {
+        const checkEmployessAssignedForMonth = async () => {
+            const result = await employessGeneratedToMonths(date, user.organization);
+            setCreateSchdualeDisable(result.data);
+        };
+        checkEmployessAssignedForMonth();
+    }, [(date.getMonth() + 1) % 12]);
 
     const handleDatePrev = () => {
         const calendarEl = calendarRef.current;
@@ -179,14 +189,17 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                                         </Typography>
                                     }
                                 >
-                                    <Button
-                                        variant="contained"
-                                        sx={{ width: '100%' }}
-                                        size="large"
-                                        onClick={() => generateScheduleMonthlyShifts(date)}
-                                    >
-                                        Create Schedule
-                                    </Button>
+                                    <span>
+                                        <Button
+                                            variant="contained"
+                                            sx={{ width: '100%' }}
+                                            size="large"
+                                            disabled={createSchdualeDisable}
+                                            onClick={() => generateScheduleMonthlyShifts(date)}
+                                        >
+                                            Create Schedule
+                                        </Button>
+                                    </span>
                                 </Tooltip>
                             </Grid>
                         </Grid>

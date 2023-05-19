@@ -87,16 +87,13 @@ router.patch("/employessAssigned/", async (req, res) => {
 router.get("/employessAssigned", async (req, res) => {
   try {
     const ans = await isEmployeesAssigned(
-      req.body.organization,
-      req.body.month,
-      req.body.year
+      req.query.organization,
+      req.query.month,
+      req.query.year
     );
     res.send(ans);
   } catch (err) {
-    res.send(
-      `error to check if is employees assigned: ` +
-        err
-    );
+    res.send(`error to check if is employees assigned: ` + err);
   }
 });
 

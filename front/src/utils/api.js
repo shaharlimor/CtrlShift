@@ -83,3 +83,14 @@ export async function getSpecificEmployeesDetails(body) {
 export async function changeEmployeesInShift(id, body) {
     await axiosServices.patch(`/monthlyShifts/assingEmployees/${id}`, body);
 }
+
+export const employessGeneratedToMonths = async (date, org) => {
+    const response = await axiosServices.get(`/schedule/employessAssigned/`, {
+        params: {
+            organization: org,
+            month: (date.getMonth() + 1) % 12,
+            year: date.getYear() + 2000 - 100
+        }
+    });
+    return response;
+};
