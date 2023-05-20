@@ -5,6 +5,7 @@ import { Button, Grid, Select, MenuItem, Tooltip, Typography } from '@mui/materi
 
 import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/ShiftBoard';
 import useAuth from 'hooks/useAuth';
+import { toast } from 'react-hot-toast';
 
 /* eslint-disable */
 const AddShiftBoardMonthButton = ({ calendarType }) => {
@@ -18,8 +19,14 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
         setMonthsWithoutBoard(data);
     }
 
-    function handleSelect(event) {
-        CreateMonthShiftBoard(user.organization, event.target.value.month, event.target.value.year);
+    async function handleSelect(event) {
+        try {
+            await CreateMonthShiftBoard(user.organization, event.target.value.month, event.target.value.year);
+            toast.success('Successfully create month !');
+        } catch (error) {
+            toast.error('Failed to create month.');
+        }
+
         setSelectedMonth(false);
     }
 

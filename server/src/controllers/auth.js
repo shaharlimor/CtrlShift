@@ -89,7 +89,7 @@ const register = async (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       organization: req.body.organizationName,
-      // "isAdmin":
+      isAdmin: true,
       email: email,
       password: encryptedPass,
     });
