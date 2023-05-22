@@ -201,7 +201,7 @@ describe("Schedule Routes", () => {
   describe("GET /employessAssigned", () => {
     it("should check if placment board for pspecifc month generated", async () => {
       // Mock the implementation of `boardOpenToConstraints` controller
-      employessAssigned.mockResolvedValueOnce(true);
+      isEmployeesAssigned.mockResolvedValueOnce(true);
 
       const requestBody = {
         organization: "exampleOrg",
@@ -220,7 +220,7 @@ describe("Schedule Routes", () => {
     it("should handle errors when checking if board is open to insert constraints", async () => {
       // Mock the implementation of `boardOpenToConstraints` controller to throw an error
       isEmployeesAssigned.mockRejectedValueOnce(
-        "error to check if is employees assigned :"
+        "error to check if is employees assigned"
       );
 
       const requestBody = {
