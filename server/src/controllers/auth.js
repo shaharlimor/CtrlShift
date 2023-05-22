@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../models/users");
 const test = require("dotenv").config();
 
@@ -60,7 +60,6 @@ const login = async (req, res, next) => {
  * Register creates new user and gennerates user token.
  */
 const register = async (req, res, next) => {
-  console.log("register");
   const email = req.body.email;
   const password = req.body.password;
 
@@ -83,26 +82,25 @@ const register = async (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       organization: req.body.organizationName,
-      // "isAdmin":
       email: email,
       password: encryptedPass,
     });
 
-    newUser = await user.save();
+    await user.save();
 
     const accessToken = await jwt.sign(
-      { _id: newUser._id },
+      { _id: user._id },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: process.env.JWT_TOKEN_EXPIRATION }
     );
 
     const refreshToken = await jwt.sign(
-      { _id: newUser._id },
+      { _id: user._id },
       process.env.REFRESH_TOKEN_SECRET
     );
 
-    newUser.tokens = [refreshToken];
-    await newUser.save();
+    user.tokens = [refreshToken];
+    const newUser = await user.save();
 
     res.status(200).send({
       accessToken: accessToken,
