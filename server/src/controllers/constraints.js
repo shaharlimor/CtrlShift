@@ -2,6 +2,7 @@ const Constraint = require("../models/constraints");
 const Shift = require("../models/monthlyShifts");
 const User = require("../models/users");
 const { getShifts } = require("../controllers/monthlyShifts");
+
 const getConstraints = async (organization) => {
   // Find all the shifts that match the given organization
   const shifts = await getShifts(organization);
@@ -41,10 +42,15 @@ const employeeHasConstraintInShift = async (userId, shiftId) => {
   return ans.length != 0;
 };
 
+const getConstraintsByOrganization = async (organization) => {
+  return await Constraint.find({ organization }).exec();
+};
+
 module.exports = {
   getConstraints,
   getConstraintsByShiftId,
   getConstraintsByEmployeeId,
   employeeHasConstraintInShift,
   getEmployeesWithConstarintsInShift,
+  getConstraintsByOrganization,
 };

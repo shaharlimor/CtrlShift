@@ -223,7 +223,19 @@ export const JWTProvider = ({ children }) => {
 
     return (
         // eslint-disable-next-line
-        <JWTContext.Provider value={{ ...state, refreshStateAccessToken, refreshAccessToken, login, logout, register, resetPassword, updateProfile, verifyToken }}>
+        <JWTContext.Provider
+            value={{
+                ...state,
+                refreshStateAccessToken,
+                refreshAccessToken,
+                login,
+                logout,
+                register,
+                resetPassword,
+                updateProfile,
+                verifyToken
+            }}
+        >
             {children}
         </JWTContext.Provider>
     );

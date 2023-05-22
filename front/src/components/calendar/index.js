@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, Fragment } from 'react';
-import { useMediaQuery, Button, Grid } from '@mui/material';
+import { useMediaQuery, Button, Grid, Tooltip, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import FullCalendar from '@fullcalendar/react';
@@ -12,7 +12,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import SubCard from 'components/cards/SubCard';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
-import { getMonthOpendToAddShifts } from 'utils/api';
+import { getMonthOpendToAddShifts, employessGeneratedToMonths } from 'utils/api';
+import { generateScheduleMonthlyShifts } from 'utils/ShiftBoard';
 import useAuth from 'hooks/useAuth';
 import PublishScheduleButton from '../shifts/PublishSchedule';
 import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
@@ -21,7 +22,7 @@ import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 // 0 - Insert Constraints
 // 1 - Manager - Monthly Planner
 // 2 - Shifts Board
-const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftClick, filterMode, changeFilteredByMyShifts }) => {
+const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeFilteredByMyShifts }) => {
     const calendarRef = useRef(null);
     const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -31,6 +32,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
     const [date, setDate] = useState(new Date());
     const [view, setView] = useState(matchSm ? 'listWeek' : 'dayGridMonth');
     const [openMonths, setOpenMonths] = useState([]);
+    const [createSchdualeDisable, setCreateSchdualeDisable] = useState(false);
 
     const handleViewChange = (newView) => {
         const calendarEl = calendarRef.current;
@@ -55,6 +57,15 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
         };
         getOpenMonths();
     }, []);
+
+    // When the month change check if its shifts generated
+    useEffect(() => {
+        const checkEmployessAssignedForMonth = async () => {
+            const result = await employessGeneratedToMonths(date, user.organization);
+            setCreateSchdualeDisable(result.data);
+        };
+        checkEmployessAssignedForMonth();
+    }, [(date.getMonth() + 1) % 12]);
 
     const handleDatePrev = () => {
         const calendarEl = calendarRef.current;
@@ -116,15 +127,6 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
                 </Grid>
             );
         }
-        if (calendarType === 2) {
-            return (
-                <Grid item>
-                    <Button variant="contained" sx={{ width: '100%' }} size="large" onClick={handleSwitchShiftClick}>
-                        Switch shift
-                    </Button>
-                </Grid>
-            );
-        }
         return '';
     };
 
@@ -179,9 +181,26 @@ const Calendar = ({ events, calendarType, handleEventSelect, handleSwitchShiftCl
                                 <StartInsertConstraintButton date={date} />
                             </Grid>
                             <Grid item>
-                                <Button variant="contained" sx={{ width: '100%' }} size="large">
-                                    Create Schedule
-                                </Button>
+                                <Tooltip
+                                    placement="top"
+                                    title={
+                                        <Typography align="center" fontSize="1.3em">
+                                            Create shift placement for this month
+                                        </Typography>
+                                    }
+                                >
+                                    <span>
+                                        <Button
+                                            variant="contained"
+                                            sx={{ width: '100%' }}
+                                            size="large"
+                                            disabled={createSchdualeDisable}
+                                            onClick={() => generateScheduleMonthlyShifts(date)}
+                                        >
+                                            Create Schedule
+                                        </Button>
+                                    </span>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -196,7 +215,6 @@ Calendar.propTypes = {
     events: PropTypes.array,
     handleEventSelect: PropTypes.func,
     calendarType: PropTypes.number,
-    handleSwitchShiftClick: PropTypes.func,
     changeFilteredByMyShifts: PropTypes.func,
     filterMode: PropTypes.bool
 };

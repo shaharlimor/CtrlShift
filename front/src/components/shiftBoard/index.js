@@ -11,8 +11,8 @@ import value from 'assets/scss/_themes-vars.module.scss';
 import { IconUserCheck } from '@tabler/icons';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
-import SwitchShiftPopup from './SwitchShiftPopup';
 import { constant, filter } from 'lodash';
+import ShiftSelectPopupup from './selectedShift/ShiftSelectPopupup';
 
 const Calendar = Loadable(lazy(() => import('components/calendar')));
 
@@ -58,9 +58,12 @@ const ShiftBoard = () => {
 
             // eslint-disable-next-line
             for (const role of roles) {
-                if (role.employeeIds === employeeID) {
-                    shiftsForEmployee.push(shift);
-                    break;
+                // eslint-disable-next-line
+                for (const id of role.employeeIds) {
+                    if (id === employeeID) {
+                        shiftsForEmployee.push(shift);
+                        break;
+                    }
                 }
             }
         }
@@ -79,22 +82,17 @@ const ShiftBoard = () => {
     };
 
     const handleEventSelect = (arg) => {
-        // TODO: add show details of the shift
-        // if (arg.event.id) {
-        //     const selectEvent = events.find((_event) => _event.id === arg.event.id);
-        //     setSelectedEvent(selectEvent);
-        // } else {
-        //     setSelectedEvent(null);
-        // }
-        // setIsModalOpen(true);
+        if (arg.event.id) {
+            const selectEvent = events.find((_event) => _event.id === arg.event.id);
+            setSelectedEvent(selectEvent);
+        } else {
+            setSelectedEvent(null);
+        }
+        setIsModalOpen(true);
     };
 
     const handleModalClose = () => {
         setIsModalOpen(false);
-    };
-
-    const handleSwitchShiftClick = () => {
-        setIsModalOpen(true);
     };
 
     return (
@@ -102,14 +100,13 @@ const ShiftBoard = () => {
             <Calendar
                 calendarType={2}
                 handleEventSelect={handleEventSelect}
-                handleSwitchShiftClick={handleSwitchShiftClick}
                 changeFilteredByMyShifts={handleChangeMyShifts}
                 events={filterMode ? filteredByEmployee : events}
                 filterMode={filterMode}
             />
             {/* Dialog renders its body even if not open */}
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-                {isModalOpen && <SwitchShiftPopup onCancel={handleModalClose} events={events} />}
+                {isModalOpen && <ShiftSelectPopupup event={selectedEvent} onCancel={handleModalClose} employess />}
             </Dialog>
         </div>
     );

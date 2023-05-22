@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import { useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -7,18 +7,15 @@ import {
     Box,
     Button,
     Checkbox,
-    Divider,
     FormControl,
     FormControlLabel,
     FormHelperText,
-    Grid,
     IconButton,
     InputAdornment,
     InputLabel,
     OutlinedInput,
     Stack,
-    Typography,
-    useMediaQuery
+    Typography
 } from '@mui/material';
 
 // third party
@@ -26,7 +23,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project imports
-import useConfig from '../../hooks/useConfig';
 import useAuth from '../../hooks/useAuth';
 import useScriptRef from '../../hooks/useScriptRef';
 import AnimateButton from '../AnimateButton';
@@ -36,16 +32,14 @@ import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-const FirebaseLogin = ({ loginProp, ...others }) => {
+const JWTLogin = ({ loginProp, ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const { borderRadius } = useConfig();
-    const [checked, setChecked] = React.useState(true);
+    const [checked, setChecked] = useState(true);
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -158,17 +152,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                 }
                                 label="Remember me"
                             />
-                            <Typography
-                                variant="subtitle1"
-                                // component={Link}
-                                // to={
-                                //     loginProp
-                                //         ? `/pages/forgot-password/forgot-password${loginProp}`
-                                //         : '/pages/forgot-password/forgot-password3'
-                                // }
-                                color="secondary"
-                                sx={{ textDecoration: 'none' }}
-                            >
+                            <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none' }}>
                                 Forgot Password?
                             </Typography>
                         </Stack>
@@ -200,8 +184,8 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
     );
 };
 
-FirebaseLogin.propTypes = {
+JWTLogin.propTypes = {
     loginProp: PropTypes.number
 };
 
-export default FirebaseLogin;
+export default JWTLogin;

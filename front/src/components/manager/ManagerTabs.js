@@ -4,11 +4,10 @@ import React from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Tab, Tabs, styled } from '@mui/material';
-
-// assets
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import PeopleIcon from '@mui/icons-material/People';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+
 import PermanentShift from './tabs/permenentShift/PermenentShifts';
 import RoleTypes from 'components/manager/tabs/roleType/roleType';
 import Employees from './tabs/employees/employees';

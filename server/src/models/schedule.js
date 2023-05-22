@@ -7,6 +7,7 @@ const Schedulechema = new Schema({
   year: Number,
   isPublished: Boolean,
   isOpenToConstraints: Boolean,
+  employessAssigned: Boolean,
 });
 
 // Compile model from schema

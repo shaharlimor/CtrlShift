@@ -73,6 +73,12 @@ const register = async (req, res, next) => {
     if (foundUser != null) {
       return res.status(500).send("User already exists");
     }
+    const orgExist = await User.find({
+      organization: req.body.organizationName,
+    });
+    if (orgExist != null && orgExist.length !== 0) {
+      return res.status(500).send("Organization already exist");
+    }
 
     salt = await bcrypt.genSalt(10);
     encryptedPass = await bcrypt.hash(password, salt);
@@ -82,6 +88,7 @@ const register = async (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       organization: req.body.organizationName,
+      isAdmin: true,
       email: email,
       password: encryptedPass,
     });
@@ -258,12 +265,10 @@ const updateUserDetails = async (req, res) => {
       }
 
       // Send the response back to the client
-      res
-        .status(200)
-        .json({
-          message: "User details updated successfully",
-          user: updatedUser,
-        });
+      res.status(200).json({
+        message: "User details updated successfully",
+        user: updatedUser,
+      });
     } catch (error) {
       console.error("Error updating user details:", error);
       res.status(500).json({ message: "Error updating user details" });

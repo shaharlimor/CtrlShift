@@ -37,4 +37,18 @@ export const CreateMonthShiftBoard = async (organization, month, year) => {
     }
 };
 
-export default { ShiftBoardMonthsDoesntExist, ShiftBoardMonthsExist, CreateMonthShiftBoard };
+export const generateScheduleMonthlyShifts = async (date) => {
+    try {
+        const response = await axiosServices.post(
+            `/monthlyShifts/generateScheduleMonthlyShifts/${(date.getMonth() + 1) % 12}/${date.getYear() + 2000 - 100}`
+        );
+
+        // Handle the response (e.g., show a success message)
+        return response.data;
+    } catch (error) {
+        console.error('Error create the month: ', error);
+        return error;
+    }
+};
+
+export default { ShiftBoardMonthsDoesntExist, ShiftBoardMonthsExist, CreateMonthShiftBoard, generateScheduleMonthlyShifts };

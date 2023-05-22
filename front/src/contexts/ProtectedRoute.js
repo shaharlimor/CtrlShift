@@ -11,14 +11,13 @@ export const ProtectedRoute = ({ children, restricedRoute }) => {
             if (!verifyToken(axios.defaults.headers.common.accessToken)) {
                 refreshStateAccessToken();
             }
-            if( restricedRoute && !user?.isAdmin ) {
+            if (restricedRoute && !user?.isAdmin) {
                 return <Navigate to="/home" />;
             }
             return children;
         } else {
             return <Navigate to="/login" />;
         }
-
     } catch (err) {
         return <Navigate to="/login" />;
     }

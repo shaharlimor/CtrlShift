@@ -42,9 +42,6 @@ const AddPermenentShift = (props) => {
     const { handleAddOpenClose, shiftToEdit } = props;
 
     React.useEffect(() => {
-        async function getRoles() {
-            // TODO - when a role schema will be
-        }
         const getRole = async () => {
             const result = await getRoleTypesByOrg(user.organization);
             setRoleTypes(result.data);

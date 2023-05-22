@@ -1,20 +1,17 @@
-import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
-import MainCard from 'components/cards/MainCard';
-import React, { useEffect } from 'react';
-// eslint-disable-next-line
+import { useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '@mui/material/styles';
 import { IconButton, Grid } from '@mui/material';
-import RoleTypeForm from './roleTypeForm';
 
-/* eslint-disable */
+import RoleTypeForm from './roleTypeForm';
+import RoleTypesList from 'components/manager/tabs/roleType/roleTypeList';
+import MainCard from 'components/cards/MainCard';
+
 const RoleTypes = () => {
     const theme = useTheme();
-
-    // eslint-disable-next-line
-    const [showForm, setShowForm] = React.useState(false);
-    const [roleToEdit, setRoleToEdit] = React.useState();
+    const [showForm, setShowForm] = useState(false);
+    const [roleToEdit, setRoleToEdit] = useState();
 
     const changeShowForm = () => {
         setRoleToEdit();
@@ -27,9 +24,9 @@ const RoleTypes = () => {
     };
 
     return (
-        <MainCard title="RoleTypes">
+        <MainCard title="Role Types">
             {showForm && <RoleTypeForm roleToEdit={roleToEdit} changeShowForm={changeShowForm} />}
-            {!showForm && <RoleTypesList handleEdit={handleEdit}/>}
+            {!showForm && <RoleTypesList handleEdit={handleEdit} />}
             {!showForm && (
                 <Grid container direction="column" justifyContent="center" alignItems="flex-end">
                     <Grid item xs={3} sx={{ mt: 2 }}>
@@ -51,7 +48,5 @@ const RoleTypes = () => {
         </MainCard>
     );
 };
-/* eslint-disable */
 
-// eslint-disable-next-line
 export default RoleTypes;

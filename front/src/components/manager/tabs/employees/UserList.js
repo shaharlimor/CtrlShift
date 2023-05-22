@@ -45,6 +45,7 @@ const UserList = (props) => {
         setData(data.filter((us) => us._id !== id));
     };
 
+    /* eslint-disable */
     return (
         <TableContainer>
             <Table>
@@ -64,7 +65,7 @@ const UserList = (props) => {
                 <TableBody>
                     {data &&
                         data.map((row, index) => (
-                            <TableRow hover key={index}>
+                            <TableRow hover key={row._id}>
                                 <TableCell sx={{ pl: 3 }}>
                                     <Avatar src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${row._id}.png`} />
                                 </TableCell>
@@ -99,12 +100,12 @@ const UserList = (props) => {
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
-                                        <Tooltip placement="top" title="Delete user">
+                                        <Tooltip placement="top" title="Delete">
                                             <IconButton onClick={() => deleteUser(index)} color="inherit" size="medium">
                                                 <DeleteOutlineOutlinedIcon />
                                             </IconButton>
                                         </Tooltip>
-                                        <Tooltip placement="top" title="Edit user">
+                                        <Tooltip placement="top" title="Edit">
                                             <IconButton onClick={() => handleEditUser(row)} color="inherit" size="medium">
                                                 <EditOutlinedIcon />
                                             </IconButton>
@@ -124,7 +125,7 @@ UserList.propTypes = {
     currentPage: PropTypes.number,
     pageSize: PropTypes.number,
     handleDelete: PropTypes.func,
-    handleEditUser: PropTypes.func,
+    handleEditUser: PropTypes.func
 };
 
 export default UserList;
