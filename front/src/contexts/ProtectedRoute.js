@@ -5,7 +5,7 @@ import axios from '../utils/axios';
 /* eslint-disable */
 
 export const ProtectedRoute = ({ children, restricedRoute }) => {
-    const { refreshAccessToken, isLoggedIn, verifyToken, user } = useAuth();
+    const { refreshStateAccessToken, isLoggedIn, verifyToken, user } = useAuth();
     try {
         if (isLoggedIn) {
             if (!verifyToken(axios.defaults.headers.common.accessToken)) {
