@@ -1,7 +1,7 @@
-const request = require("supertest");
-const express = require("express");
+const request = require('supertest');
+const express = require('express');
 const app = express();
-const Schedule = require("../../src/models/schedule");
+const Schedule = require('../../src/models/schedule');
 const {
   getSchedules,
   changeOpenToConstraints,
@@ -201,7 +201,7 @@ describe("Schedule Routes", () => {
   describe("GET /employessAssigned", () => {
     it("should check if placment board for pspecifc month generated", async () => {
       // Mock the implementation of `boardOpenToConstraints` controller
-      employessAssigned.mockResolvedValueOnce(true);
+      isEmployeesAssigned.mockResolvedValueOnce(true);
 
       const requestBody = {
         organization: "exampleOrg",
@@ -220,7 +220,7 @@ describe("Schedule Routes", () => {
     it("should handle errors when checking if board is open to insert constraints", async () => {
       // Mock the implementation of `boardOpenToConstraints` controller to throw an error
       isEmployeesAssigned.mockRejectedValueOnce(
-        "error to check if is employees assigned :"
+        "error to check if is employees assigned"
       );
 
       const requestBody = {
@@ -237,5 +237,4 @@ describe("Schedule Routes", () => {
       );
     });
   });
-  // Add tests for the remaining routes in a similar manner
 });

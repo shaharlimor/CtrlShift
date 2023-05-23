@@ -1,7 +1,7 @@
 const User = require("../models/users");
 const Common = require("../controllers/common");
 const AWS = require("aws-sdk");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const createUser = async (req, res) => {
   const {
