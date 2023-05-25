@@ -82,7 +82,6 @@ const RoleTypeForm = (props) => {
             <CardContent>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item xs={12}>
-                        <InputLabel>Role Type</InputLabel>
                         <TextField
                             fullWidth
                             label="role type"
