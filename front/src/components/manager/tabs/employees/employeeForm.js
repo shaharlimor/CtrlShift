@@ -131,7 +131,7 @@ const EmployeeForm = (props) => {
         <>
             <MainCard title={selectedUser ? 'Edit employee' : 'Add employee'}>
                 <form onSubmit={formik.handleSubmit} onReset={formik.handleReset} onChange={changeData}>
-                    <Grid container spacing={1} alignItems="center" justifyContent="center">
+                    <Grid container spacing={1.5} alignItems="center" justifyContent="center">
                         <Grid item xs={5}>
                             <TextField
                                 fullWidth
@@ -189,7 +189,7 @@ const EmployeeForm = (props) => {
                                 helperText={formik.touched.password && formik.errors.password}
                             />
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={5} sx={{ mt: 1 }}>
                             <TextField
                                 fullWidth
                                 label="Phone"
@@ -197,23 +197,25 @@ const EmployeeForm = (props) => {
                                 name="phone"
                                 value={formik.values.phone}
                                 onChange={formik.handleChange}
-                                // type="number"
                                 defaultValue=""
                                 error={formik.touched.phone && Boolean(formik.errors.phone)}
                                 helperText={formik.touched.phone && formik.errors.phone}
                             />
                         </Grid>
                         <Grid item xs={4}>
-                            <FormControl sx={{ minWidth: 120 }}>
+                            <FormControl sx={{ minWidth: 120 }} fullWidth>
+                                <Typography variant="subtitle2">Roles</Typography>
                                 <Select
                                     labelId="mutiple-select-label"
                                     multiple
                                     value={selected}
                                     onChange={handleChange}
                                     renderValue={(selected) => selected.join(', ')}
-                                    label="roles"
                                     fullWidth
                                 >
+                                    <MenuItem disabled value="">
+                                        <ListItemText primary="Roles" />
+                                    </MenuItem>
                                     {roleTypes?.map((role) => (
                                         <MenuItem key={role.roleType} value={role.roleType}>
                                             <ListItemIcon>
@@ -225,7 +227,7 @@ const EmployeeForm = (props) => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={1}>
+                        <Grid item xs={1} sx={{ mt: 1 }}>
                             <FormControlLabel
                                 control={
                                     <Checkbox
@@ -242,8 +244,8 @@ const EmployeeForm = (props) => {
                             />
                         </Grid>
                         <CardActions>
-                            <Grid container spacing={1} sx={{ alignItems: 'flex-start' }}>
-                                <Grid item>
+                            <Grid container spacing={2} sx={{ alignItems: 'flex-start' }}>
+                                <Grid item xs={6}>
                                     <Button type="submit" variant="contained" color="secondary" onClick={() => setSubmit(true)}>
                                         Submit
                                     </Button>
