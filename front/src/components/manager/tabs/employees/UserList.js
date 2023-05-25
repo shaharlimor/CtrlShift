@@ -13,7 +13,8 @@ import {
     Tooltip,
     Typography,
     FormControl,
-    Select
+    Select,
+    Chip
 } from '@mui/material';
 // eslint-disable-next-line
 import Avatar from 'components/users/Avatar';
@@ -22,6 +23,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import PropTypes from 'prop-types';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 // const avatarImage = require.context('assets/images/users', true);
+import value from 'assets/scss/_themes-vars.module.scss';
 
 // ==============================|| USER LIST 1 ||============================== //
 
@@ -45,7 +47,6 @@ const UserList = (props) => {
         setData(data.filter((us) => us._id !== id));
     };
 
-    /* eslint-disable */
     return (
         <TableContainer>
             <Table>
@@ -57,9 +58,8 @@ const UserList = (props) => {
                         <TableCell>Email</TableCell>
                         <TableCell>Role</TableCell>
                         <TableCell>Phone</TableCell>
-                        <TableCell align="center" sx={{ pr: 3 }}>
-                            Actions
-                        </TableCell>
+                        <TableCell align="center">Actions</TableCell>
+                        <TableCell sx={{ pr: 3 }}></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -92,11 +92,12 @@ const UserList = (props) => {
                                             {row.role_types?.length === 0 ? (
                                                 <option disabled>none.</option>
                                             ) : (
-                                                row.role_types?.map((role, index) => <option> {role} </option>)
+                                                row.role_types?.map((role, index) => <option key={role}> {role} </option>)
                                             )}
                                         </Select>
                                     </FormControl>
                                 </TableCell>
+
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell align="center" sx={{ pr: 3 }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
@@ -112,6 +113,7 @@ const UserList = (props) => {
                                         </Tooltip>
                                     </Stack>
                                 </TableCell>
+                                <TableCell>{row.isAdmin && <Chip label="Admin" size="small" />}</TableCell>
                             </TableRow>
                         ))}
                 </TableBody>

@@ -1,5 +1,5 @@
 import EmployeeList from 'components/manager/tabs/employees/employeeList';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
 import { IconButton, Grid, Tooltip } from '@mui/material';
@@ -15,8 +15,9 @@ const Employees = () => {
         setShowForm(!showForm);
     };
 
+    /* eslint-disable */
     return (
-        <fragment>
+        <Fragment>
             {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
             {!showForm && <EmployeeList />}
             {!showForm && (
@@ -39,7 +40,7 @@ const Employees = () => {
                     </Grid>
                 </Grid>
             )}
-        </fragment>
+        </Fragment>
     );
 };
 

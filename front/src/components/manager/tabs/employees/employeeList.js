@@ -64,6 +64,7 @@ const EmployeeList = () => {
                 );
             }
         });
+
         setFilteredUsers(filteredData);
         calcPageNum(filteredData.length);
         setCurrentPage(1);

@@ -3,6 +3,7 @@
     "@mui/x-date-pickers": "^6.0.3",
     "chance": "^1.1.11",
     "jwt-decode": "^3.1.2",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "react-hot-toast": "^2.4.1"
   }
 }
