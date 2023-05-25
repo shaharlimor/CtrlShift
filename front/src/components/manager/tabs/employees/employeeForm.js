@@ -1,7 +1,7 @@
-import MainCard from 'components/cards/MainCard';
-import React from 'react';
-import InputLabel from 'components/forms/InputLabel';
-/* eslint-disable */
+import { useState, useEffect } from 'react';
+
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import {
     Grid,
     TextField,
@@ -16,23 +16,22 @@ import {
     Typography,
     FormControlLabel
 } from '@mui/material';
+
 // project imports
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import useAuth from 'hooks/useAuth';
 import { createUser, updateUser } from 'utils/userApi';
 import { getRoleTypesByOrg } from 'utils/roleTypeServices';
+import MainCard from 'components/cards/MainCard';
 
-/* eslint-disable */
 const EmployeeForm = (props) => {
     const { selectedUser, changeShowForm } = props;
     const { user } = useAuth();
-    const [roleTypes, setRoleTypes] = React.useState([]);
-    const [submit, setSubmit] = React.useState(false);
-    const [selected, setSelected] = React.useState(selectedUser != null ? selectedUser.role_types : []);
-    const [message, setMessage] = React.useState(null);
+    const [roleTypes, setRoleTypes] = useState([]);
+    const [submit, setSubmit] = useState(false);
+    const [selected, setSelected] = useState(selectedUser != null ? selectedUser.role_types : []);
+    const [message, setMessage] = useState(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const getRoles = async () => {
             const result = await getRoleTypesByOrg(user.organization);
             setRoleTypes(result.data);
@@ -68,10 +67,10 @@ const EmployeeForm = (props) => {
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
             try {
-                // values.isAdmin = false;
                 values.roles = selected;
                 values.organization = user.organization;
                 if (!selectedUser) {
+                    // eslint-disable-next-line
                     const id = chance.bb_pin();
                     values.id = id;
 
@@ -90,6 +89,7 @@ const EmployeeForm = (props) => {
                         }
                     );
                 } else {
+                    // eslint-disable-next-line
                     values.id = selectedUser._id;
                     values.tokens = selectedUser.tokens;
                     values.password = selectedUser.password;
@@ -141,7 +141,6 @@ const EmployeeForm = (props) => {
                                 value={formik.values.firstName}
                                 onChange={formik.handleChange}
                                 type="text"
-                                defaultValue=""
                                 error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                                 helperText={formik.touched.firstName && formik.errors.firstName}
                             />
@@ -155,7 +154,6 @@ const EmployeeForm = (props) => {
                                 value={formik.values.lastName}
                                 onChange={formik.handleChange}
                                 type="text"
-                                defaultValue=""
                                 error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                                 helperText={formik.touched.lastName && formik.errors.lastName}
                             />
@@ -169,7 +167,6 @@ const EmployeeForm = (props) => {
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
                                 type="text"
-                                defaultValue=""
                                 error={formik.touched.email && Boolean(formik.errors.email)}
                                 helperText={formik.touched.email && formik.errors.email}
                             />
@@ -183,8 +180,6 @@ const EmployeeForm = (props) => {
                                 value={selectedUser ? '****' : formik.values.password}
                                 onChange={formik.handleChange}
                                 type="text"
-                                defaultValue=""
-                                disabled={selectedUser}
                                 error={formik.touched.password && Boolean(formik.errors.password)}
                                 helperText={formik.touched.password && formik.errors.password}
                             />
@@ -197,7 +192,6 @@ const EmployeeForm = (props) => {
                                 name="phone"
                                 value={formik.values.phone}
                                 onChange={formik.handleChange}
-                                defaultValue=""
                                 error={formik.touched.phone && Boolean(formik.errors.phone)}
                                 helperText={formik.touched.phone && formik.errors.phone}
                             />
@@ -211,7 +205,6 @@ const EmployeeForm = (props) => {
                                     value={selected}
                                     onChange={handleChange}
                                     renderValue={(selected) => selected.join(', ')}
-                                    fullWidth
                                 >
                                     <MenuItem disabled value="">
                                         <ListItemText primary="Roles" />
@@ -231,32 +224,32 @@ const EmployeeForm = (props) => {
                             <FormControlLabel
                                 control={
                                     <Checkbox
-                                        fullWidth
                                         margin="normal"
                                         name="isAdmin"
                                         checked={formik.values.isAdmin}
                                         onChange={formik.handleChange}
                                         error={formik.touched.isAdmin && Boolean(formik.errors.isAdmin)}
-                                        helperText={formik.touched.isAdmin && formik.errors.isAdmin}
                                     />
                                 }
                                 label="Admin"
                             />
                         </Grid>
-                        <CardActions>
-                            <Grid container spacing={2} sx={{ alignItems: 'flex-start' }}>
-                                <Grid item xs={6}>
-                                    <Button type="submit" variant="contained" color="secondary" onClick={() => setSubmit(true)}>
-                                        Submit
-                                    </Button>
+                        <Grid item xs={12}>
+                            <CardActions>
+                                <Grid container spacing={2} alignItems="center" justifyContent="center">
+                                    <Grid item>
+                                        <Button type="submit" variant="contained" color="secondary" onClick={() => setSubmit(true)}>
+                                            Submit
+                                        </Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button onClick={changeShowForm} variant="outlined">
+                                            Cancel
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <Button onClick={changeShowForm} variant="outlined">
-                                        Cancel
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </CardActions>
+                            </CardActions>
+                        </Grid>
                     </Grid>
                     {submit && message?.length > 0 ? (
                         <ListItemText
@@ -265,16 +258,14 @@ const EmployeeForm = (props) => {
                                     {message}
                                 </Typography>
                             }
-                        ></ListItemText>
+                        />
                     ) : (
-                        <div></div>
+                        <></>
                     )}
                 </form>
             </MainCard>
         </>
     );
 };
-/* eslint-disable */
 
-// eslint-disable-next-line
 export default EmployeeForm;

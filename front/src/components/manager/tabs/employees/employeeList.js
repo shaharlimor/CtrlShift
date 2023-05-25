@@ -1,36 +1,35 @@
-// material-ui
-import { Grid, InputAdornment, OutlinedInput, Pagination, Typography } from '@mui/material';
+import { useState, useEffect } from 'react';
 
-// assets
+import { Grid, InputAdornment, OutlinedInput, Pagination, Typography } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 
-import React from 'react';
-
-// material-ui
 import useAuth from 'hooks/useAuth';
-
-// project imports
 import { gridSpacing } from 'store/constant';
-
-// assets
 import MainCard from 'components/cards/MainCard';
 import UserList from 'components/manager/tabs/employees/UserList';
 import { getEmployeesByOrg } from 'utils/api';
 import { deleteUser } from 'utils/userApi';
 import EmployeeForm from './employeeForm';
 
-/* eslint-disable */
 const EmployeeList = () => {
-    const [data, setData] = React.useState([]);
-    const [filteredUsers, setFilteredUsers] = React.useState([]);
-    const [pageNum, setPageNum] = React.useState();
+    const [data, setData] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [pageNum, setPageNum] = useState();
     const { user } = useAuth();
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const PAGE_SIZE = 8;
-    const [showForm, setShowForm] = React.useState(false);
-    const [selectedUser, setSelectedUser] = React.useState(null);
+    const [showForm, setShowForm] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
-    React.useEffect(() => {
+    const calcPageNum = (len) => {
+        let num = Math.floor(len / PAGE_SIZE);
+        if (len % PAGE_SIZE !== 0) {
+            num += 1;
+        }
+        setPageNum(num);
+    };
+
+    useEffect(() => {
         function getEmployees() {
             getEmployeesByOrg(user.organization).then((res) => {
                 const { users } = res.data;
@@ -42,27 +41,18 @@ const EmployeeList = () => {
         getEmployees();
     }, [showForm]);
 
-    const calcPageNum = (len) => {
-        let num = Math.floor(len / PAGE_SIZE);
-        if (len % PAGE_SIZE != 0) {
-            num += 1;
-        }
-        setPageNum(num);
-    };
-
     const inputHandler = (e) => {
-        let lowerCase = e.target.value.toString().toLowerCase();
+        const lowerCase = e.target.value.toString().toLowerCase();
         const filteredData = data.filter((el) => {
             if (lowerCase === '') {
                 return true;
-            } else {
-                return (
-                    el.firstName?.toString().toLowerCase().includes(lowerCase) ||
-                    el.lastName?.toString().toLowerCase().includes(lowerCase) ||
-                    el.email?.toString().toLowerCase().includes(lowerCase) ||
-                    el.phone?.toString().toLowerCase().includes(lowerCase)
-                );
             }
+            return (
+                el.firstName?.toString().toLowerCase().includes(lowerCase) ||
+                el.lastName?.toString().toLowerCase().includes(lowerCase) ||
+                el.email?.toString().toLowerCase().includes(lowerCase) ||
+                el.phone?.toString().toLowerCase().includes(lowerCase)
+            );
         });
 
         setFilteredUsers(filteredData);
@@ -73,7 +63,9 @@ const EmployeeList = () => {
     const handleDelete = async (id) => {
         deleteUser(id)
             .then(() => {
+                // eslint-disable-next-line
                 setData(data.filter((us) => us._id !== id));
+                // eslint-disable-next-line
                 setFilteredUsers(filteredUsers.filter((us) => us._id !== id));
                 calcPageNum(filteredUsers.length);
             })
@@ -82,17 +74,16 @@ const EmployeeList = () => {
             });
     };
 
+    const changeShowForm = () => {
+        setShowForm(!showForm);
+    };
     const handleEditMode = async (user) => {
         setSelectedUser(user);
         changeShowForm();
     };
 
-    const changeShowForm = () => {
-        setShowForm(!showForm);
-    };
-
     return (
-        <React.Fragment>
+        <>
             {showForm && <EmployeeForm changeShowForm={changeShowForm} selectedUser={selectedUser} />}
             {!showForm && (
                 <MainCard
@@ -134,8 +125,7 @@ const EmployeeList = () => {
                     </Grid>
                 </MainCard>
             )}
-        </React.Fragment>
+        </>
     );
 };
-/* eslint-disable */
 export default EmployeeList;
