@@ -13,7 +13,8 @@ import {
     FormControl,
     Select,
     MenuItem,
-    Typography
+    Typography,
+    FormControlLabel
 } from '@mui/material';
 // project imports
 import { useFormik } from 'formik';
@@ -50,7 +51,8 @@ const EmployeeForm = (props) => {
         password: Yup.string().required('Password is required'),
         phone: Yup.string()
             .matches(/^\d{10}$/, 'Invalid phone number')
-            .required('Phone is required')
+            .required('Phone is required'),
+        isAdmin: Yup.boolean()
     });
 
     const formik = useFormik({
@@ -60,15 +62,15 @@ const EmployeeForm = (props) => {
             firstName: selectedUser?.firstName,
             lastName: selectedUser?.lastName,
             phone: selectedUser?.phone,
-            organization: selectedUser?.organization
+            organization: selectedUser?.organization,
+            isAdmin: selectedUser ? selectedUser.isAdmin : false
         },
         validationSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting, resetForm }) => {
             try {
-                values.isAdmin = false;
+                // values.isAdmin = false;
                 values.roles = selected;
                 values.organization = user.organization;
-
                 if (!selectedUser) {
                     const id = chance.bb_pin();
                     values.id = id;
@@ -201,7 +203,7 @@ const EmployeeForm = (props) => {
                                 helperText={formik.touched.phone && formik.errors.phone}
                             />
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={4}>
                             <FormControl sx={{ minWidth: 120 }}>
                                 <Select
                                     labelId="mutiple-select-label"
@@ -210,6 +212,7 @@ const EmployeeForm = (props) => {
                                     onChange={handleChange}
                                     renderValue={(selected) => selected.join(', ')}
                                     label="roles"
+                                    fullWidth
                                 >
                                     {roleTypes?.map((role) => (
                                         <MenuItem key={role.roleType} value={role.roleType}>
@@ -222,18 +225,20 @@ const EmployeeForm = (props) => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={3}>
-                            <TextField
-                                fullWidth
-                                label="check"
-                                margin="normal"
-                                name="phone"
-                                value={formik.values.phone}
-                                onChange={formik.handleChange}
-                                type="number"
-                                defaultValue=""
-                                error={formik.touched.phone && Boolean(formik.errors.phone)}
-                                helperText={formik.touched.phone && formik.errors.phone}
+                        <Grid item xs={1}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        fullWidth
+                                        margin="normal"
+                                        name="isAdmin"
+                                        checked={formik.values.isAdmin}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.isAdmin && Boolean(formik.errors.isAdmin)}
+                                        helperText={formik.touched.isAdmin && formik.errors.isAdmin}
+                                    />
+                                }
+                                label="Admin"
                             />
                         </Grid>
                         <CardActions>
