@@ -1,5 +1,5 @@
-const User = require("../models/users");
-const Common = require("../controllers/common");
+const User = require("../models/user");
+const Common = require("./common");
 const AWS = require("aws-sdk");
 const bcrypt = require("bcryptjs");
 
