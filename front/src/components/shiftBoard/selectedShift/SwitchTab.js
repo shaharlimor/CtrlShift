@@ -23,7 +23,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useAuth from 'hooks/useAuth';
 
-import { getSpecificEmployeesDetails, changeEmployeesInShift, getShiftsByRoleType } from 'utils/api';
+import { createSwapRequest, getShiftsByRoleType } from 'utils/api';
 
 const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     const { user } = useAuth();
@@ -69,7 +69,7 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     }, []);
 
     const handleSave = async () => {
-        const body = checked.reduce((result, str) => {
+        const swapRequests = checked.reduce((result, str) => {
             // eslint-disable-next-line
             const [employeeId, _id] = str.split('-');
             const swapRequest = {
@@ -79,8 +79,7 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
                 shiftId: event._id,
                 // eslint-disable-next-line
                 requestShiftId: _id,
-                requestUserId: employeeId,
-                status: 'open'
+                requestUserId: employeeId
             };
 
             result.push(swapRequest);
@@ -88,11 +87,9 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        // TODO send a request to server to create swapRequest
-        // // eslint-disable-next-line
-        // await postSwapRequest(event._id, {
-        //     roles: body
-        // });
+        for (requrst in swapRequests) {
+            await createSwapRequest(requrst);
+        }
 
         onCancel();
     };

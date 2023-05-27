@@ -94,3 +94,8 @@ export const employessGeneratedToMonths = async (date, org) => {
     });
     return response;
 };
+
+export async function createSwapRequest(body) {
+    const data = await axiosServices.get(`/swapRequests/create/`, body);
+    return data;
+}
