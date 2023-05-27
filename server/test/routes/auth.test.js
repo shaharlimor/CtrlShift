@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
 const router = require('../../src/routes/auth');
-const User = require('../../src/models/users');
+const User = require('../../src/models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
