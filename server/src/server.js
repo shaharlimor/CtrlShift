@@ -23,6 +23,7 @@ app.use("/permanentShifts", require("./routes/permanentShifts"));
 app.use("/schedule", require("./routes/schedule"));
 app.use("/user", require("./routes/user"));
 app.use("/roleTypes", require("./routes/roleTypes"));
+app.use("/swapRequests", require("./routes/swapRequests"));
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
