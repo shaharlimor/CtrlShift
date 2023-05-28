@@ -1,11 +1,11 @@
-import EmployeeList from 'components/manager/tabs/employees/employeeList';
 import { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
 
-import { IconButton, Grid, Tooltip } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { IconButton, Grid, Tooltip, useTheme } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+// import { useTheme } from '@mui/material/styles';
 
 import EmployeeForm from './employeeForm';
+import EmployeeList from 'components/manager/tabs/employees/employeeList';
 
 const Employees = () => {
     const theme = useTheme();
@@ -16,7 +16,7 @@ const Employees = () => {
     };
 
     return (
-        <fragment>
+        <>
             {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
             {!showForm && <EmployeeList />}
             {!showForm && (
@@ -39,7 +39,7 @@ const Employees = () => {
                     </Grid>
                 </Grid>
             )}
-        </fragment>
+        </>
     );
 };
 

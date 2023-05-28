@@ -5,7 +5,12 @@ const swapRequestsSchema = new Schema({
   userId: String,
   shiftId: String,
   requestUserId: String,
-  status: String,
+  requestShiftId: String,
+  status: {
+    type: String,
+    enum: ['requested', 'approved', 'rejected'],
+    default: 'requested'
+  },
 });
 
 // Compile model from schema
