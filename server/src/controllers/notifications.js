@@ -1,5 +1,5 @@
 const Notification = require("../models/notifications");
-const User = require("../models/users");
+const User = require("../models/user");
 const Common = require("../controllers/common");
 
 const getNotifications = async (req, res) => {
