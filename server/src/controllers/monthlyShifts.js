@@ -1,12 +1,12 @@
 const Shift = require("../models/monthlyShifts");
 const permanentShift = require("../models/permanentShifts");
 const Schedule = require("../models/schedule");
-const User = require("../models/users");
+const User = require("../models/user");
 const Common = require("../controllers/common");
 const Constraint = require("../models/constraints");
 
 const { scheduleShifts } = require("../controllers/Algo");
-const { getAllUsersByOrganization } = require("../controllers/users");
+const { getAllUsersByOrganization } = require("../controllers/user");
 const { getConstraintsByOrganization } = require("./constraints");
 const { changeEmployessAssigned } = require("../controllers/schedule");
 
