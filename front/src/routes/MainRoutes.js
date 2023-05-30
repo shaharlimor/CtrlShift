@@ -4,7 +4,6 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'components/Loadable';
 import { ProtectedRoute } from 'contexts/ProtectedRoute';
 
-const Home = Loadable(lazy(() => import('pages/homepage')));
 const Profile = Loadable(lazy(() => import('pages/profile')));
 const ShiftsBoard = Loadable(lazy(() => import('pages/shiftsBoard')));
 const Constraints = Loadable(lazy(() => import('pages/constraints')));
@@ -19,15 +18,7 @@ const MainRoutes = {
             path: '/',
             element: (
                 <ProtectedRoute>
-                    <Home />
-                </ProtectedRoute>
-            )
-        },
-        {
-            path: '/home',
-            element: (
-                <ProtectedRoute>
-                    <Home />
+                    <ShiftsBoard />
                 </ProtectedRoute>
             )
         },

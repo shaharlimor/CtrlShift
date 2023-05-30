@@ -23,23 +23,23 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useAuth from 'hooks/useAuth';
 
-import { getSpecificEmployeesDetails, changeEmployeesInShift, getShiftsByRoleType } from 'utils/api';
+import { createSwapRequest, getShiftsByRoleType } from 'utils/api';
 
 const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     const { user } = useAuth();
     const [userRole, setUserRole] = useState(null);
     const [roleShifts, setRoleShifts] = useState([]);
-    const [checked, setChecked] = useState(initCheck);
+    const [checked, setChecked] = useState([]);
     const [selectedShift, setSelectedShift] = useState(null);
 
     const handleChangeShiftSelction = (value) => () => {
-        const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
+        const index = newChecked.indexOf(value);
 
-        if (currentIndex === -1) {
+        if (index === -1) {
             newChecked.push(value);
         } else {
-            newChecked.splice(currentIndex, 1);
+            newChecked.splice(index, 1);
         }
         setChecked(newChecked);
     };
@@ -61,7 +61,11 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             if (roleType !== null) {
                 const shiftsResponse = await getShiftsByRoleType(roleType, event.start);
                 const roleShiftsData = shiftsResponse.data;
-                setRoleShifts(roleShiftsData);
+
+                // eslint-disable-next-line
+                const filteredShifts = roleShiftsData.filter((shift) => shift.employeeId !== user._id);
+
+                setRoleShifts(filteredShifts);
             }
         };
 
@@ -69,18 +73,15 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     }, []);
 
     const handleSave = async () => {
-        const body = checked.reduce((result, str) => {
-            // eslint-disable-next-line
-            const [employeeId, _id] = str.split('-');
+        /*eslint-disable */
+        const swapRequests = checked.reduce((result, str) => {
+            const [employeeId, _id] = str.toString().split('-');
+
             const swapRequest = {
-                // eslint-disable-next-line
                 userId: user._id,
-                // eslint-disable-next-line
-                shiftId: event._id,
-                // eslint-disable-next-line
+                shiftId: event.id,
                 requestShiftId: _id,
-                requestUserId: employeeId,
-                status: 'open'
+                requestUserId: employeeId
             };
 
             result.push(swapRequest);
@@ -88,11 +89,7 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        // TODO send a request to server to create swapRequest
-        // // eslint-disable-next-line
-        // await postSwapRequest(event._id, {
-        //     roles: body
-        // });
+        await Promise.all(swapRequests.map((request) => createSwapRequest(request)));
 
         onCancel();
     };
@@ -129,8 +126,8 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
                                                 secondaryAction={
                                                     <Checkbox
                                                         edge="end"
-                                                        onChange={handleChangeShiftSelction(value.employeeId + '-' + value._id)}
-                                                        checked={checked.indexOf(value.employeeId + '-' + value._id) !== -1}
+                                                        onChange={handleChangeShiftSelction(`${value.employeeId}-${value._id}`)}
+                                                        checked={checked.includes(`${value.employeeId}-${value._id}`)}
                                                     />
                                                 }
                                                 disablePadding
