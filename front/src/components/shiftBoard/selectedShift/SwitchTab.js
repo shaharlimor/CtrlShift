@@ -92,9 +92,7 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        swapRequests.forEach(async (request) => {
-            await createSwapRequest(request);
-        });
+        await Promise.all(swapRequests.map((request) => createSwapRequest(request)));
 
         onCancel();
     };
