@@ -106,41 +106,23 @@ describe('Notifications Routes', () => {
         expect(response.body[0].routeTo).toBe('/test');
     });
 
-//     it('should return 403 if user is not an admin', async () => {
-//       // Create a test user with isAdmin set to false
-//       const user = new User({ isAdmin: false, organization: 'organization_id' });
-//       await user.save();
+    it('should return 403 if user is not an admin', async () => {
+      // Create a test user with isAdmin set to false
+      const notification = {
+        message: 'Test notification',
+        type: 'route',
+        routeTo: '/test',
+      };
 
-//       const notification = {
-//         message: 'Test notification',
-//         type: 'route',
-//         routeTo: '/test',
-//       };
+        const user = { isAdmin: false, organization: 'organization_id' };
+        User.findById.mockReturnValue(user);
 
-//       const response = await request(app)
-//         .post('/createNotificationForOrganization')
-//         .send(notification);
-//       expect(response.statusCode).toBe(403);
-//       expect(response.text).toBe('User is not an admin');
-//     });
-
-//     it('should return 400 if type is "route" but routeTo is not provided', async () => {
-//       // Create a test user with isAdmin set to true
-//       const user = new User({ isAdmin: true, organization: 'organization_id' });
-//       await user.save();
-
-//       const notification = {
-//         message: 'Test notification',
-//         type: 'route',
-//       };
-
-//       const response = await request(app)
-//         .post('/createNotificationForOrganization')
-//         .send(notification);
-//       expect(response.statusCode).toBe(400);
-//       expect(response.text).toBe('RouteTo is required when type is \'route\'');
-//     });
-//   });
+        const response = await request(app)
+        .post('/createNotificationForOrganization')
+        .send(notification);
+        expect(response.statusCode).toBe(403);
+        expect(response.text).toBe('User is not an admin');
+    });
 
 //   describe('POST /sendSwitchNotification/:userId', () => {
 //     it('should send switch notification', async () => {
