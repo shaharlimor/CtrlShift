@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ children, restricedRoute }) => {
                 refreshStateAccessToken();
             }
             if (restricedRoute && !user?.isAdmin) {
-                return <Navigate to="/home" />;
+                return <Navigate to="/shifts-board" />;
             }
             return children;
         } else {
