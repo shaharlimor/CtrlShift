@@ -42,8 +42,6 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             newChecked.splice(index, 1);
         }
         setChecked(newChecked);
-
-        console.log(newChecked);
     };
 
     useEffect(() => {
@@ -68,7 +66,6 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
                 const filteredShifts = roleShiftsData.filter((shift) => shift.employeeId !== user._id);
 
                 setRoleShifts(filteredShifts);
-                console.log(filteredShifts);
             }
         };
 
