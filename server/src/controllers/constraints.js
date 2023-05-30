@@ -1,6 +1,6 @@
 const Constraint = require("../models/constraints");
 const Shift = require("../models/monthlyShifts");
-const User = require("../models/users");
+const User = require("../models/user");
 const { getShifts } = require("../controllers/monthlyShifts");
 
 const getConstraints = async (organization) => {

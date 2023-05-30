@@ -5,7 +5,7 @@ const User = require('../../src/models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-jest.mock("../../src/models/users");
+jest.mock("../../src/models/user");
 const app = express();
 app.use(express.json());
 app.use('/', router);
