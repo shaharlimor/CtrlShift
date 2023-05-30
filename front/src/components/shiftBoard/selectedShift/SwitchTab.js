@@ -29,19 +29,21 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     const { user } = useAuth();
     const [userRole, setUserRole] = useState(null);
     const [roleShifts, setRoleShifts] = useState([]);
-    const [checked, setChecked] = useState(initCheck);
+    const [checked, setChecked] = useState([]);
     const [selectedShift, setSelectedShift] = useState(null);
 
     const handleChangeShiftSelction = (value) => () => {
-        const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
+        const index = newChecked.indexOf(value);
 
-        if (currentIndex === -1) {
+        if (index === -1) {
             newChecked.push(value);
         } else {
-            newChecked.splice(currentIndex, 1);
+            newChecked.splice(index, 1);
         }
         setChecked(newChecked);
+
+        console.log(newChecked);
     };
 
     useEffect(() => {
@@ -62,6 +64,8 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
                 const shiftsResponse = await getShiftsByRoleType(roleType, event.start);
                 const roleShiftsData = shiftsResponse.data;
                 setRoleShifts(roleShiftsData);
+
+                console.log(roleShiftsData);
             }
         };
 
@@ -69,15 +73,13 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
     }, []);
 
     const handleSave = async () => {
+        /*eslint-disable */
         const swapRequests = checked.reduce((result, str) => {
-            // eslint-disable-next-line
-            const [employeeId, _id] = str.split('-');
+            const [employeeId, _id] = str.toString().split('-');
+
             const swapRequest = {
-                // eslint-disable-next-line
                 userId: user._id,
-                // eslint-disable-next-line
-                shiftId: event._id,
-                // eslint-disable-next-line
+                shiftId: event.id,
                 requestShiftId: _id,
                 requestUserId: employeeId
             };
@@ -87,9 +89,9 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        for (requrst in swapRequests) {
-            await createSwapRequest(requrst);
-        }
+        swapRequests.forEach(async (request) => {
+            await createSwapRequest(request);
+        });
 
         onCancel();
     };
@@ -126,8 +128,8 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
                                                 secondaryAction={
                                                     <Checkbox
                                                         edge="end"
-                                                        onChange={handleChangeShiftSelction(value.employeeId + '-' + value._id)}
-                                                        checked={checked.indexOf(value.employeeId + '-' + value._id) !== -1}
+                                                        onChange={handleChangeShiftSelction(`${value.employeeId}-${value._id}`)}
+                                                        checked={checked.includes(`${value.employeeId}-${value._id}`)}
                                                     />
                                                 }
                                                 disablePadding
