@@ -63,9 +63,12 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             if (roleType !== null) {
                 const shiftsResponse = await getShiftsByRoleType(roleType, event.start);
                 const roleShiftsData = shiftsResponse.data;
-                setRoleShifts(roleShiftsData);
 
-                console.log(roleShiftsData);
+                // eslint-disable-next-line
+                const filteredShifts = roleShiftsData.filter((shift) => shift.employeeId !== user._id);
+
+                setRoleShifts(filteredShifts);
+                console.log(filteredShifts);
             }
         };
 
