@@ -1,5 +1,7 @@
 const SwapRequest = require("../models/swapRequests");
 const { getShiftById} = require("../controllers/monthlyShifts");
+const User = require("../models/user");
+const Notification = require("../models/notifications");
 
 const getSwapRequestById = async (id) => {
     return await SwapRequest.find(
@@ -47,19 +49,33 @@ const swapEmployeesInShift = async (req, res) => {
   };
 
   const createSwapRequest = async (req, res) => {
+    const userId = req.body.userId;
+    const currentUser = await User.findById(userId);
+    const targetUserId = req.body.requestUserId;
+    const targetUser = await User.findById(targetUserId);
+    const requestShiftId = req.body.requestShiftId;
+  
+    if (!targetUser) {
+      return res.status(404).send("Target user not found");
+    }
+  
+    if (currentUser.organization !== targetUser.organization) {
+      return res.status(403).send("Users are not in the same organization");
+    }
+  
+    const switchNotification = {
+      userId: targetUserId,
+      fromId: userId,
+      message: `<b>${currentUser.firstName} ${currentUser.lastName}</b> proposed a shift change`,
+      type: "switch",
+      switchID: requestShiftId,
+    };
+  
     try {
-        const swapRequest = new swapRequest({
-            userId: req.body.userId,
-            shiftId : req.body.shiftId,
-            requestShiftId: req.body.requestShiftId,
-            requestUserId: req.body.requestUserId,
-            status: 'requested'
-        });
-        await swapRequest.save();
-        // TODO: Call switch notification 
-        res.status(200).json({ message: 'created swap request successfully', swapRequest: swapRequest });
-    } catch(error) {
-        res.status(500).json({ message: 'Error creating wap request' });
+      const savedNotification = await Notification.create(switchNotification);
+      return res.json(savedNotification);
+    } catch (error) {
+      return res.status(500).send(error.message);
     }
   };
 
@@ -67,4 +83,4 @@ const swapEmployeesInShift = async (req, res) => {
     createSwapRequest,
     swapEmployeesInShift,
     getSwapRequestById
-      };
+  };

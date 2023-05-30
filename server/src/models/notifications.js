@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const notificationSchema = new Schema({
   userId: String,
+  fromId: String,
   message: String,
   isRead: {
     type: Boolean,
@@ -17,6 +18,7 @@ const notificationSchema = new Schema({
     enum: ['switch', 'notification', 'route'],
     default: 'notification'
   },
+  switchID: String,
   routeTo: String
 });
 
