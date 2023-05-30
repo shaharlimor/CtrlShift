@@ -123,44 +123,5 @@ describe('Notifications Routes', () => {
         expect(response.statusCode).toBe(403);
         expect(response.text).toBe('User is not an admin');
     });
-
-//   describe('POST /sendSwitchNotification/:userId', () => {
-//     it('should send switch notification', async () => {
-//       // Create test users in the same organization
-//       const currentUser = new User({
-//         organization: 'organization_id',
-//         firstName: 'John',
-//         lastName: 'Doe',
-//       });
-//       await currentUser.save();
-
-//       const targetUser = new User({ organization: 'organization_id' });
-//       await targetUser.save();
-
-//       const response = await request(app).post(`/sendSwitchNotification/${targetUser._id}`);
-//       expect(response.statusCode).toBe(200);
-//       expect(response.body.userId).toBe(targetUser._id);
-//       expect(response.body.message).toContain('John Doe proposed a shift change');
-//       expect(response.body.type).toBe('switch');
-//     });
-
-//     it('should return 404 if target user is not found', async () => {
-//       const response = await request(app).post('/sendSwitchNotification/nonexistent_id');
-//       expect(response.statusCode).toBe(404);
-//       expect(response.text).toBe('Target user not found');
-//     });
-
-//     it('should return 403 if users are not in the same organization', async () => {
-//       // Create test users in different organizations
-//       const currentUser = new User({ organization: 'organization1_id' });
-//       await currentUser.save();
-
-//       const targetUser = new User({ organization: 'organization2_id' });
-//       await targetUser.save();
-
-//       const response = await request(app).post(`/sendSwitchNotification/${targetUser._id}`);
-//       expect(response.statusCode).toBe(403);
-//       expect(response.text).toBe('Users are not in the same organization');
-//     });
   });
 });
