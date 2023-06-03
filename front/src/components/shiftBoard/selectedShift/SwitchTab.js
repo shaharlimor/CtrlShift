@@ -7,25 +7,20 @@ import {
     Grid,
     Typography,
     Button,
-    Collapse,
     ListItemButton,
     ListItem,
     ListItemText,
     Checkbox,
     Select,
-    IconButton,
     InputLabel,
-    FormControl,
-    TableContainer
+    FormControl
 } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useAuth from 'hooks/useAuth';
 
 import { createSwapRequest, getShiftsByRoleType } from 'utils/api';
 
-const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
+const SwitchTab = ({ event, onCancel }) => {
     const { user } = useAuth();
     const [userRole, setUserRole] = useState(null);
     const [roleShifts, setRoleShifts] = useState([]);
@@ -70,7 +65,7 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
         };
 
         fetchData();
-    }, []);
+    });
 
     const handleSave = async () => {
         /*eslint-disable */
@@ -89,7 +84,9 @@ const SwitchTab = ({ event, roles, allEmployees, onCancel, initCheck }) => {
             return result;
         }, []);
 
-        await Promise.all(swapRequests.map((request) => createSwapRequest(request)));
+        swapRequests.forEach(request => {
+            createSwapRequest(request)
+        });
 
         onCancel();
     };
