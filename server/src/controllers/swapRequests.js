@@ -1,7 +1,9 @@
 const SwapRequest = require("../models/swapRequests");
 const { getShiftById} = require("../controllers/monthlyShifts");
 const User = require("../models/user");
+const MonthlyShifts = require("../models/monthlyShifts");
 const Notification = require("../models/notifications");
+const constraints = require("../models/constraints");
 
 const getSwapRequestById = async (id) => {
     return await SwapRequest.find(
@@ -53,7 +55,10 @@ const swapEmployeesInShift = async (req, res) => {
     const currentUser = await User.findById(userId);
     const targetUserId = req.body.requestUserId;
     const targetUser = await User.findById(targetUserId);
+    const shiftId = req.body.shiftId;
+    const shift = await MonthlyShifts.findById(shiftId);
     const requestShiftId = req.body.requestShiftId;
+    const requestShift = await MonthlyShifts.findById(requestShiftId);
   
     if (!targetUser) {
       return res.status(404).send("Target user not found");
@@ -62,11 +67,45 @@ const swapEmployeesInShift = async (req, res) => {
     if (currentUser.organization !== targetUser.organization) {
       return res.status(403).send("Users are not in the same organization");
     }
+
+    if (!shift) {
+      return res.status(404).send("Target shift not found");
+    }
+
+    if (!requestShift) {
+      return res.status(404).send("Requested shift not found");
+    }
   
+    const shiftFormattedDate = shift.startTime.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit'
+    });
+    
+    const shiftFormattedTime = shift.startTime.toLocaleTimeString('en-GB', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    });
+    const shiftDate = `${shiftFormattedDate} ${shiftFormattedTime}`;
+  
+    const requestShiftFormattedDate = requestShift.startTime.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit'
+    });
+    
+    const requestShiftFormattedTime = requestShift.startTime.toLocaleTimeString('en-GB', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    });
+    const requestShiftDate = `${requestShiftFormattedDate} ${requestShiftFormattedTime}`;
+
     const switchNotification = {
       userId: targetUserId,
       fromId: userId,
-      message: `<b>${currentUser.firstName} ${currentUser.lastName}</b> proposed a shift change`,
+      message: `<b>${currentUser.firstName} ${currentUser.lastName}</b> proposed a shift change between <b>${shift.name} at ${shiftDate}</b> to <b>${requestShift.name} at ${requestShiftDate}</b>`,
       type: "switch",
       switchID: requestShiftId,
     };
