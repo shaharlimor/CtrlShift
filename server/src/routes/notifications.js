@@ -1,6 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const notificationsController = require('../controllers/notifications');
 
 var router = express.Router();
