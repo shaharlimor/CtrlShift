@@ -6,20 +6,14 @@ import {
     CardContent,
     Grid,
     Typography,
-    Button,
     Collapse,
-    ListItemButton,
     ListItem,
-    ListItemText,
+    ListItemTet,
     Checkbox,
     Select,
-    IconButton,
     InputLabel,
     FormControl
 } from '@mui/material';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { getSpecificEmployeesDetails, changeEmployeesInShift } from 'utils/api';
 
@@ -41,7 +35,6 @@ const PlacementTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
             const changeChecked = [];
             event.roles.forEach((role) => {
                 const { roleType, employeeIds } = role;
-
                 /* eslint-disable */
                 employeeIds.map((employeeId) => {
                     const newObject = employeeId + '-' + roleType;
@@ -86,8 +79,7 @@ const PlacementTab = ({ event, roles, allEmployess, onCancel, initCheck }) => {
             <Grid container spacing={0} alignItems="center">
                 {employees &&
                     employees.map((emp) => (
-                        /*eslint-disable */
-                        <Grid key={emp.id} item xs={4}>
+                        <Grid key={emp.id} item xs={4} sx={{ mb: 2 }}>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid key={emp.LastName} item>
                                     <Avatar
