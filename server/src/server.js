@@ -9,12 +9,16 @@ const cors = require("cors");
 
 const hostname = "localhost";
 const port = process.env.PORT || 3001;
-const app = express(bodyParser.urlencoded({ extended: false }));
+const app = express();
 const corsOptions = {
   origin: "*",
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors(corsOptions));
 
 const options = {
   swaggerDefinition,
@@ -24,8 +28,6 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(bodyParser.json());
-app.use(cors(corsOptions));
 app.use("/auth", require("./routes/auth"));
 app.use("/notifications", require("./routes/notifications"));
 app.use("/constraints", require("./routes/constraints"));
@@ -49,8 +51,8 @@ mongoose
     dbName: "CtrlShift",
   })
   .then(() => {
-    console.log("mongo connection open");
+    console.log("MongoDB connection open");
   })
   .catch((err) => {
-    console.log("error connecting to mongo: " + err);
+    console.log("Error connecting to MongoDB: " + err);
   });
