@@ -5,7 +5,7 @@ import MainCard from 'components/cards/MainCard';
 const ConstrainstsComp = Loadable(lazy(() => import('components/constraints')));
 
 const Constraints = () => (
-    <MainCard title="Start insert constraints">
+    <MainCard title="Manage Your Constraints">
         <ConstrainstsComp />
     </MainCard>
 );
