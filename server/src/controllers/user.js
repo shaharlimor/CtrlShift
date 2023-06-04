@@ -182,7 +182,7 @@ const changePassword = async (req, res) => {
     // Hash the new password using bcrypt
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
-    const updatedUser = await Users.findOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
       { password: hashedNewPassword },
       { new: true }
