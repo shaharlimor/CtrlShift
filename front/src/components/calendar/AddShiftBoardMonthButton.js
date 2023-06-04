@@ -47,7 +47,7 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
             )}
 
             {!selectedMonth && (
-                <Tooltip placement="top" title={<Typography fontSize="1.2em">Generate all the permanent shifts to new month</Typography>}>
+                <Tooltip placement="top" title={<Typography fontSize="1.2em">Add all the permanent shifts to a new month</Typography>}>
                     <Button
                         sx={{ width: '100%' }}
                         startIcon={<LockOpenIcon />}
