@@ -1,7 +1,7 @@
-const request = require('supertest');
-const express = require('express');
+const request = require("supertest");
+const express = require("express");
 const app = express();
-const Schedule = require('../../src/models/schedule');
+const Schedule = require("../../src/models/schedule");
 const {
   getSchedules,
   changeOpenToConstraints,

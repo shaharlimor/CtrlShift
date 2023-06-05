@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "644551e127d00a0ff0454083",
+    "organization": "test",
+    "month": 4,
+    "year": 2023,
+    "isPublished": true,
+    "isOpenToConstraints": true,
+
+    "employessAssigned": true
+  },
+  {
+    "_id": "64523a41d68a6fa4647cabb0",
+    "organization": "test",
+    "month": 5,
+    "year": 2023,
+    "isPublished": true,
+    "isOpenToConstraints": true,
+
+    "employessAssigned": true
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48c8",
+    "organization": "test",
+    "month": 6,
+    "year": 2023,
+    "isPublished": false,
+    "isOpenToConstraints": true,
+
+    "employessAssigned": true
+  },
+  {
+    "_id": "64593c62c297178fd69ce6ae",
+    "organization": "test",
+    "month": 7,
+    "year": 2023,
+    "isPublished": false,
+    "isOpenToConstraints": false,
+    "employessAssigned": true
+  }
+]

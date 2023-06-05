@@ -1,6 +1,7 @@
 const Constraint = require("../models/constraints");
 const MonthlyShift = require("../models/monthlyShifts");
 const Notification = require("../models/notifications");
+const Schedule = require("../models/schedule");
 
 const fs = require("fs");
 const path = require("path");
@@ -10,6 +11,7 @@ const deleteData = async () => {
     await Constraint.deleteMany({});
     await MonthlyShift.deleteMany({});
     await Notification.deleteMany({});
+    await Schedule.deleteMany({});
     return;
   } catch (error) {
     return res.status(404).send(error.message);
@@ -17,7 +19,12 @@ const deleteData = async () => {
 };
 
 const insertData = async (req, res) => {
-  const collections = ["constraints", "monthlyShifts", "notifications"];
+  const collections = [
+    "constraints",
+    "monthlyShifts",
+    "notifications",
+    "schedule",
+  ];
   const insertedData = {};
 
   try {
