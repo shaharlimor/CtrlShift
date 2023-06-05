@@ -2,7 +2,7 @@ const Constraint = require("../models/constraints");
 const MonthlyShift = require("../models/monthlyShifts");
 const Notification = require("../models/notifications");
 const Schedule = require("../models/schedule");
-
+const SwapRequests = require("../models/swapRequests");
 const fs = require("fs");
 const path = require("path");
 
@@ -12,6 +12,7 @@ const deleteData = async () => {
     await MonthlyShift.deleteMany({});
     await Notification.deleteMany({});
     await Schedule.deleteMany({});
+    await SwapRequests.deleteMany({});
     return;
   } catch (error) {
     return res.status(404).send(error.message);
@@ -24,6 +25,7 @@ const insertData = async (req, res) => {
     "monthlyShifts",
     "notifications",
     "schedule",
+    "swapRequests",
   ];
   const insertedData = {};
 
