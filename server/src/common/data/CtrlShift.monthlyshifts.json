@@ -1,0 +1,2284 @@
+[
+  {
+    "_id": "644551e127d00a0ff045402e",
+    "organization": "test",
+    "startTime": "2023-04-03T07:00:00.000Z",
+    "endTime": "2023-04-03T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454034",
+    "organization": "test",
+    "startTime": "2023-04-05T07:00:00.000Z",
+    "endTime": "2023-04-05T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454037",
+    "organization": "test",
+    "startTime": "2023-04-05T14:00:00.000Z",
+    "endTime": "2023-04-05T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454043",
+    "organization": "test",
+    "startTime": "2023-04-10T07:00:00.000Z",
+    "endTime": "2023-04-10T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454049",
+    "organization": "test",
+    "startTime": "2023-04-12T07:00:00.000Z",
+    "endTime": "2023-04-12T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454054",
+    "organization": "test",
+    "startTime": "2023-04-14T14:00:00.000Z",
+    "endTime": "2023-04-14T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff045405e",
+    "organization": "test",
+    "startTime": "2023-04-19T07:00:00.000Z",
+    "endTime": "2023-04-19T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454061",
+    "organization": "test",
+    "startTime": "2023-04-19T14:00:00.000Z",
+    "endTime": "2023-04-19T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454069",
+    "organization": "test",
+    "startTime": "2023-04-21T14:00:00.000Z",
+    "endTime": "2023-04-21T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff045406d",
+    "organization": "test",
+    "startTime": "2023-04-24T07:00:00.000Z",
+    "endTime": "2023-04-24T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454073",
+    "organization": "test",
+    "startTime": "2023-04-26T07:00:00.000Z",
+    "endTime": "2023-04-26T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff0454076",
+    "organization": "test",
+    "startTime": "2023-04-26T14:00:00.000Z",
+    "endTime": "2023-04-26T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644551e127d00a0ff045407e",
+    "organization": "test",
+    "startTime": "2023-04-28T14:00:00.000Z",
+    "endTime": "2023-04-28T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "6445528127d00a0ff04540c6",
+    "organization": "test",
+    "startTime": "2023-04-09T02:00:05.000Z",
+    "endTime": "2023-04-09T08:30:05.000Z",
+    "name": "special sunday",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445528127d00a0ff04540c7",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445528127d00a0ff04540c8",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "644552ce27d00a0ff045410d",
+    "organization": "test",
+    "startTime": "2023-04-21T02:00:24.000Z",
+    "endTime": "2023-04-21T20:00:24.000Z",
+    "name": "21th",
+    "roles": [
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644552ce27d00a0ff045410e",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644552ce27d00a0ff045410f",
+        "employeeIds": ["b8738a28", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "6445537127d00a0ff045415c",
+    "organization": "test",
+    "startTime": "2023-04-24T15:00:51.000Z",
+    "endTime": "2023-04-24T20:45:51.000Z",
+    "name": "happy monday",
+    "roles": [
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "6445537127d00a0ff045415d",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "6445537127d00a0ff045415e",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "Shift manager ",
+        "amount": 1,
+        "_id": "6445537127d00a0ff045415f"
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab78",
+    "organization": "test",
+    "startTime": "2023-05-15T07:00:00.000Z",
+    "endTime": "2023-05-15T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647caba8",
+    "organization": "test",
+    "startTime": "2023-05-31T07:00:00.000Z",
+    "endTime": "2023-05-31T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab96",
+    "organization": "test",
+    "startTime": "2023-05-24T14:00:00.000Z",
+    "endTime": "2023-05-24T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab54",
+    "organization": "test",
+    "startTime": "2023-05-03T07:00:00.000Z",
+    "endTime": "2023-05-03T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab51",
+    "organization": "test",
+    "startTime": "2023-05-02T07:00:00.000Z",
+    "endTime": "2023-05-02T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "employeeIds": ["14585c78", "ab945ba2", "4c0a8029"],
+        "_id": "6445518727d00a0ff045400d"
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "employeeIds": ["c092905e", "14585c78"],
+        "_id": "6445518727d00a0ff045400e"
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab81",
+    "organization": "test",
+    "startTime": "2023-05-17T14:00:00.000Z",
+    "endTime": "2023-05-17T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab8d",
+    "organization": "test",
+    "startTime": "2023-05-22T07:00:00.000Z",
+    "endTime": "2023-05-22T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab9a",
+    "organization": "test",
+    "startTime": "2023-05-25T14:00:00.000Z",
+    "endTime": "2023-05-25T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647caba2",
+    "organization": "test",
+    "startTime": "2023-05-29T07:00:00.000Z",
+    "endTime": "2023-05-29T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab89",
+    "organization": "test",
+    "startTime": "2023-05-19T14:00:00.000Z",
+    "endTime": "2023-05-19T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "14585c78", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab4e",
+    "organization": "test",
+    "startTime": "2023-05-01T07:00:00.000Z",
+    "endTime": "2023-05-01T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "employeeIds": ["ab945ba2"],
+        "_id": "6445518727d00a0ff045400d"
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "employeeIds": ["b8738a28", "c092905e"],
+        "_id": "6445518727d00a0ff045400e"
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab5f",
+    "organization": "test",
+    "startTime": "2023-05-05T14:00:00.000Z",
+    "endTime": "2023-05-05T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab6c",
+    "organization": "test",
+    "startTime": "2023-05-10T14:00:00.000Z",
+    "endTime": "2023-05-10T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab7e",
+    "organization": "test",
+    "startTime": "2023-05-17T07:00:00.000Z",
+    "endTime": "2023-05-17T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab7b",
+    "organization": "test",
+    "startTime": "2023-05-16T07:00:00.000Z",
+    "endTime": "2023-05-16T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab5b",
+    "organization": "test",
+    "startTime": "2023-05-04T14:00:00.000Z",
+    "endTime": "2023-05-04T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab69",
+    "organization": "test",
+    "startTime": "2023-05-10T07:00:00.000Z",
+    "endTime": "2023-05-10T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647caba5",
+    "organization": "test",
+    "startTime": "2023-05-30T07:00:00.000Z",
+    "endTime": "2023-05-30T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab70",
+    "organization": "test",
+    "startTime": "2023-05-11T14:00:00.000Z",
+    "endTime": "2023-05-11T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "14585c78", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cabab",
+    "organization": "test",
+    "startTime": "2023-05-31T14:00:00.000Z",
+    "endTime": "2023-05-31T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab9e",
+    "organization": "test",
+    "startTime": "2023-05-26T14:00:00.000Z",
+    "endTime": "2023-05-26T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab57",
+    "organization": "test",
+    "startTime": "2023-05-03T14:00:00.000Z",
+    "endTime": "2023-05-03T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e", "14585c78", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab63",
+    "organization": "test",
+    "startTime": "2023-05-08T07:00:00.000Z",
+    "endTime": "2023-05-08T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "employeeIds": ["b8738a28", "14585c78"],
+        "_id": "6445518727d00a0ff045400d"
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "employeeIds": ["b8738a28"],
+        "_id": "6445518727d00a0ff045400e"
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab74",
+    "organization": "test",
+    "startTime": "2023-05-12T14:00:00.000Z",
+    "endTime": "2023-05-12T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78", "c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64523a41d68a6fa4647cab93",
+    "organization": "test",
+    "startTime": "2023-05-24T07:00:00.000Z",
+    "endTime": "2023-05-24T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a486b",
+    "organization": "test",
+    "startTime": "2023-06-01T14:00:00.000Z",
+    "endTime": "2023-06-01T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a486f",
+    "organization": "test",
+    "startTime": "2023-06-02T14:00:00.000Z",
+    "endTime": "2023-06-02T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4873",
+    "organization": "test",
+    "startTime": "2023-06-05T07:00:00.000Z",
+    "endTime": "2023-06-05T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4876",
+    "organization": "test",
+    "startTime": "2023-06-06T07:00:00.000Z",
+    "endTime": "2023-06-06T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4879",
+    "organization": "test",
+    "startTime": "2023-06-07T07:00:00.000Z",
+    "endTime": "2023-06-07T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a487c",
+    "organization": "test",
+    "startTime": "2023-06-07T14:00:00.000Z",
+    "endTime": "2023-06-07T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4880",
+    "organization": "test",
+    "startTime": "2023-06-08T14:00:00.000Z",
+    "endTime": "2023-06-08T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4884",
+    "organization": "test",
+    "startTime": "2023-06-09T14:00:00.000Z",
+    "endTime": "2023-06-09T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4888",
+    "organization": "test",
+    "startTime": "2023-06-12T07:00:00.000Z",
+    "endTime": "2023-06-12T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a488b",
+    "organization": "test",
+    "startTime": "2023-06-13T07:00:00.000Z",
+    "endTime": "2023-06-13T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a488e",
+    "organization": "test",
+    "startTime": "2023-06-14T07:00:00.000Z",
+    "endTime": "2023-06-14T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4891",
+    "organization": "test",
+    "startTime": "2023-06-14T14:00:00.000Z",
+    "endTime": "2023-06-14T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4895",
+    "organization": "test",
+    "startTime": "2023-06-15T14:00:00.000Z",
+    "endTime": "2023-06-15T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a4899",
+    "organization": "test",
+    "startTime": "2023-06-16T14:00:00.000Z",
+    "endTime": "2023-06-16T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a489d",
+    "organization": "test",
+    "startTime": "2023-06-19T07:00:00.000Z",
+    "endTime": "2023-06-19T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48a0",
+    "organization": "test",
+    "startTime": "2023-06-20T07:00:00.000Z",
+    "endTime": "2023-06-20T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48a3",
+    "organization": "test",
+    "startTime": "2023-06-21T07:00:00.000Z",
+    "endTime": "2023-06-21T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48a6",
+    "organization": "test",
+    "startTime": "2023-06-21T14:00:00.000Z",
+    "endTime": "2023-06-21T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48aa",
+    "organization": "test",
+    "startTime": "2023-06-22T14:00:00.000Z",
+    "endTime": "2023-06-22T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48ae",
+    "organization": "test",
+    "startTime": "2023-06-23T14:00:00.000Z",
+    "endTime": "2023-06-23T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48b2",
+    "organization": "test",
+    "startTime": "2023-06-26T07:00:00.000Z",
+    "endTime": "2023-06-26T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "14585c78"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48b5",
+    "organization": "test",
+    "startTime": "2023-06-27T07:00:00.000Z",
+    "endTime": "2023-06-27T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["14585c78", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48b8",
+    "organization": "test",
+    "startTime": "2023-06-28T07:00:00.000Z",
+    "endTime": "2023-06-28T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "b8738a28"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48bb",
+    "organization": "test",
+    "startTime": "2023-06-28T14:00:00.000Z",
+    "endTime": "2023-06-28T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["b8738a28", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48bf",
+    "organization": "test",
+    "startTime": "2023-06-29T14:00:00.000Z",
+    "endTime": "2023-06-29T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48c3",
+    "organization": "test",
+    "startTime": "2023-06-30T14:00:00.000Z",
+    "endTime": "2023-06-30T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5fb",
+    "organization": "test",
+    "startTime": "2024-05-07T07:00:00.000Z",
+    "endTime": "2024-05-07T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce61e",
+    "organization": "test",
+    "startTime": "2024-05-17T14:00:00.000Z",
+    "endTime": "2024-05-17T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce62f",
+    "organization": "test",
+    "startTime": "2024-05-23T14:00:00.000Z",
+    "endTime": "2024-05-23T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce637",
+    "organization": "test",
+    "startTime": "2024-05-27T07:00:00.000Z",
+    "endTime": "2024-05-27T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["c092905e", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5f0",
+    "organization": "test",
+    "startTime": "2024-05-02T14:00:00.000Z",
+    "endTime": "2024-05-02T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5f8",
+    "organization": "test",
+    "startTime": "2024-05-06T07:00:00.000Z",
+    "endTime": "2024-05-06T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5fe",
+    "organization": "test",
+    "startTime": "2024-05-08T07:00:00.000Z",
+    "endTime": "2024-05-08T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce605",
+    "organization": "test",
+    "startTime": "2024-05-09T14:00:00.000Z",
+    "endTime": "2024-05-09T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce616",
+    "organization": "test",
+    "startTime": "2024-05-15T14:00:00.000Z",
+    "endTime": "2024-05-15T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce628",
+    "organization": "test",
+    "startTime": "2024-05-22T07:00:00.000Z",
+    "endTime": "2024-05-22T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce63a",
+    "organization": "test",
+    "startTime": "2024-05-28T07:00:00.000Z",
+    "endTime": "2024-05-28T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce648",
+    "organization": "test",
+    "startTime": "2024-05-31T14:00:00.000Z",
+    "endTime": "2024-05-31T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5ec",
+    "organization": "test",
+    "startTime": "2024-05-01T14:00:00.000Z",
+    "endTime": "2024-05-01T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5f4",
+    "organization": "test",
+    "startTime": "2024-05-03T14:00:00.000Z",
+    "endTime": "2024-05-03T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce601",
+    "organization": "test",
+    "startTime": "2024-05-08T14:00:00.000Z",
+    "endTime": "2024-05-08T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce610",
+    "organization": "test",
+    "startTime": "2024-05-14T07:00:00.000Z",
+    "endTime": "2024-05-14T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce622",
+    "organization": "test",
+    "startTime": "2024-05-20T07:00:00.000Z",
+    "endTime": "2024-05-20T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce644",
+    "organization": "test",
+    "startTime": "2024-05-30T14:00:00.000Z",
+    "endTime": "2024-05-30T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce60d",
+    "organization": "test",
+    "startTime": "2024-05-13T07:00:00.000Z",
+    "endTime": "2024-05-13T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce61a",
+    "organization": "test",
+    "startTime": "2024-05-16T14:00:00.000Z",
+    "endTime": "2024-05-16T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["b8738a28", "ab945ba2"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce62b",
+    "organization": "test",
+    "startTime": "2024-05-22T14:00:00.000Z",
+    "endTime": "2024-05-22T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["4c0a8029", "14585c78"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce640",
+    "organization": "test",
+    "startTime": "2024-05-29T14:00:00.000Z",
+    "endTime": "2024-05-29T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["c092905e"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce63d",
+    "organization": "test",
+    "startTime": "2024-05-29T07:00:00.000Z",
+    "endTime": "2024-05-29T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce625",
+    "organization": "test",
+    "startTime": "2024-05-21T07:00:00.000Z",
+    "endTime": "2024-05-21T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce5e9",
+    "organization": "test",
+    "startTime": "2024-05-01T07:00:00.000Z",
+    "endTime": "2024-05-01T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029", "ab945ba2"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce609",
+    "organization": "test",
+    "startTime": "2024-05-10T14:00:00.000Z",
+    "endTime": "2024-05-10T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2", "4c0a8029"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce613",
+    "organization": "test",
+    "startTime": "2024-05-15T07:00:00.000Z",
+    "endTime": "2024-05-15T13:00:00.000Z",
+    "name": "morning shift ",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "6445518727d00a0ff045400d",
+        "employeeIds": ["ab945ba2", "b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 2,
+        "_id": "6445518727d00a0ff045400e",
+        "employeeIds": ["4c0a8029", "c092905e"]
+      }
+    ]
+  },
+  {
+    "_id": "64593c5ec297178fd69ce633",
+    "organization": "test",
+    "startTime": "2024-05-24T14:00:00.000Z",
+    "endTime": "2024-05-24T18:00:00.000Z",
+    "name": "evening shift",
+    "roles": [
+      {
+        "roleType": "chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019",
+        "employeeIds": ["14585c78", "4c0a8029"]
+      },
+      {
+        "roleType": "bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a",
+        "employeeIds": ["b8738a28"]
+      },
+      {
+        "roleType": "waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b",
+        "employeeIds": ["ab945ba2"]
+      }
+    ]
+  }
+]

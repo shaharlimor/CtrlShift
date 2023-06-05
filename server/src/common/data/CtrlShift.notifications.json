@@ -1,0 +1,102 @@
+[
+  {
+    "_id": "6474c4ca55534ec5ec265361",
+    "userId": "c092905e",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "waiter",
+    "date": "2023-05-29T15:29:14.174Z"
+  },
+  {
+    "_id": "6474c4ca55534ec5ec26536a",
+    "userId": "14585c78",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "bartender",
+    "date": "2023-05-29T15:29:14.284Z"
+  },
+  {
+    "_id": "6474c4ca55534ec5ec26536c",
+    "userId": "14585c78",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "waiter",
+    "date": "2023-05-29T15:29:14.290Z"
+  },
+  {
+    "_id": "647624c4a7b6d570994cfa71",
+    "userId": "c092905e",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "waiter",
+    "date": "2023-05-30T16:31:00.266Z"
+  },
+  {
+    "_id": "647624c4a7b6d570994cfa77",
+    "userId": "14585c78",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "bartender",
+    "date": "2023-05-30T16:31:00.290Z"
+  },
+  {
+    "_id": "647624c4a7b6d570994cfa7f",
+    "userId": "14585c78",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "waiter",
+    "date": "2023-05-30T16:31:00.708Z"
+  },
+  {
+    "_id": "647625afba060766ca486122",
+    "userId": "b8738a28",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "64523a41d68a6fa4647cab96",
+    "date": "2023-05-30T16:34:55.505Z"
+  },
+  {
+    "_id": "647b113421bcec1846f73e53",
+    "userId": "b8738a28",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change between <b>morning shift  at Wed May 31 2023 10:00:00 GMT+0300 (Israel Daylight Time)</b> to <b>morning shift  at Mon May 15 2023 10:00:00 GMT+0300 (Israel Daylight Time)</b>",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "64523a41d68a6fa4647cab78",
+    "date": "2023-06-03T10:08:52.884Z"
+  },
+  {
+    "_id": "647b118b21bcec1846f74278",
+    "userId": "14585c78",
+    "fromId": "4c0a8029",
+    "message": "<b>Shahar Limor</b> proposed a shift change between <b>morning shift  at Wed May 31 2023 10:00:00 GMT+0300 (Israel Daylight Time)</b> to <b>evening shift at Wed May 24 2023 17:00:00 GMT+0300 (Israel Daylight Time)</b>",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "64523a41d68a6fa4647cab96",
+    "date": "2023-06-03T10:10:19.317Z"
+  },
+  {
+    "_id": "647b1bc066ada8b4901535ca",
+    "userId": "4c0a8029",
+    "fromId": "14585c78",
+    "message": "<b>Aya Bryl</b> proposed a shift change between <b>morning shift  at 30/05/23 10:00 am</b> to <b>morning shift  at 02/05/23 10:00 am</b>",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "64523a41d68a6fa4647cab51",
+    "date": "2023-06-03T10:53:52.141Z"
+  }
+]

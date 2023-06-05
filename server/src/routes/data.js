@@ -27,7 +27,7 @@ var router = express.Router();
 router.delete("/", async (req, res) => {
   try {
     await deleteData();
-    res.status(200).send(`success deleted constraints`);
+    res.status(200).send(`success deleted data`);
   } catch (err) {
     res.status(500).send("Error to delete constraints " + err);
   }

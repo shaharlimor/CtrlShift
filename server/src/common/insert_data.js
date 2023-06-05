@@ -1,22 +1,39 @@
 const Constraint = require("../models/constraints");
+const MonthlyShift = require("../models/monthlyShifts");
+const Notification = require("../models/notifications");
+
 const fs = require("fs");
 const path = require("path");
 
 const deleteData = async () => {
   try {
-    return await Constraint.deleteMany({});
+    await Constraint.deleteMany({});
+    await MonthlyShift.deleteMany({});
+    await Notification.deleteMany({});
+    return;
   } catch (error) {
     return res.status(404).send(error.message);
   }
 };
 
 const insertData = async (req, res) => {
-  const filePath = path.join(__dirname, "CtrlShift.constraints.json");
-  const jsonData = fs.readFileSync(filePath);
-  const data = JSON.parse(jsonData);
-  console.log(data);
+  const collections = ["constraints", "monthlyShifts", "notifications"];
+  const insertedData = {};
+
   try {
-    return await Constraint.insertMany(data);
+    for (const collection of collections) {
+      const filePath = path.join(
+        __dirname,
+        "data",
+        `CtrlShift.${collection}.json`
+      );
+      const jsonData = fs.readFileSync(filePath);
+      const data = JSON.parse(jsonData);
+      const Model = require(`../models/${collection}`);
+      insertedData[collection] = await Model.insertMany(data);
+    }
+
+    return insertedData;
   } catch (error) {
     throw error.message;
   }
