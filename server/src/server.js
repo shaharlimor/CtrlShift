@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDefinition = require("./swagger");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require('./swagger_output.json');
+const swaggerDefinition = require("./swagger");
+
 
 const hostname = "localhost";
 const port = process.env.PORT || 3001;
@@ -26,7 +28,8 @@ const options = {
 };
 
 const swaggerSpec = swaggerJsdoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 
 app.use("/auth", require("./routes/auth"));
 app.use("/notifications", require("./routes/notifications"));
