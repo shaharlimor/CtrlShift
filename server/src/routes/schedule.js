@@ -38,7 +38,7 @@ var router = express.Router();
  *                 $ref: '#/components/schemas/Schedule'
  *       500:
  *         description: Internal server error
-
+ *
  *   post:
  *     summary: Create a new schedule
  *     tags: [Schedule]
@@ -59,7 +59,10 @@ var router = express.Router();
  *               $ref: '#/components/schemas/Schedule'
  *       500:
  *         description: Internal server error
+ */
 
+/**
+ * @swagger
  * /schedule/startInsertConstraints:
  *   patch:
  *     summary: Change the "isOpenToConstraints" status to true for a specific schedule
@@ -88,7 +91,10 @@ var router = express.Router();
  *               $ref: '#/components/schemas/Schedule'
  *       500:
  *         description: Internal server error
+ */
 
+/**
+ * @swagger
  * /schedule/publishBoard:
  *   patch:
  *     summary: Change the "isPublished" status to true for a specific schedule
@@ -117,7 +123,10 @@ var router = express.Router();
  *               $ref: '#/components/schemas/Schedule'
  *       500:
  *         description: Internal server error
+ */
 
+/**
+ * @swagger
  * /schedule/openToConstraints:
  *   get:
  *     summary: Check if a specific schedule is open to insert constraints
@@ -141,7 +150,7 @@ var router = express.Router();
  *         name: year
  *         schema:
  *           type: number
- *         required
+ *         required: true
  *         description: The year of the schedule
  *     responses:
  *       200:
@@ -152,7 +161,10 @@ var router = express.Router();
  *               type: boolean
  *       500:
  *         description: Internal server error
+ */
 
+/**
+ * @swagger
  * /schedule/employessAssigned:
  *   patch:
  *     summary: Change the "employessAssigned" status for a specific schedule
@@ -183,7 +195,7 @@ var router = express.Router();
  *               $ref: '#/components/schemas/Schedule'
  *       500:
  *         description: Internal server error
-
+ *
  *   get:
  *     summary: Check if employees are assigned for a specific schedule
  *     tags: [Schedule]
@@ -253,13 +265,13 @@ router.post("/", middleware, async (req, res) => {
   try {
     const newSche = new Schedule(req.body);
     const result = await newSche.save();
-    res.send("success adding new schedule " + result);
+    res.send(result);
   } catch (err) {
     res.send("error adding new schedule. error: " + err);
   }
 });
 
-router.patch("/startInsertConstraints/", middleware, async (req, res) => {
+router.patch("/startInsertConstraints", middleware, async (req, res) => {
   try {
     const result = await changeOpenToConstraints(
       req.body.organization,
@@ -272,7 +284,7 @@ router.patch("/startInsertConstraints/", middleware, async (req, res) => {
   }
 });
 
-router.patch("/publishBoard/", middleware, async (req, res) => {
+router.patch("/publishBoard", middleware, async (req, res) => {
   try {
     const result = await changePublish(
       req.body.organization,
@@ -288,9 +300,9 @@ router.patch("/publishBoard/", middleware, async (req, res) => {
 router.get("/openToConstraints", middleware, async (req, res) => {
   try {
     const ans = await boardOpenToConstraints(
-      req.body.organization,
-      req.body.month,
-      req.body.year
+      req.query.organization,
+      req.query.month,
+      req.query.year
     );
     res.send(ans);
   } catch (err) {
@@ -298,9 +310,9 @@ router.get("/openToConstraints", middleware, async (req, res) => {
   }
 });
 
-router.patch("/employessAssigned/", async (req, res) => {
+router.patch("/employeesAssigned", middleware, async (req, res) => {
   try {
-    const result = await changeEmployessAssigned(
+    const result = await changeEmployeesAssigned(
       req.body.organization,
       req.body.month,
       req.body.year,
@@ -308,11 +320,11 @@ router.patch("/employessAssigned/", async (req, res) => {
     );
     res.send(result);
   } catch (err) {
-    res.send("Change generate algorithm status failed: " + err);
+    res.send("Change employees assigned status failed: " + err);
   }
 });
 
-router.get("/employessAssigned", async (req, res) => {
+router.get("/employeesAssigned", middleware, async (req, res) => {
   try {
     const ans = await isEmployeesAssigned(
       req.query.organization,
@@ -321,7 +333,7 @@ router.get("/employessAssigned", async (req, res) => {
     );
     res.send(ans);
   } catch (err) {
-    res.send(`error to check if is employees assigned: ` + err);
+    res.send("error to check if employees are assigned: " + err);
   }
 });
 

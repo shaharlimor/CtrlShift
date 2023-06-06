@@ -71,7 +71,7 @@ var router = express.Router();
  *     responses:
  *       200:
  *         description: Successful response indicating that shifts were switched
- *        500:
+ *       500:
  *          description: Shift is already swapped or error switching shifts
  */
 

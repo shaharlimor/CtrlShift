@@ -134,8 +134,9 @@ router.get("/users", middleware, userController.getAllUsersByOrganization);
  *                   type: string
  *                 imageUrl:
  *                   type: string
- *       '500':
- *         description: Error uploading image
+ *
+ *         '500':
+ *           description: Error uploading image
  */
 router.post(
   "/changeImage",
@@ -150,7 +151,7 @@ router.post(
  *   post:
  *     summary: Change user password
  *     tags: [User]
- *     requestBody
+ *     requestBody:
  *       required: true
  *       content:
  *         application/json:
