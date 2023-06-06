@@ -1,7 +1,7 @@
-const swaggerAutogen = require('swagger-autogen')()
+const swaggerAutogen = require("swagger-autogen")();
 
 const swaggerDefinition = {
-  openapi: "3.0.0",
+  openapi: "3.1.0",
   info: {
     title: "My API",
     version: "1.0.0",
@@ -18,9 +18,10 @@ const swaggerDefinition = {
   ],
 };
 
-const outputFile = './src/swagger_output.json';
-const endpointsFiles = ['./src/routes/*.js'];
+const outputFile = "./src/swagger_output.json";
+const endpointsFiles = ["./src/routes/*.js", "./src/server.js"];
+const swaggerFile = "./swagger.yaml";
 
-swaggerAutogen(outputFile, endpointsFiles)
+swaggerAutogen(outputFile, endpointsFiles, swaggerFile);
 
 module.exports = swaggerDefinition;

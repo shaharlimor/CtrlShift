@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: My API
+  version: 1.0.0
+  description: Description of my API
+schemes:
+  - http
+host: localhost:3001
+basePath: /api
+servers:
+  - url: http://localhost:3001
+    description: Development server
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        password:
+          type: string
+        organization:
+          type: string
+        isAdmin:
+          type: boolean
+        roles:
+          type: array
+          items:
+            type: string
+
+    UserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"

@@ -5,9 +5,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require('./swagger_output.json');
+const swaggerFile = require("./swagger_output.json");
 const swaggerDefinition = require("./swagger");
-
 
 const hostname = "localhost";
 const port = process.env.PORT || 3001;
@@ -27,9 +26,11 @@ const options = {
   apis: ["./routes/*.js"], // Path to your API routes
 };
 
-const swaggerSpec = swaggerJsdoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerFile, { explorer: true })
+);
 
 app.use("/auth", require("./routes/auth"));
 app.use("/notifications", require("./routes/notifications"));
