@@ -7,7 +7,6 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger_output.json");
 const swaggerDefinition = require("./swagger");
-const swagger = require("./swagger");
 
 const hostname = "localhost";
 const port = process.env.PORT || 3001;
@@ -26,8 +25,6 @@ const options = {
   swaggerDefinition,
   apis: ["./routes/*.js"], // Path to your API routes
 };
-
-swagger(app);
 
 app.use(
   "/api-docs",

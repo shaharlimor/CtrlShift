@@ -1,13 +1,25 @@
 const express = require("express");
 const roleTypesController = require("../controllers/roleTypes");
 const middleware = require("../common/auth_middleware");
-var router = express.Router();
+const router = express.Router();
 
 /**
  * @swagger
  * tags:
  *   name: Roles
  *   description: API endpoints for managing roles
+ */
+
+/**
+ * @swagger
+ * definitions:
+ *   roleTypes:
+ *     type: object
+ *     properties:
+ *       organization:
+ *         type: string
+ *       roleType:
+ *         type: string
  */
 
 /**
@@ -29,7 +41,7 @@ var router = express.Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ShiftRoles'
+ *               $ref: '#/definitions/roleTypes'
  *       '500':
  *         description: Error occurred while retrieving role types
  */
@@ -45,14 +57,14 @@ router.get("/:orgId", middleware, roleTypesController.getRoleTypes);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ShiftRoles'
+ *             $ref: '#/definitions/roleTypes'
  *     responses:
  *       '200':
  *         description: Role created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ShiftRoles'
+ *               $ref: '#/definitions/roleTypes'
  *       '500':
  *         description: Error occurred while creating a role
  */
@@ -92,14 +104,14 @@ router.post("/delete", middleware, roleTypesController.deleteRole);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ShiftRoles'
+ *             $ref: '#/definitions/roleTypes'
  *     responses:
  *       '200':
  *         description: Role updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ShiftRoles'
+ *               $ref: '#/definitions/roleTypes'
  *       '404':
  *         description: Role not found
  *       '500':

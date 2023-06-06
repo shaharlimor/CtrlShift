@@ -10,7 +10,7 @@ const options = {
       description: "Description of my API",
     },
   },
-  apis: ["./src/routes/*.js", "./server.js"], // Path to your route files
+  apis: ["./server.js", "./src/routes/*.js"], // Path to your route files
 };
 
 const specs = swaggerJsdoc(options);
