@@ -30,7 +30,15 @@ const deleteData = async () => {
     await PermanentShifts.deleteMany({
       _id: { $nin: remainPermShifts.map((id) => id.toString()) },
     });
-    remainUsers = ["4c0a8029", "ab945ba2", "14585c78", "b8738a28", "c092905e"];
+    remainUsers = [
+      "4c0a8029",
+      "ab945ba2",
+      "14585c78",
+      "b8738a28",
+      "c092905e",
+      "d0e0e9d2",
+      "7a01d3e1",
+    ];
     await User.deleteMany({
       _id: { $nin: remainUsers.map((id) => id.toString()) },
     });

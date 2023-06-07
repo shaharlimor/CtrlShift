@@ -78,5 +78,31 @@
     "organization": "test",
     "role_types": ["bartender", "waiter"],
     "tokens": []
+  },
+  {
+    "_id": "d0e0e9d2",
+    "firstName": "Israel",
+    "lastName": "Israeli",
+    "email": "israel@i.con",
+    "phone": "0501111111",
+    "password": "$2a$10$MXv30CqIcGhmHLTtPouEc.ml8aW7zkF2ua4OLiCqQ9/fF0UH2Ql82",
+    "organization": "test",
+    "role_types": ["Waiter"],
+    "isAdmin": false,
+    "tokens": [],
+    "__v": 2
+  },
+  {
+    "_id": "7a01d3e1",
+    "firstName": "Lior",
+    "lastName": "Eliyahu",
+    "email": "lior@l.com",
+    "phone": "0501111146",
+    "password": "$2a$10$2.hlRFTK2rk2/2j7HKJFWOMv/hGT8q/sv3TmAnr.7ou2kMG1RrAfe",
+    "organization": "test",
+    "role_types": ["Chef"],
+    "isAdmin": false,
+    "tokens": [],
+    "__v": 2
   }
 ]
