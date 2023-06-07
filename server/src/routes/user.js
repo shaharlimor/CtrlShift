@@ -13,6 +13,39 @@ const upload = multer({
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ *         email:
+ *           type: string
+ *         phone:
+ *           type: string
+ *         password:
+ *           type: string
+ *         organization:
+ *           type: string
+ *         role_types:
+ *           type: array
+ *           items:
+ *             type: string
+ *         isAdmin:
+ *           type: boolean
+ *         tokens:
+ *           type: array
+ *           items:
+ *             type: string
+ */
+
+/**
+ * @swagger
  * tags:
  *   name: User
  *   description: API endpoints for user operations

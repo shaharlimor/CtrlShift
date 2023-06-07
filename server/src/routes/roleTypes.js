@@ -6,20 +6,21 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   name: Roles
- *   description: API endpoints for managing roles
+ *   name: roleTypes
+ *   description: API endpoints for managing roleTypes
  */
 
 /**
  * @swagger
- * definitions:
- *   roleTypes:
- *     type: object
- *     properties:
- *       organization:
- *         type: string
- *       roleType:
- *         type: string
+ * components:
+ *   schemas:
+ *     ShiftRoles:
+ *       type: object
+ *       properties:
+ *         organization:
+ *           type: string
+ *         roleType:
+ *           type: string
  */
 
 /**
@@ -27,7 +28,7 @@ const router = express.Router();
  * /roleTypes/{orgId}:
  *   get:
  *     summary: Get role types by organization ID
- *     tags: [Roles]
+ *     tags: [roleTypes]
  *     parameters:
  *       - in: path
  *         name: orgId
@@ -41,7 +42,7 @@ const router = express.Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/definitions/roleTypes'
+ *               $ref: '#/components/schemas/ShiftRoles'
  *       '500':
  *         description: Error occurred while retrieving role types
  */
@@ -49,22 +50,22 @@ router.get("/:orgId", middleware, roleTypesController.getRoleTypes);
 
 /**
  * @swagger
- * /roles/create:
+ * /roleTypes/create:
  *   post:
  *     summary: Create a new role
- *     tags: [Roles]
+ *     tags: [roleTypes]
  *     requestBody:
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/definitions/roleTypes'
+ *             $ref: '#/components/schemas/ShiftRoles'
  *     responses:
  *       '200':
  *         description: Role created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/definitions/roleTypes'
+ *               $ref: '#/components/schemas/ShiftRoles'
  *       '500':
  *         description: Error occurred while creating a role
  */
@@ -72,10 +73,10 @@ router.post("/create", middleware, roleTypesController.createRole);
 
 /**
  * @swagger
- * /roles/delete:
+ * /roleTypes/delete:
  *   post:
  *     summary: Delete a role
- *     tags: [Roles]
+ *     tags: [roleTypes]
  *     requestBody:
  *       content:
  *         application/json:
@@ -96,22 +97,22 @@ router.post("/delete", middleware, roleTypesController.deleteRole);
 
 /**
  * @swagger
- * /roles/update:
+ * /roleTypes/update:
  *   post:
  *     summary: Update a role
- *     tags: [Roles]
+ *     tags: [roleTypes]
  *     requestBody:
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/definitions/roleTypes'
+ *             $ref: '#/components/schemas/ShiftRoles'
  *     responses:
  *       '200':
  *         description: Role updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/definitions/roleTypes'
+ *               $ref: '#/components/schemas/ShiftRoles'
  *       '404':
  *         description: Role not found
  *       '500':
