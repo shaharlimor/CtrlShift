@@ -24,7 +24,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /roles/{orgId}:
+ * /roleTypes/{orgId}:
  *   get:
  *     summary: Get role types by organization ID
  *     tags: [Roles]

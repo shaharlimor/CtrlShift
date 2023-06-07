@@ -21,15 +21,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
+// const options = {
+//   swaggerDefinition,
+//   apis: ["./routes/*.js"], // Path to your API routes
+// };
+
 const options = {
-  swaggerDefinition,
-  apis: ["./routes/*.js"], // Path to your API routes
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "My API",
+      version: "1.0.0",
+      description: "Description of my API",
+    },
+  },
+  apis: ["./server.js", "./src/routes/*.js"], // Path to your route files
 };
+
+const specs = swaggerJsdoc(options);
 
 app.use(
   "/api-docs",
   swaggerUi.serve,
-  swaggerUi.setup(swaggerFile, { explorer: true })
+  swaggerUi.setup(specs, { explorer: true })
 );
 
 app.use("/auth", require("./routes/auth"));
