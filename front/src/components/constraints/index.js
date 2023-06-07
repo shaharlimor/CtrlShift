@@ -2,7 +2,7 @@ import { lazy, useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
-import { getMonthlyShiftsOpenToConstraintsByRoles, getConstraintsByUserId } from 'utils/api';
+import { getMonthlyShiftsOpenToConstraintsByRoles, getConstraintsByUserId, getMonthlyShiftsOpenToConstraints } from 'utils/api';
 import { colorGenerator } from 'utils/color-generator';
 
 import Loadable from 'components/Loadable';
@@ -47,7 +47,8 @@ const Constrainsts = () => {
 
     useEffect(() => {
         const getShifts = async () => {
-            const result = await getMonthlyShiftsOpenToConstraintsByRoles(user.organization, user.role_types);
+            // const result = await getMonthlyShiftsOpenToConstraintsByRoles(user.organization, user.role_types);
+            const result = await getMonthlyShiftsOpenToConstraints(user.organization);
             let parsedData = [];
             result.data.map(async (item) =>
                 parsedData.push({

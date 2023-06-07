@@ -4,11 +4,11 @@
     "organization": "test",
     "startTime": "1686045600000",
     "endTime": "1686063600000",
-    "days": ["Thursday", "Tuesday", "Wednesday", "Saturday"],
+    "days": ["Thursday", "Tuesday", "Wednesday", "Sunday"],
     "name": "Morning Shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1
       },
       {
@@ -35,7 +35,7 @@
         "_id": "644551d527d00a0ff0454019"
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a"
       },

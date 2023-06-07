@@ -6,7 +6,6 @@
     "year": 2023,
     "isPublished": true,
     "isOpenToConstraints": true,
-
     "employessAssigned": true
   },
   {
@@ -16,7 +15,6 @@
     "year": 2023,
     "isPublished": true,
     "isOpenToConstraints": true,
-
     "employessAssigned": true
   },
   {
@@ -26,16 +24,15 @@
     "year": 2023,
     "isPublished": false,
     "isOpenToConstraints": true,
-
-    "employessAssigned": true
+    "employessAssigned": false
   },
   {
-    "_id": "64593c62c297178fd69ce6ae",
+    "_id": "6453e16fc198be30bb3a48c9",
     "organization": "test",
     "month": 7,
     "year": 2023,
     "isPublished": false,
-    "isOpenToConstraints": false,
-    "employessAssigned": true
+    "isOpenToConstraints": true,
+    "employessAssigned": false
   }
 ]
