@@ -7,13 +7,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -28,13 +28,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e"]
@@ -49,19 +49,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -76,13 +76,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e"]
@@ -97,13 +97,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e"]
@@ -118,19 +118,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "14585c78"]
@@ -145,13 +145,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e"]
@@ -166,19 +166,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -193,19 +193,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -220,13 +220,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e"]
@@ -241,13 +241,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -262,19 +262,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["14585c78", "c092905e"]
@@ -289,19 +289,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -316,13 +316,13 @@
     "name": "special sunday",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445528127d00a0ff04540c7",
         "employeeIds": ["4c0a8029", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445528127d00a0ff04540c8",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -337,13 +337,13 @@
     "name": "21th",
     "roles": [
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644552ce27d00a0ff045410e",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644552ce27d00a0ff045410f",
         "employeeIds": ["b8738a28", "14585c78"]
@@ -358,13 +358,13 @@
     "name": "happy monday",
     "roles": [
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "6445537127d00a0ff045415d",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "6445537127d00a0ff045415e",
         "employeeIds": ["14585c78"]
@@ -384,13 +384,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -405,13 +405,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28", "4c0a8029"]
@@ -426,19 +426,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e", "ab945ba2"]
@@ -453,13 +453,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e"]
@@ -474,13 +474,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "employeeIds": ["14585c78", "ab945ba2", "4c0a8029"],
         "_id": "6445518727d00a0ff045400d"
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "employeeIds": ["c092905e", "14585c78"],
         "_id": "6445518727d00a0ff045400e"
@@ -495,19 +495,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "ab945ba2"]
@@ -522,13 +522,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e", "ab945ba2"]
@@ -543,19 +543,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "4c0a8029"]
@@ -570,13 +570,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78", "4c0a8029"]
@@ -591,19 +591,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "14585c78", "4c0a8029"]
@@ -618,13 +618,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "employeeIds": ["ab945ba2"],
         "_id": "6445518727d00a0ff045400d"
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "employeeIds": ["b8738a28", "c092905e"],
         "_id": "6445518727d00a0ff045400e"
@@ -639,19 +639,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -666,19 +666,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -693,13 +693,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "4c0a8029"]
@@ -714,13 +714,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -735,19 +735,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["14585c78", "c092905e"]
@@ -762,13 +762,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -783,13 +783,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e", "ab945ba2"]
@@ -804,19 +804,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "14585c78", "b8738a28"]
@@ -831,19 +831,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e", "ab945ba2"]
@@ -858,19 +858,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "ab945ba2"]
@@ -885,19 +885,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e", "14585c78", "b8738a28"]
@@ -912,13 +912,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "employeeIds": ["b8738a28", "14585c78"],
         "_id": "6445518727d00a0ff045400d"
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "employeeIds": ["b8738a28"],
         "_id": "6445518727d00a0ff045400e"
@@ -933,19 +933,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78", "c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["14585c78", "c092905e"]
@@ -960,13 +960,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28", "4c0a8029"]
@@ -981,19 +981,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1008,19 +1008,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1035,13 +1035,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -1056,13 +1056,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e"]
@@ -1077,13 +1077,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -1098,19 +1098,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -1125,19 +1125,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1152,19 +1152,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1179,13 +1179,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -1200,13 +1200,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e"]
@@ -1221,13 +1221,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -1242,19 +1242,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -1269,19 +1269,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1296,19 +1296,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1323,13 +1323,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -1344,13 +1344,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e"]
@@ -1365,13 +1365,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -1386,19 +1386,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -1413,19 +1413,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1440,19 +1440,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1467,13 +1467,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "14585c78"]
@@ -1488,13 +1488,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["14585c78", "c092905e"]
@@ -1509,13 +1509,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "b8738a28"]
@@ -1530,19 +1530,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["b8738a28", "c092905e"]
@@ -1557,19 +1557,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1584,19 +1584,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["c092905e"]
@@ -1611,13 +1611,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -1632,19 +1632,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2"]
@@ -1659,19 +1659,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["4c0a8029"]
@@ -1686,13 +1686,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["c092905e", "4c0a8029"]
@@ -1707,19 +1707,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -1734,13 +1734,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -1755,13 +1755,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -1776,19 +1776,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -1803,19 +1803,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2"]
@@ -1830,13 +1830,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029"]
@@ -1851,13 +1851,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -1872,19 +1872,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -1899,19 +1899,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -1926,19 +1926,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -1953,19 +1953,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -1980,13 +1980,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -2001,13 +2001,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029"]
@@ -2022,19 +2022,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -2049,13 +2049,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -2070,19 +2070,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["b8738a28", "ab945ba2"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["4c0a8029"]
@@ -2097,19 +2097,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["4c0a8029", "14585c78"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2"]
@@ -2124,19 +2124,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["c092905e"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -2151,13 +2151,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -2172,13 +2172,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["ab945ba2"]
@@ -2193,13 +2193,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029", "ab945ba2"]
@@ -2214,19 +2214,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2", "4c0a8029"]
@@ -2241,13 +2241,13 @@
     "name": "morning shift ",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "6445518727d00a0ff045400d",
         "employeeIds": ["ab945ba2", "b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 2,
         "_id": "6445518727d00a0ff045400e",
         "employeeIds": ["4c0a8029", "c092905e"]
@@ -2262,19 +2262,19 @@
     "name": "evening shift",
     "roles": [
       {
-        "roleType": "chef",
+        "roleType": "Chef",
         "amount": 1,
         "_id": "644551d527d00a0ff0454019",
         "employeeIds": ["14585c78", "4c0a8029"]
       },
       {
-        "roleType": "bartender",
+        "roleType": "Bartender",
         "amount": 1,
         "_id": "644551d527d00a0ff045401a",
         "employeeIds": ["b8738a28"]
       },
       {
-        "roleType": "waiter",
+        "roleType": "Waiter",
         "amount": 1,
         "_id": "644551d527d00a0ff045401b",
         "employeeIds": ["ab945ba2"]

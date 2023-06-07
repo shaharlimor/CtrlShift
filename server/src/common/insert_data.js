@@ -4,6 +4,8 @@ const Notification = require("../models/notifications");
 const Schedule = require("../models/schedule");
 const SwapRequests = require("../models/swapRequests");
 const ShiftRoles = require("../models/shiftRoles");
+const PermanentShifts = require("../models/permanentShifts");
+const User = require("../models/user");
 
 const fs = require("fs");
 const path = require("path");
@@ -24,6 +26,14 @@ const deleteData = async () => {
     await ShiftRoles.deleteMany({
       _id: { $nin: remainRoles.map((id) => id.toString()) },
     });
+    remainPermShifts = ["645cd41531eea8fabe794ab1", "644551d527d00a0ff0454018"];
+    await PermanentShifts.deleteMany({
+      _id: { $nin: remainPermShifts.map((id) => id.toString()) },
+    });
+    remainUsers = ["4c0a8029", "ab945ba2", "14585c78", "b8738a28", "c092905e"];
+    await User.deleteMany({
+      _id: { $nin: remainUsers.map((id) => id.toString()) },
+    });
     return;
   } catch (error) {
     return res.status(404).send(error.message);
@@ -38,6 +48,8 @@ const insertData = async (req, res) => {
     "schedule",
     "swapRequests",
     // "shiftRoles",
+    // "permanentShifts",
+    // "users",
   ];
   const insertedData = {};
 

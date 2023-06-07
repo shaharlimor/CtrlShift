@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "4c0a8029",
+    "firstName": "Shahar",
+    "lastName": "Limor",
+    "email": "a@a.com",
+    "password": "$2b$10$5U6nWgIpAky6EhnMz9r2NO9Xfk2zuZH9P438YSeovJstDWwDXjQ6m",
+    "organization": "test",
+    "role_types": ["waiter", "Shift manager", "chef"],
+    "tokens": [
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NDQxMTUxNH0.eg1IfbESxRslQfjxJjXrYTUg8OHqN2D4hY3KgTiki7Y",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NDg1NjY2MH0.juyOo1vuoIk0BuStcueFgWSYQh6R0Xn_O47ojVCAg4c",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTQ2MDk0NH0.O5p7oODvo9zS14wULrmqJ0IY-PBeBytV4kgzCBWzkQk",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTM3MjkyMn0.Pv-iArAPQKhHjTwAZFzjRvC3rjP_XUURac8qJYtyBbw",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTg5NjA4MX0.r3vDFUeWHS8M-rEBW333rofQ8C0j9U9e-HATjRQxiNc",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTU0MzE3OH0.YGa02J2taVAS1lCBxX43SduKJ-Ho-efzqHai4xj6XhQ",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTU0ODg5MX0.QmdHeAQXFailEShfmpmJm-sKzx8HzU_D6iPNiU3wwaE",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTU0OTAxOX0.203KYlBairXJQU7wPa6WKjDdzgc_GCnG1rG18kcurJU",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NTc4OTMzMn0.T2yZrZsU2RMgzDPt-Zo6_4wmlr_4Rf-iPPGXblg77CU"
+    ],
+    "isAdmin": true,
+    "phone": "1"
+  },
+  {
+    "_id": "ab945ba2",
+    "firstName": "sagi",
+    "lastName": "ben mordechai",
+    "email": "b@b.com",
+    "password": "$2b$10$a2XWB1NfiGRdqD4i5StQ.Oqc936vmsXpwPjPWpQeQ0.Vh0cg32irm",
+    "organization": "test",
+    "role_types": ["waiter", "chef"],
+    "tokens": [
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NDI2MzA5OH0.po2XgbT5wpamCo4qesuAGwCJD3Bi8Lu5brMI3-XLApM",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NDUwMzQyMn0.LeCnZpcepSCSoxUmOqXcCObOt6EOMfzc4AgZ5AbL6MM",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NTM2NjQwOH0.J8HPNqeOWRsAa2X766AOODXMaZBvXCQSWojmMurpGoQ",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NTgwMjc5OX0.peAv9NNBWCwCLbVHwuzzBAWVMQ0Gk6P7EGOKue8UikU",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NTM2NjY4NH0.4daTC6qcYbNnN8RMQTlOrT2PHLfS_GAkTtUktz8bMKA",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NTgwMzY1NH0.QanJv8r5B7YiPmJm75u5fOvXUtgAoGS-K9dGwAaMchk"
+    ],
+    "isAdmin": true,
+    "phone": "0546818808"
+  },
+  {
+    "_id": "14585c78",
+    "firstName": "Aya",
+    "lastName": "Bryl",
+    "email": "c@c.com",
+    "password": "$2b$10$/MIvpPtxHw2kOx8DoD13LuPbk/cj0I.LGp3aDgb5zd4pr2HtfBKgW",
+    "organization": "test",
+    "role_types": ["chef"],
+    "tokens": [
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4MzgwMzc1Nn0.3bmBW0Ffh83eM5a3ltCzZ-_aa05HiDM3gMGVBGMrhCM",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4NDc1ODE4N30.A9raLz2u_G_iS581dYZhxEuJlmqx1sADzxc6BApFmuI",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4NTc4NzA1MH0.D6ZeuJ1S7qU2s6K4CozmjIGV8eRs0XfU7TQHUFc7SVo"
+    ],
+    "isAdmin": true
+  },
+  {
+    "_id": "b8738a28",
+    "firstName": "Hadas",
+    "lastName": "Manteka",
+    "email": "d@d.com",
+    "password": "$2a$10$10hNhNwG1BcHJpX6evVRM.ma1vkz.Wgf5RPSy3MPdjXaa4Lr/S.IW",
+    "organization": "test",
+    "role_types": ["chef", "bartender"],
+    "tokens": [
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJiODczOGEyOCIsImlhdCI6MTY4NTYyMjc0M30.CVCYrRazLWLulHTjV0cBfhBlOE2GifqDeU8k3dRuW3g"
+    ],
+    "isAdmin": true,
+    "phone": "0501234567"
+  },
+  {
+    "_id": "c092905e",
+    "firstName": "Asaf",
+    "lastName": "Halely",
+    "email": "e@e.com",
+    "password": "$2b$10$uJumS1WzpRQEBaGgWWo7w.gK29pyxFOf9dDxk60Mkq5Jvhe6hZ7Ou",
+    "organization": "test",
+    "role_types": ["bartender", "waiter"],
+    "tokens": []
+  }
+]
