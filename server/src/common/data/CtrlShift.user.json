@@ -6,7 +6,7 @@
     "email": "a@a.com",
     "password": "$2b$10$5U6nWgIpAky6EhnMz9r2NO9Xfk2zuZH9P438YSeovJstDWwDXjQ6m",
     "organization": "test",
-    "role_types": ["waiter", "Shift manager", "chef"],
+    "role_types": ["Waiter", "Shift manager", "Chef"],
     "tokens": [
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NDQxMTUxNH0.eg1IfbESxRslQfjxJjXrYTUg8OHqN2D4hY3KgTiki7Y",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0YzBhODAyOSIsImlhdCI6MTY4NDg1NjY2MH0.juyOo1vuoIk0BuStcueFgWSYQh6R0Xn_O47ojVCAg4c",
@@ -28,7 +28,7 @@
     "email": "b@b.com",
     "password": "$2b$10$a2XWB1NfiGRdqD4i5StQ.Oqc936vmsXpwPjPWpQeQ0.Vh0cg32irm",
     "organization": "test",
-    "role_types": ["waiter", "chef"],
+    "role_types": ["Waiter", "Chef"],
     "tokens": [
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NDI2MzA5OH0.po2XgbT5wpamCo4qesuAGwCJD3Bi8Lu5brMI3-XLApM",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYjk0NWJhMiIsImlhdCI6MTY4NDUwMzQyMn0.LeCnZpcepSCSoxUmOqXcCObOt6EOMfzc4AgZ5AbL6MM",
@@ -47,7 +47,7 @@
     "email": "c@c.com",
     "password": "$2b$10$/MIvpPtxHw2kOx8DoD13LuPbk/cj0I.LGp3aDgb5zd4pr2HtfBKgW",
     "organization": "test",
-    "role_types": ["chef"],
+    "role_types": ["Chef"],
     "tokens": [
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4MzgwMzc1Nn0.3bmBW0Ffh83eM5a3ltCzZ-_aa05HiDM3gMGVBGMrhCM",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4NDc1ODE4N30.A9raLz2u_G_iS581dYZhxEuJlmqx1sADzxc6BApFmuI",
@@ -62,7 +62,7 @@
     "email": "d@d.com",
     "password": "$2a$10$10hNhNwG1BcHJpX6evVRM.ma1vkz.Wgf5RPSy3MPdjXaa4Lr/S.IW",
     "organization": "test",
-    "role_types": ["chef", "bartender"],
+    "role_types": ["Chef", "Bartender"],
     "tokens": [
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJiODczOGEyOCIsImlhdCI6MTY4NTYyMjc0M30.CVCYrRazLWLulHTjV0cBfhBlOE2GifqDeU8k3dRuW3g"
     ],
@@ -76,7 +76,7 @@
     "email": "e@e.com",
     "password": "$2b$10$uJumS1WzpRQEBaGgWWo7w.gK29pyxFOf9dDxk60Mkq5Jvhe6hZ7Ou",
     "organization": "test",
-    "role_types": ["bartender", "waiter"],
+    "role_types": ["Bartender", "Waiter"],
     "tokens": []
   },
   {
@@ -89,8 +89,7 @@
     "organization": "test",
     "role_types": ["Waiter"],
     "isAdmin": false,
-    "tokens": [],
-    "__v": 2
+    "tokens": []
   },
   {
     "_id": "7a01d3e1",
@@ -102,7 +101,6 @@
     "organization": "test",
     "role_types": ["Chef"],
     "isAdmin": false,
-    "tokens": [],
-    "__v": 2
+    "tokens": []
   }
 ]

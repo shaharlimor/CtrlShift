@@ -6,7 +6,7 @@
     "message": "<b>Shahar Limor</b> proposed a shift change",
     "isRead": false,
     "type": "switch",
-    "switchID": "waiter",
+    "switchID": "Waiter",
     "date": "2023-05-29T15:29:14.174Z"
   },
   {
@@ -16,7 +16,7 @@
     "message": "<b>Shahar Limor</b> proposed a shift change",
     "isRead": false,
     "type": "switch",
-    "switchID": "bartender",
+    "switchID": "Bartender",
     "date": "2023-05-29T15:29:14.284Z"
   },
   {
@@ -26,7 +26,7 @@
     "message": "<b>Shahar Limor</b> proposed a shift change",
     "isRead": false,
     "type": "switch",
-    "switchID": "waiter",
+    "switchID": "Waiter",
     "date": "2023-05-29T15:29:14.290Z"
   },
   {
@@ -36,7 +36,7 @@
     "message": "<b>Shahar Limor</b> proposed a shift change",
     "isRead": false,
     "type": "switch",
-    "switchID": "waiter",
+    "switchID": "Waiter",
     "date": "2023-05-30T16:31:00.266Z"
   },
   {
@@ -46,7 +46,7 @@
     "message": "<b>Shahar Limor</b> proposed a shift change",
     "isRead": false,
     "type": "switch",
-    "switchID": "bartender",
+    "switchID": "Bartender",
     "date": "2023-05-30T16:31:00.290Z"
   },
   {
@@ -56,7 +56,7 @@
     "message": "<b>Shahar Limor</b> proposed a shift change",
     "isRead": false,
     "type": "switch",
-    "switchID": "waiter",
+    "switchID": "Waiter",
     "date": "2023-05-30T16:31:00.708Z"
   },
   {

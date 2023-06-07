@@ -57,7 +57,7 @@ const insertData = async (req, res) => {
     "swapRequests",
     // "shiftRoles",
     // "permanentShifts",
-    // "users",
+    "user",
   ];
   const insertedData = {};
 
