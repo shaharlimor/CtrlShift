@@ -47,11 +47,11 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
 
   const chooseEmployee = (shift) => {
     if (shift.possibleEmployees.length == 1) {
-      return shift.possibleEmployees[0]._id
+      return shift.possibleEmployees[0]
     } else {
       shift.possibleEmployees.forEach(user => usersWeight.get(user._id).potential -= 1)
 
-      return users.reduce((min, user) => {
+      return shift.possibleEmployees.reduce((min, user) => {
         const userWeight = usersWeight.get(user._id);
         let weight;
         if (userWeight.given > perfectAmount) {
@@ -68,35 +68,37 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     const shifts = [];
     for (const shift of monthlyShifts) {
       for (const role of shift.roles) {
-        // TODO multiply by the shift amount (can push to array times the amount)
-        const possibleEmployees = users.filter((user) => {
-          const hasConstraint = constraints.some(
-            (constraint) =>
-              constraint.employeeId === user._id && constraint.shiftId === shift._id
-          );
-
-          if (hasConstraint) {
+        for (let i = 0; i < role.amount; i++) {
+          // TODO multiply by the shift amount (can push to array times the amount)
+          const possibleEmployees = users.filter((user) => {
+            const hasConstraint = constraints.some(
+              (constraint) =>
+                constraint.employeeId === user._id && constraint.shiftId === shift._id
+            );
+  
+            if (hasConstraint) {
+              return false;
+            };
+  
+            if (user.role_types.includes(role.roleType)) {
+              usersWeight.get(user._id).potential += 1;
+              return true
+            }
+  
             return false;
+          });
+  
+          const newShift = {
+            shiftsID: shift._id,
+            startTime: shift.startTime,
+            endTime: shift.endTime,
+            name: shift.name,
+            roleType: role.roleType,
+            possibleEmployees
           };
-
-          if (user.role_types.includes(role.roleType)) {
-            usersWeight.get(user._id).potential += 1;
-            return true
-          }
-
-          return false;
-        });
-
-        const newShift = {
-          shiftsID: shift._id,
-          startTime: shift.startTime,
-          endTime: shift.endTime,
-          name: shift.name,
-          roleType: role.roleType,
-          possibleEmployees
-        };
-
-        createShiftObject(shifts, newShift)
+  
+          createShiftObject(shifts, newShift)
+        }
       }
     };
 

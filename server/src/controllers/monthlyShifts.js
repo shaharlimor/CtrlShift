@@ -345,8 +345,9 @@ const generateScheduleMonthlyShifts = async (req, res) => {
   const userOrg = user.organization;
 
   const users = await User.find({ organization: userOrg });
+  const employeeIds = users.map(user => user._id);
 
-  const constraints = await Constraint.find({ userOrg });
+  const constraints = await Constraint.find({ employeeId: { $in: employeeIds } });
 
   const monthlyShifts = await ShiftsByMonth(userOrg, month, year);
   const assignedShifts = await scheduleShifts(
