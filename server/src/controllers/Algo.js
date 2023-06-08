@@ -73,7 +73,7 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
           const possibleEmployees = users.filter((user) => {
             const hasConstraint = constraints.some(
               (constraint) =>
-                constraint.employeeId === user._id && constraint.shiftId === shift._id
+                constraint.employeeId === user._id && constraint.shiftId === shift._id.toString()
             );
   
             if (hasConstraint) {
