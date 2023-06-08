@@ -59,7 +59,7 @@ const NotificationList = () => {
                         }}
                     >
                         <ListItem alignItems="center">
-                            <Avatar alt="John Doe" />
+                            <Avatar src={`https://controlshift-images.s3.eu-central-1.amazonaws.com/${notification.fromId}.png`} />
                             <ListItemWrapper style={{ paddingLeft: 16, paddingRight: 16, paddingTop: 4, paddingBottom: 4 }}>
                                 <ListItemText
                                     primary={<Typography variant="body1" dangerouslySetInnerHTML={{ __html: notification.message }} />}
