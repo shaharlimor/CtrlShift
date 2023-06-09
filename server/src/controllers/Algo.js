@@ -105,6 +105,36 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     return shifts;
   };
 
+  const removeFromShifts = (shift, user) => {
+    const newShifts = [];
+
+    shifts.forEach(theShifts => {
+      theShifts.shifts.forEach(theShift => {
+        if (user.role_types.includes(theShift.roleType)) {
+          if (theShift.possibleEmployees.some(employee => employee._id === user._id)) {
+            if (theShift.startTime.toISOString().split("T")[0] == shift.startTime.toISOString().split("T")[0]) {
+              theShift.possibleEmployees = theShift.possibleEmployees.filter(employee => employee._id !== user._id);
+              usersWeight.get(user._id).potential -= 1;
+              newShifts.push(theShift);
+
+              if (theShifts.shifts.length === 1) {
+                const index = shifts.indexOf(theShifts);
+                shifts.splice(index, 1);
+              } else {
+                const index = theShifts.shifts.indexOf(theShift);
+                theShifts.shifts.splice(index, 1);
+              }
+            }
+          }
+        }
+      });
+    });
+
+    newShifts.forEach(theShift => {
+      createShiftObject(shifts, theShift)
+    })
+  }
+
   // create user weight map
   const usersWeight = new Map();
   users.forEach(user => usersWeight.set(user._id, { given: 0, potential: 0 }))
@@ -125,6 +155,7 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
     } else {
       const chosenEmployee = chooseEmployee(shifts[0].shifts[0]);
       assignShiftToEmployee(shifts[0].shifts[0].shiftsID, shifts[0].shifts[0].roleType, chosenEmployee._id);
+      const shift = shifts[0].shifts[0]
 
       if (shifts[0].shifts.length > 1) {
         shifts[0].shifts.splice(0, 1);
@@ -133,6 +164,7 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
       }
 
       // find and resort the problem shifts
+      removeFromShifts(shift, chosenEmployee)
     }
   }
 };
