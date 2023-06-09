@@ -3,18 +3,49 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger_output.json");
+const swaggerDefinition = require("./swagger");
 
 const hostname = "localhost";
 const port = process.env.PORT || 3001;
-const app = express(bodyParser.urlencoded({ extended: false }));
+const app = express();
 const corsOptions = {
   origin: "*",
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
+
+// const options = {
+//   swaggerDefinition,
+//   apis: ["./routes/*.js"], // Path to your API routes
+// };
+
+const options = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "My API",
+      version: "1.0.0",
+      description: "Description of my API",
+    },
+  },
+  apis: ["./server.js", "./src/routes/*.js"], // Path to your route files
+};
+
+const specs = swaggerJsdoc(options);
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { explorer: true })
+);
+
 app.use("/auth", require("./routes/auth"));
 app.use("/notifications", require("./routes/notifications"));
 app.use("/constraints", require("./routes/constraints"));
@@ -38,8 +69,8 @@ mongoose
     dbName: "CtrlShift",
   })
   .then(() => {
-    console.log("mongo connection open");
+    console.log("MongoDB connection open");
   })
   .catch((err) => {
-    console.log("error connecting to mongo: " + err);
+    console.log("Error connecting to MongoDB: " + err);
   });
