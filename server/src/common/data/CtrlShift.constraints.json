@@ -441,13 +441,6 @@
     "employeeId": "4c0a8029"
   },
   {
-    "_id": "6480c18bbbcd95acbaaacd28",
-    "level": "1",
-    "description": "",
-    "shiftId": "6480b3fb423119018d3c029b",
-    "employeeId": "4c0a8029"
-  },
-  {
     "_id": "6480c18ebbcd95acbaaacd2b",
     "level": "1",
     "description": "",
@@ -473,13 +466,6 @@
     "level": "1",
     "description": "",
     "shiftId": "6453e16fc198be30bb3a48b2",
-    "employeeId": "14585c78"
-  },
-  {
-    "_id": "6480c759bbcd95acbaaad722",
-    "level": "1",
-    "description": "",
-    "shiftId": "6480b3fb423119018d3c0287",
     "employeeId": "14585c78"
   },
   {
@@ -634,13 +620,6 @@
     "level": "1",
     "description": "",
     "shiftId": "6480b3fb423119018d3c02c7",
-    "employeeId": "ab945ba2"
-  },
-  {
-    "_id": "6480c81dbbcd95acbaaae628",
-    "level": "1",
-    "description": "",
-    "shiftId": "6480b3fb423119018d3c02cb",
     "employeeId": "ab945ba2"
   },
   {
@@ -880,13 +859,6 @@
     "description": "",
     "shiftId": "6480b3fb423119018d3c0297",
     "employeeId": "b8738a28"
-  },
-  {
-    "_id": "6482c54137496d4ac5c16e20",
-    "level": "1",
-    "description": "",
-    "shiftId": "6480b3fb423119018d3c027f",
-    "employeeId": "e7a83588"
   },
   {
     "_id": "6482c54337496d4ac5c16e23",
