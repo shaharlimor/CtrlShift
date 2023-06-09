@@ -699,19 +699,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -726,19 +726,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["c092905e"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -753,19 +753,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["c092905e", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -780,23 +780,24 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588", "4c0a8029"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
   },
+
   {
     "_id": "6482275eb42a060e92b21799",
     "organization": "test",
@@ -807,19 +808,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["c092905e", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -834,23 +835,24 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
   },
+
   {
     "_id": "6482275eb42a060e92b217a1",
     "organization": "test",
@@ -861,23 +863,24 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
   },
+
   {
     "_id": "6482275eb42a060e92b217a5",
     "organization": "test",
@@ -888,23 +891,24 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["c092905e"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
   },
+
   {
     "_id": "6482275eb42a060e92b217a9",
     "organization": "test",
@@ -915,23 +919,24 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
   },
+
   {
     "_id": "6482275eb42a060e92b217ad",
     "organization": "test",
@@ -942,23 +947,24 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029", "ab945ba2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
   },
+
   {
     "_id": "6482275eb42a060e92b217b1",
     "organization": "test",
@@ -969,19 +975,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["c092905e", "e7a83588"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -996,19 +1002,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["c092905e", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1023,19 +1029,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1050,19 +1056,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["d0e0e9d2", "4c0a8029"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1077,19 +1083,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["d0e0e9d2", "ab945ba2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1104,19 +1110,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1131,19 +1137,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["c092905e"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1158,19 +1164,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1185,19 +1191,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["c092905e"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1212,19 +1218,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["c092905e"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1239,19 +1245,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["c092905e", "e7a83588"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1266,19 +1272,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1293,19 +1299,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["4c0a8029"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["d0e0e9d2", "ab945ba2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1320,19 +1326,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1347,19 +1353,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "648068e70b1463ad57c7b36d"
       },
       {
         "roleType": "Shift manager",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "648068e70b1463ad57c7b36e"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2", "d0e0e9d2"],
         "_id": "648068e70b1463ad57c7b36f"
       }
     ]
@@ -1374,19 +1380,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["c092905e"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1401,19 +1407,19 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "644551d527d00a0ff0454019"
       },
       {
         "roleType": "Bartender",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["b8738a28"],
         "_id": "644551d527d00a0ff045401a"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["d0e0e9d2"],
         "_id": "644551d527d00a0ff045401b"
       }
     ]
@@ -1428,13 +1434,13 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["14585c78"],
         "_id": "6482281bb42a060e92b21ac6"
       },
       {
         "roleType": "Waiter",
         "amount": 2,
-        "employeeIds": [],
+        "employeeIds": ["ab945ba2", "c092905e"],
         "_id": "6482281bb42a060e92b21ac7"
       }
     ]
@@ -1449,13 +1455,13 @@
       {
         "roleType": "Chef",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["7a01d3e1"],
         "_id": "64822885b42a060e92b21b6f"
       },
       {
         "roleType": "Waiter",
         "amount": 1,
-        "employeeIds": [],
+        "employeeIds": ["e7a83588"],
         "_id": "64822885b42a060e92b21b70"
       }
     ]

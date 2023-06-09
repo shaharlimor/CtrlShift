@@ -74,7 +74,6 @@ const insertData = async (req, res) => {
       const Model = require(`../models/${collection}`);
       insertedData[collection] = await Model.insertMany(data);
     }
-
     return insertedData;
   } catch (error) {
     throw error.message;
