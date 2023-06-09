@@ -38,6 +38,7 @@ const deleteData = async () => {
       "c092905e",
       "d0e0e9d2",
       "7a01d3e1",
+      "e7a83588",
     ];
     await User.deleteMany({
       _id: { $nin: remainUsers.map((id) => id.toString()) },

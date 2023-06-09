@@ -47,7 +47,7 @@
     "email": "c@c.com",
     "password": "$2b$10$/MIvpPtxHw2kOx8DoD13LuPbk/cj0I.LGp3aDgb5zd4pr2HtfBKgW",
     "organization": "test",
-    "role_types": ["Chef"],
+    "role_types": ["Chef", "Shift manager"],
     "tokens": [
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4MzgwMzc1Nn0.3bmBW0Ffh83eM5a3ltCzZ-_aa05HiDM3gMGVBGMrhCM",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDU4NWM3OCIsImlhdCI6MTY4NDc1ODE4N30.A9raLz2u_G_iS581dYZhxEuJlmqx1sADzxc6BApFmuI",
@@ -102,5 +102,19 @@
     "role_types": ["Chef"],
     "isAdmin": false,
     "tokens": []
+  },
+  {
+    "_id": "e7a83588",
+    "firstName": "Sean",
+    "lastName": "Kingston",
+    "email": "sean@k.com",
+    "phone": "0536213598",
+    "password": "$2a$10$RSomLpHOGNcl64by3dvdX.PXzj0ITC6IvvidQu9/iPQbqr9yvbMHa",
+    "organization": "test",
+    "role_types": ["Waiter"],
+    "isAdmin": false,
+    "tokens": [
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJlN2E4MzU4OCIsImlhdCI6MTY4NjI5MTY2NX0.MliHcUw3c98unlS4WHZf4sJcqMiwx5njWLp4bamMOUQ"
+    ]
   }
 ]
