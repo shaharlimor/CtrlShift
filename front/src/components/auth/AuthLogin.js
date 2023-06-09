@@ -1,22 +1,8 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-// material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-    Box,
-    Button,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    FormHelperText,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    Stack,
-    Typography
-} from '@mui/material';
+import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 
 // third party
 import * as Yup from 'yup';
@@ -35,7 +21,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const JWTLogin = ({ loginProp, ...others }) => {
     const theme = useTheme();
     const scriptedRef = useScriptRef();
-    const [checked, setChecked] = useState(true);
     const navigate = useNavigate();
     const { login } = useAuth();
 

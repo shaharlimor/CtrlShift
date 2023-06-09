@@ -179,7 +179,7 @@ const EmployeeForm = (props) => {
                                 name="password"
                                 value={selectedUser ? '****' : formik.values.password}
                                 onChange={formik.handleChange}
-                                type="text"
+                                type="password"
                                 error={formik.touched.password && Boolean(formik.errors.password)}
                                 helperText={formik.touched.password && formik.errors.password}
                             />

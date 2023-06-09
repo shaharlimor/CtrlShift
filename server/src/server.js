@@ -29,7 +29,6 @@ app.use("/insertData", require("./routes/data"));
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
-
 const mongoDB =
   "mongodb+srv://guest_user:Aa123456@cluster0.emt0ekc.mongodb.net/?retryWrites=true&w=majority";
 mongoose
