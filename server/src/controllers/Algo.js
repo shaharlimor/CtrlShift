@@ -108,27 +108,28 @@ const scheduleShifts = async (monthlyShifts, users, constraints) => {
   const removeFromShifts = (shift, user) => {
     const newShifts = [];
 
-    shifts.forEach(theShifts => {
-      theShifts.shifts.forEach(theShift => {
+    for (let i = shifts.length - 1; i >= 0; i--) {
+      const theShifts = shifts[i];
+      for (let j = theShifts.shifts.length - 1; j >= 0; j--) {
+        const theShift = theShifts.shifts[j];
         if (user.role_types.includes(theShift.roleType)) {
           if (theShift.possibleEmployees.some(employee => employee._id === user._id)) {
             if (theShift.startTime.toISOString().split("T")[0] == shift.startTime.toISOString().split("T")[0]) {
               theShift.possibleEmployees = theShift.possibleEmployees.filter(employee => employee._id !== user._id);
               usersWeight.get(user._id).potential -= 1;
               newShifts.push(theShift);
-
+    
               if (theShifts.shifts.length === 1) {
-                const index = shifts.indexOf(theShifts);
-                shifts.splice(index, 1);
+                shifts.splice(i, 1);
               } else {
-                const index = theShifts.shifts.indexOf(theShift);
-                theShifts.shifts.splice(index, 1);
+                theShifts.shifts.splice(j, 1);
               }
             }
           }
         }
-      });
-    });
+      }
+    }
+    
 
     newShifts.forEach(theShift => {
       createShiftObject(shifts, theShift)
