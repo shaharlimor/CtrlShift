@@ -10,6 +10,7 @@ const swaggerDefinition = require("./swagger");
 
 const hostname = "localhost";
 const port = process.env.PORT || 3001;
+
 const app = express();
 const corsOptions = {
   origin: "*",
