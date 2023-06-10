@@ -40,7 +40,6 @@ const Profile = () => {
     const test = async () => {
         updateUserDetails(email, firstName, lastName, phone)
             .then((res) => {
-                console.log(res.data.user);
                 setUser(res.data.user);
             })
             .catch((err) => {
