@@ -16,7 +16,7 @@ function createData(roleType) {
 
 // TODO: get events by props / from server
 // eslint-disable-next-line
-const rows = [createData('Day waiter'), createData('Day chef'), createData('Shift supervisor'), createData('Bartender')];
+const rows = [createData('Day waiter'), createData('Day Chef'), createData('Shift supervisor'), createData('Bartender')];
 
 export default function RoleTypesList(props) {
     const { handleEdit } = props;

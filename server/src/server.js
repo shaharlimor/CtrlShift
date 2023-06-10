@@ -51,15 +51,15 @@ app.use("/notifications", require("./routes/notifications"));
 app.use("/constraints", require("./routes/constraints"));
 app.use("/monthlyShifts", require("./routes/monthlyShifts"));
 app.use("/permanentShifts", require("./routes/permanentShifts"));
-app.use("/schedule", require("./routes/schedule"));
+app.use("/schedule", require("./routes/schedules"));
 app.use("/user", require("./routes/user"));
 app.use("/roleTypes", require("./routes/roleTypes"));
 app.use("/swapRequests", require("./routes/swapRequests"));
+app.use("/insertData", require("./routes/data"));
 
 app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
-
 const mongoDB =
   "mongodb+srv://guest_user:Aa123456@cluster0.emt0ekc.mongodb.net/?retryWrites=true&w=majority";
 mongoose
