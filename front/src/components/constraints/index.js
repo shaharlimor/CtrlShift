@@ -47,8 +47,7 @@ const Constrainsts = () => {
 
     useEffect(() => {
         const getShifts = async () => {
-            // const result = await getMonthlyShiftsOpenToConstraintsByRoles(user.organization, user.role_types);
-            const result = await getMonthlyShiftsOpenToConstraints(user.organization);
+            const result = await getMonthlyShiftsOpenToConstraintsByRoles(user.organization, user.role_types);
             let parsedData = [];
             result.data.map(async (item) =>
                 parsedData.push({
