@@ -12,6 +12,108 @@ var router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     RegisterRequest:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The ID of the user.
+ *         firstName:
+ *           type: string
+ *           description: The first name of the user.
+ *         lastName:
+ *           type: string
+ *           description: The last name of the user.
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The email address of the user.
+ *         password:
+ *           type: string
+ *           description: The password of the user.
+ *         organization:
+ *           type: string
+ *           description: The organization the user belongs to.
+ *         isAdmin:
+ *           type: boolean
+ *           description: Indicates if the user is an admin.
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     LoginRequest:
+ *      type: object
+ *      properties:
+ *         email:
+ *           type: string
+ *           description: The email of the user.
+ *         password:
+ *           type: string
+ *           description: The password of the user.  
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     RefreshTokenResponse:
+ *      type: object
+ *      properties:
+ *         refrershToken:
+ *           type: string
+ *           description: The refresh token of the user.  
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The ID of the user.
+ *         firstName:
+ *           type: string
+ *           description: The first name of the user.
+ *         lastName:
+ *           type: string
+ *           description: The last name of the user.
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The email address of the user.
+ *         phone:
+ *           type: string
+ *           description: The phone number of the user.
+ *         password:
+ *           type: string
+ *           description: The password of the user.
+ *         organization:
+ *           type: string
+ *           description: The organization the user belongs to.
+ *         role_types:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: The role types assigned to the user.
+ *         isAdmin:
+ *           type: boolean
+ *           description: Indicates if the user is an admin.
+ *         tokens:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: The authentication tokens associated with the user.
+ */
+
+/**
+ * @swagger
  * /auth/login:
  *   post:
  *     summary: User login
