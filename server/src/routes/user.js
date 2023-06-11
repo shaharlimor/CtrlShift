@@ -13,6 +13,39 @@ const upload = multer({
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *         firstName:
+ *           type: string
+ *         lastName:
+ *           type: string
+ *         email:
+ *           type: string
+ *         phone:
+ *           type: string
+ *         password:
+ *           type: string
+ *         organization:
+ *           type: string
+ *         role_types:
+ *           type: array
+ *           items:
+ *             type: string
+ *         isAdmin:
+ *           type: boolean
+ *         tokens:
+ *           type: array
+ *           items:
+ *             type: string
+ */
+
+/**
+ * @swagger
  * tags:
  *   name: User
  *   description: API endpoints for user operations
@@ -194,10 +227,14 @@ router.post("/changePassword", middleware, userController.changePassword);
  *       '500':
  *         description: Error with getting employee details
  */
-router.get(
-  "/getEmployeesDetails/:ids",
-  middleware,
-  userController.getEmployeesDetails
-);
+router.get("/getEmployeesDetails/:ids", middleware, async (req, res) => {
+  try {
+    const idsSplitted = req.params.ids.split(",");
+    const ans = await userController.getEmployeesDetails(idsSplitted);
+    res.status(200).send(ans);
+  } catch (err) {
+    res.status(500).send("Error with getting employess details");
+  }
+});
 
 module.exports = router;

@@ -133,7 +133,7 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
                     employees.map((emp) => (
                         /*eslint-disable */
                         <Grid key={emp.id} item xs={4}>
-                            <Grid container spacing={2} alignItems="center">
+                            <Grid container spacing={2} sx={{ mb: 1.5 }} alignItems="center">
                                 <Grid key={emp.LastName} item>
                                     <Avatar
                                         alt={emp.firstName}
@@ -152,7 +152,7 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
                         </Grid>
                     ))}
             </Grid>
-            <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
+            <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
                 <Typography align="center" component="div" variant="h4">
                     {missingRoles.length !== 0 ? 'Missing employees: ' + missingRoles : 'Change Assigment'}
                 </Typography>

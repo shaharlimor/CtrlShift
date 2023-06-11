@@ -1,0 +1,1234 @@
+[
+  {
+    "_id": "6445554027d00a0ff045432e",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045402e",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445554227d00a0ff0454331",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454034",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445554527d00a0ff0454334",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045403f",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445554827d00a0ff0454337",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454043",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445554a27d00a0ff045433a",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045405e",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445554c27d00a0ff045433d",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454070",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445554e27d00a0ff0454340",
+    "level": "1",
+    "description": "",
+    "shiftId": "6445537127d00a0ff045415c",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445555027d00a0ff0454343",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045407a",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445555127d00a0ff0454346",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454069",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6445564b27d00a0ff045442c",
+    "level": "3",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045407a",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6445564f27d00a0ff045442f",
+    "level": "4",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045407e",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6445565427d00a0ff0454432",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045403b",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6445565627d00a0ff0454435",
+    "level": "1",
+    "description": "",
+    "shiftId": "6445528127d00a0ff04540c6",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6445565827d00a0ff0454438",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045403f",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6445568b27d00a0ff04544d0",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454046",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6445568d27d00a0ff04544d3",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045405e",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6445568f27d00a0ff04544d6",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454065",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6445569127d00a0ff04544d9",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454070",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6445569227d00a0ff04544dc",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045403b",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6445569527d00a0ff04544df",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045407a",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6445569727d00a0ff04544e2",
+    "level": "1",
+    "description": "",
+    "shiftId": "644552ce27d00a0ff045410d",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "644556d727d00a0ff045460b",
+    "level": "5",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045406d",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "644556da27d00a0ff045460e",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045407a",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "644556dd27d00a0ff0454611",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454069",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "644556df27d00a0ff0454614",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045405e",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "644556e127d00a0ff0454617",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454050",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "644556e327d00a0ff045461a",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045402e",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "644556e527d00a0ff045461d",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045403f",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6445570127d00a0ff045466c",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045407e",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570227d00a0ff045466f",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454069",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570427d00a0ff0454672",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454050",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570527d00a0ff0454675",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454046",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570727d00a0ff0454678",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454070",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570827d00a0ff045467b",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454076",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570a27d00a0ff045467e",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045403b",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6445570c27d00a0ff0454681",
+    "level": "1",
+    "description": "",
+    "shiftId": "644551e127d00a0ff045402e",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "644ad990ab29f6fbf248ebeb",
+    "level": "1",
+    "description": "cant",
+    "shiftId": "644551e127d00a0ff0454034",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6452990874a50442f4224cc2",
+    "level": "1",
+    "description": "hhhh",
+    "shiftId": "644551e127d00a0ff0454037",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6452b428a2d406b8b817c76c",
+    "level": "2",
+    "description": "",
+    "shiftId": "644551e127d00a0ff0454049",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6452bbbea2d406b8b817d34e",
+    "level": "3",
+    "description": "",
+    "shiftId": "6445528127d00a0ff04540c6",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6453e196c198be30bb3a4a59",
+    "level": "2",
+    "description": "sa",
+    "shiftId": "6453e16fc198be30bb3a4891",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6456508361895a22b56f2831",
+    "level": "1",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab54",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6456508761895a22b56f2834",
+    "level": "3",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab5f",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6456509561895a22b56f29f3",
+    "level": "5",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab7b",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "645f36aecc7886b88efcb5d6",
+    "level": "1",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab4e",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6464d4cf53a38b3878ddef81",
+    "level": "3",
+    "description": "vacation",
+    "shiftId": "6464d2ff53a38b3878dde093",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6464d4d953a38b3878ddef84",
+    "level": "1",
+    "description": "test",
+    "shiftId": "6464d2ff53a38b3878dde0c4",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6464d4e153a38b3878ddef87",
+    "level": "1",
+    "description": "test",
+    "shiftId": "6464d2ff53a38b3878dde0d8",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6464d4e853a38b3878ddef8a",
+    "level": "1",
+    "description": "test",
+    "shiftId": "6464d2ff53a38b3878dde0ad",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6464d51853a38b3878ddf212",
+    "level": "1",
+    "description": "test",
+    "shiftId": "6464d2ff53a38b3878dde099",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6464d51c53a38b3878ddf215",
+    "level": "1",
+    "description": "test",
+    "shiftId": "6464d2ff53a38b3878dde0ad",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6464d52453a38b3878ddf218",
+    "level": "1",
+    "description": "test",
+    "shiftId": "6464d2ff53a38b3878dde09f",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6464d52853a38b3878ddf21b",
+    "level": "1",
+    "description": "",
+    "shiftId": "6464d2ff53a38b3878dde0ff",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6464d52b53a38b3878ddf21e",
+    "level": "1",
+    "description": "",
+    "shiftId": "6464d2ff53a38b3878dde117",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "646514159f9645f128337f69",
+    "level": "1",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab78",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "646514179f9645f128337f6c",
+    "level": "1",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab74",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "646514199f9645f128337f6f",
+    "level": "1",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab69",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6465141b9f9645f128337f72",
+    "level": "1",
+    "description": "",
+    "shiftId": "64523a41d68a6fa4647cab54",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c14ebbcd95acbaaac735",
+    "level": "3",
+    "description": "very urgent",
+    "shiftId": "6453e16fc198be30bb3a48b2",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c15bbbcd95acbaaac8d3",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48bb",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c15ebbcd95acbaaac8d6",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0273",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c160bbcd95acbaaac8d9",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0267",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c18abbcd95acbaaacd25",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02a7",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c18ebbcd95acbaaacd2b",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02cb",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c19fbbcd95acbaaacec9",
+    "level": "2",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0297",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6480c753bbcd95acbaaad71c",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48b5",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c755bbcd95acbaaad71f",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48b2",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c75abbcd95acbaaad725",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c028b",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c764bbcd95acbaaad8c3",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c029f",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c768bbcd95acbaaad8c6",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c029b",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c769bbcd95acbaaad8c9",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02a7",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c770bbcd95acbaaad8cc",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02c7",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c773bbcd95acbaaad8cf",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02c3",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c780bbcd95acbaaada6d",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0297",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6480c79dbbcd95acbaaaddea",
+    "level": "4",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c027f",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7a0bbcd95acbaaadded",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c028f",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7a1bbcd95acbaaaddf0",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c029f",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7a6bbcd95acbaaaddf3",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48b5",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7a9bbcd95acbaaaddf6",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02a3",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7acbbcd95acbaaaddf9",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b561423119018d3c0659",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7afbbcd95acbaaaddfc",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02d3",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7bebbcd95acbaaadf9a",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0263",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6480c7e1bbcd95acbaaae1c1",
+    "level": "3",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c027f",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c7e4bbcd95acbaaae1c4",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0297",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c7e5bbcd95acbaaae1c7",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0273",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c7e8bbcd95acbaaae1ca",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02af",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c7ebbbcd95acbaaae1cd",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48b2",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c7f8bbcd95acbaaae36b",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c029f",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c803bbcd95acbaaae509",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02c7",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6480c921bbcd95acbaaaea55",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b4e8423119018d3c052e",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c934bbcd95acbaaaea5e",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c027b",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c940bbcd95acbaaaea67",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c028f",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c948bbcd95acbaaaea73",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c029b",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c952bbcd95acbaaaea79",
+    "level": "5",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02d3",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c95abbcd95acbaaaea7f",
+    "level": "2",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02cf",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c964bbcd95acbaaaea88",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b561423119018d3c0659",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c973bbcd95acbaaaea9a",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48b8",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c975bbcd95acbaaaea9d",
+    "level": "1",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48bb",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c97bbbcd95acbaaaeaa3",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c026f",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c980bbcd95acbaaaeaa9",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0287",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c981bbcd95acbaaaeaac",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c028b",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c98fbbcd95acbaaaec4d",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02bf",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c994bbcd95acbaaaec50",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02c3",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6480c9d8bbcd95acbaaaf0e9",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b4e8423119018d3c052e",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca0dbbcd95acbaaaf0f2",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02b3",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca18bbcd95acbaaaf0f8",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02d3",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca24bbcd95acbaaaf0fb",
+    "level": "4",
+    "description": "",
+    "shiftId": "6453e16fc198be30bb3a48b2",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca31bbcd95acbaaaf107",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0283",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca39bbcd95acbaaaf10d",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c027f",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca41bbcd95acbaaaf116",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0277",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca43bbcd95acbaaaf119",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0273",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca55bbcd95acbaaaf2bd",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02a3",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca57bbcd95acbaaaf2c0",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02a7",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca6ebbcd95acbaaaf2cf",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c028f",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca83bbcd95acbaaaf476",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0263",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ca84bbcd95acbaaaf479",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c027b",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6480ccdbbbcd95acbaaaf841",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c027f",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6480ccdfbbcd95acbaaaf844",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c029f",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6480cce3bbcd95acbaaaf847",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0267",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6480cce7bbcd95acbaaaf84a",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0263",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6480cceebbcd95acbaaaf9e8",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02c7",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6480ccf0bbcd95acbaaaf9eb",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02cb",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6480ccf3bbcd95acbaaaf9ee",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0297",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482c54337496d4ac5c16e23",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0297",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c54737496d4ac5c16e26",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c02a7",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c54b37496d4ac5c16e29",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b3fb423119018d3c0277",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c55e37496d4ac5c16f77",
+    "level": "1",
+    "description": "",
+    "shiftId": "6480b561423119018d3c0659",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c9356332529698443fd1",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b2179d",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6482c9376332529698443fd4",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217a1",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6482c93b6332529698443fd7",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482281bb42a060e92b21ac5",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6482c94b6332529698444124",
+    "level": "3",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217a9",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6482c95a6332529698444271",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217f5",
+    "employeeId": "4c0a8029"
+  },
+  {
+    "_id": "6482c97f6332529698444653",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e9",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c9806332529698444656",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217ad",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c9826332529698444659",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21791",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c984633252969844465c",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217d9",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c98b63325296984447a9",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217b5",
+    "employeeId": "e7a83588"
+  },
+  {
+    "_id": "6482c9be6332529698444a4b",
+    "level": "3",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217b5",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6482c9c76332529698444a4e",
+    "level": "3",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e5",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6482c9cb6332529698444a51",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217fd",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6482c9d66332529698444b9e",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b2178d",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6482c9d86332529698444ba1",
+    "level": "1",
+    "description": "",
+    "shiftId": "64822885b42a060e92b21b6e",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6482c9e26332529698444cee",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21795",
+    "employeeId": "ab945ba2"
+  },
+  {
+    "_id": "6482cae76332529698445186",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21791",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482cae96332529698445189",
+    "level": "1",
+    "description": "",
+    "shiftId": "64822885b42a060e92b21b6e",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482caef633252969844518f",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e1",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482cafa6332529698445195",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217ed",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482cb1663325296984452eb",
+    "level": "4",
+    "description": "Wedding",
+    "shiftId": "6482275eb42a060e92b217b1",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482cb296332529698445438",
+    "level": "3",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217b9",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482cb326332529698445588",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e5",
+    "employeeId": "14585c78"
+  },
+  {
+    "_id": "6482cb4a63325296984456df",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217dd",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cb4b63325296984456e2",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217d9",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cb4e63325296984456e5",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e1",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cb5c63325296984456f7",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482281bb42a060e92b21ac5",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cb5e63325296984456fa",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21791",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cb72633252969844584d",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217a1",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cb736332529698445850",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217a5",
+    "employeeId": "b8738a28"
+  },
+  {
+    "_id": "6482cbfb6332529698445ba3",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217ed",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cbfd6332529698445ba6",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217f1",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cc086332529698445cf6",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217bd",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cc166332529698445cfc",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21795",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cc206332529698445d05",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217cd",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cc2e6332529698445db5",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217fd",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cc3f6332529698445f08",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21785",
+    "employeeId": "c092905e"
+  },
+  {
+    "_id": "6482cc62633252969844610a",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21795",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6482cc64633252969844610d",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217b1",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6482cc696332529698446113",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217d5",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6482cc6b6332529698446116",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217f1",
+    "employeeId": "d0e0e9d2"
+  },
+  {
+    "_id": "6482ce246332529698446325",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e9",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce2c6332529698446331",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21785",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce2d6332529698446334",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b2178d",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce466332529698446487",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482281bb42a060e92b21ac5",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce506332529698446493",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217e1",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce576332529698446499",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b217f5",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce6263325296984464a2",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b2179d",
+    "employeeId": "7a01d3e1"
+  },
+  {
+    "_id": "6482ce8763325296984467f7",
+    "level": "1",
+    "description": "",
+    "shiftId": "6482275eb42a060e92b21785",
+    "employeeId": "4c0a8029"
+  }
+]

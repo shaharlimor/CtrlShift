@@ -53,12 +53,15 @@ const SwitchTab = ({ event, onCancel }) => {
         const fetchData = async () => {
             const roleType = handleUserShift();
 
-            if (roleType !== null) {
+            if (roleType !== null && event.roles && event.roles.length > 0) {
                 const shiftsResponse = await getShiftsByRoleType(roleType, event.start);
                 const roleShiftsData = shiftsResponse.data;
 
-                // eslint-disable-next-line
-                const filteredShifts = roleShiftsData.filter((shift) => shift.employeeId !== user._id);
+                const filteredShifts = roleShiftsData.filter((shift) => {
+                    const hasShiftRole = event.roles.some((role) => role.employeeIds.includes(shift.employeeId));
+
+                    return !hasShiftRole;
+                });
 
                 setRoleShifts(filteredShifts);
             }
@@ -84,8 +87,8 @@ const SwitchTab = ({ event, onCancel }) => {
             return result;
         }, []);
 
-        swapRequests.forEach(request => {
-            createSwapRequest(request)
+        swapRequests.forEach((request) => {
+            createSwapRequest(request);
         });
 
         onCancel();

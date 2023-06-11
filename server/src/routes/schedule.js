@@ -12,246 +12,6 @@ const {
 
 var router = express.Router();
 
-/**
- * @swagger
- * tags:
- *   name: Schedule
- *   description: API endpoints for managing schedules
- */
-
-/**
- * @swagger
- * /schedule:
- *   get:
- *     summary: Get all schedules
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Successful response with schedules
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Schedule'
- *       500:
- *         description: Internal server error
- *
- *   post:
- *     summary: Create a new schedule
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Schedule'
- *     responses:
- *       200:
- *         description: Successful response with the new schedule
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Schedule'
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /schedule/startInsertConstraints:
- *   patch:
- *     summary: Change the "isOpenToConstraints" status to true for a specific schedule
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               organization:
- *                 type: string
- *               month:
- *                 type: number
- *               year:
- *                 type: number
- *     responses:
- *       200:
- *         description: Successful response with the updated schedule
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Schedule'
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /schedule/publishBoard:
- *   patch:
- *     summary: Change the "isPublished" status to true for a specific schedule
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               organization:
- *                 type: string
- *               month:
- *                 type: number
- *               year:
- *                 type: number
- *     responses:
- *       200:
- *         description: Successful response with the updated schedule
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Schedule'
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /schedule/openToConstraints:
- *   get:
- *     summary: Check if a specific schedule is open to insert constraints
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: organization
- *         schema:
- *           type: string
- *         required: true
- *         description: The organization of the schedule
- *       - in: query
- *         name: month
- *         schema:
- *           type: number
- *         required: true
- *         description: The month of the schedule
- *       - in: query
- *         name: year
- *         schema:
- *           type: number
- *         required: true
- *         description: The year of the schedule
- *     responses:
- *       200:
- *         description: Successful response indicating if the schedule is open to insert constraints
- *         content:
- *           application/json:
- *             schema:
- *               type: boolean
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /schedule/employessAssigned:
- *   patch:
- *     summary: Change the "employessAssigned" status for a specific schedule
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               organization:
- *                 type: string
- *               month:
- *                 type: number
- *               year:
- *                 type: number
- *               changeTo:
- *                 type: boolean
- *     responses:
- *       200:
- *         description: Successful response with the updated schedule
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Schedule'
- *       500:
- *         description: Internal server error
- *
- *   get:
- *     summary: Check if employees are assigned for a specific schedule
- *     tags: [Schedule]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: organization
- *         schema:
- *           type: string
- *         required: true
- *         description: The organization of the schedule
- *       - in: query
- *         name: month
- *         schema:
- *           type: number
- *         required: true
- *         description: The month of the schedule
- *       - in: query
- *         name: year
- *         schema:
- *           type: number
- *         required: true
- *         description: The year of the schedule
- *     responses:
- *       200:
- *         description: Successful response indicating if employees are assigned
- *         content:
- *           application/json:
- *             schema:
- *               type: boolean
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     Schedule:
- *       type: object
- *       properties:
- *         organization:
- *           type: string
- *         month:
- *           type: number
- *         year:
- *           type: number
- *         isPublished:
- *           type: boolean
- *         isOpenToConstraints:
- *           type: boolean
- *         employessAssigned:
- *           type: boolean
- */
-
 router.get("/", middleware, async (req, res) => {
   try {
     const schedules = await getSchedules();
@@ -265,13 +25,13 @@ router.post("/", middleware, async (req, res) => {
   try {
     const newSche = new Schedule(req.body);
     const result = await newSche.save();
-    res.send(result);
+    res.send("success adding new schedule " + result);
   } catch (err) {
     res.send("error adding new schedule. error: " + err);
   }
 });
 
-router.patch("/startInsertConstraints", middleware, async (req, res) => {
+router.patch("/startInsertConstraints/", middleware, async (req, res) => {
   try {
     const result = await changeOpenToConstraints(
       req.body.organization,
@@ -284,7 +44,7 @@ router.patch("/startInsertConstraints", middleware, async (req, res) => {
   }
 });
 
-router.patch("/publishBoard", middleware, async (req, res) => {
+router.patch("/publishBoard/", middleware, async (req, res) => {
   try {
     const result = await changePublish(
       req.body.organization,
@@ -300,9 +60,9 @@ router.patch("/publishBoard", middleware, async (req, res) => {
 router.get("/openToConstraints", middleware, async (req, res) => {
   try {
     const ans = await boardOpenToConstraints(
-      req.query.organization,
-      req.query.month,
-      req.query.year
+      req.body.organization,
+      req.body.month,
+      req.body.year
     );
     res.send(ans);
   } catch (err) {
@@ -310,9 +70,9 @@ router.get("/openToConstraints", middleware, async (req, res) => {
   }
 });
 
-router.patch("/employeesAssigned", middleware, async (req, res) => {
+router.patch("/employessAssigned/", async (req, res) => {
   try {
-    const result = await changeEmployeesAssigned(
+    const result = await changeEmployessAssigned(
       req.body.organization,
       req.body.month,
       req.body.year,
@@ -320,11 +80,11 @@ router.patch("/employeesAssigned", middleware, async (req, res) => {
     );
     res.send(result);
   } catch (err) {
-    res.send("Change employees assigned status failed: " + err);
+    res.send("Change generate algorithm status failed: " + err);
   }
 });
 
-router.get("/employeesAssigned", middleware, async (req, res) => {
+router.get("/employessAssigned", async (req, res) => {
   try {
     const ans = await isEmployeesAssigned(
       req.query.organization,
@@ -333,7 +93,7 @@ router.get("/employeesAssigned", middleware, async (req, res) => {
     );
     res.send(ans);
   } catch (err) {
-    res.send("error to check if employees are assigned: " + err);
+    res.send(`error to check if is employees assigned: ` + err);
   }
 });
 

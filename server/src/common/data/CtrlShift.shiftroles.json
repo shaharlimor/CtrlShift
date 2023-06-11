@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "644550ba27d00a0ff0453ffa",
+    "organization": "test",
+    "roleType": "Chef"
+  },
+  {
+    "_id": "644550dd27d00a0ff0453ffd",
+    "organization": "test",
+    "roleType": "Bartender"
+  },
+  {
+    "_id": "644550f727d00a0ff0454000",
+    "organization": "test",
+    "roleType": "Shift manager"
+  },
+  {
+    "_id": "6445510c27d00a0ff0454003",
+    "organization": "test",
+    "roleType": "Waiter"
+  }
+]

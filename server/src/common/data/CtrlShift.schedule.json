@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "6453e16fc198be30bb3a48c8",
+    "organization": "test",
+    "month": 6,
+    "year": 2023,
+    "isPublished": true,
+    "isOpenToConstraints": true,
+    "employessAssigned": true
+  },
+  {
+    "_id": "6453e16fc198be30bb3a48c9",
+    "organization": "test",
+    "month": 7,
+    "year": 2023,
+    "isPublished": false,
+    "isOpenToConstraints": true,
+    "employessAssigned": false
+  }
+]

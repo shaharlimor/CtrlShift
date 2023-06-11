@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "64833affc8d53ced3bdbf61e",
+    "userId": "4c0a8029",
+    "fromId": "14585c78",
+    "message": "<b>Aya Bryl</b> proposed a shift change between <b>Evening Shift at 02/06/23 7:00 pm</b> to <b>Evening Shift at 22/06/23 7:00 pm</b>",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "6482275eb42a060e92b217dd",
+    "date": "2023-06-09T14:45:19.894Z"
+  },
+  {
+    "_id": "64833da0c8d53ced3bdc0690",
+    "userId": "4c0a8029",
+    "fromId": "ab945ba2",
+    "message": "<b>sagi ben mordechai</b> proposed a shift change between <b>Evening Shift at 23/06/23 7:00 pm</b> to <b>Morning Shift at 20/06/23 1:00 pm</b>",
+    "isRead": false,
+    "type": "switch",
+    "switchID": "6482275eb42a060e92b217cd",
+    "date": "2023-06-09T14:56:32.531Z"
+  }
+]

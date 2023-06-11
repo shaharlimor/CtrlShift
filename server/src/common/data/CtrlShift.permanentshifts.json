@@ -1,0 +1,49 @@
+[
+  {
+    "_id": "645cd41531eea8fabe794ab1",
+    "organization": "test",
+    "startTime": "1686045600000",
+    "endTime": "1686063600000",
+    "days": ["Thursday", "Tuesday", "Wednesday", "Sunday"],
+    "name": "Morning Shift",
+    "roles": [
+      {
+        "roleType": "Chef",
+        "amount": 1
+      },
+      {
+        "roleType": "Shift manager",
+        "amount": 1
+      },
+      {
+        "roleType": "Waiter",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "_id": "644551d527d00a0ff0454018",
+    "organization": "test",
+    "startTime": "1686067200000",
+    "endTime": "1686088800000",
+    "days": ["Wednesday", "Thursday", "Friday"],
+    "name": "Evening Shift",
+    "roles": [
+      {
+        "roleType": "Chef",
+        "amount": 1,
+        "_id": "644551d527d00a0ff0454019"
+      },
+      {
+        "roleType": "Bartender",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401a"
+      },
+      {
+        "roleType": "Waiter",
+        "amount": 1,
+        "_id": "644551d527d00a0ff045401b"
+      }
+    ]
+  }
+]

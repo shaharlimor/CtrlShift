@@ -2,7 +2,7 @@ import { lazy, useState, useEffect } from 'react';
 import { Dialog } from '@mui/material';
 
 import useAuth from 'hooks/useAuth';
-import { getMonthlyShiftsOpenToConstraintsByRoles, getConstraintsByUserId } from 'utils/api';
+import { getMonthlyShiftsOpenToConstraintsByRoles, getConstraintsByUserId, getMonthlyShiftsOpenToConstraints } from 'utils/api';
 import { colorGenerator } from 'utils/color-generator';
 
 import Loadable from 'components/Loadable';
