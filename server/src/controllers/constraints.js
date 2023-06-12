@@ -25,14 +25,6 @@ const getConstraintsByEmployeeId = async (id) => {
 };
 
 const getEmployeesWithConstarintsInShift = async (shiftId) => {
-  // const constraints = await getConstraintsByShiftId(shiftId);
-  // console.log(constraints);
-  // const employeeIds = constraints.map((constraint) => constraint.employeeId);
-  // const employees = await User.find(
-  //   { _id: { $in: employeeIds } },
-  //   { firstName: 1, lastName: 1 }
-  // );
-  // return employees;
   const constraints = await getConstraintsByShiftId(shiftId);
   const employeeIds = constraints.map((constraint) => constraint.employeeId);
   const employees = await User.find(

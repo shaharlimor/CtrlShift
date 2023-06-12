@@ -86,7 +86,6 @@ const ShiftTabs = ({ event, onCancel }) => {
                 level: item.level,
                 description: item.description
             }));
-            console.log(parsedData);
             setEmployeesWithConstraints(parsedData);
             parsedData = [];
 

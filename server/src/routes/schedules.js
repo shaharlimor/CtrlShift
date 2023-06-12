@@ -324,7 +324,7 @@ router.patch("/employeesAssigned", middleware, async (req, res) => {
   }
 });
 
-router.get("/employeesAssigned", async (req, res) => {
+router.get("/employeesAssigned", middleware, async (req, res) => {
   try {
     const ans = await isEmployeesAssigned(
       req.query.organization,
