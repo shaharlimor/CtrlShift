@@ -156,7 +156,6 @@ export default function PermenentShiftTableMode(props) {
                     roles: item.roles
                 })
             );
-            console.log(parsedData);
             setShifts(parsedData);
             parsedData = [];
         };
