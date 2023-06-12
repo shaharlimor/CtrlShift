@@ -67,13 +67,14 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
         <Grid item className="add-shift-board-month-button">
             {selectedMonth ? (
                 <Select
-                    sx={{ mt: 1, width: '100%' }}
+                    sx={{ mt: 1, minWidth: '130px' }}
                     size="medium"
                     value={selectedYear}
                     onChange={handleSelectChange}
                     onMouseDown={handleSelectMouseDown}
                     MenuProps={{ disablePortal: true }}
                     ref={selectRef}
+                    renderValue={(selected) => (selected ? `${selected.month} - ${selected.year}` : 'Select a month')}
                 >
                     {monthsWithoutBoard?.map((month, index) => (
                         <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
