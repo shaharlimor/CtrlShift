@@ -138,7 +138,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
 
     return (
         // eslint-disable-next-line
-        <Fragment>
+        <>
             <CalendarStyled>
                 <Toolbar
                     date={date}
@@ -208,7 +208,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                 {/* according to the calendar page display the relevant button */}
                 {displayButton()}
             </Grid>
-        </Fragment>
+        </>
     );
 };
 Calendar.propTypes = {

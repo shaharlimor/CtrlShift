@@ -9,13 +9,12 @@ const Shifts = () => {
     const handleClose = (ans) => {
         setIsModalOpen(ans);
     };
-    /* eslint-disable */
     return (
-        <fragment>
+        <>
             <Tooltip placement="top" title={<Typography fontSize="1.2em">Add new shift to the board</Typography>}>
                 <Button
                     variant="contained"
-                    sx={{ width: '100%' }}
+                    sx={{ width: '100' }}
                     size="large"
                     color="secondary"
                     startIcon={<AddCircleOutlineTwoToneIcon />}
@@ -41,7 +40,7 @@ const Shifts = () => {
                     />
                 )}
             </Dialog>
-        </fragment>
+        </>
     );
 };
 
