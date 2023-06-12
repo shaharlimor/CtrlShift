@@ -40,7 +40,15 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
                 <Select sx={{ mt: 1, width: '100%' }} size="medium" value={selectedYear} onChange={handleSelect}>
                     {monthsWithoutBoard?.map((month, index) => (
                         <MenuItem key={`${month.month}-${month.year}-${index}`} value={month}>
-                            {`${month.month} - ${month.year}`}
+                            <Tooltip
+                                title={
+                                    <Typography fontSize="1.2em">
+                                        Click to build the shift schedule for this month using the permanent shifts
+                                    </Typography>
+                                }
+                            >
+                                <Typography>{`${month.month} - ${month.year}`}</Typography>
+                            </Tooltip>
                         </MenuItem>
                     ))}
                 </Select>
