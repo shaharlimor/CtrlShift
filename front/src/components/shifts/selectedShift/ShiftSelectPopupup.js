@@ -17,8 +17,7 @@ const ShiftSelectPopupup = ({ event, onCancel }) => {
     };
 
     return (
-        // eslint-disable-next-line
-        <Fragment>
+        <>
             <DialogTitle color="primary.800">
                 {event.title} - {new Date(event.start).toLocaleDateString('de-DE')}
             </DialogTitle>
@@ -60,7 +59,7 @@ const ShiftSelectPopupup = ({ event, onCancel }) => {
                     </Button>
                 </Grid>
             </DialogActions>
-        </Fragment>
+        </>
     );
 };
 
