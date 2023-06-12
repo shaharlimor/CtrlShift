@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 
 import { Avatar, CardContent, Grid, Typography, Tooltip } from '@mui/material';
 
-// eslint-disable-next-line
 const ConstraintsTab = ({ employees }) => {
-    /* eslint-disable */
+    // eslint-disable-next-line
     const baseComponent = (emp) => {
         return (
             <Grid container spacing={2} alignItems="center">
@@ -23,11 +22,13 @@ const ConstraintsTab = ({ employees }) => {
         );
     };
 
+    /* eslint-disable */
     const tooltipText = (emp) => {
         if (emp.level !== '1' && emp.description !== '') return 'urgency: ' + emp.level + ' - comment: ' + emp.description;
         else if (emp.level !== '1') return 'urgency: ' + emp.level;
         return 'comment: ' + emp.description;
     };
+    /* eslint-enable */
 
     // eslint-disable-next-line
     return (

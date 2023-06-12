@@ -71,11 +71,11 @@ const SwitchTab = ({ event, onCancel }) => {
     });
 
     const handleSave = async () => {
-        /*eslint-disable */
         const swapRequests = checked.reduce((result, str) => {
             const [employeeId, _id] = str.toString().split('-');
 
             const swapRequest = {
+                // eslint-disable-next-line
                 userId: user._id,
                 shiftId: event.id,
                 requestShiftId: _id,
