@@ -2,8 +2,6 @@ import { Navigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import axios from '../utils/axios';
 
-/* eslint-disable */
-
 export const ProtectedRoute = ({ children, restricedRoute }) => {
     const { refreshStateAccessToken, isLoggedIn, verifyToken, user } = useAuth();
     try {
@@ -15,9 +13,8 @@ export const ProtectedRoute = ({ children, restricedRoute }) => {
                 return <Navigate to="/shifts-board" />;
             }
             return children;
-        } else {
-            return <Navigate to="/login" />;
         }
+        return <Navigate to="/login" />;
     } catch (err) {
         return <Navigate to="/login" />;
     }

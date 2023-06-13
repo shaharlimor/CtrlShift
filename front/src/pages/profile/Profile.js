@@ -28,7 +28,7 @@ const uploadImage = async (file) => {
 };
 
 const Profile = () => {
-    const { user, logout } = useAuth();
+    const { user, logout, setUser } = useAuth();
     const [email, setEmail] = useState(user.email);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
@@ -38,7 +38,13 @@ const Profile = () => {
     const userId = user._id;
 
     const test = async () => {
-        updateUserDetails(email, firstName, lastName, phone);
+        updateUserDetails(email, firstName, lastName, phone)
+            .then((res) => {
+                setUser(res.data.user);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
     };
 
     const [avatarSrc, setAvatarSrc] = useState(`https://controlshift-images.s3.eu-central-1.amazonaws.com/${userId}.png`);

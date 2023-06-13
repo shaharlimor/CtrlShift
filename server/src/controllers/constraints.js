@@ -31,7 +31,24 @@ const getEmployeesWithConstarintsInShift = async (shiftId) => {
     { _id: { $in: employeeIds } },
     { firstName: 1, lastName: 1 }
   );
-  return employees;
+
+  // Map with constraint level and id
+  const employeesWithConstraints = employees
+    .map((employee) => {
+      const employeeConstraints = constraints.filter(
+        (constraint) => constraint.employeeId === employee._id
+      );
+      return employeeConstraints.map((constraint) => ({
+        _id: employee._id,
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        level: constraint.level,
+        description: constraint.description,
+      }));
+    })
+    .flat();
+
+  return employeesWithConstraints;
 };
 
 const employeeHasConstraintInShift = async (userId, shiftId) => {

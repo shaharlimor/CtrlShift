@@ -85,7 +85,7 @@ export async function changeEmployeesInShift(id, body) {
 }
 
 export const employessGeneratedToMonths = async (date, org) => {
-    const response = await axiosServices.get(`/schedule/employessAssigned/`, {
+    const response = await axiosServices.get(`/schedule/employeesAssigned/`, {
         params: {
             organization: org,
             month: (date.getMonth() + 1) % 12,

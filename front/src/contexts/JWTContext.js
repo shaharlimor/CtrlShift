@@ -71,23 +71,6 @@ export const JWTProvider = ({ children }) => {
     const [state, setState] = useReducer(accountReducer, initialState);
     const navigate = useNavigate();
     useEffect(() => {
-        const getUserByRefreshToken = async () => {
-            try {
-                const response = await axiosServices.get('/auth/getUserByRefreshToken');
-                const { user } = response.data;
-                setState({
-                    type: LOGIN,
-                    payload: {
-                        isLoggedIn: true,
-                        user
-                    }
-                });
-            } catch (err) {
-                // eslint-disable-next-line
-                navigateLogin();
-            }
-        };
-
         const refresh = async () => {
             try {
                 // eslint-disable-next-line
@@ -97,7 +80,6 @@ export const JWTProvider = ({ children }) => {
                 navigateLogin();
             }
         };
-
         const init = async () => {
             try {
                 const accessToken = window.localStorage.getItem('accessToken');
@@ -108,6 +90,7 @@ export const JWTProvider = ({ children }) => {
                     setRefreshToken(refreshToken);
 
                     if (verifyToken(accessToken)) {
+                        // eslint-disable-next-line
                         getUserByRefreshToken();
                     } else {
                         refresh();
@@ -124,6 +107,23 @@ export const JWTProvider = ({ children }) => {
 
         init();
     }, []); // eslint-disable-line
+
+    const getUserByRefreshToken = async () => {
+        try {
+            const response = await axiosServices.get('/auth/getUserByRefreshToken');
+            const { user } = response.data;
+            setState({
+                type: LOGIN,
+                payload: {
+                    isLoggedIn: true,
+                    user
+                }
+            });
+        } catch (err) {
+            // eslint-disable-next-line
+            navigateLogin();
+        }
+    };
 
     const navigateLogin = () => {
         setRefreshToken(null);
@@ -213,6 +213,10 @@ export const JWTProvider = ({ children }) => {
         });
     };
 
+    const setUser = () => {
+        getUserByRefreshToken();
+    };
+
     const resetPassword = (email) => console.log(email);
 
     const updateProfile = () => {};
@@ -233,7 +237,8 @@ export const JWTProvider = ({ children }) => {
                 register,
                 resetPassword,
                 updateProfile,
-                verifyToken
+                verifyToken,
+                setUser
             }}
         >
             {children}
