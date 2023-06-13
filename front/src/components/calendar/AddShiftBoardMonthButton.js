@@ -18,8 +18,9 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
         setMonthsWithoutBoard(data);
     }
 
-    async function handleSelect(event) {
+    const handleSelect = async (event) => {
         try {
+            console.log(event);
             await CreateMonthShiftBoard(user.organization, event.target.value.month, event.target.value.year);
             toast.success('Successfully create month!');
         } catch (error) {
@@ -27,7 +28,7 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
         }
 
         setSelectedMonth(false);
-    }
+    };
 
     const handleClickOutside = (event) => {
         if (selectRef.current && !selectRef.current.contains(event.target) && !event.target.classList.contains('MuiButton-label')) {
@@ -70,7 +71,7 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
                     sx={{ mt: 1, minWidth: '130px' }}
                     size="medium"
                     value={selectedYear}
-                    onChange={handleSelectChange}
+                    onChange={handleSelect}
                     onMouseDown={handleSelectMouseDown}
                     MenuProps={{ disablePortal: true }}
                     ref={selectRef}
