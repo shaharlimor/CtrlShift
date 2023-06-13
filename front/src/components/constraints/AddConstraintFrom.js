@@ -3,20 +3,21 @@ import PropTypes from 'prop-types';
 import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { lazy, useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 
 // project imports
 import { gridSpacing } from 'store/constant';
-import { addConstraint, employeeHasConstraintInShift } from 'utils/api';
+import { addConstraint, employeeHasConstraintInShift, employessGeneratedToMonths, deleteConstraint } from 'utils/api';
 import useAuth from 'hooks/useAuth';
 
 // constant
-const getInitialValues = () => {
+const getInitialValues = (event) => {
     const newEvent = {
-        level: '1',
-        comment: ''
+        level: event.constraint ? event.constraint.level : '1',
+        comment: event.constraint ? event.constraint.description : ''
     };
     return newEvent;
 };
@@ -25,10 +26,20 @@ const levelOptions = [1, 2, 3, 4, 5];
 
 const AddConstraintFrom = ({ event, onCancel }) => {
     const { user } = useAuth();
+    const [createConstraintDisable, setCreateConstraintDisable] = useState(false);
     const EventSchema = Yup.object().shape({
         level: Yup.number(),
         comment: Yup.string().max(5000)
     });
+
+    useEffect(() => {
+        const checkEmployessAssignedForMonth = async () => {
+            console.log(event);
+            const result = await employessGeneratedToMonths(event.start, user.organization);
+            setCreateConstraintDisable(result.data);
+        };
+        checkEmployessAssignedForMonth();
+    }, []);
 
     const formik = useFormik({
         initialValues: getInitialValues(event),
@@ -48,6 +59,16 @@ const AddConstraintFrom = ({ event, onCancel }) => {
                     /* eslint-enable */
                     await addConstraint(data);
 
+                    resetForm();
+                    onCancel();
+                    setSubmitting(false);
+                } else {
+                    const data = {
+                        shiftId: event.id,
+                        /* eslint-disable-next-line */
+                        employeeId: user._id
+                    };
+                    await deleteConstraint(data);
                     resetForm();
                     onCancel();
                     setSubmitting(false);
@@ -105,8 +126,14 @@ const AddConstraintFrom = ({ event, onCancel }) => {
                     </DialogContent>
                     <DialogActions sx={{ p: 3 }}>
                         <Grid container justifyContent="center" alignItems="center">
-                            <Button type="submit" variant="contained" color="secondary" sx={{ width: '30%' }}>
-                                Save
+                            <Button
+                                type="submit"
+                                disabled={createConstraintDisable}
+                                variant="contained"
+                                color="secondary"
+                                sx={{ width: '30%' }}
+                            >
+                                {event.constraint ? 'Delete' : 'Save'}
                             </Button>
                         </Grid>
                     </DialogActions>
