@@ -69,9 +69,28 @@ const Shifts = () => {
         setIsModalOpen(true);
     };
 
+    const getAfterGenerate = async () => {
+        const result = await getMonthlyShifts(user.organization);
+        let parsedData = [];
+        result.data.map(async (item) =>
+            parsedData.push({
+                // eslint-disable-next-line
+                id: item._id,
+                color: await colorGenerator(item.startTime.toString()),
+                description: item.name,
+                start: new Date(item.startTime.toString()),
+                end: new Date(item.endTime.toString()),
+                title: item.name,
+                roles: item.roles
+            })
+        );
+        setEvents(parsedData);
+        parsedData = [];
+    };
+
     return (
         <div>
-            <Calendar calendarType={1} events={events} handleEventSelect={handleEventSelect} />
+            <Calendar calendarType={1} events={events} handleEventSelect={handleEventSelect} getAfterGenerate={getAfterGenerate} />
             <Dialog maxWidth="sm" fullWidth onClose={handleModalClose} open={isModalOpen} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
                 {isModalOpen && <ShiftSelectPopupup event={selectedEvent} onCancel={handleModalClose} employess />}
             </Dialog>
