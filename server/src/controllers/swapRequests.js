@@ -23,9 +23,9 @@ const swapEmployeesInShift = async (req, res) => {
 
     // Modify the employeeIds
     shift.roles.forEach((role) => {
-      const index = role.employeeIds.indexOf(notification.userId);
+      const index = role.employeeIds.indexOf(notification.fromId);
       if (index !== -1) {
-        role.employeeIds[index] = notification.requestUserId;
+        role.employeeIds[index] = notification.userId;
       }
     });
 
@@ -45,12 +45,12 @@ const swapEmployeesInShift = async (req, res) => {
       throw new Error('Shift not found');
     }
 
+
     // Modify the employeeIds
     shift.roles.forEach((role) => {
-      const index = role.employeeIds.indexOf(notification.requestUserId);
-      console.log(index)
+      const index = role.employeeIds.indexOf(notification.userId);
       if (index !== -1) {
-        role.employeeIds[index] = notification.userId;
+        role.employeeIds[index] = notification.fromId;
       }
     });
 
@@ -123,7 +123,6 @@ const createSwapRequest = async (req, res) => {
     message: `<b>${currentUser.firstName} ${currentUser.lastName}</b> proposed a shift change between <b>${shift.name} at ${shiftDate}</b> to <b>${requestShift.name} at ${requestShiftDate}</b>`,
     type: "switch",
     shiftId: shiftId,
-    requestUserId: requestShiftId,
     requestShiftId: requestShiftId,
   };
 

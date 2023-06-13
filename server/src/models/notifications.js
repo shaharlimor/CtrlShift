@@ -19,7 +19,6 @@ const notificationSchema = new Schema({
     default: 'notification'
   },
   shiftId: String,
-  requestUserId: String,
   requestShiftId: String,
   routeTo: String
 });
