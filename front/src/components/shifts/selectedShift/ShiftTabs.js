@@ -82,9 +82,10 @@ const ShiftTabs = ({ event, onCancel }) => {
                 // eslint-disable-next-line
                 id: item._id,
                 firstName: item.firstName,
-                lastName: item.lastName
+                lastName: item.lastName,
+                level: item.level,
+                description: item.description
             }));
-
             setEmployeesWithConstraints(parsedData);
             parsedData = [];
 

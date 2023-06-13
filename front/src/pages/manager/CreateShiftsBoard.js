@@ -4,7 +4,6 @@ import Loadable from 'components/Loadable';
 
 const ShiftsComp = Loadable(lazy(() => import('components/shifts')));
 
-/* eslint-disable */
 const CreateShiftsBoard = () => (
     <MainCard title="Manage Your Shifts Board">
         <ShiftsComp />
