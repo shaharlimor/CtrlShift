@@ -102,7 +102,13 @@ const Profile = () => {
                 <SubCard title="Edit Account Details">
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12}>
-                            <TextField onChange={(e) => setEmail(e.target.value)} fullWidth label="Email address" defaultValue={email} />
+                            <TextField
+                                disabled
+                                onChange={(e) => setEmail(e.target.value)}
+                                fullWidth
+                                label="Email address"
+                                defaultValue={email}
+                            />
                         </Grid>
                         <Grid item md={6} xs={12}>
                             <TextField
