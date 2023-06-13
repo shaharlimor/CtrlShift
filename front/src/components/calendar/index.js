@@ -136,31 +136,9 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
         }
     };
 
-    // const eventRender = (info) => {
-    //     console.log(info);
-    //     if (calendarType === 0) {
-    //         const selectEvent = events.find((_event) => _event.id === info.event.id);
-    //         if (selectEvent.constraint) {
-    //             info.po({
-    //                 title: info.event.title,
-    //                 placement: 'top',
-    //                 trigger: 'hover',
-    //                 content: 'selectEvent.constraint.description',
-    //                 container: 'body'
-    //             });
-    //             // const tooltip = new Tooltip(info.event, {
-    //             //     title: selectEvent.constraint.description,
-    //             //     placement: 'top',
-    //             //     trigger: 'hover',
-    //             //     container: 'body'
-    //             // });
-    //         }
-    //     }
-    // };
-
     return (
         // eslint-disable-next-line
-        <>
+        <Fragment>
             <CalendarStyled>
                 <Toolbar
                     date={date}
@@ -230,7 +208,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                 {/* according to the calendar page display the relevant button */}
                 {displayButton()}
             </Grid>
-        </>
+        </Fragment>
     );
 };
 Calendar.propTypes = {

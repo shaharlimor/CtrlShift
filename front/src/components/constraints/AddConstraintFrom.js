@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { lazy, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
@@ -34,7 +34,6 @@ const AddConstraintFrom = ({ event, onCancel }) => {
 
     useEffect(() => {
         const checkEmployessAssignedForMonth = async () => {
-            console.log(event);
             const result = await employessGeneratedToMonths(event.start, user.organization);
             setCreateConstraintDisable(result.data);
         };
