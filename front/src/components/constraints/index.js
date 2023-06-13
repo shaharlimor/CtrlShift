@@ -90,9 +90,19 @@ const Constrainsts = () => {
         setIsModalOpen(true);
     };
 
-    const handleModalClose = () => {
+    const handleModalClose = async () => {
         setIsModalOpen(false);
         setSelectedEvent(null);
+        // eslint-disable-next-line
+        const result = await getConstraintsByUserId(user._id);
+        let parsedData = [];
+        result.data.map(async (item) =>
+            parsedData.push({
+                id: item.shiftId
+            })
+        );
+        setShiftsWithConstraints(parsedData);
+        parsedData = [];
     };
 
     return (
