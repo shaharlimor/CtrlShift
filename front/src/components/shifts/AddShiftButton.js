@@ -3,11 +3,12 @@ import { Dialog, Button, Tooltip, Typography } from '@mui/material';
 import AddShiftFrom from './AddShiftFrom';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
-const Shifts = () => {
+const Shifts = ({ getAfterGenerate }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleClose = (ans) => {
         setIsModalOpen(ans);
+        getAfterGenerate();
     };
     return (
         <>

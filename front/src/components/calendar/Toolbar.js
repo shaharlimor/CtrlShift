@@ -29,7 +29,18 @@ const viewOptions = [
     }
 ];
 
-const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarType, onMyShiftChange, filterMode, ...others }) => {
+const Toolbar = ({
+    date,
+    view,
+    onClickNext,
+    onClickPrev,
+    onChangeView,
+    calendarType,
+    onMyShiftChange,
+    filterMode,
+    getAfterGenerate,
+    ...others
+}) => {
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const [newViewOption, setNewViewOption] = useState(viewOptions);
 
@@ -47,7 +58,7 @@ const Toolbar = ({ date, view, onClickNext, onClickPrev, onChangeView, calendarT
                 <Grid item>
                     {calendarType === 1 ? (
                         <Stack direction="row" alignItems="center" spacing={4}>
-                            <AddShiftButton />
+                            <AddShiftButton getAfterGenerate={getAfterGenerate} />
 
                             <AddShiftBoardMonthButton calendarType={calendarType} />
                         </Stack>
@@ -110,7 +121,8 @@ Toolbar.propTypes = {
     onChangeView: PropTypes.func,
     calendarType: PropTypes.number,
     onMyShiftChange: PropTypes.func,
-    filterMode: PropTypes.bool
+    filterMode: PropTypes.bool,
+    getAfterGenerate: PropTypes.func
 };
 
 export default Toolbar;

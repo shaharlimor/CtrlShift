@@ -22,7 +22,7 @@ import StartInsertConstraintButton from '../shifts/StartInsertConstraint';
 // 0 - Insert Constraints
 // 1 - Manager - Monthly Planner
 // 2 - Shifts Board
-const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeFilteredByMyShifts }) => {
+const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeFilteredByMyShifts, getAfterGenerate }) => {
     const calendarRef = useRef(null);
     const { user } = useAuth();
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -136,9 +136,21 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
         }
     };
 
+    const generateSchedule = async (data) => {
+        await generateScheduleMonthlyShifts(data)
+            .then(() => {
+                getAfterGenerate();
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        const result = await employessGeneratedToMonths(date, user.organization);
+        setCreateSchdualeDisable(result.data);
+    };
+
     return (
         // eslint-disable-next-line
-        <>
+        <Fragment>
             <CalendarStyled>
                 <Toolbar
                     date={date}
@@ -148,6 +160,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                     onClickPrev={handleDatePrev}
                     onChangeView={handleViewChange}
                     onMyShiftChange={handleChangeMyShifts}
+                    getAfterGenerate={getAfterGenerate}
                     calendarType={calendarType}
                 />
                 <SubCard>
@@ -195,7 +208,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                                             sx={{ width: '100%' }}
                                             size="large"
                                             disabled={createSchdualeDisable}
-                                            onClick={() => generateScheduleMonthlyShifts(date)}
+                                            onClick={() => generateSchedule(date)}
                                         >
                                             Create Schedule
                                         </Button>
@@ -208,7 +221,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                 {/* according to the calendar page display the relevant button */}
                 {displayButton()}
             </Grid>
-        </>
+        </Fragment>
     );
 };
 Calendar.propTypes = {
@@ -216,7 +229,8 @@ Calendar.propTypes = {
     handleEventSelect: PropTypes.func,
     calendarType: PropTypes.number,
     changeFilteredByMyShifts: PropTypes.func,
-    filterMode: PropTypes.bool
+    filterMode: PropTypes.bool,
+    getAfterGenerate: PropTypes.func
 };
 
 export default Calendar;
