@@ -152,7 +152,6 @@ const AddShiftFrom = ({ onCancel }) => {
                                                     <Typography variant="subtitle2">Roles</Typography>
                                                     <Select
                                                         fullWidth
-                                                        label="RoleType"
                                                         labelId="select-label"
                                                         value={role.roleType}
                                                         name={`roles[${index}].roleType`}
