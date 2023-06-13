@@ -45,7 +45,7 @@ const EmployeeForm = (props) => {
             .matches(/^[a-zA-Z]+$/, 'First name should contain only letters'),
         lastName: Yup.string()
             .required('Last name is required')
-            .matches(/^[a-zA-Z]+$/, 'Last name should contain only letters'),
+            .matches(/^[a-zA-Z\s-]+$/, 'Last name should contain only letters, spaces, and hyphens'),
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
         password: Yup.string().required('Password is required'),
         phone: Yup.string()
