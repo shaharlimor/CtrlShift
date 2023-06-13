@@ -164,6 +164,7 @@ const EmployeeForm = (props) => {
                                 label="Email"
                                 margin="normal"
                                 name="email"
+                                disabled={selectedUser}
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
                                 type="text"
