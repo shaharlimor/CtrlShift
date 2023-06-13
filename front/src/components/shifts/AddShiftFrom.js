@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
-
-import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, InputAdornment, IconButton } from '@mui/material';
+import { Fragment, useState, useEffect } from 'react';
+// eslint-disable-next-line
+import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, InputAdornment, IconButton, ListItemText, MenuItem, Select } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
@@ -13,10 +13,20 @@ import { useFormik, Form, FormikProvider, Field, FieldArray } from 'formik';
 import { gridSpacing } from 'store/constant';
 import { addMonthlyShift } from 'utils/api';
 import useAuth from 'hooks/useAuth';
+import { getRoleTypesByOrg } from 'utils/roleTypeServices';
 
 const AddShiftFrom = ({ onCancel }) => {
     const { user } = useAuth();
     const theme = useTheme();
+    const [roleTypes, setRoleTypes] = useState([]);
+
+    useEffect(() => {
+        const getRole = async () => {
+            const result = await getRoleTypesByOrg(user.organization);
+            setRoleTypes(result.data);
+        };
+        getRole();
+    }, []);
 
     const ValidationCheck = Yup.object().shape({
         name: Yup.string().max(5000).required('Shift name is required'),
@@ -136,27 +146,30 @@ const AddShiftFrom = ({ onCancel }) => {
                             <FieldArray name="roles">
                                 {({ push, remove }) => (
                                     <>
-                                        {values.roles.map((roles, index) => (
+                                        {values.roles.map((role, index) => (
                                             <Fragment key={index}>
-                                                <Grid item xs={5.3} sm={5.3}>
-                                                    <Field
-                                                        name={`roles[${index}].roleType`}
-                                                        label="Role Type"
-                                                        as={TextField}
+                                                <Grid item xs={5.3} sm={4}>
+                                                    <Select
                                                         fullWidth
+                                                        label="Role Type"
+                                                        labelId="select-label"
+                                                        value={role.roleType}
+                                                        name={`roles[${index}].roleType`}
+                                                        onChange={formik.handleChange}
+                                                        renderValue={(selected) => selected}
                                                         error={Boolean(
-                                                            touched.roles &&
-                                                                touched.roles[index] &&
-                                                                errors.roles &&
-                                                                errors.roles[index]?.roleType
+                                                            formik.touched.roles &&
+                                                                formik.touched.roles[index] &&
+                                                                formik.errors.roles &&
+                                                                formik.errors.roles[index]?.roleType
                                                         )}
-                                                        helperText={
-                                                            touched.roles &&
-                                                            touched.roles[index] &&
-                                                            errors.roles &&
-                                                            errors.roles[index]?.roleType
-                                                        }
-                                                    />
+                                                    >
+                                                        {roleTypes?.map((role) => (
+                                                            <MenuItem key={role.roleType} value={role.roleType}>
+                                                                <ListItemText primary={role.roleType} />
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Select>
                                                 </Grid>
                                                 <Grid item xs={5.3} sm={5.3}>
                                                     <Field

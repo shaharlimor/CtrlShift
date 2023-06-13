@@ -9,6 +9,10 @@ export async function addConstraint(body) {
     await axiosServices.post('/constraints', body);
 }
 
+export async function deleteConstraint(body) {
+    await axiosServices.post('/constraints/delete', body);
+}
+
 export async function getConstraintsByShiftId(id) {
     const data = await axiosServices.get(`/constraints/byShift/${id}`);
     return data;
@@ -48,6 +52,10 @@ export async function publishSchdule(body) {
 
 export async function startInsertConstraints(body) {
     await axiosServices.patch(`/schedule/startInsertConstraints/`, body);
+}
+
+export async function isEmployeesAssigned(body) {
+    await axiosServices.patch(`/schedule/employeesAssigned/`, body);
 }
 
 export async function getMonthlyShiftsOpenToConstraints(org) {

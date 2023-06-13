@@ -28,7 +28,9 @@ const Constrainsts = () => {
             let parsedData = [];
             result.data.map(async (item) =>
                 parsedData.push({
-                    id: item.shiftId
+                    id: item.shiftId,
+                    description: item.description,
+                    level: item.level
                 })
             );
             setShiftsWithConstraints(parsedData);
@@ -41,6 +43,15 @@ const Constrainsts = () => {
         let ans = name;
         if (await shiftsWithConstraints.some((shift) => shift.id === shiftId)) {
             ans += ' ✔️';
+        }
+        return ans;
+    };
+
+    const handleIsConstraintInsertConstraint = async (name, shiftId) => {
+        let ans;
+        const constraint = await shiftsWithConstraints.find((shift) => shift.id === shiftId);
+        if (constraint) {
+            ans = constraint;
         }
         return ans;
     };
@@ -58,7 +69,9 @@ const Constrainsts = () => {
                     start: new Date(item.startTime.toString()),
                     end: new Date(item.endTime.toString()),
                     /* eslint-disable-next-line */
-                    title: await handleIsConstraintInsertTitle(item.name, item._id)
+                    title: await handleIsConstraintInsertTitle(item.name, item._id),
+                    /* eslint-disable-next-line */
+                    constraint: await handleIsConstraintInsertConstraint(item.name, item._id)
                 })
             );
             setEvents(parsedData);

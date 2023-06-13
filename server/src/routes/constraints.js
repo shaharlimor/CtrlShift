@@ -8,6 +8,7 @@ const {
   employeeHasConstraintInShift,
   getEmployeesWithConstarintsInShift,
 } = require("../controllers/constraints");
+const user = require("../models/user");
 
 var router = express.Router();
 
@@ -347,6 +348,24 @@ router.get(
       res.send(employess);
     } catch (err) {
       res.send(err);
+    }
+  }
+);
+
+router.post(
+  "/delete",
+  middleware,
+  async (req, res) => {
+    try {
+      const shiftId = req.body.shiftId;
+      const employeeId = req.body.employeeId;
+      await Constraint.findOneAndDelete(
+        { shiftId: shiftId,
+         employeeId: employeeId }
+    );
+    res.status(200).json({ message: 'Constraint deleted successfully'});
+    } catch (err) {
+      res.status(500).json({ message: 'Error deleting constraint' });
     }
   }
 );
