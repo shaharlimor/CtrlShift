@@ -42,6 +42,16 @@ const NotificationList = () => {
         fetchData();
     };
 
+    const approveSwitch = async (id) => {
+        const request = {
+            // eslint-disable-next-line
+            notificationId: id,
+        };
+        await axios.post(`/swapRequests/switchShifts`, request);
+        // eslint-disable-next-line no-use-before-define
+        fetchData();
+    };
+
     const fetchData = async () => {
         const response = await axios.get(`/notifications/`);
         setNotificatinos(
@@ -119,6 +129,7 @@ const NotificationList = () => {
                                                         bgcolor: '#e0e0e0'
                                                     }
                                                 }}
+                                                onClick={() => removeNotification(notification._id)}
                                             >
                                                 Decline
                                             </Button>
@@ -138,6 +149,7 @@ const NotificationList = () => {
                                                         bgcolor: '#4527a0'
                                                     }
                                                 }}
+                                                onClick={() => approveSwitch(notification._id)}
                                             >
                                                 Approve
                                             </Button>
