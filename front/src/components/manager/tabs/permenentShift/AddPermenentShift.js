@@ -13,6 +13,7 @@ import {
     ListItemText,
     MenuItem,
     FormHelperText,
+    CardActions,
     Grid,
     TextField,
     FormGroup,
@@ -300,30 +301,31 @@ const AddPermenentShift = (props) => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} container spacing={5} justifyContent="center">
-                    <Grid item xs={5}>
-                        {formik.errors.submit && (
-                            <Box sx={{ mt: 3 }}>
-                                <FormHelperText error>{formik.errors.submit}</FormHelperText>
-                            </Box>
-                        )}
-                        <Box sx={{ mt: 2 }}>
-                            <AnimateButton>
-                                <Button fullWidth size="large" type="submit" variant="contained" color="secondary">
-                                    Add
+                <Grid item xs={12}>
+                    <CardActions>
+                        <Grid
+                            container
+                            spacing={2}
+                            alignItems="center"
+                            justifyContent="center"
+                            {...(formik.errors.submit && (
+                                <Box sx={{ mt: 3 }}>
+                                    <FormHelperText error>{formik.errors.submit}</FormHelperText>
+                                </Box>
+                            ))}
+                        >
+                            <Grid item>
+                                <Button type="submit" variant="contained" color="secondary">
+                                    Submit
                                 </Button>
-                            </AnimateButton>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Box sx={{ mt: 2 }}>
-                            <AnimateButton>
-                                <Button fullWidth size="large" onClick={handleAddOpenClose} variant="contained" color="secondary">
+                            </Grid>
+                            <Grid item>
+                                <Button onClick={handleAddOpenClose} variant="outlined">
                                     Cancel
                                 </Button>
-                            </AnimateButton>
-                        </Box>
-                    </Grid>
+                            </Grid>
+                        </Grid>
+                    </CardActions>
                 </Grid>
             </form>
         </>
