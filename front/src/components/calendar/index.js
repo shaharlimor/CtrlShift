@@ -151,7 +151,6 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
     const handleCreateNewMonth = async () => {
         const result = await getMonthOpendToAddShifts(user.organization);
         setOpenMonths(result.data);
-        console.log('new month');
         getAfterGenerate();
     };
 
