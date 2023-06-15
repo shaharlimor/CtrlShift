@@ -39,6 +39,7 @@ const Toolbar = ({
     onMyShiftChange,
     filterMode,
     getAfterGenerate,
+    handleCreateNewMonth,
     ...others
 }) => {
     const matchSm = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -60,7 +61,7 @@ const Toolbar = ({
                         <Stack direction="row" alignItems="center" spacing={4}>
                             <AddShiftButton getAfterGenerate={getAfterGenerate} />
 
-                            <AddShiftBoardMonthButton calendarType={calendarType} />
+                            <AddShiftBoardMonthButton calendarType={calendarType} handleCreateNewMonth={handleCreateNewMonth} />
                         </Stack>
                     ) : (
                         <Button
@@ -122,7 +123,8 @@ Toolbar.propTypes = {
     calendarType: PropTypes.number,
     onMyShiftChange: PropTypes.func,
     filterMode: PropTypes.bool,
-    getAfterGenerate: PropTypes.func
+    getAfterGenerate: PropTypes.func,
+    handleCreateNewMonth: PropTypes.func
 };
 
 export default Toolbar;

@@ -5,7 +5,7 @@ import { ShiftBoardMonthsDoesntExist, CreateMonthShiftBoard } from '../../utils/
 import useAuth from 'hooks/useAuth';
 import { toast } from 'react-hot-toast';
 
-const AddShiftBoardMonthButton = ({ calendarType }) => {
+const AddShiftBoardMonthButton = ({ calendarType, handleCreateNewMonth }) => {
     const [monthsWithoutBoard, setMonthsWithoutBoard] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(false);
     const [selectedYear, setSelectedYear] = useState('');
@@ -22,6 +22,8 @@ const AddShiftBoardMonthButton = ({ calendarType }) => {
         try {
             console.log(event);
             await CreateMonthShiftBoard(user.organization, event.target.value.month, event.target.value.year);
+            handleCreateNewMonth();
+            fetchMonthsWithoutBoard();
             toast.success('Successfully create month!');
         } catch (error) {
             toast.error('Failed to create month.');
