@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, CardContent, CardActions, Divider, Grid, TextField, FormControl, FormHelperText } from '@mui/material';
-import InputLabel from 'components/forms/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import useAuth from 'hooks/useAuth';
 
