@@ -18,27 +18,28 @@ const deleteData = async () => {
     await Schedule.deleteMany({});
     await SwapRequests.deleteMany({});
     remainRoles = [
-      "644550ba27d00a0ff0453ffa",
-      "644550dd27d00a0ff0453ffd",
-      "644550f727d00a0ff0454000",
-      "6445510c27d00a0ff0454003",
+      // "644550ba27d00a0ff0453ffa",
+      // "644550dd27d00a0ff0453ffd",
+      // "644550f727d00a0ff0454000",
+      // "6445510c27d00a0ff0454003",
     ];
     await ShiftRoles.deleteMany({
       _id: { $nin: remainRoles.map((id) => id.toString()) },
     });
-    remainPermShifts = ["645cd41531eea8fabe794ab1", "644551d527d00a0ff0454018"];
+    // remainPermShifts = ["645cd41531eea8fabe794ab1", "644551d527d00a0ff0454018"];
+    remainPermShifts = [];
     await PermanentShifts.deleteMany({
       _id: { $nin: remainPermShifts.map((id) => id.toString()) },
     });
     remainUsers = [
-      "4c0a8029",
-      "ab945ba2",
-      "14585c78",
-      "b8738a28",
-      "c092905e",
-      "d0e0e9d2",
-      "7a01d3e1",
-      "e7a83588",
+      // "4c0a8029",
+      // "ab945ba2",
+      // "14585c78",
+      // "b8738a28",
+      // "c092905e",
+      // "d0e0e9d2",
+      // "7a01d3e1",
+      // "e7a83588",
     ];
     await User.deleteMany({
       _id: { $nin: remainUsers.map((id) => id.toString()) },
@@ -56,9 +57,9 @@ const insertData = async (req, res) => {
     "notifications",
     "schedule",
     "swapRequests",
-    // "shiftRoles",
-    // "permanentShifts",
-    // "user",
+    "shiftRoles",
+    "permanentShifts",
+    "user",
   ];
   const insertedData = {};
 
