@@ -2,9 +2,15 @@ import { useTheme } from '@mui/material/styles';
 import { Chip } from '@mui/material';
 
 import { IconUserCircle } from '@tabler/icons';
+import { activeItem } from 'store/slices/menu';
+import { useDispatch } from 'store';
 
 const ProfileSection = () => {
     const theme = useTheme();
+    const dispatch = useDispatch();
+    const itemHandler = () => {
+        dispatch(activeItem(['']));
+    };
 
     return (
         <>
@@ -31,6 +37,7 @@ const ProfileSection = () => {
                 label={<IconUserCircle stroke={2} size="26px" color={theme.palette.primary.main} />}
                 variant="outlined"
                 color="primary"
+                onClick={() => itemHandler()}
             />
         </>
     );
