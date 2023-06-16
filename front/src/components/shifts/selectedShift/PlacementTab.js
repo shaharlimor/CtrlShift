@@ -165,8 +165,8 @@ const PlacementTab = ({ eventId, roles, allEmployess, onCancel, initCheck }) => 
                     <Grid container alignItems="center" justifyContent="center" sx={{ mt: 0.5 }}>
                         <Grid item xs={10}>
                             <FormControl sx={{ width: '100%' }}>
-                                <InputLabel id="Change Assigment">Employees List</InputLabel>
-                                <Select labelId="Change Assigment" sx={{ width: '90%', bgcolor: 'background.paper' }}>
+                                <InputLabel htmlFor="change-assignment">Employees List</InputLabel>
+                                <Select id="change-assignment" sx={{ width: '90%', bgcolor: 'background.paper' }} label="Employees List">
                                     {allEmployess?.map((value) => {
                                         return (
                                             <ListItem
