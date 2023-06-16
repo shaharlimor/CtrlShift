@@ -55,7 +55,6 @@ const Snackbar = () => {
 
     return (
         <>
-            {/* default snackbar */}
             {variant === 'default' && (
                 <MuiSnackbar
                     anchorOrigin={anchorOrigin}

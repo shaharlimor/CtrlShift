@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, useMediaQuery, Link } from '@mui/material';
+import { IconMenu2 } from '@tabler/icons';
 
 import LAYOUT_CONST from 'constant';
 import useConfig from 'hooks/useConfig';
@@ -9,7 +10,6 @@ import LogoSection from '../Logo';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 import { Link as RouterLink } from 'react-router-dom';
-import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleDrawerToggle }) => {
     const theme = useTheme();
