@@ -22,8 +22,7 @@ const menu = createSlice({
 
         openDrawer(state, action) {
             state.drawerOpen = action.payload;
-        },
-
+        }
     }
 });
 
