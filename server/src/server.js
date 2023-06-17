@@ -51,7 +51,7 @@ app.use("/notifications", require("./routes/notifications"));
 app.use("/constraints", require("./routes/constraints"));
 app.use("/monthlyShifts", require("./routes/monthlyShifts"));
 app.use("/permanentShifts", require("./routes/permanentShifts"));
-app.use("/schedule", require("./routes/schedules"));
+app.use("/schedule", require("./routes/schedule"));
 app.use("/user", require("./routes/user"));
 app.use("/roleTypes", require("./routes/roleTypes"));
 app.use("/swapRequests", require("./routes/swapRequests"));
