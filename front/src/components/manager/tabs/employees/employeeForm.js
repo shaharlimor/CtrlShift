@@ -160,6 +160,7 @@ const EmployeeForm = (props) => {
                         </Grid>
                         <Grid item xs={5}>
                             <TextField
+                                disabled
                                 fullWidth
                                 label="Email"
                                 margin="normal"
