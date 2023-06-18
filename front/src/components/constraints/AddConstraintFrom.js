@@ -85,7 +85,7 @@ const AddConstraintFrom = ({ event, onCancel }) => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                     <DialogTitle color="primary.800">
-                        Add Constraint - {event.title.endsWith(' ✔️') ? event.title.slice(0, -4) : event.title} -{' '}
+                        Add Constraint - {event.title.endsWith(' ✔️') ? event.title.slice(0, -3) : event.title} -{' '}
                         {new Date(event.start).toLocaleDateString('de-DE')}
                     </DialogTitle>
                     <Divider />

@@ -1,7 +1,21 @@
 import PropTypes from 'prop-types';
 import { Fragment, useState, useEffect } from 'react';
 // eslint-disable-next-line
-import { Button, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, InputAdornment, IconButton, ListItemText, MenuItem, Select, Typography } from '@mui/material';
+import {
+    Button,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Divider,
+    Grid,
+    TextField,
+    InputAdornment,
+    IconButton,
+    ListItemText,
+    MenuItem,
+    Select,
+    FormHelperText
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
@@ -37,7 +51,7 @@ const AddShiftFrom = ({ onCancel }) => {
         roles: Yup.array()
             .of(
                 Yup.object().shape({
-                    roleType: Yup.string().min(3, 'Role type must be at least 3 characters').required('Role type is required'), // these constraints take precedence
+                    roleType: Yup.string().required('Role type is required'), // these constraints take precedence
                     amount: Yup.number().required('Amount of employess is required').min(1, 'Minimum 1 employee in each role') // these constraints take precedence
                 })
             )
@@ -53,7 +67,6 @@ const AddShiftFrom = ({ onCancel }) => {
         },
         validationSchema: ValidationCheck,
         onSubmit: async (values, { resetForm, setSubmitting }) => {
-            // TODO: first check if permanent shifts for this month and year already generated.
             try {
                 const parsedRoles = values.roles.map((obj) => ({ ...obj, employeeIds: [] }));
                 const data = {
@@ -149,27 +162,39 @@ const AddShiftFrom = ({ onCancel }) => {
                                         {values.roles.map((role, index) => (
                                             <Fragment key={index}>
                                                 <Grid item xs={5.3} sm={4}>
-                                                    <Typography variant="subtitle2">Roles</Typography>
+                                                    {/* <Typograpshy variant="subtitle2">Roles</Typography> */}
                                                     <Select
                                                         fullWidth
-                                                        labelId="select-label"
                                                         value={role.roleType}
                                                         name={`roles[${index}].roleType`}
                                                         onChange={formik.handleChange}
-                                                        renderValue={(selected) => selected}
+                                                        renderValue={(selected) => selected || 'Role Type'}
+                                                        displayEmpty
                                                         error={Boolean(
-                                                            formik.touched.roles &&
-                                                                formik.touched.roles[index] &&
-                                                                formik.errors.roles &&
-                                                                formik.errors.roles[index]?.roleType
+                                                            touched.roles &&
+                                                                touched.roles[index] &&
+                                                                errors.roles &&
+                                                                errors.roles[index]?.roleType
                                                         )}
                                                     >
+                                                        <MenuItem disabled value="">
+                                                            <ListItemText primary="Role Type" />
+                                                        </MenuItem>
                                                         {roleTypes?.map((role) => (
                                                             <MenuItem key={role.roleType} value={role.roleType}>
                                                                 <ListItemText primary={role.roleType} />
                                                             </MenuItem>
                                                         ))}
                                                     </Select>
+                                                    {touched.roles?.[index]?.roleType && errors.roles?.[index]?.roleType && (
+                                                        <FormHelperText sx={{ color: 'red', ml: 1 }}>
+                                                            {errors.roles?.[index]?.roleType &&
+                                                                touched.roles &&
+                                                                touched.roles[index] &&
+                                                                errors.roles &&
+                                                                errors.roles[index]?.roleType}
+                                                        </FormHelperText>
+                                                    )}
                                                 </Grid>
                                                 <Grid item xs={5.3} sm={5.3}>
                                                     <Field

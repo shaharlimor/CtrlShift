@@ -2,7 +2,7 @@
   {
     "_id": "6445554027d00a0ff045432e",
     "level": "1",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "644551e127d00a0ff045402e",
     "employeeId": "4c0a8029"
   },
@@ -23,7 +23,7 @@
   {
     "_id": "6445554827d00a0ff0454337",
     "level": "1",
-    "description": "",
+    "description": "Wedding",
     "shiftId": "644551e127d00a0ff0454043",
     "employeeId": "4c0a8029"
   },
@@ -51,7 +51,7 @@
   {
     "_id": "6445555027d00a0ff0454343",
     "level": "1",
-    "description": "",
+    "description": "Wedding",
     "shiftId": "644551e127d00a0ff045407a",
     "employeeId": "4c0a8029"
   },
@@ -72,14 +72,14 @@
   {
     "_id": "6445564f27d00a0ff045442f",
     "level": "4",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "644551e127d00a0ff045407e",
     "employeeId": "c092905e"
   },
   {
     "_id": "6445565427d00a0ff0454432",
-    "level": "1",
-    "description": "",
+    "level": "5",
+    "description": "A family event",
     "shiftId": "644551e127d00a0ff045403b",
     "employeeId": "c092905e"
   },
@@ -100,13 +100,13 @@
   {
     "_id": "6445568b27d00a0ff04544d0",
     "level": "1",
-    "description": "",
+    "description": "Exam",
     "shiftId": "644551e127d00a0ff0454046",
     "employeeId": "ab945ba2"
   },
   {
     "_id": "6445568d27d00a0ff04544d3",
-    "level": "1",
+    "level": "3",
     "description": "",
     "shiftId": "644551e127d00a0ff045405e",
     "employeeId": "ab945ba2"
@@ -121,13 +121,13 @@
   {
     "_id": "6445569127d00a0ff04544d9",
     "level": "1",
-    "description": "",
+    "description": "Exam",
     "shiftId": "644551e127d00a0ff0454070",
     "employeeId": "ab945ba2"
   },
   {
     "_id": "6445569227d00a0ff04544dc",
-    "level": "1",
+    "level": "4",
     "description": "",
     "shiftId": "644551e127d00a0ff045403b",
     "employeeId": "ab945ba2"
@@ -155,7 +155,7 @@
   },
   {
     "_id": "644556da27d00a0ff045460e",
-    "level": "1",
+    "level": "3",
     "description": "",
     "shiftId": "644551e127d00a0ff045407a",
     "employeeId": "14585c78"
@@ -169,7 +169,7 @@
   },
   {
     "_id": "644556df27d00a0ff0454614",
-    "level": "1",
+    "level": "2",
     "description": "",
     "shiftId": "644551e127d00a0ff045405e",
     "employeeId": "14585c78"
@@ -198,7 +198,7 @@
   {
     "_id": "6445570127d00a0ff045466c",
     "level": "1",
-    "description": "",
+    "description": "cant",
     "shiftId": "644551e127d00a0ff045407e",
     "employeeId": "b8738a28"
   },
@@ -226,7 +226,7 @@
   {
     "_id": "6445570727d00a0ff0454678",
     "level": "1",
-    "description": "",
+    "description": "cant",
     "shiftId": "644551e127d00a0ff0454070",
     "employeeId": "b8738a28"
   },
@@ -261,7 +261,7 @@
   {
     "_id": "6452990874a50442f4224cc2",
     "level": "1",
-    "description": "hhhh",
+    "description": "exams",
     "shiftId": "644551e127d00a0ff0454037",
     "employeeId": "b8738a28"
   },
@@ -289,7 +289,7 @@
   {
     "_id": "6456508361895a22b56f2831",
     "level": "1",
-    "description": "",
+    "description": "exams",
     "shiftId": "64523a41d68a6fa4647cab54",
     "employeeId": "4c0a8029"
   },
@@ -310,7 +310,7 @@
   {
     "_id": "645f36aecc7886b88efcb5d6",
     "level": "1",
-    "description": "",
+    "description": "A family event",
     "shiftId": "64523a41d68a6fa4647cab4e",
     "employeeId": "4c0a8029"
   },
@@ -387,13 +387,13 @@
   {
     "_id": "646514179f9645f128337f6c",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "64523a41d68a6fa4647cab74",
     "employeeId": "14585c78"
   },
   {
     "_id": "646514199f9645f128337f6f",
-    "level": "1",
+    "level": "5",
     "description": "",
     "shiftId": "64523a41d68a6fa4647cab69",
     "employeeId": "14585c78"
@@ -464,7 +464,7 @@
   {
     "_id": "6480c755bbcd95acbaaad71f",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6453e16fc198be30bb3a48b2",
     "employeeId": "14585c78"
   },
@@ -477,7 +477,7 @@
   },
   {
     "_id": "6480c764bbcd95acbaaad8c3",
-    "level": "1",
+    "level": "3",
     "description": "",
     "shiftId": "6480b3fb423119018d3c029f",
     "employeeId": "14585c78"
@@ -498,7 +498,7 @@
   },
   {
     "_id": "6480c770bbcd95acbaaad8cc",
-    "level": "1",
+    "level": "3",
     "description": "",
     "shiftId": "6480b3fb423119018d3c02c7",
     "employeeId": "14585c78"
@@ -513,7 +513,7 @@
   {
     "_id": "6480c780bbcd95acbaaada6d",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6480b3fb423119018d3c0297",
     "employeeId": "14585c78"
   },
@@ -695,7 +695,7 @@
   {
     "_id": "6480c980bbcd95acbaaaeaa9",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6480b3fb423119018d3c0287",
     "employeeId": "7a01d3e1"
   },
@@ -786,7 +786,7 @@
   {
     "_id": "6480ca57bbcd95acbaaaf2c0",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6480b3fb423119018d3c02a7",
     "employeeId": "d0e0e9d2"
   },
@@ -807,7 +807,7 @@
   {
     "_id": "6480ca84bbcd95acbaaaf479",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6480b3fb423119018d3c027b",
     "employeeId": "d0e0e9d2"
   },
@@ -884,7 +884,7 @@
   {
     "_id": "6482c55e37496d4ac5c16f77",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6480b561423119018d3c0659",
     "employeeId": "e7a83588"
   },
@@ -912,7 +912,7 @@
   {
     "_id": "6482c94b6332529698444124",
     "level": "3",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "6482275eb42a060e92b217a9",
     "employeeId": "4c0a8029"
   },
@@ -933,7 +933,7 @@
   {
     "_id": "6482c9806332529698444656",
     "level": "1",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "6482275eb42a060e92b217ad",
     "employeeId": "e7a83588"
   },
@@ -954,7 +954,7 @@
   {
     "_id": "6482c98b63325296984447a9",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6482275eb42a060e92b217b5",
     "employeeId": "e7a83588"
   },
@@ -1003,14 +1003,14 @@
   {
     "_id": "6482cae76332529698445186",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6482275eb42a060e92b21791",
     "employeeId": "14585c78"
   },
   {
     "_id": "6482cae96332529698445189",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "64822885b42a060e92b21b6e",
     "employeeId": "14585c78"
   },
@@ -1059,21 +1059,21 @@
   {
     "_id": "6482cb4b63325296984456e2",
     "level": "1",
-    "description": "",
+    "description": "academic studies",
     "shiftId": "6482275eb42a060e92b217d9",
     "employeeId": "b8738a28"
   },
   {
     "_id": "6482cb4e63325296984456e5",
     "level": "1",
-    "description": "",
+    "description": "academic studies ",
     "shiftId": "6482275eb42a060e92b217e1",
     "employeeId": "b8738a28"
   },
   {
     "_id": "6482cb5c63325296984456f7",
     "level": "1",
-    "description": "",
+    "description": "A family event",
     "shiftId": "6482281bb42a060e92b21ac5",
     "employeeId": "b8738a28"
   },
@@ -1094,27 +1094,27 @@
   {
     "_id": "6482cb736332529698445850",
     "level": "1",
-    "description": "",
+    "description": "academic studies",
     "shiftId": "6482275eb42a060e92b217a5",
     "employeeId": "b8738a28"
   },
   {
     "_id": "6482cbfb6332529698445ba3",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6482275eb42a060e92b217ed",
     "employeeId": "c092905e"
   },
   {
     "_id": "6482cbfd6332529698445ba6",
     "level": "1",
-    "description": "",
+    "description": "academic studies",
     "shiftId": "6482275eb42a060e92b217f1",
     "employeeId": "c092905e"
   },
   {
     "_id": "6482cc086332529698445cf6",
-    "level": "1",
+    "level": "4",
     "description": "",
     "shiftId": "6482275eb42a060e92b217bd",
     "employeeId": "c092905e"
@@ -1122,14 +1122,14 @@
   {
     "_id": "6482cc166332529698445cfc",
     "level": "1",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "6482275eb42a060e92b21795",
     "employeeId": "c092905e"
   },
   {
     "_id": "6482cc206332529698445d05",
     "level": "1",
-    "description": "",
+    "description": "A family event",
     "shiftId": "6482275eb42a060e92b217cd",
     "employeeId": "c092905e"
   },
@@ -1143,7 +1143,7 @@
   {
     "_id": "6482cc3f6332529698445f08",
     "level": "1",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "6482275eb42a060e92b21785",
     "employeeId": "c092905e"
   },
@@ -1156,7 +1156,7 @@
   },
   {
     "_id": "6482cc64633252969844610d",
-    "level": "1",
+    "level": "2",
     "description": "",
     "shiftId": "6482275eb42a060e92b217b1",
     "employeeId": "d0e0e9d2"
@@ -1164,20 +1164,20 @@
   {
     "_id": "6482cc696332529698446113",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6482275eb42a060e92b217d5",
     "employeeId": "d0e0e9d2"
   },
   {
     "_id": "6482cc6b6332529698446116",
     "level": "1",
-    "description": "",
+    "description": "academic studies",
     "shiftId": "6482275eb42a060e92b217f1",
     "employeeId": "d0e0e9d2"
   },
   {
     "_id": "6482ce246332529698446325",
-    "level": "1",
+    "level": "4",
     "description": "",
     "shiftId": "6482275eb42a060e92b217e9",
     "employeeId": "7a01d3e1"
@@ -1191,14 +1191,14 @@
   },
   {
     "_id": "6482ce2d6332529698446334",
-    "level": "1",
-    "description": "",
+    "level": "5",
+    "description": "Exam",
     "shiftId": "6482275eb42a060e92b2178d",
     "employeeId": "7a01d3e1"
   },
   {
     "_id": "6482ce466332529698446487",
-    "level": "1",
+    "level": "4",
     "description": "",
     "shiftId": "6482281bb42a060e92b21ac5",
     "employeeId": "7a01d3e1"
@@ -1206,28 +1206,28 @@
   {
     "_id": "6482ce506332529698446493",
     "level": "1",
-    "description": "",
+    "description": "A family event",
     "shiftId": "6482275eb42a060e92b217e1",
     "employeeId": "7a01d3e1"
   },
   {
     "_id": "6482ce576332529698446499",
     "level": "1",
-    "description": "",
+    "description": "vacation planned",
     "shiftId": "6482275eb42a060e92b217f5",
     "employeeId": "7a01d3e1"
   },
   {
     "_id": "6482ce6263325296984464a2",
     "level": "1",
-    "description": "",
+    "description": "A family event",
     "shiftId": "6482275eb42a060e92b2179d",
     "employeeId": "7a01d3e1"
   },
   {
     "_id": "6482ce8763325296984467f7",
     "level": "1",
-    "description": "",
+    "description": "travel plans",
     "shiftId": "6482275eb42a060e92b21785",
     "employeeId": "4c0a8029"
   }

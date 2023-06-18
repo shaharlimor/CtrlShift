@@ -18,11 +18,9 @@ import {
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import AddIcon from '@mui/icons-material/Add';
 import useAuth from 'hooks/useAuth';
 
 // project imports
-import MainCard from '../../../cards/MainCard';
 import SubCard from '../../../cards/SubCard';
 import { deletePermanentShift, getPermanentShifts } from '../../../../utils/permenentShift';
 
@@ -98,7 +96,7 @@ function Row({ row, handleEdit, handleDelete }) {
                                 <TableContainer>
                                     <SubCard
                                         sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.800' : 'grey.50', mb: 2 }}
-                                        title="roles"
+                                        title="Roles"
                                         content={false}
                                     >
                                         <Stack direction="column" spacing={2} alignItems="flex-start" sx={{ mr: 2, ml: 2 }}>

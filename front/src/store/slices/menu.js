@@ -22,11 +22,6 @@ const menu = createSlice({
 
         openDrawer(state, action) {
             state.drawerOpen = action.payload;
-        },
-
-        // has error
-        hasError(state, action) {
-            state.error = action.payload;
         }
     }
 });

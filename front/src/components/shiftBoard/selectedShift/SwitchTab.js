@@ -110,9 +110,11 @@ const SwitchTab = ({ event, onCancel }) => {
                 <Grid container alignItems="center" justifyContent="center" sx={{ mt: 2 }}>
                     <Grid item xs={10}>
                         <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="Chane Assigment">Shift List</InputLabel>
+                            {/* <InputLabel id="Chane Assigment">Shift List</InputLabel> */}
+                            <InputLabel htmlFor="change-assignment">Shifts List</InputLabel>
                             <Select
-                                labelId="Change Assignment"
+                                label="Shifts List"
+                                id="change-assignment"
                                 sx={{ width: '90%', bgcolor: 'background.paper' }}
                                 value={selectedShift || ''}
                                 onChange={handleSelect}

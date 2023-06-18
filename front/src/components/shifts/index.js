@@ -15,7 +15,6 @@ const Shifts = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // TODO: get shifts by month (only if permenant shifts generated) + by organization
     useEffect(() => {
         const getShifts = async () => {
             const result = await getMonthlyShifts(user.organization);

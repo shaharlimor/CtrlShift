@@ -6,13 +6,13 @@ import {
     Box,
     Button,
     Checkbox,
-    Divider,
     IconButton,
     FormControl,
     FormControlLabel,
     ListItemText,
     MenuItem,
     FormHelperText,
+    CardActions,
     Grid,
     TextField,
     FormGroup,
@@ -26,10 +26,9 @@ import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 
 // third party
 import * as Yup from 'yup';
-import { useFormik, Field, FieldArray } from 'formik';
+import { useFormik } from 'formik';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
-import AnimateButton from '../../../AnimateButton';
 import { savePermanentShift, updatePermanentShift } from '../../../../utils/permenentShift';
 import { getRoleTypesByOrg } from 'utils/roleTypeServices';
 
@@ -194,7 +193,6 @@ const AddPermenentShift = (props) => {
 
                     <Grid item xs={12} container justifyContent="center" sx={{ flexDirection: 'row' }}>
                         <FormControl component="fieldset">
-                            {/* <FormLabel component="legend">Days</FormLabel> */}
                             <FormGroup sx={{ justifyContent: 'center', flexDirection: 'row' }}>
                                 {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
                                     <React.Fragment key={day}>
@@ -228,7 +226,8 @@ const AddPermenentShift = (props) => {
                                     value={role.roleType}
                                     name={`roles[${index}].roleType`}
                                     onChange={formik.handleChange}
-                                    renderValue={(selected) => selected}
+                                    displayEmpty
+                                    renderValue={(selected) => selected || 'Role Type'}
                                     error={Boolean(
                                         formik.touched.roles &&
                                             formik.touched.roles[index] &&
@@ -236,12 +235,24 @@ const AddPermenentShift = (props) => {
                                             formik.errors.roles[index]?.roleType
                                     )}
                                 >
+                                    <MenuItem disabled value="">
+                                        <ListItemText primary="Role Type" />
+                                    </MenuItem>
                                     {roleTypes?.map((role) => (
                                         <MenuItem key={role.roleType} value={role.roleType}>
                                             <ListItemText primary={role.roleType} />
                                         </MenuItem>
                                     ))}
                                 </Select>
+                                {formik.touched.roles?.[index]?.roleType && formik.errors.roles?.[index]?.roleType && (
+                                    <FormHelperText sx={{ color: 'red', ml: 1 }}>
+                                        {formik.errors.roles?.[index]?.roleType &&
+                                            formik.touched.roles &&
+                                            formik.touched.roles[index] &&
+                                            formik.errors.roles &&
+                                            formik.errors.roles[index]?.roleType}
+                                    </FormHelperText>
+                                )}
                             </Grid>
                             <Grid item xs={5.3} sm={4}>
                                 <TextField
@@ -300,30 +311,31 @@ const AddPermenentShift = (props) => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} container spacing={5} justifyContent="center">
-                    <Grid item xs={5}>
-                        {formik.errors.submit && (
-                            <Box sx={{ mt: 3 }}>
-                                <FormHelperText error>{formik.errors.submit}</FormHelperText>
-                            </Box>
-                        )}
-                        <Box sx={{ mt: 2 }}>
-                            <AnimateButton>
-                                <Button fullWidth size="large" type="submit" variant="contained" color="secondary">
-                                    Add
+                <Grid item xs={12}>
+                    <CardActions>
+                        <Grid
+                            container
+                            spacing={2}
+                            alignItems="center"
+                            justifyContent="center"
+                            {...(formik.errors.submit && (
+                                <Box sx={{ mt: 3 }}>
+                                    <FormHelperText error>{formik.errors.submit}</FormHelperText>
+                                </Box>
+                            ))}
+                        >
+                            <Grid item>
+                                <Button type="submit" variant="contained" color="secondary">
+                                    Submit
                                 </Button>
-                            </AnimateButton>
-                        </Box>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Box sx={{ mt: 2 }}>
-                            <AnimateButton>
-                                <Button fullWidth size="large" onClick={handleAddOpenClose} variant="contained" color="secondary">
+                            </Grid>
+                            <Grid item>
+                                <Button onClick={handleAddOpenClose} variant="outlined">
                                     Cancel
                                 </Button>
-                            </AnimateButton>
-                        </Box>
-                    </Grid>
+                            </Grid>
+                        </Grid>
+                    </CardActions>
                 </Grid>
             </form>
         </>

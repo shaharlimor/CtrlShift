@@ -18,7 +18,8 @@ const notificationSchema = new Schema({
     enum: ['switch', 'notification', 'route'],
     default: 'notification'
   },
-  switchID: String,
+  shiftId: String,
+  requestShiftId: String,
   routeTo: String
 });
 

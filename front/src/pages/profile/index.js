@@ -18,12 +18,6 @@ function TabPanel({ children, value, index, ...other }) {
     );
 }
 
-// TabPanel.propTypes = {
-//     children: PropTypes.node,
-//     index: PropTypes.any.isRequired,
-//     value: PropTypes.any.isRequired
-// };
-
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,

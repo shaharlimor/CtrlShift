@@ -14,7 +14,6 @@ function createData(roleType) {
     return { roleType };
 }
 
-// TODO: get events by props / from server
 // eslint-disable-next-line
 const rows = [createData('Day waiter'), createData('Day Chef'), createData('Shift supervisor'), createData('Bartender')];
 

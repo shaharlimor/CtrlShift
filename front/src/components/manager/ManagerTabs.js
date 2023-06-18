@@ -108,7 +108,7 @@ export default function ManagerTabs() {
                     label={
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <WorkOutlineIcon sx={{ fontSize: '2rem', marginRight: theme.spacing(1) }} />
-                            Permenent shifts
+                            Permenent Shifts
                         </Box>
                     }
                 />

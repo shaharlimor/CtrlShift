@@ -148,6 +148,12 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
         setCreateSchdualeDisable(result.data);
     };
 
+    const handleCreateNewMonth = async () => {
+        const result = await getMonthOpendToAddShifts(user.organization);
+        setOpenMonths(result.data);
+        getAfterGenerate();
+    };
+
     return (
         // eslint-disable-next-line
         <Fragment>
@@ -161,6 +167,7 @@ const Calendar = ({ events, calendarType, handleEventSelect, filterMode, changeF
                     onChangeView={handleViewChange}
                     onMyShiftChange={handleChangeMyShifts}
                     getAfterGenerate={getAfterGenerate}
+                    handleCreateNewMonth={handleCreateNewMonth}
                     calendarType={calendarType}
                 />
                 <SubCard>
