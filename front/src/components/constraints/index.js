@@ -98,7 +98,9 @@ const Constrainsts = () => {
         let parsedData = [];
         result.data.map(async (item) =>
             parsedData.push({
-                id: item.shiftId
+                id: item.shiftId,
+                description: item.description,
+                level: item.level
             })
         );
         setShiftsWithConstraints(parsedData);
