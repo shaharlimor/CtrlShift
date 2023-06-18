@@ -162,7 +162,6 @@ const AddShiftFrom = ({ onCancel }) => {
                                         {values.roles.map((role, index) => (
                                             <Fragment key={index}>
                                                 <Grid item xs={5.3} sm={4}>
-                                                    {/* <Typograpshy variant="subtitle2">Roles</Typography> */}
                                                     <Select
                                                         fullWidth
                                                         value={role.roleType}
