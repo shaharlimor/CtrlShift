@@ -24,7 +24,7 @@ import { getRoleTypesByOrg } from 'utils/roleTypeServices';
 import MainCard from 'components/cards/MainCard';
 
 const EmployeeForm = (props) => {
-    const { selectedUser, changeShowForm } = props;
+    const { selectedUser, changeShowForm, edit } = props;
     const { user } = useAuth();
     const [roleTypes, setRoleTypes] = useState([]);
     const [submit, setSubmit] = useState(false);
@@ -160,7 +160,8 @@ const EmployeeForm = (props) => {
                         </Grid>
                         <Grid item xs={5}>
                             <TextField
-                                disabled
+                                // eslint-disable-next-line
+                                disabled={edit}
                                 fullWidth
                                 label="Email"
                                 margin="normal"
