@@ -84,7 +84,7 @@ const EmployeeList = () => {
 
     return (
         <>
-            {showForm && <EmployeeForm changeShowForm={changeShowForm} selectedUser={selectedUser} />}
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} selectedUser={selectedUser} edit />}
             {!showForm && (
                 <MainCard
                     title={

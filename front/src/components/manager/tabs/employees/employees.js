@@ -17,7 +17,7 @@ const Employees = () => {
 
     return (
         <>
-            {showForm && <EmployeeForm changeShowForm={changeShowForm} />}
+            {showForm && <EmployeeForm changeShowForm={changeShowForm} edit={false} />}
             {!showForm && <EmployeeList />}
             {!showForm && (
                 <Grid container direction="column" justifyContent="center" alignItems="flex-end">

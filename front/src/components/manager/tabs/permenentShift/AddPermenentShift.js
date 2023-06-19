@@ -276,19 +276,18 @@ const AddPermenentShift = (props) => {
                                     }
                                 />
                             </Grid>
-                            <Grid item xs={1} sm={1} sx={{ mr: 2 }}>
-                                <IconButton
-                                    variant="outlined"
-                                    sx={{ fontWeight: 'bold' }}
-                                    onClick={() => {
-                                        if (formik.values.roles.length !== 1) {
-                                            formik.setFieldValue('roles', formik.values.roles.splice(index, 1));
-                                        }
-                                    }}
-                                >
-                                    <DeleteForeverOutlinedIcon sx={{ color: theme.palette.primary[800] }} />
-                                </IconButton>
-                            </Grid>
+                            <IconButton
+                                variant="outlined"
+                                sx={{ fontWeight: 'bold' }}
+                                onClick={() => {
+                                    if (formik.values.roles.length !== 1) {
+                                        const updatedRoles = formik.values.roles.filter((_, i) => i !== index);
+                                        formik.setFieldValue('roles', updatedRoles);
+                                    }
+                                }}
+                            >
+                                <DeleteForeverOutlinedIcon sx={{ color: theme.palette.primary[800] }} />
+                            </IconButton>
                         </Fragment>
                     ))}
                     <Grid container justifyContent="center" alignItems="center" sx={{ pt: 3, ml: 3.2 }}>
