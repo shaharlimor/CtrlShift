@@ -53,17 +53,15 @@ describe("Schedule Routes", () => {
 
   describe("POST /", () => {
     it("should add a new schedule", async () => {
-      // Mock the implementation of `newSche.save()` to return the mock schedule data
       Schedule.prototype.save = jest.fn().mockResolvedValueOnce(mockSchedule);
 
       const response = await request(app).post("/").send(mockSchedule);
 
       expect(response.status).toBe(200);
-      expect(response.text).toBe(`success adding new schedule ${mockSchedule}`);
+      expect(response.body).toStrictEqual(mockSchedule);
     });
 
     it("should handle errors when adding a new schedule", async () => {
-      // Mock the implementation of `newSche.save()` to throw an error
       Schedule.prototype.save = jest
         .fn()
         .mockRejectedValueOnce("Error adding new schedule");
@@ -138,7 +136,6 @@ describe("Schedule Routes", () => {
     });
 
     it("should handle errors when changing publish", async () => {
-      // Mock the implementation of `changePublish` controller to throw an error
       changePublish.mockRejectedValueOnce("Error changing publish");
 
       const requestBody = {
@@ -160,7 +157,6 @@ describe("Schedule Routes", () => {
 
   describe("GET /openToConstraints", () => {
     it("should check if board is open to insert constraints", async () => {
-      // Mock the implementation of `boardOpenToConstraints` controller
       boardOpenToConstraints.mockResolvedValueOnce(true);
 
       const requestBody = {
@@ -200,7 +196,6 @@ describe("Schedule Routes", () => {
 
   describe("GET /employessAssigned", () => {
     it("should check if placment board for pspecifc month generated", async () => {
-      // Mock the implementation of `boardOpenToConstraints` controller
       isEmployeesAssigned.mockResolvedValueOnce(true);
 
       const requestBody = {
@@ -210,7 +205,7 @@ describe("Schedule Routes", () => {
       };
 
       const response = await request(app)
-        .get("/employessAssigned")
+        .get("/employeesAssigned")
         .send(requestBody);
 
       expect(response.status).toBe(200);
@@ -218,7 +213,6 @@ describe("Schedule Routes", () => {
     });
 
     it("should handle errors when checking if board is open to insert constraints", async () => {
-      // Mock the implementation of `boardOpenToConstraints` controller to throw an error
       isEmployeesAssigned.mockRejectedValueOnce(
         "error to check if is employees assigned"
       );
@@ -230,10 +224,10 @@ describe("Schedule Routes", () => {
       };
 
       const response = await request(app)
-        .get("/employessAssigned")
+        .get("/employeesAssigned")
         .send(requestBody);
       expect(response.text).toBe(
-        "error to check if is employees assigned: error to check if is employees assigned"
+        "error to check if employees are assigned: error to check if is employees assigned"
       );
     });
   });
